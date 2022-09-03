@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    private GameObject background;
-    private GameObject title;
-    private GameObject playButton;
-    private GameObject quitButton;
-
-    void Awake()
-    {
-        background = transform.Find("BackGround").gameObject;
-        title = transform.Find("Title").gameObject;
-        playButton = transform.Find("playButton").gameObject;
-        quitButton = transform.Find("quitButton").gameObject;
-    }
+    public GameObject background;
+    public GameObject title;
+    public GameObject playButton;
+    public GameObject quitButton;
 
     public void Play()
     {

@@ -366,6 +366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d366684cd44456419594a3366b8f5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 2139669517}
+  victory_text: {fileID: 954200373}
+  lose_text: {fileID: 1216428314}
+  game_UI: {fileID: 1680003569}
 --- !u!114 &58128813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +648,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443cf5d572188094b80b0b7aed57483c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 660251583}
+  title: {fileID: 1195639162}
+  playButton: {fileID: 1015590911}
+  quitButton: {fileID: 1368018213}
 --- !u!1 &435175175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4105,7 +4113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &1142883043
 Grid:
   m_ObjectHideFlags: 0

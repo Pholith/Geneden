@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private GameObject background;
-    private GameObject victory_text;
-    private GameObject lose_text;
-    private GameObject game_UI;
+    public GameObject background;
+    public GameObject victory_text;
+    public GameObject lose_text;
+    public GameObject game_UI;
     // Start is called before the first frame update
-    void Awake()
-    {
-        background = transform.Find("BackGround").gameObject;
-        victory_text = transform.Find("VictoryText").gameObject;
-        lose_text = transform.Find("GameOverText").gameObject;
-        game_UI = transform.Find("GameUI").gameObject;
-    }
 
     public void showVictory()
     {
