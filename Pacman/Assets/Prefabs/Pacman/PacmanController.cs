@@ -10,7 +10,7 @@ public class PacmanController : MonoBehaviour
         
     }
 
-    private const float DEFAULT_COULDOWN_SPEED = 0.1f; // More it is big, more it is slow
+    private const float DEFAULT_COULDOWN_SPEED = 0.2f; // More it is big, more it is slow
     private float couldownBeforeNextMove = DEFAULT_COULDOWN_SPEED;
     // Update is called once per frame
     void Update()
