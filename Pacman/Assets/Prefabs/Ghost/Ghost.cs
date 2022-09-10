@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Ghost : MonoBehaviour
@@ -12,10 +13,9 @@ public class Ghost : MonoBehaviour
     public GameObject ghostEyes;
     private SpriteRenderer eyesSprite;
 
-    public float speed = 3.0f;
+    public GhostDirections[] availableDir;
     public GhostDirections actualDirection;
-    public int steps = 0;
-    private Vector2 target;
+    public Rigidbody2D rgbody;
 
     void Awake()
     {
@@ -48,13 +48,11 @@ public class Ghost : MonoBehaviour
 
     void Start()
     {
-        target = this.transform.localPosition;
+
     }
 
     void Update()
     {
-       
-
 
     }
 
@@ -91,31 +89,72 @@ public class Ghost : MonoBehaviour
 
     }
 
-    public void pickTarget()
+    public GhostDirections[] availableDirection()
     {
-        Vector2 localpos = this.transform.localPosition;
-        if (localpos == target)
+
+        GhostDirections[] dirList = new GhostDirections[4];
+
+        if(!checkWalls(Vector2.down))
         {
-            Vector2 picked = new Vector2(Random.Range(-14, 14), Random.Range(-17, 14));
-            print(picked);
-            Collider2D isWall = Physics2D.OverlapBox(picked, new Vector2(1, 1),0.0f,6);
-            Debug.DrawLine(new Vector2(picked.x - 0.5f, picked.y), new Vector2(picked.x + 0.5f, picked.y),Color.red);
-            print(isWall);
-            if (isWall)
-            {
-                target = localpos;
-            }
-            else
-            {
-                target = picked;
-            }
+            dirList[0] = (GhostDirections.Up);
         }
+        if (!checkWalls(Vector2.up))
+        {
+            dirList[1] = (GhostDirections.Down);
+        }
+        if (!checkWalls(Vector2.right))
+        {
+            dirList[2] = (GhostDirections.Right);
+        }
+        if (!checkWalls(Vector2.left))
+        {
+            dirList[3] = (GhostDirections.Left);
+        }
+
+        return dirList;
+    }
+
+    public void pickDirection()
+    {
+        GhostDirections[] availDir = availableDirection();
+
+        if(!(Enumerable.SequenceEqual(availableDir, availDir)))
+        {
+            GhostDirections picked = availDir[Random.Range(0, 4)];
+            actualDirection = picked;
+        }        
     }
 
     public void RandomAI()
     {
-        pickTarget();
-        print(target);
+        pickDirection();
+        print(actualDirection);
+        Vector2 velocity = new Vector2(0,0);
+        switch(actualDirection)
+        {
+            case GhostDirections.Up:
+            {
+                velocity = Vector2.down;
+                break;
+            }
+            case GhostDirections.Down:
+            {
+                velocity = Vector2.up;
+                break;
+            }
+            case GhostDirections.Right:
+            {
+                velocity = Vector2.right;
+                break;
+            }
+            case GhostDirections.Left:
+            {
+                velocity = Vector2.left;
+                break;
+            }
+        }
+        print(this.transform.localPosition);
+        rgbody.MovePosition(this.transform.localPosition * velocity * Time.fixedDeltaTime * 1.0f);
     }
     //(-3.42, -8.27, 0.00)
 
