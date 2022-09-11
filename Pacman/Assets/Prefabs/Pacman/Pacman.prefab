@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 9175552305839756651}
   - component: {fileID: 7297250703054466090}
-  - component: {fileID: 7318706345511963479}
   - component: {fileID: 8296461090782455911}
-  - component: {fileID: 7141681276766646086}
-  - component: {fileID: 7427356157276645465}
-  m_Layer: 8
+  - component: {fileID: 6436456824236166756}
+  - component: {fileID: 583396297004542187}
+  - component: {fileID: 2262254639281582087}
+  - component: {fileID: 2135568112}
+  m_Layer: 0
   m_Name: Pacman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7063791741341903422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,20 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7318706345511963479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7063791741341903422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650d9427b9a005749bed5ac9f3be7624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 800
-  rbPacman: {fileID: 8296461090782455911}
 --- !u!50 &8296461090782455911
 Rigidbody2D:
   serializedVersion: 4
@@ -123,7 +110,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &7141681276766646086
+--- !u!58 &6436456824236166756
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +126,42 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.46875
---- !u!95 &7427356157276645465
+--- !u!114 &583396297004542187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7063791741341903422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5560584b1ebc10d4a9f2061a5c635dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Movement: {fileID: 2262254639281582087}
+--- !u!114 &2262254639281582087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7063791741341903422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcba28941f796e41ab2b0d7d02f4857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RbPacman: {fileID: 8296461090782455911}
+  speed: 8
+  speedMultiplier: 1
+  initialDirection: {x: 0, y: 0}
+  obstacle:
+    serializedVersion: 2
+    m_Bits: 64
+  Direction: {x: 0, y: 0}
+  NextDirection: {x: 0, y: 0}
+  InitialPosition: {x: 0, y: 0, z: 0}
+--- !u!95 &2135568112
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -149,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 7063791741341903422}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: defef8de3037a5449b21ea40746ec473, type: 2}
+  m_Controller: {fileID: 9100000, guid: c03638aa320ab7c4fa464ce9b29fdacc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
