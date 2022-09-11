@@ -11780,11 +11780,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 58128812}
   mainMenu: {fileID: 412629228}
-  scoreManager: {fileID: 1402352999}
+  scoreManager: {fileID: 0}
   map: {fileID: 1142883042}
   state: 0
   coins: {fileID: 435175176}
   pacman: {fileID: 1576962394}
+  ghosts: {fileID: 736476424}
+  multiplierTimer: 6
+  ghostPoint: 0
+  health: 3
 --- !u!4 &1890222472
 Transform:
   m_ObjectHideFlags: 0
