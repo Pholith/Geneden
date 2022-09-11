@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
     
 
     //Fonction de CallBack lorsqu'un Collider hit une pièce
-    private void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
