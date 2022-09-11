@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public GameObject title;
     public GameObject playButton;
     public GameObject quitButton;
+    public GameObject namesText;
 
     public void Play()
     {
@@ -25,5 +26,6 @@ public class MainMenu : MonoBehaviour
         title.SetActive(isVis);
         playButton.SetActive(isVis);
         quitButton.SetActive(isVis);
+        namesText.SetActive(isVis);
     }
 }

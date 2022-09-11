@@ -14,7 +14,8 @@ public class PacmanController : MonoBehaviour
     public Vector2 NextDirection;
     public Vector3 InitialPosition;
 
-
+    public bool isDead;
+    public float deathTimer;
     private void Awake()
     {
         this.RbPacman = GetComponent<Rigidbody2D>();
@@ -25,7 +26,8 @@ public class PacmanController : MonoBehaviour
     {
         // R�cup�ration de la position locale du Pacman
         this.InitialPosition = this.transform.localPosition;
-
+        this.deathTimer = 3.0f;
+        this.isDead = false;
         // Initialisation
         this.speedMultiplier = 1.0f;
         this.Direction = this.initialDirection;
@@ -36,23 +38,40 @@ public class PacmanController : MonoBehaviour
     }
 
 
-    private const float DEFAULT_COULDOWN_SPEED = 0.2f; // More it is big, more it is slow
-    private float couldownBeforeNextMove = DEFAULT_COULDOWN_SPEED;
-    public bool isDead = false;
+    //private const float DEFAULT_COULDOWN_SPEED = 0.2f; // More it is big, more it is slow
+    //private float couldownBeforeNextMove = DEFAULT_COULDOWN_SPEED;
+    
     // Update is called once per frame
     void Update()
     {
         // Tester la nouvelle direction tout le temps
-        if (this.NextDirection != Vector2.zero)
+        if (isDead & (deathTimer > 0))
         {
-            SetDir(this.NextDirection);
+            GetComponent<Animator>().SetBool("isDead", true);
+            deathTimer -= Time.smoothDeltaTime;
         }
+        else if (isDead & (deathTimer <= 0))
+        {
+            this.transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
+            isDead = false;
+            GetComponent<Animator>().SetBool("isDead", false);
+            GetComponent<CircleCollider2D>().enabled = true;
+            deathTimer = 3.0f;
+        }
+        
+        if(!isDead)
+        {
+            if (this.NextDirection != Vector2.zero)
+            {
+                SetDir(this.NextDirection);
+            }
+            Vector2 position = this.RbPacman.position;
+            Vector2 translation = this.Direction * this.speed * this.speedMultiplier * Time.fixedDeltaTime;
+            Vector2 movement = position + translation;
 
-        Vector2 position = this.RbPacman.position;
-        Vector2 translation = this.Direction * this.speed * this.speedMultiplier * Time.fixedDeltaTime;
-        Vector2 movement = position + translation;
-
-        this.RbPacman.MovePosition(movement);
+            this.RbPacman.MovePosition(movement);
+        }
+        
     }
 
     public void SetDir(Vector2 dir)
@@ -70,12 +89,6 @@ public class PacmanController : MonoBehaviour
         else
         {
             this.NextDirection = dir;
-        }
-
-        if(isDead)
-        {
-            this.transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
-            isDead = false;
         }
     }
 

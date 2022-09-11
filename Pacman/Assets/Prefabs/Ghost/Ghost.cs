@@ -29,6 +29,8 @@ public class Ghost : MonoBehaviour
 
     public int point = 200;
 
+    public Vector3 initial_pos;
+
     void Awake()
     {
         ghostSpriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -42,7 +44,7 @@ public class Ghost : MonoBehaviour
 
     void Start()
     {
-    
+        this.initial_pos = this.transform.localPosition;
     }
 
     void Update()
@@ -256,6 +258,7 @@ public class Ghost : MonoBehaviour
             }
         }
     }
+    
 
     public void GhostDie()
     {
@@ -266,6 +269,14 @@ public class Ghost : MonoBehaviour
         deathTimer = 8.0f;
     }
 
+    public void GhostReset()
+    {
+        isDebuff = false;
+        debuffTime = 0.0f;
+        deathTimer = 0.0f;
+        speed = 3.0f;
+        transform.position = initial_pos;
+    }
     public enum GhostColors
     {
         Cyan,

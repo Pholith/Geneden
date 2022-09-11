@@ -38,12 +38,12 @@ public class GameManager : MonoBehaviour
     {
 
         //Condition de victoire (si toutes les pièces sont mangées)
-        if(!hasCoin() & (state == GameState.Game))
+        if (!hasCoin() & (state == GameState.Game))
         {
             UpdateGameState(GameState.Victory);
         }
-
-        if(health == 0)
+        
+        if((state == GameState.Game) & (health == 0 ) & (FindObjectOfType<PacmanController>(true).deathTimer <= 0))
         {
             UpdateGameState(GameState.Lose);
         }
@@ -56,26 +56,62 @@ public class GameManager : MonoBehaviour
             ghostPoint = 0;
         }
 
+        if ((state == GameState.Game))
+        {
+            uiManager.update_health();
+            if ((FindObjectOfType<PacmanController>(true).isDead) & (FindObjectOfType<PacmanController>(true).deathTimer <= 0))
+            {
+                Ghost[] ghostlist = FindObjectsOfType<Ghost>(true);
+                foreach (Ghost ghost in ghostlist)
+                {
+                    print(ghost);
+                    ghost.gameObject.SetActive(true);
+                    ghost.transform.localPosition = ghost.initial_pos;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                UpdateGameState(GameState.MainMenu);
+            }
+        }
+
+        if ((state == GameState.Lose) || (state == GameState.Victory))
+        {
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                UpdateGameState(GameState.MainMenu);
+            }
+        }
+        
+
     }
 
     //Reset de la game
     // TODO : Revoir le reset du Pacman (Revoir la façon dont spawn et se déplace le Pacman?)
     public void setGame()
     {
-        foreach (Transform pacman in this.pacman)
+        health = 3;
+        Ghost[] ghostlist = FindObjectsOfType<Ghost>(true);
+        Coin[] coinlist = FindObjectsOfType<Coin>(true);
+        PacmanController _pacman = FindObjectOfType<PacmanController>(true);
+        foreach (Ghost ghost in ghostlist)
         {
-            pacman.gameObject.transform.position = new Vector3(-0.5f,-9.50f,0.0f);
+            ghost.gameObject.SetActive(true);
+            ghost.GhostReset();
         }
-        foreach (Transform coin in this.coins)
+        foreach (Coin coin in coinlist)
         {
             coin.gameObject.SetActive(true);
         }
-        foreach (Transform ghost in this.ghosts)
-        {
-            ghost.gameObject.SetActive(true);
-        }
+
+        _pacman.transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
+        _pacman.Direction = new Vector2(0, 0);
+        _pacman.NextDirection = new Vector2(0, 0);
+        _pacman.gameObject.SetActive(true);
         mainMenu.setUIVisible(false);
         map.SetActive(true);
+        scoreManager.gScoreVar = 0;
         uiManager.showGameUI();
     }
 
@@ -84,8 +120,7 @@ public class GameManager : MonoBehaviour
     public void CoinEaten(Coin coin)
     {
         coin.gameObject.SetActive(false);
-        scoreManager.addUpScore(coin.getValue());
-        scoreManager.addglobalScore(coin.getValue());
+        scoreManager.addScore(coin.getValue());
     }
 
     public void LargeCoinEaten(Large_Coin large_coin)
@@ -102,8 +137,17 @@ public class GameManager : MonoBehaviour
 
     public void PacmanDie()
     {
-        FindObjectOfType<PacmanController>().isDead = true;
+        print("You die");
+        PacmanController _pacman = FindObjectOfType<PacmanController>();
+        _pacman.GetComponent<CircleCollider2D>().enabled = false;
+        _pacman.isDead = true;
         health -= 1;
+
+        Ghost[] ghostlist = FindObjectsOfType<Ghost>();
+        foreach (Ghost ghost in ghostlist)
+        {
+            ghost.gameObject.SetActive(false);
+        }
     }
 
     public void GhostEaten(Ghost ghost)
@@ -112,15 +156,13 @@ public class GameManager : MonoBehaviour
         if(ghostPoint != 0)
         {
             ghostPoint = ghostPoint * 2;
-            scoreManager.addUpScore(ghostPoint);
-            scoreManager.addglobalScore(ghostPoint);
+            scoreManager.addScore(ghostPoint);
             
         }
         else
         {
             ghostPoint = ghost.point;
-            scoreManager.addUpScore(ghost.point);
-            scoreManager.addglobalScore(ghost.point);
+            scoreManager.addScore(ghost.point);
         }
 
     }
@@ -189,13 +231,22 @@ public class GameManager : MonoBehaviour
     {
         print("You won.");
         uiManager.showVictory();
+        foreach (Ghost ghost in FindObjectsOfType<Ghost>(true))
+        {
+            ghost.gameObject.SetActive(false);
+        }
+        FindObjectOfType<PacmanController>(true).gameObject.SetActive(false);
     }
 
     //Méthode d'affichage de l'écran de Défaite lorsque le jeu passe à l'état GameOver
     private void onLose()
     {
-        print("Game has been quitted.");
         uiManager.showGameOver();
+        foreach (Ghost ghost in FindObjectsOfType<Ghost>(true))
+        {
+            ghost.gameObject.SetActive(false);
+        }
+        FindObjectOfType<PacmanController>(true).gameObject.SetActive(false);
     }
 
     //Méthode lorsque le bouton Quit est pressé

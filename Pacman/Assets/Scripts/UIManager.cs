@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class UIManager : MonoBehaviour
     public GameObject victory_text;
     public GameObject lose_text;
     public GameObject game_UI;
+
+    public GameObject health_bar;
     // Start is called before the first frame update
 
     public void showVictory()
@@ -40,9 +43,24 @@ public class UIManager : MonoBehaviour
         lose_text.SetActive(false);
     }
 
+    public void update_health()
+    {
+        foreach(Transform health_icon in health_bar.transform)
+        {
+            if((int.Parse(health_icon.name)) <= (FindObjectOfType<GameManager>().health))
+            {
+                health_icon.GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                health_icon.GetComponent<Image>().enabled = false;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

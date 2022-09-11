@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pacman Spawn
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 7063791741341903422, guid: 98d3be86b60d5344f9fb372ad9e1ba5e, type: 3}
+  m_DefaultGameObject: {fileID: 1554765929099116908, guid: 98d3be86b60d5344f9fb372ad9e1ba5e, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
