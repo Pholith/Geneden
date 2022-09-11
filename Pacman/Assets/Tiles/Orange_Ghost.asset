@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Orange_Ghost
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 9153482488752138784, guid: 00551151ab9638443a838f48ed4b4ead, type: 3}
+  m_DefaultGameObject: {fileID: 9153482488752138784, guid: f2471d9418b158740b7a03b69314e9cc, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
