@@ -10,4 +10,14 @@ public class Large_Coin : Coin
         value = 100;
     }
 
+    //Fonction de CallBack lorsqu'un Collider hit une pièce
+    public override void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        {
+            print("Eat large coin!");
+            FindObjectOfType<GameManager>().LargeCoinEaten(this);
+        }
+    }
+
 }
