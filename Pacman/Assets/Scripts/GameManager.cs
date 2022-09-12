@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Transform coins;
     public Transform pacman;
     public Transform ghosts;
+    public Cherry cherry;
 
     public float multiplierTimer = 0.0f;
     public int ghostPoint = 0;
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        //Condition de victoire (si toutes les pièces sont mangées)
+        //Condition de victoire (si toutes les piï¿½ces sont mangï¿½es)
         if(!hasCoin() & (state == GameState.Game))
         {
             UpdateGameState(GameState.Victory);
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Reset de la game
-    // TODO : Revoir le reset du Pacman (Revoir la façon dont spawn et se déplace le Pacman?)
+    // TODO : Revoir le reset du Pacman (Revoir la faï¿½on dont spawn et se dï¿½place le Pacman?)
     public void setGame()
     {
         foreach (Transform pacman in this.pacman)
@@ -74,13 +75,15 @@ public class GameManager : MonoBehaviour
         {
             ghost.gameObject.SetActive(true);
         }
+
+        cherry.GameStart();
         mainMenu.setUIVisible(false);
         map.SetActive(true);
         uiManager.showGameUI();
     }
 
-    //Action lorsqu'une pièce est mangée
-    // TODO : Ecrire la fonction pour le large Coin dans le même esprit.
+    //Action lorsqu'une piï¿½ce est mangï¿½e
+    // TODO : Ecrire la fonction pour le large Coin dans le mï¿½me esprit.
     public void CoinEaten(Coin coin)
     {
         coin.gameObject.SetActive(false);
@@ -126,7 +129,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //Méthode pour vérifier s'il reste des pièces sur le terrain
+    //Mï¿½thode pour vï¿½rifier s'il reste des piï¿½ces sur le terrain
     public bool hasCoin()
     {
         foreach(Transform coin in this.coins)
@@ -140,7 +143,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    //Fonction gérant les transitions entre les différents états du jeu.
+    //Fonction gï¿½rant les transitions entre les diffï¿½rents ï¿½tats du jeu.
     public void UpdateGameState(GameState new_state)
     {
         state = new_state;
@@ -165,7 +168,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    //Méthode d'affichage du MainMenu lorsque le jeu passe à l'état MainMenu
+    //Mï¿½thode d'affichage du MainMenu lorsque le jeu passe ï¿½ l'ï¿½tat MainMenu
     private void onMainMenu()
     {
         print("MainMenu is loaded!");
@@ -175,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //Méthode d'affichage du Jeu lorsque le jeu passe à l'état Game
+    //Mï¿½thode d'affichage du Jeu lorsque le jeu passe ï¿½ l'ï¿½tat Game
     private void onGame()
     {
         setGame();
@@ -184,21 +187,21 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //Méthode d'affichage de l'écran de Victoire lorsque le jeu passe à l'état Victory
+    //Mï¿½thode d'affichage de l'ï¿½cran de Victoire lorsque le jeu passe ï¿½ l'ï¿½tat Victory
     private void onVictory()
     {
         print("You won.");
         uiManager.showVictory();
     }
 
-    //Méthode d'affichage de l'écran de Défaite lorsque le jeu passe à l'état GameOver
+    //Mï¿½thode d'affichage de l'ï¿½cran de Dï¿½faite lorsque le jeu passe ï¿½ l'ï¿½tat GameOver
     private void onLose()
     {
         print("Game has been quitted.");
         uiManager.showGameOver();
     }
 
-    //Méthode lorsque le bouton Quit est pressé
+    //Mï¿½thode lorsque le bouton Quit est pressï¿½
     private void onQuit()
     {
         Application.Quit();
