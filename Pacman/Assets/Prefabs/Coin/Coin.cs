@@ -17,12 +17,11 @@ public class Coin : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
-            print("Eat!");
-            FindObjectOfType<GameManager>().CoinEaten(this);
+            FindObjectOfType<GameManager>().EatCoin(this);
         }
     }
 
-    public int getValue()
+    public int GetValue()
     {
         return value;
     }

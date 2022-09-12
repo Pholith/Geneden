@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingLayerID: -701867425
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 07ddb51374d9f19458dad756bbbcd880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 439988598284015815}
   - component: {fileID: 9054095925197878929}
   m_Layer: 9
-  m_Name: Ghost_Orange
+  m_Name: GhostCyan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +114,8 @@ Transform:
   m_GameObject: {fileID: 9153482488752138784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3861325732817924062}
   m_Father: {fileID: 0}
@@ -159,11 +159,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -701867425
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: afc3b534b8a93544984cf1676ba61ae4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.39215684, g: 1, b: 0.8082798, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -192,7 +192,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &7080027375100753224
 BoxCollider2D:
@@ -207,7 +207,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00726223, y: 0.0009084344}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -218,7 +218,7 @@ BoxCollider2D:
     adaptiveTiling: 1
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8368511, y: 1.8151253}
+  m_Size: {x: 1.7, y: 1.7}
   m_EdgeRadius: 0
 --- !u!114 &439988598284015815
 MonoBehaviour:
@@ -232,19 +232,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6996fe85a3f61ed4db3b8dbdf75a5010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostColor: 2
-  ghostSprite: {fileID: 21300000, guid: afc3b534b8a93544984cf1676ba61ae4, type: 3}
   ghostEyes: {fileID: 6999346732641834013}
-  availableDir: 
-  actualDirection: 0
-  animator: {fileID: 9054095925197878929}
-  rgbody: {fileID: 9022384558284084035}
-  timer: 1
-  speed: 0
-  isDebuff: 0
-  debuffTime: 0
-  deathTimer: 0
-  point: 200
+  speed: 5
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 576
+  ghostBaseEntrance: {fileID: 0}
+  alternativeIA: 0
 --- !u!95 &9054095925197878929
 Animator:
   serializedVersion: 4

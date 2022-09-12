@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 7063791741341903422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -701867425
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f9604f5749fde646a59a72c9ee1cd3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5560584b1ebc10d4a9f2061a5c635dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Movement: {fileID: 2262254639281582087}
+  movement: {fileID: 2262254639281582087}
 --- !u!114 &2262254639281582087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,16 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcba28941f796e41ab2b0d7d02f4857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RbPacman: {fileID: 8296461090782455911}
   speed: 8
   speedMultiplier: 1
   initialDirection: {x: 0, y: 0}
   obstacle:
     serializedVersion: 2
     m_Bits: 64
-  Direction: {x: 0, y: 0}
-  NextDirection: {x: 0, y: 0}
-  InitialPosition: {x: 0, y: 0, z: 0}
   isDead: 0
 --- !u!95 &2135568112
 Animator:

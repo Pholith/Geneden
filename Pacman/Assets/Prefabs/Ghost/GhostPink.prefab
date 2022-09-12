@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7848593888414906345
+--- !u!1001 &7241657772195816500
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,9 +8,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 439988598284015815, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
-      propertyPath: ghostColor
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 1979396579915320852}
     - target: {fileID: 6034242158191755169, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -55,9 +55,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7345117757770234456, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9338102
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345117757770234456, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3160377
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345117757770234456, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9153482488752138784, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
       propertyPath: m_Name
-      value: Ghost_Pink
+      value: GhostPink
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
+--- !u!1 &1979396579915320852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9153482488752138784, guid: 02d00237ecb152f45828296dbdc5ca77, type: 3}
+  m_PrefabInstance: {fileID: 7241657772195816500}
+  m_PrefabAsset: {fileID: 0}

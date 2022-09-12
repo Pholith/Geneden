@@ -2,36 +2,35 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public PacmanController Movement;
+    [SerializeField]
+    PacmanController movement;
 
     public void Awake()
     {
-        this.Movement = GetComponent<PacmanController>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
+        movement = GetComponent<PacmanController>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow)) {
-            this.Movement.SetDir(Vector2.up);
+        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            movement.SetDir(Vector2.up);
             //print("Haut");
         }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-            this.Movement.SetDir(Vector2.down);
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            movement.SetDir(Vector2.down);
             //print("Bas");
         }
-        else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftArrow)) {
-            this.Movement.SetDir(Vector2.left);
+        else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            movement.SetDir(Vector2.left);
             //print("Gauche");
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-            this.Movement.SetDir(Vector2.right);
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            movement.SetDir(Vector2.right);
             //print("Droite");
         }
     }

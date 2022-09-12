@@ -1,58 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PacmanController : MonoBehaviour
 {
-    public Rigidbody2D RbPacman;
-    public float speed;
-    public float speedMultiplier;
+    private Rigidbody2D rbPacman;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float speedMultiplier;
 
-    public Vector2 initialDirection;
-    public LayerMask obstacle;
-    public Vector2 Direction;
-    public Vector2 NextDirection;
-    public Vector3 InitialPosition;
+    [SerializeField]
+    private Vector2 initialDirection;
+    [SerializeField]
+    private LayerMask obstacle;
+    private Vector2 direction;
+    private Vector2 nextDirection;
+    private Vector3 initialPosition;
 
 
     private void Awake()
     {
-        this.RbPacman = GetComponent<Rigidbody2D>();
+        rbPacman = GetComponent<Rigidbody2D>();
         //print(this.StartintPosition);
     }
 
     private void Start()
     {
         // R�cup�ration de la position locale du Pacman
-        this.InitialPosition = this.transform.localPosition;
+        initialPosition = transform.localPosition;
 
         // Initialisation
-        this.speedMultiplier = 1.0f;
-        this.Direction = this.initialDirection;
-        this.NextDirection = Vector2.zero;
-        this.transform.localPosition = this.InitialPosition;
-        this.RbPacman.isKinematic = false;
-        this.enabled = true;
+        speedMultiplier = 1.0f;
+        direction = initialDirection;
+        nextDirection = Vector2.zero;
+        transform.localPosition = initialPosition;
+        rbPacman.isKinematic = false;
+        enabled = true;
     }
 
 
     private const float DEFAULT_COULDOWN_SPEED = 0.2f; // More it is big, more it is slow
-    private float couldownBeforeNextMove = DEFAULT_COULDOWN_SPEED;
+    private readonly float couldownBeforeNextMove = DEFAULT_COULDOWN_SPEED;
     public bool isDead = false;
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Tester la nouvelle direction tout le temps
-        if (this.NextDirection != Vector2.zero)
+        if (nextDirection != Vector2.zero)
         {
-            SetDir(this.NextDirection);
+            SetDir(nextDirection);
         }
 
-        Vector2 position = this.RbPacman.position;
-        Vector2 translation = this.Direction * this.speed * this.speedMultiplier * Time.fixedDeltaTime;
+        Vector2 position = rbPacman.position;
+        Vector2 translation = direction * speed * speedMultiplier * Time.fixedDeltaTime;
         Vector2 movement = position + translation;
 
-        this.RbPacman.MovePosition(movement);
+        rbPacman.MovePosition(movement);
     }
 
     public void SetDir(Vector2 dir)
@@ -63,25 +66,25 @@ public class PacmanController : MonoBehaviour
         // Si c'est pas un obstacle
         if (!IsWall(dir))
         {
-            this.Direction = dir;
-            this.NextDirection = Vector2.zero;
+            direction = dir;
+            nextDirection = Vector2.zero;
         }
         // Si c'est un obstacle
         else
         {
-            this.NextDirection = dir;
+            nextDirection = dir;
         }
 
-        if(isDead)
+        if (isDead)
         {
-            this.transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
+            transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
             isDead = false;
         }
     }
 
-    public bool IsWall(Vector2 direction)
+    private bool IsWall(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.BoxCast(this.transform.localPosition, Vector2.one * 0.75f, 0.0f, direction, 1.5f, this.obstacle);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.localPosition, Vector2.one * 0.75f, 0.0f, direction, 1.5f, obstacle);
         //Physics2D.BoxCast(this.transform.localPosition, Vector2.one * 0.75f, 0.0f, direction, 1.5f, this.obstacle);
 
         return hit.collider;
