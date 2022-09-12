@@ -1,30 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject background;
-    public GameObject victory_text;
-    public GameObject lose_text;
-    public GameObject game_UI;
+    [SerializeField]
+    private GameObject background;
+    [SerializeField]
+    private GameObject victory_text;
+    [SerializeField]
+    private GameObject lose_text;
+    [SerializeField]
+    private GameObject game_UI;
     // Start is called before the first frame update
 
-    public void showVictory()
+    public void ShowVictory()
     {
         background.SetActive(true);
         victory_text.SetActive(true);
         lose_text.SetActive(false);
     }
 
-    public void showGameOver()
+    public void ShowGameOver()
     {
         background.SetActive(true);
         lose_text.SetActive(true);
         victory_text.SetActive(false);
     }
 
-    public void showGameUI()
+    public void ShowGameUI()
     {
         game_UI.SetActive(true);
         background.SetActive(false);
@@ -32,7 +34,7 @@ public class UIManager : MonoBehaviour
         lose_text.SetActive(false);
     }
 
-    public void hideAll()
+    public void HideAll()
     {
         game_UI.SetActive(false);
         background.SetActive(false);
@@ -41,8 +43,8 @@ public class UIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
     }
 }

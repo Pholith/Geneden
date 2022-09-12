@@ -1,29 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject background;
-    public GameObject title;
-    public GameObject playButton;
-    public GameObject quitButton;
-
     public void Play()
     {
-        GameManager.gameManager.UpdateGameState(GameManager.GameState.Game);
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Game);
     }
 
     public void Quit()
     {
-        GameManager.gameManager.UpdateGameState(GameManager.GameState.Quit);
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Quit);
     }
 
-    public void setUIVisible(bool isVis)
+    public void SetUIVisible(bool isVis)
     {
-        background.SetActive(isVis);
-        title.SetActive(isVis);
-        playButton.SetActive(isVis);
-        quitButton.SetActive(isVis);
+        gameObject.SetActive(isVis);
     }
 }

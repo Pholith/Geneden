@@ -1,257 +1,153 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class Ghost : MonoBehaviour
 {
-
-    public GhostColors ghostColor;
-    public Sprite ghostSprite;
-    private SpriteRenderer ghostSpriteRenderer;
-
     public GameObject ghostEyes;
-    private SpriteRenderer eyesSprite;
 
-    public List<GhostDirections> availableDir;
-    public GhostDirections actualDirection;
-    public Animator animator;
-    public Rigidbody2D rgbody;
-    public float timer = 0.0f;
-    private bool has_change_dir;
+    [SerializeField]
+    [Tooltip("Vitesse de déplacement du fantôme")]
+    private float speed = 3f;
+    public const int POINTS_PER_GHOST = 200;
 
-    
-    public float speed;
+    [Tooltip("Temps de debuff en secondes")]
+    public const float DEFAULT_DEBUFF_DURATION = 6f;
+    private float debuffDuration = DEFAULT_DEBUFF_DURATION;
+    private bool isDebuffed = false;
+    private SpriteRenderer spriteRenderer;
+    private Color color;
+    private Vector3 spawnTransformPosition;
 
-    public bool isDebuff = false;
-    public float debuffTime = 0.0f;
-    public float deathTimer = 0.0f;
+    [Header("Tout ce qui concerne l'IA des fantômes")]
+    [SerializeField] LayerMask collideWith;
+    [SerializeField] GameObject ghostBaseEntrance;
+    [SerializeField, Range(0, 2)] int alternativeIA;
+    private Tilemap tilemap;
+    private PacmanController pacman;
+    private Vector2Int currentDirection = Vector2Int.up;
+    private bool isInStarterPoint = true;
 
-    public int point = 200;
 
-    void Awake()
+    private void Start()
     {
-        ghostSpriteRenderer = this.GetComponent<SpriteRenderer>();
-        ghostSpriteRenderer.sprite = ghostSprite;
-        ghostSpriteRenderer.size = new Vector2(1, 1);
-        eyesSprite = ghostEyes.GetComponent<SpriteRenderer>();
-        choseColor(ghostColor);
+        spawnTransformPosition = transform.position;
+        tilemap = FindObjectOfType<Tilemap>();
+        pacman = FindObjectOfType<PacmanController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
-
-    void Start()
+    private void Update()
     {
-    
-    }
-
-    void Update()
-    {
-        if(deathTimer <= 0)
-        {
-            this.ghostSpriteRenderer.enabled = true;
-            this.GetComponent<BoxCollider2D>().enabled = true;
-            this.ghostEyes.SetActive(true);
-
-            if (debuffTime <= 0)
-            {
-                isDebuff = false;
-            }
-            animator.SetBool("isVulnerable", isDebuff);
-            if (isDebuff)
-            {
-                speed = 1.0f;
-                ghostSpriteRenderer.color = Color.white;
-                debuffTime -= Time.smoothDeltaTime;
-            }
-            else
-            {
-                choseColor(ghostColor);
-                speed = 3.0f;
-            }
+        // Gestion du temps de debuff
+        if (isDebuffed) {
+            debuffDuration -= Time.deltaTime;
+            if (debuffDuration <= 0) RebuffGhost();
         }
-        else
-        {
-            deathTimer -= Time.smoothDeltaTime;
-            debuffTime = 0;
-            isDebuff = false;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (deathTimer <= 0)
-        {
-            GhostBehaviour(ghostColor);
-            if (timer >= 0)
-            {
-                timer -= Time.smoothDeltaTime;
-            }
-        }
-    }
-
-    public void choseColor(GhostColors ghostCol)
-    {
-        if (ghostCol == GhostColors.Orange)
-        {
-            ghostSpriteRenderer.color = new Color(1.0f, 0.6825919f, 0.0f);
-        }
-
-        if (ghostCol == GhostColors.Cyan)
-        {
-            ghostSpriteRenderer.color = Color.cyan;
-        }
-
-        if (ghostCol == GhostColors.Red)
-        {
-            ghostSpriteRenderer.color = Color.red;
-        }
-
-        if (ghostCol == GhostColors.Pink)
-        {
-            ghostSpriteRenderer.color = new Color(1.0f, 0.6273585f, 0.8231753f);
-        }
-        if (ghostCol == GhostColors.White)
-        {
-            ghostSpriteRenderer.color = Color.white;
-        }
-    }
-    public void deBuffGhost()
-    {
-        isDebuff = true;
-    }
-
-    public void GhostBehaviour(GhostColors color)
-    {
-        switch (color)
-        {
-            case GhostColors.Cyan:
-                RandomAI();
-                break;
-            case GhostColors.Red:
-                ChaserAI();
-                break;
-            case GhostColors.Orange:
-                RandomAI();
-                break;
-            case GhostColors.Pink:
-                AmbusherAI();
-                break;
-        }
-    }
-
-    public void ChaserAI()
-    {
-
-    }
-
-    public void AmbusherAI()
-    {
-
-    }
-
-    public List<GhostDirections> availableDirection()
-    {
-
-        List<GhostDirections> dirList = new List<GhostDirections>();
-
-        if(!checkWalls(Vector2.down))
-        {
-            dirList.Add(GhostDirections.Up);
-        }
-        if (!checkWalls(Vector2.up))
-        {
-            dirList.Add(GhostDirections.Down);
-        }
-        if (!checkWalls(Vector2.right))
-        {
-            dirList.Add(GhostDirections.Right);
-        }
-        if (!checkWalls(Vector2.left))
-        {
-            dirList.Add(GhostDirections.Left);
-        }
-        print(string.Join(", ", dirList));
-
-        return dirList;
-    }
-
-    public void pickDirection()
-    {
-        List<GhostDirections> availDir = availableDirection();
-        if((!(availableDir.Equals(availDir)))& (!(has_change_dir)))
-        {
-            print(availDir.ElementAt(0));
-            GhostDirections picked = availDir.ElementAt(Random.Range(0, availDir.Count));
-            actualDirection = picked;
-        }        
-    }
-
-    public void RandomAI()
-    {
-        Vector2 velocity = new Vector2(0, 0);
         
-        if (timer <= 0)
+        
+        // Gestion de la sortie de base
+        if (Vector2.Distance(ghostBaseEntrance.transform.position, transform.position) < 0.1f) isInStarterPoint = false;
+        if (isInStarterPoint)
         {
-            pickDirection();
-            timer = 0.5f;
-        }
-        switch (actualDirection)
-        {
-            case GhostDirections.Up:
-                {
-                    velocity = Vector2.down;
-                    Debug.DrawRay(this.transform.localPosition, velocity, Color.red, 1.5f);
-                    break;
-                }
-            case GhostDirections.Down:
-                {
-                    velocity = Vector2.up;
-                    Debug.DrawRay(this.transform.localPosition, velocity, Color.red, 1.5f);
-                    break;
-                }
-            case GhostDirections.Right:
-                {
-                    velocity = Vector2.right;
-                    Debug.DrawRay(this.transform.localPosition, velocity, Color.red, 1.5f);
-                    break;
-                }
-            case GhostDirections.Left:
-                {
-                    velocity = Vector2.left;
-                    Debug.DrawRay(this.transform.localPosition, velocity, Color.red, 1.5f);
-                    break;
-                }
-        }
-        rgbody.MovePosition(rgbody.position + velocity * Time.fixedDeltaTime * speed);
-    }
-    //(-3.42, -8.27, 0.00)
-
-    public bool checkWalls(Vector2 dir)
-    {
-        Vector2 localpos = this.transform.localPosition;
-        RaycastHit2D isWall = Physics2D.Raycast(localpos,dir, 1.5f);
-        if(isWall)
-        {
-            if (isWall.collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            if (Mathf.Abs(transform.position.x - ghostBaseEntrance.transform.position.x) > 0.01f)
             {
-                return true;
+                Vector2 direction = (ghostBaseEntrance.transform.position.x < transform.position.x) ? Vector2.left : Vector2.right;
+                transform.Translate(((Vector3)direction) * Time.deltaTime * speed);
+            } else
+            {
+                transform.Translate(((Vector3)Vector2.up) * Time.deltaTime * speed);
             }
+            return;
         }
-        return false;
+
+        GameObject target;
+        if (isInStarterPoint) target = ghostBaseEntrance;
+        else target = pacman.gameObject;
+
+        Vector2 vectorBetweenObjects = target.transform.position - transform.position;
+        Vector2Int favoriteDirection = Direction(vectorBetweenObjects);
+        Vector2Int secondFavoriteDirection = SecondDirection(vectorBetweenObjects);
+        if (alternativeIA == 1) favoriteDirection = secondFavoriteDirection;
+
+        if (isDebuffed)
+        {
+            favoriteDirection = -favoriteDirection;
+            secondFavoriteDirection = -secondFavoriteDirection;
+        }
+
+        // Si l'IA peut changer de direction
+        if (!IsWall(favoriteDirection, 1f))
+        {
+            currentDirection = favoriteDirection;
+        } else if (!IsWall(secondFavoriteDirection, 1f))
+        {
+            currentDirection = secondFavoriteDirection;
+        }
+
+        if (!IsWall(currentDirection, 0.02f))
+        {
+            transform.Translate(((Vector3)(Vector3Int)currentDirection) * Time.deltaTime * speed);
+        }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(transform.localPosition + ((Vector3)(Vector2) currentDirection) * 1f, Vector3.one);
+    }
+
+    private bool IsWall(Vector2 direction, float distance)
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(transform.localPosition, Vector2.one*0.95f, 0.0f, direction, distance, collideWith);
+        return hit.collider != null;
+    }
+
+    private Vector2Int Direction(Vector2 vectorBetweenObjects)
+    {
+        if (Mathf.Abs(vectorBetweenObjects.x) > Mathf.Abs(vectorBetweenObjects.y))
+        {
+            return vectorBetweenObjects.x > 0 ? Vector2Int.right : Vector2Int.left;
+        }
+        return vectorBetweenObjects.y > 0 ? Vector2Int.up : Vector2Int.down;
+    }    
+    private Vector2Int SecondDirection(Vector2 vectorBetweenObjects)
+    {
+        if (Mathf.Abs(vectorBetweenObjects.y) > Mathf.Abs(vectorBetweenObjects.x))
+        {
+            return vectorBetweenObjects.x > 0 ? Vector2Int.right : Vector2Int.left;
+        }
+        return vectorBetweenObjects.y > 0 ? Vector2Int.up : Vector2Int.down;
+    }
+
+    public void DebuffGhost()
+    {
+        print("Debuff");
+        isDebuffed = true;
+        debuffDuration = DEFAULT_DEBUFF_DURATION;
+        color = spriteRenderer.color;
+        spriteRenderer.color = Color.blue;
+        speed -= 2f;
+    }
+
+    public void RebuffGhost()
+    {
+        isDebuffed = false;
+        spriteRenderer.color = color;
+        speed = DEFAULT_DEBUFF_DURATION;
+    }
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
-            if(isDebuff == false)
+            if (isDebuffed == false)
             {
-                FindObjectOfType<GameManager>().PacmanDie();
+                GameManager.Instance.PacmanDie();
             }
             else
             {
-                FindObjectOfType<GameManager>().GhostEaten(this);
+                GameManager.Instance.ScoreManager.AddUpScore(POINTS_PER_GHOST);
                 GhostDie();
             }
         }
@@ -259,27 +155,16 @@ public class Ghost : MonoBehaviour
 
     public void GhostDie()
     {
-        this.ghostSpriteRenderer.enabled = false;
-        this.ghostEyes.SetActive(false);
-        this.GetComponent<BoxCollider2D>().enabled = false;
-        this.transform.position = new Vector3(-6.0f, -10.0f, 0.0f);
-        deathTimer = 8.0f;
+        transform.position = spawnTransformPosition;
+        isInStarterPoint = true;
+        RebuffGhost();
+        GameManager.Instance.StartCoroutine(WaitAndRespawnGhost());
+        gameObject.SetActive(false);
     }
 
-    public enum GhostColors
+    IEnumerator WaitAndRespawnGhost()
     {
-        Cyan,
-        Red,
-        Orange,
-        Pink,
-        White
-    }
-
-    public enum GhostDirections
-    {
-        Up,
-        Down,
-        Left,
-        Right
+        yield return new WaitForSeconds(2);
+        gameObject.SetActive(true);
     }
 }
