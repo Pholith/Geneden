@@ -32,6 +32,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int health = 3;
 
+    public AudioSource munch1;
+    public AudioSource munch2;
+    public int currentMunch = 0;
+
+    public AudioSource siren_bg;
+    public AudioSource eat_ghost;
+    public AudioSource eat_fruit;
+
     // Function whenever a GameManager is instanciated.
     private void Awake()
     {
@@ -146,6 +154,7 @@ public class GameManager : MonoBehaviour
     private void OnGame()
     {
         StartGame();
+        this.siren_bg.Play();
 
     }
 
@@ -153,18 +162,21 @@ public class GameManager : MonoBehaviour
     private void OnVictory()
     {
         uiManager.ShowVictory();
+        this.siren_bg.Stop();
     }
 
     //M�thode d'affichage de l'�cran de D�faite lorsque le jeu passe � l'�tat GameOver
     private void OnLose()
     {
         uiManager.ShowGameOver();
+        this.siren_bg.Stop();
     }
 
     //M�thode lorsque le bouton Quit est press�
     private void OnQuit()
     {
         Application.Quit();
+        this.siren_bg.Stop();
     }
 
 

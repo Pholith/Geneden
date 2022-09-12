@@ -82,6 +82,11 @@ public class PacmanController : MonoBehaviour
         }
     }
 
+    public Vector2 getDir()
+    {
+        return this.direction;
+    }
+
     private bool IsWall(Vector2 direction)
     {
         RaycastHit2D hit = Physics2D.BoxCast(transform.localPosition, Vector2.one * 0.75f, 0.0f, direction, 1.5f, obstacle);

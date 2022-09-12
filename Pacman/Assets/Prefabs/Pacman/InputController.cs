@@ -33,5 +33,9 @@ public class InputController : MonoBehaviour
             movement.SetDir(Vector2.right);
             //print("Droite");
         }
+
+        // Rotation de Pacman dans la direction précédement indiquée
+        float angle = Mathf.Atan2(this.movement.getDir().y, this.movement.getDir().x);
+        this.transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
     }
 }

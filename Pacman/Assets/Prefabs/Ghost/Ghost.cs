@@ -148,6 +148,7 @@ public class Ghost : MonoBehaviour
             else
             {
                 GameManager.Instance.ScoreManager.AddUpScore(POINTS_PER_GHOST);
+                GameManager.Instance.eat_ghost.Play();
                 GhostDie();
             }
         }

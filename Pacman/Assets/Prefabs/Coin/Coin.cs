@@ -17,6 +17,23 @@ public class Coin : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
+            if (this.GetType() == typeof(Cherry))
+            {
+                GameManager.Instance.eat_fruit.Play();
+            }
+            else
+            {
+                if (GameManager.Instance.currentMunch == 0)
+                {
+                    GameManager.Instance.munch1.Play();
+                    GameManager.Instance.currentMunch = 1;
+                }
+                else if (GameManager.Instance.currentMunch == 1)
+                {
+                    GameManager.Instance.munch2.Play();
+                    GameManager.Instance.currentMunch = 0;
+                }
+            }
             FindObjectOfType<GameManager>().EatCoin(this);
         }
     }
