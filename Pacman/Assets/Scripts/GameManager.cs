@@ -64,10 +64,7 @@ public class GameManager : MonoBehaviour
     // TODO : Revoir le reset du Pacman (Revoir la fa�on dont spawn et se d�place le Pacman?)
     public void StartGame()
     {
-        foreach (Transform pacman in pacman)
-        {
-            pacman.gameObject.transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
-        }
+        pacman.gameObject.transform.position = new Vector3(-0.5f, -9.50f, 0.0f);
         cherry.GameStart();
         mainMenu.SetUIVisible(false);
         map.SetActive(true);
