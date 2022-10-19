@@ -14,16 +14,20 @@ public class TileEditor : MonoBehaviour
     [SerializeField] private GameUI gameUI;
     [SerializeField] private GameObject previewSprite;
     [SerializeField] private SpriteRenderer previewSpriteRenderer;
+    [SerializeField] private RessourceManager ressourceManager;
+    [SerializeField] private int tileDivinePowerCost;
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
         gameUI = FindObjectOfType<GameUI>();
+        ressourceManager = GetComponent<RessourceManager>();
         previewSprite = new GameObject();
         previewSprite.AddComponent<SpriteRenderer>();
         previewSpriteRenderer = previewSprite.GetComponent<SpriteRenderer>();
         previewSpriteRenderer.sortingOrder = 2;
+        tileDivinePowerCost = 5;
     }
 
     private void Update()
@@ -42,7 +46,15 @@ public class TileEditor : MonoBehaviour
     {
         if (selectedTile != null)
         {  
-            tilemap.SetTile(gridPos, selectedTile);
+            if(ressourceManager.HasEnoughPower(tileDivinePowerCost))
+            {
+                if (!(tilemap.GetTile(gridPos) == selectedTile))
+                {
+                    ressourceManager.SubstractDivinePower(tileDivinePowerCost);
+                    print("Tile Set!");
+                    tilemap.SetTile(gridPos, selectedTile);
+                }
+            }
         }
         else
         {
@@ -63,6 +75,14 @@ public class TileEditor : MonoBehaviour
             previewSpriteRenderer.sprite = selectedTile.sprite;
             previewSprite.transform.position = gridPos;
             previewSprite.transform.position += new Vector3(0.5f, 0.5f, 0);
+            if (ressourceManager.HasEnoughPower(tileDivinePowerCost))
+            {
+                previewSpriteRenderer.color = new Color(255f, 255f, 255f,255f);
+            }
+            else
+            {
+                previewSpriteRenderer.color = new Color(0, 0, 0, 255f);
+            }
         }
         else
         {
