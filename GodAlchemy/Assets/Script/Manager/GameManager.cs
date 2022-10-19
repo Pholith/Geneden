@@ -4,12 +4,12 @@
 /// Exemple de GameManager
 /// </summary>
 [ExecuteAlways]
-public class MotelGameManager : BaseGameManager
+public class GameManager : BaseGameManager
 {
 
 
-    private static MotelGameManager instance;
-    public static new MotelGameManager Instance => instance;
+    private static GameManager instance;
+    public static new GameManager Instance => instance;
 
 
 
