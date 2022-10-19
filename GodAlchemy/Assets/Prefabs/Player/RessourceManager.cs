@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RessourceManager : MonoBehaviour
@@ -27,6 +28,15 @@ public class RessourceManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI popText;
     [SerializeField] private TextMeshProUGUI civText;
 
+    //Divine Power
+    [SerializeField] private int currentPower;
+    [SerializeField] private int maxPower;
+
+    //Divine Power bar
+    [SerializeField] private Image divinePowerBar;
+    [SerializeField] private TextMeshProUGUI midPowerText;
+    [SerializeField] private TextMeshProUGUI topPowerText;
+
     //Timer test
     public float timer = 2;
 
@@ -43,6 +53,11 @@ public class RessourceManager : MonoBehaviour
         goldText = gameUI.transform.Find("Canvas").transform.Find("Ressource Panel").transform.Find("GoldScore").transform.gameObject.GetComponent<TextMeshProUGUI>();
         popText = gameUI.transform.Find("Canvas").transform.Find("Ressource Panel").transform.Find("PopScore").transform.gameObject.GetComponent<TextMeshProUGUI>();
         civText = gameUI.transform.Find("Canvas").transform.Find("Ressource Panel").transform.Find("CivScore").transform.gameObject.GetComponent<TextMeshProUGUI>();
+        divinePowerBar = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("PowerFill").transform.gameObject.GetComponent<Image>();
+        midPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("MidText").transform.gameObject.GetComponent<TextMeshProUGUI>();
+        topPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("TopText").transform.gameObject.GetComponent<TextMeshProUGUI>();
+        currentPower = 50;
+        maxPower = 100;
     }
 
     // Update is called once per frame
@@ -54,12 +69,14 @@ public class RessourceManager : MonoBehaviour
             RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
             AddRessource(randomRessource, 100);
             AddRessource(RessourceType.CivLevel, 5);
-            timer = 2;
+            AddDivinePower(1);
+            timer = 1;
         }
         if(civLevel > 25)
         {
             civLevel = 25;
         }
+        SetCurrentFill();
         UpdateUI();
     }
 
@@ -105,8 +122,55 @@ public class RessourceManager : MonoBehaviour
         goldText.text = goldScore.ToString();
         popText.text = popScore.ToString();
         civText.text = civLevel.ToString();
+        midPowerText.text = (maxPower/2).ToString();
+        topPowerText.text = maxPower.ToString();
     }
 
+    public void SetCurrentFill()
+    {
+        float _fillAmount = (float) currentPower / (float) maxPower;
+        divinePowerBar.fillAmount = _fillAmount;
+    }
+
+    public void AddDivinePower(int amount)
+    {
+        if(!((currentPower + amount) > maxPower))
+        {
+            currentPower += amount;
+        }
+        else
+        {
+            currentPower = maxPower;
+        }
+    }
+
+    public void SetMaxDivinePower(int max)
+    {
+        maxPower = max;
+    }
+
+    public int GetMaxDivinePower()
+    {
+        return maxPower;
+    }
+
+    public void SubstractDivinePower(int amount)
+    {
+            currentPower -= amount;
+    }
+
+    public bool HasEnoughPower(int substraction)
+    {
+        int _current = currentPower;
+        if(!((currentPower - substraction) < 0))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public enum RessourceType
     {
