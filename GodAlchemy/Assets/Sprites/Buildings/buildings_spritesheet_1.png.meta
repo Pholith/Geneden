@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4bcb77fc36e86f34286a1623e5c39b7c
+guid: ac20b9d7ff56cf54c90cec8e565fe7b9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8194ad3f766eff45890654708c06264
-      internalID: -1343907979
+      spriteID: 96a63587445b1d840805ef7570801ccb
+      internalID: 1974448446
       vertices: []
       indices: 
       edges: []
@@ -140,14 +140,98 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28977ec6f5ac6dc4a97365a794425c59
-      internalID: -75294826
+      spriteID: c83236f284a198a40834cc2b548fa7b9
+      internalID: -883850575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: buildings_spritesheet_1_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8daf9f084982ca342b5d4996ba69990d
+      internalID: 359655389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afc5f47eb58be4f4dac607921b1b69e1
+      internalID: 139503913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6f6ffae9f1506f4db36241116eaed71
+      internalID: -358069989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515eb5cd242d02947ba2da5e1b8f2d07
+      internalID: -1560595919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_6
       rect:
         serializedVersion: 2
         x: 0
@@ -161,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cb045898c7d8a4458d6e07b8d073469
-      internalID: -2100348591
+      spriteID: 657108cbbc408f74d8ae1761deb99b47
+      internalID: -1173699327
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buildings_spritesheet_1_3
+      name: buildings_spritesheet_1_7
       rect:
         serializedVersion: 2
         x: 16
@@ -182,8 +266,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26a2c50c2b5fc9b49b9d5b7e0abbe5bd
-      internalID: -294764547
+      spriteID: befdbb8525d5adb40ae90de2aa6c3daa
+      internalID: 1988665551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19120569ce6326548b71821478eac2cf
+      internalID: 1726515846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_9
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10468f93aaba25242bde2292a2c135f3
+      internalID: -741972321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69f0c419fbf1e6e498ad088b8b9ee8f5
+      internalID: 1572982508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20922c2dab22f4b4d8e0cee35a7d2d62
+      internalID: -431884308
       vertices: []
       indices: 
       edges: []
@@ -199,10 +367,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      buildings_spritesheet_1_0: -1343907979
-      buildings_spritesheet_1_2: -2100348591
-      buildings_spritesheet_1_1: -75294826
-      buildings_spritesheet_1_3: -294764547
+      buildings_spritesheet_1_4: -358069989
+      buildings_spritesheet_1_11: -431884308
+      buildings_spritesheet_1_10: 1572982508
+      buildings_spritesheet_1_0: 1974448446
+      buildings_spritesheet_1_9: -741972321
+      buildings_spritesheet_1_6: -1173699327
+      buildings_spritesheet_1_2: 359655389
+      buildings_spritesheet_1_7: 1988665551
+      buildings_spritesheet_1_8: 1726515846
+      buildings_spritesheet_1_1: -883850575
+      buildings_spritesheet_1_5: -1560595919
+      buildings_spritesheet_1_3: 139503913
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
