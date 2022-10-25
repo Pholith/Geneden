@@ -7,20 +7,18 @@ using UnityEngine.Tilemaps;
 public class TileEditor : MonoBehaviour
 {
 
-    public Tilemap tilemap;
-    [SerializeField] private Tile selectedTile;
-    [SerializeField] private Vector3Int gridPos;
-    [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameUI gameUI;
-    [SerializeField] private GameObject previewSprite;
-    [SerializeField] private SpriteRenderer previewSpriteRenderer;
-    [SerializeField] private RessourceManager ressourceManager;
-    [SerializeField] private int tileDivinePowerCost;
+    private Tile selectedTile;
+    private int tileDivinePowerCost;
+    private GameObject previewSprite;
+    private SpriteRenderer previewSpriteRenderer;
+    private RessourceManager ressourceManager;
+    private GameUI gameUI;
+    private Tilemap tilemap;
 
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = FindObjectOfType<Camera>();
+        tilemap = GameManager.GridManager.GameGrid;
         gameUI = FindObjectOfType<GameUI>();
         ressourceManager = GetComponent<RessourceManager>();
         previewSprite = new GameObject();
@@ -32,33 +30,22 @@ public class TileEditor : MonoBehaviour
 
     private void Update()
     {
-        GetMouseGridPos();
+        
         PreviewTile();
-    }
-    private void GetMouseGridPos()
-    {
-        Vector3 _screenPos = Input.mousePosition;
-        Vector3 _worldPos = mainCamera.ScreenToWorldPoint(_screenPos);
-        _worldPos.z = 0.0f;
-        gridPos = tilemap.WorldToCell(_worldPos);
     }
     public void ChangeTile()
     {
         if (selectedTile != null)
         {  
-            if(ressourceManager.HasEnoughPower(tileDivinePowerCost))
+            Vector3Int tilePositionUnderMouse = GameManager.GridManager.GetMouseGridPos().ToVector3Int();
+            if (ressourceManager.HasEnoughPower(tileDivinePowerCost))
             {
-                if (!(tilemap.GetTile(gridPos) == selectedTile))
+                if (!(tilemap.GetTile(tilePositionUnderMouse) == selectedTile))
                 {
                     ressourceManager.SubstractDivinePower(tileDivinePowerCost);
-                    print("Tile Set!");
-                    tilemap.SetTile(gridPos, selectedTile);
+                    tilemap.SetTile(tilePositionUnderMouse, selectedTile);
                 }
             }
-        }
-        else
-        {
-            Debug.Log(gridPos);
         }
         
     }
@@ -73,7 +60,7 @@ public class TileEditor : MonoBehaviour
         if (selectedTile != null)
         {
             previewSpriteRenderer.sprite = selectedTile.sprite;
-            previewSprite.transform.position = gridPos;
+            previewSprite.transform.position = GameManager.GridManager.GetMouseGridPos();
             previewSprite.transform.position += new Vector3(0.5f, 0.5f, 0);
             if (ressourceManager.HasEnoughPower(tileDivinePowerCost))
             {

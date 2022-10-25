@@ -58,8 +58,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba37b9972232fb45959c1d998481117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
-  selectedTile: {fileID: 0}
-  gridPos: {x: 0, y: 0, z: 0}
-  terrainGrid: {fileID: 0}
-  mainCamera: {fileID: 0}

@@ -21,8 +21,8 @@ MonoBehaviour:
   EffectOnMap:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8194671126125077875, guid: 9a3386487254f9249a4c8e565434b8f9, type: 3}
-        m_TargetAssemblyTypeName: ElementsEffect, Assembly-CSharp
+      - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
+        m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
         m_MethodName: Fire
         m_Mode: 1
         m_Arguments:
