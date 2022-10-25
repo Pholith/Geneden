@@ -52,6 +52,7 @@ public class ElementInspector : Editor
         EditorGUILayout.LabelField("Sprite");
         targetElement.Sprite = EditorGUILayout.ObjectField(targetElement.Sprite, typeof(Sprite), true,
         GUILayout.Height(64), GUILayout.Width(64)) as Sprite;
+        Undo.RecordObject(targetElement, $"Ajout d'un sprite sur l'élément {targetElement.name}");
         EditorGUILayout.EndHorizontal();
 
         // Ajout d'une fusion
