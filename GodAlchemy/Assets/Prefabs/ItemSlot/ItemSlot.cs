@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private GameObject uiCase;
     [SerializeField] public ElementScriptableObject element;
     [SerializeField] private int itemNumber;
+    [SerializeField] public type slotType;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class ItemSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        updateSlotUI();
     }
 
     private void initSlot(int amount)
@@ -35,5 +36,26 @@ public class ItemSlot : MonoBehaviour
             uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>().sprite = null;
             itemNumber = 0;
         }
+    }
+
+    public void updateSlotUI()
+    {
+        if(element != null)
+        {
+            uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>().sprite = element.Sprite;
+            itemNumber = 1;
+        }
+        else
+        {
+            uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>().sprite = null;
+            itemNumber = 0;
+        }
+        
+    }
+
+    public enum type
+    {
+        itemSlot,
+        craftSlot
     }
 }
