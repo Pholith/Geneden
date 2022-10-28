@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Terre
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: af209e3d414c6684584eaff76b3db250, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 1
   elementToCraft1: {fileID: 0}
