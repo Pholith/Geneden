@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Brouillard
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 65c4f55bb0f1b694192e4b44dcd4face, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0
   elementToCraft1: {fileID: 11400000, guid: 910f593104f615443a2bcf82c901b64f, type: 2}
   elementToCraft2: {fileID: 11400000, guid: 5413f5e411c71804da39f117ca682bd7, type: 2}
+  EffectOnMap:
+    m_PersistentCalls:
+      m_Calls: []

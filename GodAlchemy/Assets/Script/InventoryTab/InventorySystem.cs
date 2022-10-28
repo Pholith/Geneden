@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class InventorySystem : MonoBehaviour
+{
+
+    [SerializeField] private ItemSlot[] ItemSlotList;
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        ItemSlotList = transform.GetComponentsInChildren<ItemSlot>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public bool AddItem(ElementScriptableObject addedItem)
+    {
+        if(isItemInList(addedItem))
+        {
+            foreach(ItemSlot slot in ItemSlotList)
+            {
+                if(slot.element.name == addedItem.name)
+                {
+                    slot.addItem(addedItem,1);
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            foreach(ItemSlot slot in ItemSlotList)
+            {
+                if(slot.element == null)
+                {
+                    slot.element = addedItem;
+                    slot.addItem(addedItem,1);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool isItemInList(ElementScriptableObject checkedItem)
+    {
+        foreach(ItemSlot slot in ItemSlotList)
+        {
+            if(slot.element != null)
+            {
+                if (slot.element.name == checkedItem.name)
+                {
+                    return true;
+                }
+            } 
+        }
+        return false;
+    }
+
+}
