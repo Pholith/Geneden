@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4056641538846377171}
   - component: {fileID: 4056641538846377168}
+  - component: {fileID: 3268193049309953862}
   m_Layer: 5
   m_Name: ResultSlot
   m_TagString: Untagged
@@ -54,8 +55,22 @@ MonoBehaviour:
   element: {fileID: 0}
   itemNumber: 0
   slotType: 1
-  itemSprite: {fileID: 0}
+  itemIcon: {fileID: 0}
   amountText: {fileID: 0}
+  craftManager: {fileID: 0}
+--- !u!114 &3268193049309953862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056641538846377170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb2bf4bed10d62488a452177fe77eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSlot: {fileID: 0}
 --- !u!1 &4056641539322644061
 GameObject:
   m_ObjectHideFlags: 0
