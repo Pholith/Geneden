@@ -51,14 +51,9 @@ public class TileEditor : MonoBehaviour
                 if (!(tilemap.GetTile(gridPos) == selectedTile))
                 {
                     ressourceManager.SubstractDivinePower(tileDivinePowerCost);
-                    print("Tile Set!");
                     tilemap.SetTile(gridPos, selectedTile);
                 }
             }
-        }
-        else
-        {
-            Debug.Log(gridPos);
         }
         
     }

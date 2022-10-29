@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ItemSlot : MonoBehaviour, IPointerClickHandler
+public class ItemSlot : MonoBehaviour, IDropHandler
 {
 
     [SerializeField] private GameObject uiCase;
@@ -18,6 +19,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     //Crafting Slot Type
     [SerializeField] private CraftingSystem craftManager;
+    [SerializeField] private InventorySystem playerInventory;
+
+
 
 
 
@@ -28,6 +32,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         itemIcon = uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>();
         amountText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
         craftManager = FindObjectOfType<CraftingSystem>();
+        playerInventory = FindObjectOfType<InventorySystem>();
         initSlot(1);
     }
 
@@ -55,7 +60,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void updateSlot()
     {
-        if(itemNumber != 0)
+        if(itemNumber > 0)
         {
             itemIcon.sprite = element.Sprite;
             amountText.text = "x" + itemNumber;
@@ -63,13 +68,13 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         else
         {
             element = null;
+            itemNumber = 0;
             itemIcon.sprite = null;
             amountText.text = "";
         }
-        
     }
 
-    public void addItem(ElementScriptableObject addedElement,int amount)
+    public bool addItem(ElementScriptableObject addedElement,int amount)
     {
         if(element != null)
         {
@@ -78,6 +83,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 if (addedElement.name == element.name)
                 {
                     itemNumber += amount;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else if(slotType == type.craftSlot)
@@ -85,6 +95,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 if (addedElement.name == element.name)
                 {
                     itemNumber = amount;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             
@@ -93,7 +108,10 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             element = addedElement;
             itemNumber = amount;
+            return true;
         }
+
+        return false;
     }
 
     public void suppItem(int amount)
@@ -101,10 +119,15 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         if(itemNumber > 0)
         {
             itemNumber -= amount;
+            if(itemNumber < 0)
+            {
+                itemNumber = 0;
+            }
         }
     }
+
     //Testing
-    public void clickCraftResult()
+    public void onClick()
     {
         if(slotType == type.craftSlot)
         {
@@ -114,21 +137,81 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             craftManager.addRessource(element);
         }
-        else if(slotType == type.itemSlot)
+        else if((slotType == type.itemSlot) || !isNotForbiddenElement())
         {
             suppItem(1);
         }
+        else if((slotType == type.recipeSlot))
+        {
+            if (playerInventory.AddItem(element))
+                suppItem(1);
+        }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public Image getItemIcon()
     {
-        clickCraftResult();
+        return itemIcon;
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
+        //GameObject
+        GameObject dropped = eventData.pointerCurrentRaycast.gameObject;
+        GameObject origin = eventData.pointerDrag;
+        ItemSlot originSlot = origin.GetComponent<ItemSlot>();
+        ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
+        GetComponent<DragAndDrop>().setParentSnap(transform);
+
+        if (finalSlot.slotType == type.recipeSlot)
+        {
+            if (originSlot.slotType == type.ressourceSlot)
+            {
+                finalSlot.addItem(originSlot.element, 1);
+            }
+            else if ((originSlot.slotType == type.recipeSlot) || (originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.craftSlot))
+            {
+                if (finalSlot.addItem(originSlot.element, 1))
+                {
+                    originSlot.suppItem(1);
+                }
+            }
+        }
+        if ((finalSlot.slotType == type.itemSlot) & (originSlot.isNotForbiddenElement()))
+        {
+            if ((originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.recipeSlot))
+            {
+                if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
+                {
+                    originSlot.suppItem(itemNumber);
+                }
+            }
+            if((originSlot.slotType == type.craftSlot))
+            {
+                if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
+                {
+                    craftManager.consumeElement();
+                }
+            }
+        }
+    }
+
+    public bool isNotForbiddenElement()
+    {
+        string[] forbiddenList = { "Feu", "Air", "Eau", "Terre" };
+        foreach(string str in forbiddenList)
+        {
+            if (element.name.Contains(str))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public enum type
     {
         itemSlot,
         craftSlot,
+        recipeSlot,
         ressourceSlot
     }
 }
