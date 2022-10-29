@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: Air
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 21300000, guid: 0e849d0e78e5bf54fa8bba9d581edbe7, type: 3}
-  DifficultyToCraft: 1
+  Sprite: {fileID: 0}
   IsPrimaryElement: 1
   elementToCraft1: {fileID: 0}
   elementToCraft2: {fileID: 0}
-  EffectOnMap:
-    m_PersistentCalls:
-      m_Calls: []
