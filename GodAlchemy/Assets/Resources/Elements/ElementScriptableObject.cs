@@ -19,12 +19,30 @@ public class ElementScriptableObject : ScriptableObject
     public bool IsPrimaryElement = false;
 
     [HideInInspector, SerializeField]
-    public ElementScriptableObject elementToCraft1;
+    public ElementScriptableObject ElementToCraft1;
     [HideInInspector, SerializeField]
-    public ElementScriptableObject elementToCraft2;
+    public ElementScriptableObject ElementToCraft2;
 
     [SerializeField]
     public UnityEvent EffectOnMap;
+
+
+    public int GetElementPrice()
+    {
+        return DifficultyToCraft switch
+        {
+            1 => 10,
+            2 => 20,
+            3 => 40,
+            _ => throw new ArgumentOutOfRangeException("Argument must be between 1 and 3 included"),
+        };
+    }
+
+    // a voir si c'est nécessaire
+    /*public static bool operator ==(ElementScriptableObject element2)
+    {
+        return false;
+    }*/
 }
 
 [CustomEditor(typeof(ElementScriptableObject))]
@@ -43,8 +61,8 @@ public class ElementInspector : Editor
     {
         targetElement = target as ElementScriptableObject;
 
-        elementGUIContent1.text = targetElement.elementToCraft1?.name ?? "Element 1";
-        elementGUIContent2.text = targetElement.elementToCraft2?.name ?? "Element 2";
+        elementGUIContent1.text = targetElement.ElementToCraft1?.name ?? "Element 1";
+        elementGUIContent2.text = targetElement.ElementToCraft2?.name ?? "Element 2";
         DrawDefaultInspector();
 
         // Sprite
@@ -93,16 +111,15 @@ public class ElementInspector : Editor
     {
         ElementScriptableObject element = elementScriptableObj as ElementScriptableObject;
         elementGUIContent1.text = element.name;
-        targetElement.elementToCraft1 = element;
+        targetElement.ElementToCraft1 = element;
 
     }
     private void OnElement2Selected(object elementScriptableObj)
     {
         ElementScriptableObject element = elementScriptableObj as ElementScriptableObject;
         elementGUIContent2.text = element.name;
-        targetElement.elementToCraft2 = element;
+        targetElement.ElementToCraft2 = element;
     }
-
 }
 
 #endif
