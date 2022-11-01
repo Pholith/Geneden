@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DragAndDrop : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragHandler, IPointerClickHandler
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
 
-    [SerializeField] private ItemSlot currentSlot;
-    [SerializeField] private Image itemImage;
     [SerializeField] private Vector2 initialRectTransform;
     [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private Canvas canvas;
 
     [SerializeField] private Transform snapParent;
 
+    private Image itemImage;
+    private Canvas canvas;
+    private ItemSlot currentSlot;
+
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         currentSlot = transform.GetComponent<ItemSlot>();
         itemImage = transform.Find("Case").transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>();
@@ -25,14 +24,14 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDra
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(itemImage.sprite != null)
+        if (itemImage.sprite != null)
         {
             rectTransform = itemImage.GetComponent<RectTransform>();
             initialRectTransform = rectTransform.anchoredPosition;
@@ -66,6 +65,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDra
     {
         snapParent = parentSnap;
     }
-    
+
 
 }

@@ -9,17 +9,17 @@ using TMPro;
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
 
-    [SerializeField] private GameObject uiCase;
     [SerializeField] public ElementScriptableObject element;
     [SerializeField] private int itemNumber;
     [SerializeField] public type slotType;
+    private GameObject uiCase;
 
-    [SerializeField] private Image itemIcon;
-    [SerializeField] private TextMeshProUGUI amountText;
+    private Image itemIcon;
+    private TextMeshProUGUI amountText;
 
     //Crafting Slot Type
-    [SerializeField] private CraftingSystem craftManager;
-    [SerializeField] private InventorySystem playerInventory;
+    private CraftingSystem craftManager;
+    private InventorySystem playerInventory;
 
 
 

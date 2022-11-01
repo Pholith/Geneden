@@ -23,11 +23,11 @@ public class InventorySystem : MonoBehaviour
 
     public bool AddItem(ElementScriptableObject addedItem)
     {
-        if(isItemInList(addedItem))
+        if(IsItemInList(addedItem))
         {
             foreach(ItemSlot slot in ItemSlotList)
             {
-                if(slot.element.name == addedItem.name)
+                if(slot.element != null && slot.element.name == addedItem.name)
                 {
                     slot.addItem(addedItem,1);
                     return true;
@@ -49,7 +49,7 @@ public class InventorySystem : MonoBehaviour
         return false;
     }
 
-    public bool isItemInList(ElementScriptableObject checkedItem)
+    public bool IsItemInList(ElementScriptableObject checkedItem)
     {
         foreach(ItemSlot slot in ItemSlotList)
         {
