@@ -23,29 +23,29 @@ public class InventorySystem : MonoBehaviour
 
     public bool AddItem(ElementScriptableObject addedItem)
     {
-        if(IsItemInList(addedItem))
-        {
-            foreach(ItemSlot slot in ItemSlotList)
-            {
-                if(slot.element != null && slot.element.name == addedItem.name)
-                {
-                    slot.addItem(addedItem,1);
-                    return true;
-                }
-            }
-        }
-        else
-        {
+        //if(IsItemInList(addedItem))
+        //{
+        //    foreach(ItemSlot slot in ItemSlotList)
+        //    {
+        //        if(slot.element != null && slot.element.name == addedItem.name)
+        //        {
+        //            slot.addItem(addedItem,1);
+        //            return true;
+        //        }
+        //    }
+        //}
+        //else
+        //{
             foreach(ItemSlot slot in ItemSlotList)
             {
                 if(slot.element == null)
                 {
-                    slot.element = addedItem;
                     slot.addItem(addedItem,1);
+                    slot.elementIsPayed = true;
                     return true;
                 }
             }
-        }
+        //}
         return false;
     }
 
@@ -59,7 +59,7 @@ public class InventorySystem : MonoBehaviour
                 {
                     return true;
                 }
-            } 
+            }    
         }
         return false;
     }

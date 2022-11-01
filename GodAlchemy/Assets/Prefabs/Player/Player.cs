@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            Debug.Log("Mouse Hold");
+            //Debug.Log("Mouse Hold");
             isMousePressed = true;
         }
     }

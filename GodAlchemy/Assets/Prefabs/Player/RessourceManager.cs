@@ -162,7 +162,7 @@ public class RessourceManager : MonoBehaviour
     public bool HasEnoughPower(int substraction)
     {
         int _current = currentPower;
-        if(!((currentPower - substraction) < 0))
+        if(!((_current - substraction) < 0))
         {
             return true;
         }

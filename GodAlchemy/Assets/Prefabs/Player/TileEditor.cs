@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileEditor : MonoBehaviour
 {
 
-    private Tile selectedTile;
+    [SerializeField] private Tile selectedTile;
     private int tileDivinePowerCost;
     private GameObject previewSprite;
     private SpriteRenderer previewSpriteRenderer;

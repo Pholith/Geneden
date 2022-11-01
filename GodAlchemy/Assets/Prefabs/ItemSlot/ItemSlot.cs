@@ -10,16 +10,21 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 {
 
     [SerializeField] public ElementScriptableObject element;
+                     public bool elementIsPayed;
     [SerializeField] private int itemNumber;
     [SerializeField] public type slotType;
     private GameObject uiCase;
 
     private Image itemIcon;
-    private TextMeshProUGUI amountText;
+    private TextMeshProUGUI costText;
 
     //Crafting Slot Type
     private CraftingSystem craftManager;
     private InventorySystem playerInventory;
+    private RessourceManager ressourceManager;
+
+    const int COST_FACTOR = 10;
+
 
 
 
@@ -30,9 +35,11 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         uiCase = transform.Find("Case").transform.gameObject;
         itemIcon = uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>();
-        amountText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
+        costText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
         craftManager = FindObjectOfType<CraftingSystem>();
         playerInventory = FindObjectOfType<InventorySystem>();
+        ressourceManager = FindObjectOfType<RessourceManager>();
+        elementIsPayed = false;
         initSlot(1);
     }
 
@@ -48,13 +55,13 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             itemIcon.sprite = element.Sprite;
             itemNumber = amount;
-            amountText.text = "x" + itemNumber;
+            costText.text = (element.DifficultyToCraft * 10).ToString();
         }
         else
         {
             itemIcon.sprite = null;
             itemNumber = 0;
-            amountText.text = ""; 
+            costText.text = ""; 
         }
     }
 
@@ -63,14 +70,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         if(itemNumber > 0)
         {
             itemIcon.sprite = element.Sprite;
-            amountText.text = "x" + itemNumber;
+            costText.text = (element.DifficultyToCraft * 10).ToString();
         }
         else
         {
             element = null;
             itemNumber = 0;
             itemIcon.sprite = null;
-            amountText.text = "";
+            elementIsPayed = false;
+            costText.text = "";
         }
     }
 
@@ -78,19 +86,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         if(element != null)
         {
-            if(slotType == type.itemSlot)
-            {
-                if (addedElement.name == element.name)
-                {
-                    itemNumber += amount;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if(slotType == type.craftSlot)
+            if (slotType == type.craftSlot)
             {
                 if (addedElement.name == element.name)
                 {
@@ -102,12 +98,11 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                     return false;
                 }
             }
-            
         }
         else
         {
             element = addedElement;
-            itemNumber = amount;
+            itemNumber += amount;
             return true;
         }
 
@@ -129,15 +124,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     //Testing
     public void onClick()
     {
-        if(slotType == type.craftSlot)
+        if (slotType == type.craftSlot)
         {
-            craftManager.craftDone();
+            craftManager.craftDoneClick();
         }
         else if(slotType == type.ressourceSlot)
         {
             craftManager.addRessource(element);
         }
-        else if((slotType == type.itemSlot) || !isNotForbiddenElement())
+        else if((slotType == type.itemSlot) || (!isNotForbiddenElement() && elementIsPayed == false))
         {
             suppItem(1);
         }
@@ -160,38 +155,90 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         ItemSlot originSlot = origin.GetComponent<ItemSlot>();
         ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
         GetComponent<DragAndDrop>().setParentSnap(transform);
+        if(finalSlot == originSlot)
+        {
+            return;
+        }
 
-        if (finalSlot.slotType == type.recipeSlot)
+        if(finalSlot.element == null)
         {
-            if (originSlot.slotType == type.ressourceSlot)
+            if (finalSlot.slotType == type.recipeSlot)
             {
-                finalSlot.addItem(originSlot.element, 1);
-            }
-            else if ((originSlot.slotType == type.recipeSlot) || (originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.craftSlot))
-            {
-                if (finalSlot.addItem(originSlot.element, 1))
+                if (originSlot.slotType == type.ressourceSlot)
                 {
-                    originSlot.suppItem(1);
+                    finalSlot.addItem(originSlot.element, 1);
+                }
+                else if ((originSlot.slotType == type.recipeSlot) || (originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.craftSlot))
+                {
+                    if (finalSlot.addItem(originSlot.element, 1))
+                    {
+                        finalSlot.elementIsPayed = true;
+                        originSlot.suppItem(1);
+                    }
+                }
+            }
+            if (finalSlot.slotType == type.itemSlot)
+            {
+                if ((originSlot.slotType == type.itemSlot))
+                {
+                    if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
+                    {
+                        finalSlot.elementIsPayed = originSlot.elementIsPayed;
+                        originSlot.suppItem(itemNumber);
+                    }
+                }
+                if (originSlot.slotType == type.recipeSlot)
+                {
+                    int _amount = originSlot.element.DifficultyToCraft * COST_FACTOR;
+                    if(originSlot.elementIsPayed)
+                    {
+                        if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
+                        {
+                            originSlot.suppItem(itemNumber);
+                            finalSlot.elementIsPayed = true;
+                        }
+                    }
+                    else
+                    {
+                        if (ressourceManager.HasEnoughPower(_amount))
+                        {
+                            if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
+                            {
+                                originSlot.suppItem(itemNumber);
+                                ressourceManager.SubstractDivinePower(_amount);
+                                finalSlot.elementIsPayed = true;
+                            }
+                        }
+                    }
+                }
+                if ((originSlot.slotType == type.craftSlot))
+                {
+                    craftManager.craftDoneDrop(finalSlot);
+                }
+                if ((originSlot.slotType == type.ressourceSlot))
+                {
+                    int _amount = originSlot.element.DifficultyToCraft * COST_FACTOR;
+                    if (ressourceManager.HasEnoughPower(_amount))
+                    {
+                        if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
+                        {
+                            finalSlot.elementIsPayed = true;
+                            ressourceManager.SubstractDivinePower(_amount);
+                        }
+                    }
+                        
                 }
             }
         }
-        if ((finalSlot.slotType == type.itemSlot) & (originSlot.isNotForbiddenElement()))
-        {
-            if ((originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.recipeSlot))
-            {
-                if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
-                {
-                    originSlot.suppItem(itemNumber);
-                }
-            }
-            if((originSlot.slotType == type.craftSlot))
-            {
-                if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
-                {
-                    craftManager.consumeElement();
-                }
-            }
-        }
+        
+    }
+
+    public int getSlotCost()
+    {
+        if (elementIsPayed)
+            return 0;
+        else
+            return (element.DifficultyToCraft * 10);
     }
 
     public bool isNotForbiddenElement()

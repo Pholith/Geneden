@@ -129,13 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5d6a8939950742a0a44495fb62e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCase: {fileID: 0}
   element: {fileID: 0}
+  elementIsPayed: 0
   itemNumber: 0
   slotType: 0
-  itemIcon: {fileID: 0}
-  amountText: {fileID: 0}
-  craftManager: {fileID: 0}
 --- !u!114 &-3965439386533995033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb2bf4bed10d62488a452177fe77eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSlot: {fileID: 0}
+  initialRectTransform: {x: 0, y: 0}
+  rectTransform: {fileID: 0}
+  snapParent: {fileID: 0}
 --- !u!1 &3510237544635461071
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +290,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: x1
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 296ebafcc7e8659448a34beeba3ddc0f, type: 2}
   m_sharedMaterial: {fileID: 6283599472157283469, guid: 296ebafcc7e8659448a34beeba3ddc0f, type: 2}
@@ -300,8 +299,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -318,8 +317,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
-  m_fontSizeBase: 6
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
