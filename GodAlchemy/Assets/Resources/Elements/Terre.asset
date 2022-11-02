@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
+  m_Name: Terre
+  m_EditorClassIdentifier: 
+  ElementDescription: 
+  Sprite: {fileID: 21300000, guid: af209e3d414c6684584eaff76b3db250, type: 3}
+  DifficultyToCraft: 1
+  IsPrimaryElement: 1
+  elementToCraft1: {fileID: 0}
+  elementToCraft2: {fileID: 0}
+  EffectOnMap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
+        m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
+        m_MethodName: Dirt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

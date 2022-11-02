@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5911366380029177561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5911366380029177562}
+  - component: {fileID: 5911366380029177563}
+  - component: {fileID: 5911366380029177572}
+  - component: {fileID: 5911366380029177573}
+  - component: {fileID: 2030806754}
+  m_Layer: 0
+  m_Name: GAME_MANAGER 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5911366380029177562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 163.51184, y: 217.62894, z: -4.5133195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5911366380029177563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899964f93fe34bb4d8b3d6304ffb5ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 5911366380029177572}
+  elementManager: {fileID: 2030806754}
+--- !u!114 &5911366380029177572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30e82b4c51780f409be528d1c5a4cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameGrid: {fileID: 0}
+--- !u!114 &5911366380029177573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67437b918d909d24ab064a76b202da89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodScore: 0
+  woodScore: 0
+  stoneScore: 0
+  ironScore: 0
+  silverScore: 0
+  goldScore: 0
+  popScore: 0
+  civLevel: 0
+  gameUI: {fileID: 0}
+  foodText: {fileID: 0}
+  woodText: {fileID: 0}
+  stoneText: {fileID: 0}
+  ironText: {fileID: 0}
+  silverText: {fileID: 0}
+  goldText: {fileID: 0}
+  popText: {fileID: 0}
+  civText: {fileID: 0}
+  currentPower: 0
+  maxPower: 0
+  divinePowerBar: {fileID: 0}
+  midPowerText: {fileID: 0}
+  topPowerText: {fileID: 0}
+  timer: 2
+--- !u!114 &2030806754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5fa61ce88eebf4497c7f8a47a75c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DirtTile: {fileID: 11400000, guid: d91f86bdfd686d04fb59c5ed2fd1c225, type: 2}
