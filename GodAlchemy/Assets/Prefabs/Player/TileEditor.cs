@@ -11,7 +11,7 @@ public class TileEditor : MonoBehaviour
     private int tileDivinePowerCost;
     private GameObject previewSprite;
     private SpriteRenderer previewSpriteRenderer;
-    private RessourceManager ressourceManager;
+    private ResourceManager ressourceManager;
     private GameUI gameUI;
     private Tilemap tilemap;
 
@@ -20,7 +20,7 @@ public class TileEditor : MonoBehaviour
     {
         tilemap = GameManager.GridManager.GameGrid;
         gameUI = FindObjectOfType<GameUI>();
-        ressourceManager = GetComponent<RessourceManager>();
+        ressourceManager = GetComponent<ResourceManager>();
         previewSprite = new GameObject();
         previewSprite.AddComponent<SpriteRenderer>();
         previewSpriteRenderer = previewSprite.GetComponent<SpriteRenderer>();
@@ -42,7 +42,7 @@ public class TileEditor : MonoBehaviour
             {
                 if (!(tilemap.GetTile(tilePositionUnderMouse) == selectedTile))
                 {
-                    ressourceManager.SubstractDivinePower(tileDivinePowerCost);
+                    ressourceManager.ConsumePower(tileDivinePowerCost);
                     tilemap.SetTile(tilePositionUnderMouse, selectedTile);
                 }
             }

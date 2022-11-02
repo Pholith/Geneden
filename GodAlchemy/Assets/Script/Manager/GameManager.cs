@@ -17,7 +17,11 @@ public class GameManager : BaseGameManager
 
     [SerializeField] 
     private ElementsManager elementManager;
-    public static ElementsManager ElementManager => ElementManager;
+    public ElementsManager ElementManager => elementManager;
+    
+    [SerializeField] 
+    private ResourceManager resourceManager;
+    public ResourceManager ResourceManager => resourceManager;
 
     protected override void InitManager()
     {
@@ -31,6 +35,7 @@ public class GameManager : BaseGameManager
         }
         grid?.Initialization();
         elementManager?.Initialization();
+        resourceManager?.Initialization();
     }
 
 #if UNITY_EDITOR
@@ -38,6 +43,7 @@ public class GameManager : BaseGameManager
     {
         if (grid == null) grid = GetComponentInChildren<GridManager>();
         if (elementManager == null) elementManager = GetComponentInChildren<ElementsManager>();
+        if (resourceManager == null) resourceManager = GetComponentInChildren<ResourceManager>();
     }
 #endif
 }

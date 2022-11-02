@@ -39,6 +39,28 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
+    /// <summary>
+    /// Quand on clic sur un slot sans drag and drop (pour aller plus vite que le drag and drop).
+    /// </summary>
+    public void OnClick()
+    {
+        switch (SlotType)
+        {
+            case Type.itemSlot:
+                break;
+            case Type.craftSlot:
+                break;
+            case Type.recipeSlot:
+                if (!IsEmpty() && craftSystem.HasEnoughPower() && playerInventory.AddItem(Element, true)) Empty();
+                break;
+            case Type.ressourceSlot:
+                craftSystem.AddRessource(Element);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerCurrentRaycast.gameObject;
@@ -47,35 +69,49 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
         GetComponent<ItemSlot>().SetParentSnap(transform);
 
-        if (finalSlot.SlotType == Type.recipeSlot)
+        if (finalSlot.SlotType == Type.craftSlot)
         {
-            if (originSlot.SlotType == Type.ressourceSlot)
+            switch (originSlot.SlotType)
             {
-                finalSlot.AddItem(originSlot.Element);
-            }
-            else if (originSlot.SlotType == Type.recipeSlot || originSlot.SlotType == Type.itemSlot || originSlot.SlotType == Type.craftSlot)
-            {
-                if (finalSlot.AddItem(originSlot.Element))
-                {
-                    originSlot.SuppItem();
-                }
+                case Type.itemSlot:
+                    if (finalSlot.AddItem(originSlot.Element, true)) originSlot.Empty();
+                    break;
+                case Type.recipeSlot:
+                    if (craftSystem.HasEnoughPower() && finalSlot.AddItem(originSlot.Element, true))
+                    {
+                        craftSystem.ConsumePower();
+                        originSlot.Empty();
+                    }
+                    break;
+                case Type.ressourceSlot:
+                    finalSlot.AddItem(originSlot.Element);
+                    break;
+                default:
+                    break;
             }
         }
         if (finalSlot.SlotType == Type.itemSlot)
         {
-            if (originSlot.SlotType == Type.itemSlot || originSlot.SlotType == Type.recipeSlot)
+            switch (originSlot.SlotType)
             {
-                if (finalSlot.AddItem(originSlot.Element))
-                {
-                    originSlot.SuppItem();
-                }
-            }
-            if (originSlot.SlotType == Type.craftSlot)
-            {
-                if (finalSlot.AddItem(originSlot.Element))
-                {
-                    craftSystem.ConsumeElement(5); // 5 juste pour le test
-                }
+                case Type.itemSlot:
+                    if (finalSlot.AddItem(originSlot.Element, true)) originSlot.Empty();
+                    break;
+                case Type.craftSlot:
+                    if (GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()) && finalSlot.AddItem(originSlot.Element, true))
+                    {
+                        GameManager.Instance.ResourceManager.ConsumePower(originSlot.GetSlotCost());
+                        originSlot.Empty();
+                    }
+                    break;
+                case Type.recipeSlot:
+                    if (craftSystem.HasEnoughPower() && finalSlot.AddItem(originSlot.Element, true)) craftSystem.ConsumePower();
+                    break;
+                case Type.ressourceSlot:
+                    if (GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.Element.GetCost()) && finalSlot.AddItem(originSlot.Element, true)) GameManager.Instance.ResourceManager.ConsumePower(originSlot.Element.GetCost());
+                    break;
+                default:
+                    break;
             }
         }
     }

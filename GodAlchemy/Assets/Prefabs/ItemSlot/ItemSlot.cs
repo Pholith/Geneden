@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteAlways] // Permet d'appeler certaines fonction dans le mode d'édition pour actualiser les slots
 public partial class ItemSlot : MonoBehaviour
 {
     public enum Type
@@ -26,7 +27,6 @@ public partial class ItemSlot : MonoBehaviour
     //Crafting Slot Type
     private CraftingSystem craftSystem;
     private InventorySystem playerInventory;
-    private readonly RessourceManager ressourceManager;
 
     private void Start()
     {
@@ -35,21 +35,26 @@ public partial class ItemSlot : MonoBehaviour
         costText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
         craftSystem = FindObjectOfType<CraftingSystem>();
         playerInventory = FindObjectOfType<InventorySystem>();
-        InitSlot();
 
+        // Adapte le isPayed selon l'élément placé dans l'inspecteur
+        elementIsPayed = Element != null;
         // Définitions nécessaires pour le DragAndDrop
         currentSlot = transform.GetComponent<ItemSlot>();
         canvas = FindObjectOfType<Canvas>();
 
+        UpdateUi();
     }
 
-
-    private void InitSlot()
+    /// <summary>
+    /// Fonction qui permet de mettre à jour le slot avec tout le visuel. Cette fonction peut être utilisé lors de changements (supp, add...)
+    /// Ne pas utiliser la fonction dans un update de unity !!
+    /// </summary>
+    private void UpdateUi()
     {
         if (Element != null)
         {
             itemIcon.sprite = Element.Sprite;
-            costText.text = (Element.DifficultyToCraft * 10).ToString();
+            costText.text = Element.GetCost().ToString();
         }
         else
         {
@@ -57,7 +62,6 @@ public partial class ItemSlot : MonoBehaviour
             costText.text = "";
         }
     }
-
     /// <summary>
     /// Test si le slot est vide.
     /// </summary>
@@ -67,61 +71,36 @@ public partial class ItemSlot : MonoBehaviour
     }
 
     /// <summary>
+    /// Ajoute un item dans la case.
+    /// </summary>
+    /// <param name="addedElement"> Element à ajouter. </param>
+    /// <param name="payItem"> Si l'élément ajouté vient d'être payé ou l'est déjà. </param>
+    /// <returns> True si l'item a été ajouté. </returns>
+    public bool AddItem(ElementScriptableObject addedElement, bool payItem = false)
+    {
+        if (!IsEmpty()) return false;
+
+        elementIsPayed |= payItem;
+        Element = addedElement;
+        UpdateUi();
+        return true;
+    }
+
+    /// <summary>
     /// Vide le slot.
     /// </summary>
     public void Empty()
     {
         Element = null;
-    }
-
-    public bool AddItem(ElementScriptableObject addedElement)
-    {
-        if (!IsEmpty()) return false;
-
-        elementIsPayed = true;
-        Element = addedElement;
-        return true;
-    }
-
-    public void SuppItem()
-    {
-        costText.text = "x";
-        Element = null;
-        itemIcon.sprite = null;
         elementIsPayed = false;
-        costText.text = "";
+        UpdateUi();
     }
+
     /// <summary>
-    /// Quand on clic sur un slot sans drag and drop (pour aller plus vite parfois).
+    /// Retourne le coût de l'élément s'il n'a pas encore été payé. Ou 0 s'il a déjà été payé.
     /// </summary>
-    public void OnClick()
-    {
-        switch (SlotType)
-        {
-            case Type.itemSlot:
-                break;
-            case Type.craftSlot:
-                craftSystem.CraftDoneClick();
-                break;
-            case Type.recipeSlot:
-                if (playerInventory.AddItem(Element))
-                    SuppItem();
-                break;
-            case Type.ressourceSlot:
-                craftSystem.AddRessource(Element);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public Image GetItemIcon()
-    {
-        return itemIcon;
-    }
-
     public int GetSlotCost()
     {
-        return Element.GetElementPrice();
+        return elementIsPayed ? 0 :  Element.GetCost();
     }
 }

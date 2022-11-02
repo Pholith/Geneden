@@ -27,7 +27,7 @@ public class ElementScriptableObject : ScriptableObject
     public UnityEvent EffectOnMap;
 
 
-    public int GetElementPrice()
+    public int GetCost()
     {
         return DifficultyToCraft switch
         {
@@ -112,6 +112,7 @@ public class ElementInspector : Editor
         ElementScriptableObject element = elementScriptableObj as ElementScriptableObject;
         elementGUIContent1.text = element.name;
         targetElement.ElementToCraft1 = element;
+        Undo.RecordObject(targetElement, "Ajout de l'élément 1 du craft");
 
     }
     private void OnElement2Selected(object elementScriptableObj)
@@ -119,6 +120,7 @@ public class ElementInspector : Editor
         ElementScriptableObject element = elementScriptableObj as ElementScriptableObject;
         elementGUIContent2.text = element.name;
         targetElement.ElementToCraft2 = element;
+        Undo.RecordObject(targetElement, "Ajout de l'élément 2 du craft");
     }
 }
 
