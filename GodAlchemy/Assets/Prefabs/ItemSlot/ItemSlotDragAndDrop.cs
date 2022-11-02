@@ -51,7 +51,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             case Type.craftSlot:
                 break;
             case Type.recipeSlot:
-                if (!IsEmpty() && craftSystem.HasEnoughPower() && playerInventory.AddItem(Element, true)) Empty();
+                if (!IsEmpty() && craftSystem.HasEnoughPower() && playerInventory.AddItem(Element, true)) craftSystem.ConsumePower();
                 break;
             case Type.ressourceSlot:
                 craftSystem.AddRessource(Element);

@@ -668,7 +668,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1619565293102733720}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2516,7 +2516,7 @@ RectTransform:
   - {fileID: 438420462}
   - {fileID: 393624037}
   m_Father: {fileID: 1619565293102733720}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3440,7 +3440,7 @@ RectTransform:
   - {fileID: 725013730}
   - {fileID: 1190015072}
   m_Father: {fileID: 1619565293102733720}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4836,7 +4836,6 @@ GameObject:
   - component: {fileID: 1619565293102733725}
   - component: {fileID: 1619565293102733722}
   - component: {fileID: 1619565293102733723}
-  - component: {fileID: 1619565292781139099}
   - component: {fileID: 1327024899}
   m_Layer: 5
   m_Name: Canvas
@@ -4857,12 +4856,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 670278525444085807}
   - {fileID: 1619565294157707741}
   - {fileID: 1619565293861688718}
   - {fileID: 1233958413}
   - {fileID: 1699739453}
   - {fileID: 463738620}
+  - {fileID: 670278525444085807}
   - {fileID: 1891030834}
   - {fileID: 1804814478}
   m_Father: {fileID: 1619565293112314624}
@@ -4934,21 +4933,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1619565292781139099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619565293102733721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0f712f72e5bb543b3523b65362f604, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuScene: Antoine
-  pauseMenu: {fileID: 0}
-  isPaused: 0
 --- !u!114 &1327024899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5043,7 +5027,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1619565293102733720}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5268,7 +5252,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1619565293102733720}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5469,6 +5453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 670278525444085807}
   - component: {fileID: 3174880993094880624}
+  - component: {fileID: 6831573493591400494}
   m_Layer: 5
   m_Name: Gameplay
   m_TagString: Untagged
@@ -5483,17 +5468,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3056902783908108401}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1619565293102733720}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: 64.026}
+  m_AnchoredPosition: {x: -0.000030517578, y: 64.02605}
   m_SizeDelta: {x: 800, y: 321.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3174880993094880624
@@ -5508,6 +5493,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219e2dc391fe3c349a2c05e27dcc48e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6831573493591400494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056902783908108401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2adca5441830c45ae521837cbbc3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &9307838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5515,6 +5516,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2042217725}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot2
@@ -5629,6 +5634,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2042217725}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot1
@@ -5739,6 +5748,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot4_1
@@ -5845,6 +5858,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot4
@@ -5951,6 +5968,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot2_1
@@ -6057,6 +6078,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1008771999}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot2
@@ -6167,6 +6192,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1008771999}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot4
@@ -6277,6 +6306,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot1_1
@@ -6383,6 +6416,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot3_1
@@ -6489,6 +6526,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot3
@@ -6599,6 +6640,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1008771999}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot3
@@ -6709,6 +6754,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1008771999}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot1
@@ -6823,6 +6872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot2
@@ -6933,6 +6986,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2042217725}
     m_Modifications:
+    - target: {fileID: 1450304257913940962, guid: 0ab84b724fd39184bb85939220434dfa, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4056641538846377170, guid: 0ab84b724fd39184bb85939220434dfa, type: 3}
       propertyPath: m_Name
       value: ResultSlot
@@ -7036,6 +7093,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935649243}
     m_Modifications:
+    - target: {fileID: 2732497562538995493, guid: 50949db6454bad74eb645278a7429471, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3510237544436444992, guid: 50949db6454bad74eb645278a7429471, type: 3}
       propertyPath: m_Name
       value: ItemSlot1
