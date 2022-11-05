@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Element: {fileID: 0}
   SlotType: 0
+  lockedSprite: {fileID: 21300000, guid: fba0ade9799d57241a49addcc55aa84d, type: 3}
   initialRectTransform: {x: 0, y: 0}
   rectTransform: {fileID: 0}
   snapParent: {fileID: 0}
@@ -275,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 296ebafcc7e8659448a34beeba3ddc0f, type: 2}
   m_sharedMaterial: {fileID: 6283599472157283469, guid: 296ebafcc7e8659448a34beeba3ddc0f, type: 2}

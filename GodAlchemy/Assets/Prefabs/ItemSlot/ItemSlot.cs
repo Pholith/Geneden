@@ -10,7 +10,8 @@ public partial class ItemSlot : MonoBehaviour
         itemSlot,
         craftSlot,
         recipeSlot,
-        ressourceSlot
+        ressourceSlot,
+        recipeBookSlot,
     }
 
     [SerializeField]
@@ -28,6 +29,12 @@ public partial class ItemSlot : MonoBehaviour
     private CraftingSystem craftSystem;
     private InventorySystem playerInventory;
 
+    //RecipeSystem
+    private RecipeSystem recipeSystem;
+    private bool isRecipeUnlock;
+    [SerializeField] 
+    private Sprite lockedSprite;
+
     private void Start()
     {
         uiCase = transform.Find("Case").transform.gameObject;
@@ -35,12 +42,16 @@ public partial class ItemSlot : MonoBehaviour
         costText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
         craftSystem = FindObjectOfType<CraftingSystem>();
         playerInventory = FindObjectOfType<InventorySystem>();
+        recipeSystem = FindObjectOfType<RecipeSystem>();
 
         // Adapte le isPayed selon l'élément placé dans l'inspecteur
         elementIsPayed = Element != null;
         // Définitions nécessaires pour le DragAndDrop
         currentSlot = transform.GetComponent<ItemSlot>();
         canvas = FindObjectOfType<Canvas>();
+
+        //Variable pour recipeBookSlot
+        isRecipeUnlock = false;
 
         UpdateUi();
     }
@@ -53,8 +64,17 @@ public partial class ItemSlot : MonoBehaviour
     {
         if (Element != null)
         {
-            itemIcon.sprite = Element.Sprite;
-            costText.text = Element.GetCost().ToString();
+            if((SlotType == Type.recipeBookSlot) && isRecipeUnlock == false)
+            {
+                itemIcon.sprite = lockedSprite;
+                costText.text = "";
+            }
+            else
+            {
+                itemIcon.sprite = Element.Sprite;
+                costText.text = Element.GetCost().ToString();
+            }
+            
         }
         else
         {
@@ -68,6 +88,17 @@ public partial class ItemSlot : MonoBehaviour
     public bool IsEmpty()
     {
         return Element == null;
+    }
+
+    public void UnlockRecipe()
+    {
+        isRecipeUnlock = true;
+        UpdateUi();
+    }
+
+    public bool IsRecipeUnlock()
+    {
+        return isRecipeUnlock;
     }
 
     /// <summary>
@@ -94,6 +125,11 @@ public partial class ItemSlot : MonoBehaviour
         Element = null;
         elementIsPayed = false;
         UpdateUi();
+    }
+
+    public bool IsElementPayed()
+    {
+        return elementIsPayed;
     }
 
     /// <summary>

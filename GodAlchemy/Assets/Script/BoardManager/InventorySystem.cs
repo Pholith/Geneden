@@ -21,4 +21,19 @@ public class InventorySystem : MonoBehaviour
         }
         return false;
     }
+
+    public ItemSlot SearchElement(ElementScriptableObject searchedElement)
+    {
+        foreach(ItemSlot slot in itemSlotList)
+        {
+            if(!slot.IsEmpty())
+            {
+                if(searchedElement == slot.Element)
+                {
+                    return slot;
+                }
+            }
+        }
+        return null;
+    }
 }

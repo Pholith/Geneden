@@ -56,6 +56,10 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             case Type.ressourceSlot:
                 craftSystem.AddRessource(Element);
                 break;
+            case Type.recipeBookSlot:
+                if (IsRecipeUnlock())
+                recipeSystem.AddRecipeToCraft(Element);
+                break;
             default:
                 break;
         }

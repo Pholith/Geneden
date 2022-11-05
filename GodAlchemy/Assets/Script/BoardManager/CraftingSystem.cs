@@ -11,6 +11,7 @@ public class CraftingSystem : MonoBehaviour
     //Crafting slot
     [SerializeField] private InventorySystem playerInventory;
     [SerializeField] private ResourceManager resourceManager;
+    [SerializeField] private RecipeSystem recipeSystem;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class CraftingSystem : MonoBehaviour
         resultSlot = transform.Find("ResultSlot").transform.gameObject.GetComponent<ItemSlot>();
         playerInventory = FindObjectOfType<InventorySystem>();
         resourceManager = FindObjectOfType<ResourceManager>();
+        recipeSystem = FindObjectOfType<RecipeSystem>();
     }
 
     private void Update()
@@ -41,11 +43,13 @@ public class CraftingSystem : MonoBehaviour
                     if (combinedElement.ElementToCraft1.name == firstElementSlot.Element.name && combinedElement.ElementToCraft2.name == secondElementSlot.Element.name)
                     {
                         resultSlot.AddItem(combinedElement);
+                        recipeSystem.UnlockRecipe(combinedElement);
                         return;
                     }
                     else if (combinedElement.ElementToCraft2.name == firstElementSlot.Element.name && combinedElement.ElementToCraft1.name == secondElementSlot.Element.name)
                     {
                         resultSlot.AddItem(combinedElement);
+                        recipeSystem.UnlockRecipe(combinedElement);
                         return;
                     }
                     else
@@ -89,5 +93,12 @@ public class CraftingSystem : MonoBehaviour
         if (firstElementSlot.IsEmpty()) firstElementSlot.AddItem(addedRessource);
         else if (secondElementSlot.IsEmpty()) secondElementSlot.AddItem(addedRessource);
     }
+
+    public void AddItemInSlot(ElementScriptableObject addedRessource,bool isPayed)
+    {
+        if (firstElementSlot.IsEmpty()) firstElementSlot.AddItem(addedRessource,isPayed);
+        else if (secondElementSlot.IsEmpty()) secondElementSlot.AddItem(addedRessource,isPayed);
+    }
+
 
 }
