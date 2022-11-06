@@ -1,217 +1,106 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 
-public class ItemSlot : MonoBehaviour, IDropHandler
+[ExecuteAlways] // Permet d'appeler certaines fonction dans le mode d'édition pour actualiser les slots
+public partial class ItemSlot : MonoBehaviour
 {
-
-    [SerializeField] public ElementScriptableObject element;
-    [SerializeField] private int itemNumber;
-    [SerializeField] public type slotType;
-    private GameObject uiCase;
-
-    private Image itemIcon;
-    private TextMeshProUGUI amountText;
-
-    //Crafting Slot Type
-    private CraftingSystem craftManager;
-    private InventorySystem playerInventory;
-
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        uiCase = transform.Find("Case").transform.gameObject;
-        itemIcon = uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>();
-        amountText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
-        craftManager = FindObjectOfType<CraftingSystem>();
-        playerInventory = FindObjectOfType<InventorySystem>();
-        initSlot(1);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        updateSlot();
-    }
-
-    private void initSlot(int amount)
-    {
-        if (element != null)
-        {
-            itemIcon.sprite = element.Sprite;
-            itemNumber = amount;
-            amountText.text = "x" + itemNumber;
-        }
-        else
-        {
-            itemIcon.sprite = null;
-            itemNumber = 0;
-            amountText.text = ""; 
-        }
-    }
-
-    public void updateSlot()
-    {
-        if(itemNumber > 0)
-        {
-            itemIcon.sprite = element.Sprite;
-            amountText.text = "x" + itemNumber;
-        }
-        else
-        {
-            element = null;
-            itemNumber = 0;
-            itemIcon.sprite = null;
-            amountText.text = "";
-        }
-    }
-
-    public bool addItem(ElementScriptableObject addedElement,int amount)
-    {
-        if(element != null)
-        {
-            if(slotType == type.itemSlot)
-            {
-                if (addedElement.name == element.name)
-                {
-                    itemNumber += amount;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if(slotType == type.craftSlot)
-            {
-                if (addedElement.name == element.name)
-                {
-                    itemNumber = amount;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            
-        }
-        else
-        {
-            element = addedElement;
-            itemNumber = amount;
-            return true;
-        }
-
-        return false;
-    }
-
-    public void suppItem(int amount)
-    {
-        if(itemNumber > 0)
-        {
-            itemNumber -= amount;
-            if(itemNumber < 0)
-            {
-                itemNumber = 0;
-            }
-        }
-    }
-
-    //Testing
-    public void onClick()
-    {
-        if(slotType == type.craftSlot)
-        {
-            craftManager.craftDone();
-        }
-        else if(slotType == type.ressourceSlot)
-        {
-            craftManager.addRessource(element);
-        }
-        else if((slotType == type.itemSlot) || !isNotForbiddenElement())
-        {
-            suppItem(1);
-        }
-        else if((slotType == type.recipeSlot))
-        {
-            if (playerInventory.AddItem(element))
-                suppItem(1);
-        }
-    }
-
-    public Image getItemIcon()
-    {
-        return itemIcon;
-    }
-    public void OnDrop(PointerEventData eventData)
-    {
-        //GameObject
-        GameObject dropped = eventData.pointerCurrentRaycast.gameObject;
-        GameObject origin = eventData.pointerDrag;
-        ItemSlot originSlot = origin.GetComponent<ItemSlot>();
-        ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
-        GetComponent<DragAndDrop>().setParentSnap(transform);
-
-        if (finalSlot.slotType == type.recipeSlot)
-        {
-            if (originSlot.slotType == type.ressourceSlot)
-            {
-                finalSlot.addItem(originSlot.element, 1);
-            }
-            else if ((originSlot.slotType == type.recipeSlot) || (originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.craftSlot))
-            {
-                if (finalSlot.addItem(originSlot.element, 1))
-                {
-                    originSlot.suppItem(1);
-                }
-            }
-        }
-        if ((finalSlot.slotType == type.itemSlot) & (originSlot.isNotForbiddenElement()))
-        {
-            if ((originSlot.slotType == type.itemSlot) || (originSlot.slotType == type.recipeSlot))
-            {
-                if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
-                {
-                    originSlot.suppItem(itemNumber);
-                }
-            }
-            if((originSlot.slotType == type.craftSlot))
-            {
-                if (finalSlot.addItem(originSlot.element, originSlot.itemNumber))
-                {
-                    craftManager.consumeElement();
-                }
-            }
-        }
-    }
-
-    public bool isNotForbiddenElement()
-    {
-        string[] forbiddenList = { "Feu", "Air", "Eau", "Terre" };
-        foreach(string str in forbiddenList)
-        {
-            if (element.name.Contains(str))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public enum type
+    public enum Type
     {
         itemSlot,
         craftSlot,
         recipeSlot,
         ressourceSlot
+    }
+
+    [SerializeField]
+    public ElementScriptableObject Element;
+
+    [SerializeField]
+    public Type SlotType;
+    private GameObject uiCase;
+
+    private Image itemIcon;
+    private TextMeshProUGUI costText;
+    private bool elementIsPayed = false;
+
+    //Crafting Slot Type
+    private CraftingSystem craftSystem;
+    private InventorySystem playerInventory;
+
+    private void Start()
+    {
+        uiCase = transform.Find("Case").transform.gameObject;
+        itemIcon = uiCase.transform.Find("ItemIcon").transform.gameObject.GetComponent<Image>();
+        costText = uiCase.transform.Find("ItemAmount").transform.gameObject.GetComponent<TextMeshProUGUI>();
+        craftSystem = FindObjectOfType<CraftingSystem>();
+        playerInventory = FindObjectOfType<InventorySystem>();
+
+        // Adapte le isPayed selon l'élément placé dans l'inspecteur
+        elementIsPayed = Element != null;
+        // Définitions nécessaires pour le DragAndDrop
+        currentSlot = transform.GetComponent<ItemSlot>();
+        canvas = FindObjectOfType<Canvas>();
+
+        UpdateUi();
+    }
+
+    /// <summary>
+    /// Fonction qui permet de mettre à jour le slot avec tout le visuel. Cette fonction peut être utilisé lors de changements (supp, add...)
+    /// Ne pas utiliser la fonction dans un update de unity !!
+    /// </summary>
+    private void UpdateUi()
+    {
+        if (Element != null)
+        {
+            itemIcon.sprite = Element.Sprite;
+            costText.text = Element.GetCost().ToString();
+        }
+        else
+        {
+            itemIcon.sprite = null;
+            costText.text = "";
+        }
+    }
+    /// <summary>
+    /// Test si le slot est vide.
+    /// </summary>
+    public bool IsEmpty()
+    {
+        return Element == null;
+    }
+
+    /// <summary>
+    /// Ajoute un item dans la case.
+    /// </summary>
+    /// <param name="addedElement"> Element à ajouter. </param>
+    /// <param name="payItem"> Si l'élément ajouté vient d'être payé ou l'est déjà. </param>
+    /// <returns> True si l'item a été ajouté. </returns>
+    public bool AddItem(ElementScriptableObject addedElement, bool payItem = false)
+    {
+        if (!IsEmpty()) return false;
+
+        elementIsPayed |= payItem;
+        Element = addedElement;
+        UpdateUi();
+        return true;
+    }
+
+    /// <summary>
+    /// Vide le slot.
+    /// </summary>
+    public void Empty()
+    {
+        Element = null;
+        elementIsPayed = false;
+        UpdateUi();
+    }
+
+    /// <summary>
+    /// Retourne le coût de l'élément s'il n'a pas encore été payé. Ou 0 s'il a déjà été payé.
+    /// </summary>
+    public int GetSlotCost()
+    {
+        return elementIsPayed ? 0 :  Element.GetCost();
     }
 }
