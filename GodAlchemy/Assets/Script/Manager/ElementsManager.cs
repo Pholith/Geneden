@@ -1,18 +1,33 @@
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ElementsManager : BaseManager<ElementsManager>
 {
+    protected override void InitManager()
+    {
+    }
+
+
     public void Fire()
     {
     }
 
-    public TileBase DirtTile;
+    [SerializeField]
+    private TileBase dirtTile;
     public void Dirt()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(DirtTile, 4);
+        GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 4);
     }
 
-    protected override void InitManager()
+
+    [SerializeField]
+    private GameObject lightningPrefab;
+    public void Lightning()
     {
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        GameObject lightning = Instantiate(lightningPrefab);
+        lightning.transform.position = mousePos;
+        var animator = lightning.GetComponent<Animator>();
+        // Mettre le feu et particules de feu
     }
 }

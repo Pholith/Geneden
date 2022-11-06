@@ -17,11 +17,11 @@ public class GameManager : BaseGameManager
 
     [SerializeField] 
     private ElementsManager elementManager;
-    public ElementsManager ElementManager => elementManager;
+    public static ElementsManager ElementManager => instance.elementManager;
     
     [SerializeField] 
     private ResourceManager resourceManager;
-    public ResourceManager ResourceManager => resourceManager;
+    public static ResourceManager ResourceManager => instance.resourceManager;
 
     protected override void InitManager()
     {

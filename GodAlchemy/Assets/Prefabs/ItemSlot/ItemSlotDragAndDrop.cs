@@ -98,9 +98,9 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                     if (finalSlot.AddItem(originSlot.Element, true)) originSlot.Empty();
                     break;
                 case Type.craftSlot:
-                    if (GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()) && finalSlot.AddItem(originSlot.Element, true))
+                    if (GameManager.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()) && finalSlot.AddItem(originSlot.Element, true))
                     {
-                        GameManager.Instance.ResourceManager.ConsumePower(originSlot.GetSlotCost());
+                        GameManager.ResourceManager.ConsumePower(originSlot.GetSlotCost());
                         originSlot.Empty();
                     }
                     break;
@@ -108,7 +108,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                     if (craftSystem.HasEnoughPower() && finalSlot.AddItem(originSlot.Element, true)) craftSystem.ConsumePower();
                     break;
                 case Type.ressourceSlot:
-                    if (GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.Element.GetCost()) && finalSlot.AddItem(originSlot.Element, true)) GameManager.Instance.ResourceManager.ConsumePower(originSlot.Element.GetCost());
+                    if (GameManager.ResourceManager.HasEnoughPower(originSlot.Element.GetCost()) && finalSlot.AddItem(originSlot.Element, true)) GameManager.ResourceManager.ConsumePower(originSlot.Element.GetCost());
                     break;
                 default:
                     break;
