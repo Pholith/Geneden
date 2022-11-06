@@ -8,16 +8,18 @@ public class PauseMenuIG : MonoBehaviour
 
     public string mainMenuScene;
     public GameObject pauseMenu;
+    public GameObject imageOptionsMenu;
+    private GameObject optionsMenu;
     public bool isPaused;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        optionsMenu = imageOptionsMenu.transform.Find("Options Screen").transform.gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -42,11 +44,14 @@ public class PauseMenuIG : MonoBehaviour
     public void openOptionsGames()
     {
         Debug.Log("Open Options !");
+        imageOptionsMenu.SetActive(true);
+        optionsMenu.SetActive(true);
     }
 
     public void closeOptionsGames()
     {
-
+        imageOptionsMenu.SetActive(false);
+        optionsMenu.SetActive(false);
     }
 
     public void quitGame()
