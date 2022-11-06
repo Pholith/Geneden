@@ -35,6 +35,9 @@ public partial class ItemSlot : MonoBehaviour
     [SerializeField] 
     private Sprite lockedSprite;
 
+    //ToolTip
+    private ToolTipTrigger toolTipTrigger;
+
     private void Start()
     {
         uiCase = transform.Find("Case").transform.gameObject;
@@ -53,6 +56,8 @@ public partial class ItemSlot : MonoBehaviour
         //Variable pour recipeBookSlot
         isRecipeUnlock = false;
 
+        //Tooltip
+        toolTipTrigger = gameObject.GetComponent<ToolTipTrigger>();
         UpdateUi();
     }
 
@@ -68,9 +73,13 @@ public partial class ItemSlot : MonoBehaviour
             {
                 itemIcon.sprite = lockedSprite;
                 costText.text = "";
+                toolTipTrigger.SetHeader(null);
+                toolTipTrigger.SetContent(null);
             }
             else
             {
+                toolTipTrigger.SetHeader(Element.name);
+                toolTipTrigger.SetContent(Element.ElementDescription);
                 itemIcon.sprite = Element.Sprite;
                 costText.text = Element.GetCost().ToString();
             }
@@ -98,7 +107,11 @@ public partial class ItemSlot : MonoBehaviour
 
     public bool IsRecipeUnlock()
     {
-        return isRecipeUnlock;
+        if(SlotType == Type.recipeBookSlot)
+        {
+            return isRecipeUnlock;
+        }
+        return true;
     }
 
     /// <summary>
