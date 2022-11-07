@@ -14,6 +14,7 @@ public class GameplayBoard : MonoBehaviour, IDropHandler
         GameObject origin = eventData.pointerDrag;
         ItemSlot originSlot = origin.GetComponent<ItemSlot>();
         if (originSlot == null) return;
+        if (originSlot.IsEmpty()) return;
 
         if (originSlot.SlotType != ItemSlot.Type.recipeSlot && originSlot.SlotType != ItemSlot.Type.recipeBookSlot && GameManager.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()))
         {
