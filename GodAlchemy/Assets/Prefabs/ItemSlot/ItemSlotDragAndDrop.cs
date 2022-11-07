@@ -126,6 +126,11 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         rectTransform.anchoredPosition = initialRectTransform;
         transform.SetParent(snapParent);
         itemIcon.raycastTarget = true;
+        rectTransform = null;
+        snapParent = null;
+        initialRectTransform = new Vector2(0, 0);
+
+
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -6,9 +6,12 @@ using TMPro;
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
 {
+    [SerializeField]
     private TextMeshProUGUI headerField;
+    [SerializeField]
     private TextMeshProUGUI contentField;
-    private LayoutElement layoutElemnt;
+    [SerializeField]
+    private LayoutElement layoutElement;
 
     [SerializeField]
     private int characterLimit;
@@ -19,31 +22,14 @@ public class Tooltip : MonoBehaviour
     {
         rectTransform = gameObject.GetComponent<RectTransform>();
     }
-    public void SetText(string content, string header)
+
+    private void Start()
     {
-        if(string.IsNullOrEmpty(header))
-        {
-            headerField.gameObject.SetActive(false);
-        }
-        else
-        {
-            headerField.gameObject.SetActive(true);
-            headerField.text = header;
-        }
-        if (string.IsNullOrEmpty(content))
-        {
-            contentField.gameObject.SetActive(false);
-        }
-        else
-        {
-            contentField.gameObject.SetActive(true);
-            contentField.text = content;
-        }
-
-        int headerLength = headerField.text.Length;
-        int contentLength = contentField.text.Length;
-
-        layoutElemnt.enabled = (headerLength > characterLimit || contentLength > characterLimit) ? true : false;
+        headerField = gameObject.transform.Find("Header").GetComponent<TextMeshProUGUI>();
+        contentField = gameObject.transform.Find("Content").GetComponent<TextMeshProUGUI>();
+        layoutElement = gameObject.GetComponent<LayoutElement>();
+        Debug.Log(layoutElement);
+        characterLimit = 80;
     }
 
     private void Update()
@@ -57,12 +43,35 @@ public class Tooltip : MonoBehaviour
         rectTransform.pivot = new Vector2(pivotX, pivotY);
     }
 
-    private void Start()
+    public void SetText(string content = "", string header = "")
     {
-        headerField = gameObject.transform.Find("Header").GetComponent<TextMeshProUGUI>();
-        contentField = gameObject.transform.Find("Content").GetComponent<TextMeshProUGUI>();
-        layoutElemnt = GetComponent<LayoutElement>();
-        characterLimit = 80;
+        if(string.IsNullOrEmpty(header))
+        {
+            headerField.gameObject.SetActive(false);
+        }
+        else
+        {   
+            headerField.gameObject.SetActive(true);
+            headerField.text = header;
+            
+        }
+        if (string.IsNullOrEmpty(content))
+        {
+            contentField.gameObject.SetActive(false);
+        }
+        else
+        {
+            contentField.gameObject.SetActive(true);
+            contentField.text = content;
+        }
+
+        int headerLength = headerField.text.Length;
+        int contentLength = contentField.text.Length;
+        Debug.Log(contentLength.ToString());
+
+        layoutElement.enabled = (headerLength > characterLimit || contentLength > characterLimit) ? true : false;
     }
+
+
 
 }

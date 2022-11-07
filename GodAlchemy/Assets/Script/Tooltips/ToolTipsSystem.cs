@@ -24,7 +24,7 @@ public class ToolTipsSystem : MonoBehaviour
 
     public static void Show(string content = "", string header = "")
     {
-        if ((content == null) && (header == null))
+        if ((string.IsNullOrEmpty(content)) && (string.IsNullOrEmpty(header)))
         {
             return;
         }
