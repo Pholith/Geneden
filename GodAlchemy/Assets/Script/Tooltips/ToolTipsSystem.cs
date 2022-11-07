@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ToolTipsSystem : MonoBehaviour
@@ -16,6 +14,7 @@ public class ToolTipsSystem : MonoBehaviour
     private void Start()
     {
         tooltip = FindObjectOfType<Tooltip>();
+        current.tooltip.gameObject.SetActive(false);
     }
 
     public static void Hide()
@@ -25,8 +24,7 @@ public class ToolTipsSystem : MonoBehaviour
 
     public static void Show(string content = "", string header = "")
     {
-        Debug.Log(content);
-        if((content == null) && (header == null))
+        if ((content == null) && (header == null))
         {
             return;
         }
