@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: "V\xE9g\xE9tation"
   m_EditorClassIdentifier: 
   ElementDescription: 
-<<<<<<< Updated upstream
-  Sprite: {fileID: 21300000, guid: af209e3d414c6684584eaff76b3db250, type: 3}
-  DifficultyToCraft: 1
-=======
   Sprite: {fileID: 21300000, guid: e0933e861b017714ca85d0118b4d3e1e, type: 3}
   DifficultyToCraft: 3
->>>>>>> Stashed changes
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: bf39b9e63e5937c43953f100b865fc63, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: 826029d4a928be944a304663a792fa4a, type: 2}
@@ -28,7 +23,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
         m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
-        m_MethodName: Dirt
+        m_MethodName: Vegetation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

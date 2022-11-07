@@ -16,8 +16,6 @@ public class ElementsManager : BaseManager<ElementsManager>
         GameManager.GridManager.SetTilesOnMouseInRange(treeTile, 2);
     }
 
-<<<<<<< Updated upstream
-=======
 
     [SerializeField]
     private GameObject rockPrefab;
@@ -28,10 +26,17 @@ public class ElementsManager : BaseManager<ElementsManager>
         GameObject rock = Instantiate(rockPrefab);
         rock.transform.position = mousePos;
     }
->>>>>>> Stashed changes
 
     public void Fire()
     {
+
+    }
+    
+    [SerializeField]
+    private TileBase hillTile;
+    public void Hill()
+    {
+        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 4);
     }
 
     [SerializeField]
@@ -41,6 +46,12 @@ public class ElementsManager : BaseManager<ElementsManager>
         GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 4);
     }
 
+    [SerializeField]
+    private TileBase waterTile;
+    public void Water()
+    {
+        GameManager.GridManager.SetTilesOnMouseInRange(null, 4);
+    }
 
     [SerializeField]
     private GameObject lightningPrefab;

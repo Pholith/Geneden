@@ -5,8 +5,12 @@ using UnityEngine.Tilemaps;
 public class GridManager : BaseManager<GridManager>
 {
 
-    public Tilemap GameGrid;
+    public Tilemap MainGameGrid;
+    public Tilemap DirtGameGrid;
     
+    [SerializeField]
+    private TileBase dirt; 
+
     private Camera mainCamera;
 
     protected override void InitManager()
@@ -17,7 +21,7 @@ public class GridManager : BaseManager<GridManager>
 
     public void SetTileOnMouse(TileBase tile)
     {
-        GameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
+        MainGameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
     }
 
     public void SetTilesOnMouseInRange(TileBase tile, int range)
@@ -27,9 +31,21 @@ public class GridManager : BaseManager<GridManager>
         {
             for (int j = -range; j <= range; j++)
             {
-                GameGrid.SetTile(tilePos + new Vector3Int(i, j), tile);
+                if (tile == dirt)
+                {
+                    DirtGameGrid.SetTile(tilePos + new Vector3Int(i, j), tile);
+                } else
+                {
+                    MainGameGrid.SetTile(tilePos + new Vector3Int(i, j), tile);
+                    if (tile == null) DirtGameGrid.SetTile(tilePos + new Vector3Int(i, j), null);
+                }
             }
         }
+    }
+
+    public void RemoveObjectsOnMouse()
+    {
+        //TODO
     }
 
     public Vector3 GetMouseGridPos()
@@ -37,6 +53,6 @@ public class GridManager : BaseManager<GridManager>
         Vector3 _screenPos = Input.mousePosition;
         Vector3 _worldPos = mainCamera.ScreenToWorldPoint(_screenPos);
         _worldPos.z = 0.0f;
-        return GameGrid.WorldToCell(_worldPos);
+        return MainGameGrid.WorldToCell(_worldPos);
     }
 }

@@ -131,12 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Element: {fileID: 0}
   SlotType: 0
-<<<<<<< Updated upstream
-  lockedSprite: {fileID: 21300000, guid: fba0ade9799d57241a49addcc55aa84d, type: 3}
-=======
   elementIsPayed: 0
   lockedSprite: {fileID: 21300000, guid: afce7c7f11f2cfc42a8814709c4188ae, type: 3}
->>>>>>> Stashed changes
   initialRectTransform: {x: 0, y: 0}
   rectTransform: {fileID: 0}
   snapParent: {fileID: 0}

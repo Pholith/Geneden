@@ -6,26 +6,26 @@ using System;
 using UnityEditor;
 #endif
 
+
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/New element", order = 1)]
 public class ElementScriptableObject : ScriptableObject
 {
     public string ElementDescription;
 
-    [HideInInspector, SerializeField]
+    [HideInInspector]
     public Sprite Sprite;
 
     [Range(1, 3)]
     public int DifficultyToCraft = 1;
     public bool IsPrimaryElement = false;
 
-    [HideInInspector, SerializeField]
+    [HideInInspector]
     public ElementScriptableObject ElementToCraft1;
-    [HideInInspector, SerializeField]
+    [HideInInspector]
     public ElementScriptableObject ElementToCraft2;
 
     [SerializeField]
     public UnityEvent EffectOnMap;
-
 
     public int GetCost()
     {
@@ -52,29 +52,40 @@ public class ElementInspector : Editor
 {
     private ElementScriptableObject targetElement;
 
-    private readonly GUIContent elementGUIContent1 = new GUIContent("");
-    private readonly GUIContent elementGUIContent2 = new GUIContent("");
+    private SerializedProperty sprite;
+    private SerializedProperty elementToCraft1;
+    private SerializedProperty elementToCraft2;
+
+    private readonly GUIContent elementGUIContent1 = new ("");
+    private readonly GUIContent elementGUIContent2 = new ("");
 
     // Sert uniquement à afficher les menus de dropdown au bon endroit
     private Rect dropdownRect1 = Rect.zero;
     private Rect dropdownRect2 = Rect.zero;
 
-    public override void OnInspectorGUI()
+    protected void OnEnable()
     {
         targetElement = target as ElementScriptableObject;
+        sprite = serializedObject.FindProperty("Sprite");
+        elementToCraft1 = serializedObject.FindProperty("ElementToCraft1");
+        elementToCraft2 = serializedObject.FindProperty("ElementToCraft2");
+    }
 
-        elementGUIContent1.text = targetElement.ElementToCraft1?.name ?? "Element 1";
-        elementGUIContent2.text = targetElement.ElementToCraft2?.name ?? "Element 2";
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
         DrawDefaultInspector();
+
+        elementGUIContent1.text = elementToCraft1.objectReferenceValue?.name ?? "Element 1";
+        elementGUIContent2.text = elementToCraft2.objectReferenceValue?.name ?? "Element 2";
 
         // Sprite
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Sprite");
-        targetElement.Sprite = EditorGUILayout.ObjectField(targetElement.Sprite, typeof(Sprite), true,
-        GUILayout.Height(64), GUILayout.Width(64)) as Sprite;
-        Undo.RecordObject(targetElement, $"Ajout d'un sprite sur l'élément {targetElement.name}");
-        EditorGUILayout.EndHorizontal();
+        sprite.objectReferenceValue = EditorGUILayout.ObjectField(sprite.objectReferenceValue, typeof(Sprite), true, GUILayout.Height(64), GUILayout.Width(64)) as Sprite;
 
+        EditorGUILayout.EndHorizontal();
+        
         // Ajout d'une fusion
         if (!targetElement.IsPrimaryElement)
         {
@@ -107,22 +118,25 @@ public class ElementInspector : Editor
             }
             EditorGUILayout.EndHorizontal();
         }
+        serializedObject.ApplyModifiedProperties();
     }
 
     private void OnElement1Selected(object elementScriptableObj)
     {
+
         ElementScriptableObject element = elementScriptableObj as ElementScriptableObject;
         elementGUIContent1.text = element.name;
-        targetElement.ElementToCraft1 = element;
-        Undo.RecordObject(targetElement, "Ajout de l'élément 1 du craft");
+        elementToCraft1.objectReferenceValue = element;
+        serializedObject.ApplyModifiedProperties();
 
     }
     private void OnElement2Selected(object elementScriptableObj)
     {
         ElementScriptableObject element = elementScriptableObj as ElementScriptableObject;
         elementGUIContent2.text = element.name;
-        targetElement.ElementToCraft2 = element;
-        Undo.RecordObject(targetElement, "Ajout de l'élément 2 du craft");
+        elementToCraft2.objectReferenceValue = element;
+        serializedObject.ApplyModifiedProperties();
+
     }
 }
 
