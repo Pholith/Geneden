@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
-  m_Name: "V\xE9g\xE9tation"
+  m_Name: Test
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 21300000, guid: e0933e861b017714ca85d0118b4d3e1e, type: 3}
+  Sprite: {fileID: 21300000, guid: 8c5b79707e8ddf9449a3f42ede0a06f3, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0
-  ElementToCraft1: {fileID: 11400000, guid: bf39b9e63e5937c43953f100b865fc63, type: 2}
-  ElementToCraft2: {fileID: 11400000, guid: 826029d4a928be944a304663a792fa4a, type: 2}
+  ElementToCraft1: {fileID: 11400000, guid: 910f593104f615443a2bcf82c901b64f, type: 2}
+  ElementToCraft2: {fileID: 11400000, guid: 5413f5e411c71804da39f117ca682bd7, type: 2}
   EffectOnMap:
     m_PersistentCalls:
       m_Calls: []
