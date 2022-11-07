@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: "M\xE9t\xE9orite"
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "D\xE9chaine une m\xE9t\xE9orite qui explose et  a une chance
+    de laisser un gisement al\xE9atoire"
   Sprite: {fileID: 21300000, guid: aa353738783149e4aa72e3316521aba7, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0

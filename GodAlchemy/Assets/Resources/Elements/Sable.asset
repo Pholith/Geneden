@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Sable
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er une zone de sable"
   Sprite: {fileID: 21300000, guid: a3f4461a49e22334fbdf22204209f51d, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0

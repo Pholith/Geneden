@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Boue
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Transforme une zone de terrain en mar\xE9cage"
   Sprite: {fileID: 21300000, guid: 0faa42f0de2243147998a08640a6ab5a, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0

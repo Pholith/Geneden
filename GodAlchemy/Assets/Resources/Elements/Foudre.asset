@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Foudre
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Foudroie l'emplacement cibl\xE9 et inflige des d\xE9gats"
   Sprite: {fileID: 21300000, guid: 8207330586c181449a4b2644f7e92274, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0

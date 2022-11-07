@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: "V\xE9g\xE9tation"
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er de la v\xE9g\xE9tation dans une grande zone"
   Sprite: {fileID: 21300000, guid: e0933e861b017714ca85d0118b4d3e1e, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0

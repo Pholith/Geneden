@@ -33,21 +33,21 @@ public class ElementsManager : BaseManager<ElementsManager>
     private TileBase hillTile;
     public void Hill()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 4);
+        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 5);
     }
 
     [SerializeField]
     private TileBase dirtTile;
     public void Dirt()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 4);
+        GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 3);
     }
 
     [SerializeField]
     private TileBase waterTile;
     public void Water()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(null, 4);
+        GameManager.GridManager.SetTilesOnMouseInRange(null, 3);
     }
 
     [SerializeField]

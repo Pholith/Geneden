@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Fer
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: Pose un petit gisement de fer
   Sprite: {fileID: 21300000, guid: 51c302f64de43fe4b8b02506b6ed1918, type: 3}
   DifficultyToCraft: 3
   IsPrimaryElement: 0

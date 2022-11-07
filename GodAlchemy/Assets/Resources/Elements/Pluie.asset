@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Pluie
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er de la pluie et pose de l'eau dans une zone moyenne"
   Sprite: {fileID: 21300000, guid: e1e7c89520f2c544992eed31e4915fed, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0
