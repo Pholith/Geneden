@@ -19,6 +19,7 @@ public class ToolTipsSystem : MonoBehaviour
 
     public static void Hide()
     {
+        current.tooltip.SetText("", "");
         current.tooltip.gameObject.SetActive(false);
     }
 

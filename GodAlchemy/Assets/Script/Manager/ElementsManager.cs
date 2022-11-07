@@ -9,22 +9,6 @@ public class ElementsManager : BaseManager<ElementsManager>
     }
 
 
-    [SerializeField]
-    private TileBase treeTile;
-    // Creates some Trees / bushes near the cursor
-    public void Vegetation()
-    {
-        GameManager.GridManager.SetTilesOnMouseInRange(treeTile, 2);
-    }
-
-    [SerializeField]
-    private GameObject rockPrefab;
-    public void Rock()
-    {
-        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
-        GameObject rock = Instantiate(rockPrefab);
-        rock.transform.position = mousePos;
-    }
 
     public void Fire()
     {
