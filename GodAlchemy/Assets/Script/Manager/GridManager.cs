@@ -32,6 +32,11 @@ public class GridManager : BaseManager<GridManager>
         }
     }
 
+    public void RemoveObjectsOnMouse()
+    {
+        //TODO
+    }
+
     public Vector3 GetMouseGridPos()
     {
         Vector3 _screenPos = Input.mousePosition;
