@@ -23,6 +23,7 @@ public partial class ItemSlot : MonoBehaviour
 
     private Image itemIcon;
     private TextMeshProUGUI costText;
+    [SerializeField]
     private bool elementIsPayed = false;
 
     //Crafting Slot Type
@@ -48,7 +49,7 @@ public partial class ItemSlot : MonoBehaviour
         recipeSystem = FindObjectOfType<RecipeSystem>();
 
         // Adapte le isPayed selon l'élément placé dans l'inspecteur
-        elementIsPayed = Element != null;
+        elementIsPayed = SlotType != Type.ressourceSlot && Element != null;
         // Définitions nécessaires pour le DragAndDrop
         currentSlot = transform.GetComponent<ItemSlot>();
         canvas = FindObjectOfType<Canvas>();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 public class ElementsManager : BaseManager<ElementsManager>
@@ -16,10 +17,28 @@ public class ElementsManager : BaseManager<ElementsManager>
     }
 
     [SerializeField]
+    private TileBase treeTile;
+    // Creates some Trees / bushes near the cursor
+    public void Vegetation()
+    {
+        GameManager.GridManager.SetTilesOnMouseInRange(treeTile, 2);
+    }
+
+    [SerializeField]
     private GameObject rockPrefab;
     public void Rock()
     {
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        GameObject rock = Instantiate(rockPrefab);
+        rock.transform.position = mousePos;
+    }
+
+    [SerializeField]
+    private GameObject rockPrefab;
+    public void Rock()
+    {
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        Debug.Log(rockPrefab);
         GameObject rock = Instantiate(rockPrefab);
         rock.transform.position = mousePos;
     }
@@ -47,7 +66,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     private TileBase waterTile;
     public void Water()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(null, 3);
+        GameManager.GridManager.SetTilesOnMouseInRange(null, 4);
     }
 
     [SerializeField]

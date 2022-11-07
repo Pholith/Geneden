@@ -22,7 +22,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (itemIcon.sprite != null)
+        if ((itemIcon.sprite != null) && (SlotType != Type.recipeBookSlot))
         {
             rectTransform = itemIcon.GetComponent<RectTransform>();
             initialRectTransform = rectTransform.anchoredPosition;
@@ -72,7 +72,6 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         ItemSlot originSlot = origin.GetComponent<ItemSlot>();
         ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
         GetComponent<ItemSlot>().SetParentSnap(transform);
-
         if (finalSlot.SlotType == Type.craftSlot)
         {
             switch (originSlot.SlotType)

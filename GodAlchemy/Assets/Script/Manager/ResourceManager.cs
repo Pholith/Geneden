@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Collections;
 public class ResourceManager : BaseManager<ResourceManager>
 {
 
@@ -52,9 +52,6 @@ public class ResourceManager : BaseManager<ResourceManager>
     [SerializeField] private TextMeshProUGUI midPowerText;
     [SerializeField] private TextMeshProUGUI topPowerText;
 
-    //Timer test
-    public float timer = 2;
-
 
     // Start is called before the first frame update
     private void Start()
@@ -73,26 +70,26 @@ public class ResourceManager : BaseManager<ResourceManager>
         topPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("TopText").transform.gameObject.GetComponent<TextMeshProUGUI>();
         currentPower = 50;
         maxPower = 100;
+        StartCoroutine(RegenDivinPower());
     }
 
-    // Update is called once per frame
-    private void Update()
+    public void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0)
+        SetCurrentFill();
+        UpdateUI();
+    }
+
+    private IEnumerator RegenDivinPower()
+    {
+        while (true)
         {
             RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
             AddRessource(randomRessource, 100);
             AddRessource(RessourceType.CivLevel, 5);
-            AddDivinePower(1);
-            timer = 1;
+            AddDivinePower(1);    
+            yield return new WaitForSeconds(1.0f);
         }
-        if (civLevel > 25)
-        {
-            civLevel = 25;
-        }
-        SetCurrentFill();
-        UpdateUI();
+        
     }
 
     public void AddRessource(RessourceType type, int amount)
@@ -121,6 +118,7 @@ public class ResourceManager : BaseManager<ResourceManager>
                 popScore += amount;
                 break;
             case RessourceType.CivLevel:
+                if(civLevel + amount <= 25)
                 civLevel += amount;
                 break;
         }
