@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementDescription: 
   Sprite: {fileID: 21300000, guid: 80fccf780b7ca0249b4aa64a18eb5efa, type: 3}
-  DifficultyToCraft: 1
+  DifficultyToCraft: 3
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: 2911b96a07f13a240aa107a59bfd1283, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: 967f21d94c0f5c24786032eee1667c6a, type: 2}

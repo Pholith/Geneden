@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: "V\xE9g\xE9tation"
   m_EditorClassIdentifier: 
   ElementDescription: 
+<<<<<<< Updated upstream
   Sprite: {fileID: 21300000, guid: af209e3d414c6684584eaff76b3db250, type: 3}
   DifficultyToCraft: 1
+=======
+  Sprite: {fileID: 21300000, guid: e0933e861b017714ca85d0118b4d3e1e, type: 3}
+  DifficultyToCraft: 3
+>>>>>>> Stashed changes
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: bf39b9e63e5937c43953f100b865fc63, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: 826029d4a928be944a304663a792fa4a, type: 2}

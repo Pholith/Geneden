@@ -8,6 +8,7 @@ public class RecipeSystem : MonoBehaviour
 
     private ItemSlot[] recipeList;
     private CraftingSystem craftSystem;
+    [SerializeField]
     private InventorySystem playerInventory;
 
     void Start()
