@@ -62,7 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30e82b4c51780f409be528d1c5a4cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameGrid: {fileID: 0}
+  MainGameGrid: {fileID: 0}
+  DirtGameGrid: {fileID: 0}
+  dirt: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
 --- !u!114 &5911366380029177573
 MonoBehaviour:
   m_ObjectHideFlags: 0

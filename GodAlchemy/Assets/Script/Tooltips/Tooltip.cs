@@ -28,7 +28,6 @@ public class Tooltip : MonoBehaviour
         headerField = gameObject.transform.Find("Header").GetComponent<TextMeshProUGUI>();
         contentField = gameObject.transform.Find("Content").GetComponent<TextMeshProUGUI>();
         layoutElement = gameObject.GetComponent<LayoutElement>();
-        Debug.Log(layoutElement);
         characterLimit = 80;
     }
 
