@@ -117,8 +117,8 @@ public class ElementInspector : Editor
                 dropdownMenu.DropDown(dropdownRect2);
             }
             EditorGUILayout.EndHorizontal();
-            serializedObject.ApplyModifiedProperties();
         }
+        serializedObject.ApplyModifiedProperties();
     }
 
     private void OnElement1Selected(object elementScriptableObj)
