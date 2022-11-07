@@ -15,9 +15,9 @@ public class GameplayBoard : MonoBehaviour, IDropHandler
         ItemSlot originSlot = origin.GetComponent<ItemSlot>();
         if (originSlot == null) return;
 
-        if (originSlot.SlotType != ItemSlot.Type.recipeSlot && GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()))
+        if (originSlot.SlotType != ItemSlot.Type.recipeSlot && GameManager.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()))
         {
-            GameManager.Instance.ResourceManager.ConsumePower(originSlot.GetSlotCost());
+            GameManager.ResourceManager.ConsumePower(originSlot.GetSlotCost());
             originSlot.Element.EffectOnMap.Invoke();
         }
 

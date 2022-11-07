@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementDescription: 
   Sprite: {fileID: 21300000, guid: 12d7c0b96d362a14c845af2ace33b328, type: 3}
-  DifficultyToCraft: 3
+  DifficultyToCraft: 2
   IsPrimaryElement: 1
-  elementToCraft1: {fileID: 0}
-  elementToCraft2: {fileID: 0}
+  ElementToCraft1: {fileID: 0}
+  ElementToCraft2: {fileID: 0}
   EffectOnMap:
     m_PersistentCalls:
       m_Calls:

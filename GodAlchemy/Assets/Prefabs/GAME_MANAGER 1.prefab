@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 5911366380029177572}
   elementManager: {fileID: 2030806754}
+  resourceManager: {fileID: 5911366380029177573}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,4 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5fa61ce88eebf4497c7f8a47a75c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtTile: {fileID: 11400000, guid: d91f86bdfd686d04fb59c5ed2fd1c225, type: 2}
+  dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
+  lightningPrefab: {fileID: 7569464812020034455, guid: ca84c41ceaa02ef43b05ba4131148726, type: 3}

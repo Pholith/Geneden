@@ -4,7 +4,7 @@ using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/New element", order = 1)]
 public class ElementScriptableObject : ScriptableObject
@@ -44,6 +44,8 @@ public class ElementScriptableObject : ScriptableObject
         return false;
     }*/
 }
+
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(ElementScriptableObject))]
 public class ElementInspector : Editor
