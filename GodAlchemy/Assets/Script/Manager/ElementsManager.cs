@@ -28,6 +28,13 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
 
     }
+    
+    [SerializeField]
+    private TileBase hillTile;
+    public void Hill()
+    {
+        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 4);
+    }
 
     [SerializeField]
     private TileBase dirtTile;
