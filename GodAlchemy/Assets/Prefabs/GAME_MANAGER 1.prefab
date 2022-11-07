@@ -113,4 +113,5 @@ MonoBehaviour:
   treeTile: {fileID: 11400000, guid: 075a3fb51958b044a84eab1ec40067f7, type: 2}
   rockPrefab: {fileID: 5525039842881984747, guid: c72c07a41736f8a4bb5135247366a2aa, type: 3}
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
+  waterTile: {fileID: 0}
   lightningPrefab: {fileID: 7569464812020034455, guid: ca84c41ceaa02ef43b05ba4131148726, type: 3}

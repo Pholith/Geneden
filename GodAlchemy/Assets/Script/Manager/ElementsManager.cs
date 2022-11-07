@@ -36,6 +36,12 @@ public class ElementsManager : BaseManager<ElementsManager>
         GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 4);
     }
 
+    [SerializeField]
+    private TileBase waterTile;
+    public void Water()
+    {
+        GameManager.GridManager.SetTilesOnMouseInRange(null, 4);
+    }
 
     [SerializeField]
     private GameObject lightningPrefab;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tornade
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: b48a70d93fdb32b468f19c794176a85f, type: 3}
   DifficultyToCraft: 3
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: 1b9d320d3596f1744af28709ca0d22b5, type: 2}

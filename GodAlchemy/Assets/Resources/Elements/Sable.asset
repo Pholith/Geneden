@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Sable
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: a3f4461a49e22334fbdf22204209f51d, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0
-  ElementToCraft1: {fileID: 0}
-  ElementToCraft2: {fileID: 0}
+  ElementToCraft1: {fileID: 11400000, guid: 5413f5e411c71804da39f117ca682bd7, type: 2}
+  ElementToCraft2: {fileID: 11400000, guid: abbd3c9f5bd2ebc4eb26017dddb1ee0a, type: 2}
   EffectOnMap:
     m_PersistentCalls:
       m_Calls: []

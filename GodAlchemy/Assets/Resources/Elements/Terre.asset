@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Terre
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 21300000, guid: af209e3d414c6684584eaff76b3db250, type: 3}
+  Sprite: {fileID: 21300000, guid: a4382ecc636ed1c489ef12d728cc807c, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 1
-  elementToCraft1: {fileID: 0}
-  elementToCraft2: {fileID: 0}
+  ElementToCraft1: {fileID: 0}
+  ElementToCraft2: {fileID: 0}
   EffectOnMap:
     m_PersistentCalls:
       m_Calls:

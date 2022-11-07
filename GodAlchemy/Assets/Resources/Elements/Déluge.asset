@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: "D\xE9luge"
   m_EditorClassIdentifier: 
   ElementDescription: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: e1e7c89520f2c544992eed31e4915fed, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0
-  ElementToCraft1: {fileID: 0}
-  ElementToCraft2: {fileID: 0}
+  ElementToCraft1: {fileID: 11400000, guid: 376834e45c272654c88c395f74c07eb0, type: 2}
+  ElementToCraft2: {fileID: 11400000, guid: 376834e45c272654c88c395f74c07eb0, type: 2}
   EffectOnMap:
     m_PersistentCalls:
       m_Calls: []
