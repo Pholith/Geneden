@@ -68,10 +68,10 @@ public class ResourceManager : BaseManager<ResourceManager>
         divinePowerBar = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("PowerFill").transform.gameObject.GetComponent<Image>();
         midPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("MidText").transform.gameObject.GetComponent<TextMeshProUGUI>();
         topPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("TopText").transform.gameObject.GetComponent<TextMeshProUGUI>();
-        currentPower = 50;
         maxPower = 100;
 #if DEBUG
         maxPower = 500;
+        currentPower = 500;
 #endif
         StartCoroutine(RegenDivinPower());
     }
