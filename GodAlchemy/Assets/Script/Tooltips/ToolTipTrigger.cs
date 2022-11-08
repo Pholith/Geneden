@@ -9,6 +9,8 @@ public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler, IPointerExitHa
     private string headerText;
     private string contentText;
 
+    [SerializeField]
+    private float toolTipDelay = 0.5f;
     private void Start()
     {
         headerText = null;
@@ -17,7 +19,7 @@ public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        delay = LeanTween.delayedCall(1.0f, () =>
+        delay = LeanTween.delayedCall(toolTipDelay, () =>
          {
              ToolTipsSystem.Show(contentText, headerText);
          });

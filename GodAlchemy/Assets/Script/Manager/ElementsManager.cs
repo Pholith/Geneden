@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -29,18 +30,23 @@ public class ElementsManager : BaseManager<ElementsManager>
         GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 3);
     }
 
+
+    [SerializeField]
+    private GameObject waterPrefab;
     public void Water()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(null, 4);
+        var water = Instantiate(waterPrefab);
+        water.transform.position = GameManager.GridManager.GetMouseGridPos() + new Vector3Int(0, 5, 0);
+        
+        new GameTimer(2, () => GameManager.GridManager.SetTilesOnMouseInRange(null, 4));
     }
 
     [SerializeField]
     private GameObject lightningPrefab;
     public void Lightning()
     {
-        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         GameObject lightning = Instantiate(lightningPrefab);
-        lightning.transform.position = mousePos;
+        lightning.transform.position = GameManager.GridManager.GetMouseGridPos(); ;
         var animator = lightning.GetComponent<Animator>();
         // Mettre le feu et particules de feu
     }

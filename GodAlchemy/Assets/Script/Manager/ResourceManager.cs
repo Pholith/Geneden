@@ -1,7 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 public class ResourceManager : BaseManager<ResourceManager>
 {
 
@@ -69,6 +69,9 @@ public class ResourceManager : BaseManager<ResourceManager>
         midPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("MidText").transform.gameObject.GetComponent<TextMeshProUGUI>();
         topPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("TopText").transform.gameObject.GetComponent<TextMeshProUGUI>();
         currentPower = 50;
+#if DEBUG
+        maxPower = 500;
+#endif
         maxPower = 100;
         StartCoroutine(RegenDivinPower());
     }
@@ -86,10 +89,10 @@ public class ResourceManager : BaseManager<ResourceManager>
             RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
             AddRessource(randomRessource, 100);
             AddRessource(RessourceType.CivLevel, 5);
-            AddDivinePower(1);    
+            AddDivinePower(1);
             yield return new WaitForSeconds(1.0f);
         }
-        
+
     }
 
     public void AddRessource(RessourceType type, int amount)
@@ -118,8 +121,8 @@ public class ResourceManager : BaseManager<ResourceManager>
                 popScore += amount;
                 break;
             case RessourceType.CivLevel:
-                if(civLevel + amount <= 25)
-                civLevel += amount;
+                if (civLevel + amount <= 25)
+                    civLevel += amount;
                 break;
         }
 
