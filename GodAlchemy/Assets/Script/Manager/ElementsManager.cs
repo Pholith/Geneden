@@ -37,8 +37,8 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         var water = Instantiate(waterPrefab);
         water.transform.position = GameManager.GridManager.GetMouseGridPos() + new Vector3Int(0, 5, 0);
-        
-        new GameTimer(2, () => GameManager.GridManager.SetTilesOnMouseInRange(null, 4));
+        var mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(2, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 4));
     }
 
     [SerializeField]

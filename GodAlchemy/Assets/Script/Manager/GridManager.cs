@@ -24,26 +24,29 @@ public class GridManager : BaseManager<GridManager>
         MainGameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
     }
 
-    public void SetTilesOnMouseInRange(TileBase tile, int radius)
+    public void SetTileInRange(TileBase tile, Vector3Int position, int radius)
     {
-        Vector3Int tilePos = GetMouseGridPos().ToVector3Int();
-        
-        for (int iy = -radius; iy <= radius ; iy++) 
+        for (int iy = -radius; iy <= radius; iy++)
         {
             int dx = (int)Mathf.Sqrt(radius * radius - iy * iy);
             for (int ix = -dx; ix <= dx; ix++)
             {
                 if (tile == dirt)
                 {
-                    DirtGameGrid.SetTile(tilePos + new Vector3Int(ix, iy), tile);
+                    DirtGameGrid.SetTile(position + new Vector3Int(ix, iy), tile);
                 }
                 else
                 {
-                    MainGameGrid.SetTile(tilePos + new Vector3Int(ix, iy), tile);
-                    if (tile == null) DirtGameGrid.SetTile(tilePos + new Vector3Int(ix, iy), null);
+                    MainGameGrid.SetTile(position + new Vector3Int(ix, iy), tile);
+                    if (tile == null) DirtGameGrid.SetTile(position + new Vector3Int(ix, iy), null);
                 }
             }
         }
+    }
+
+    public void SetTilesOnMouseInRange(TileBase tile, int radius)
+    {
+        SetTileInRange(tile, GetMouseGridPos().ToVector3Int(), radius);
     }
 
     public void RemoveObjectsOnMouse()
