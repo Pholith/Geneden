@@ -25,12 +25,5 @@ public static class Utils
     {
         return Vector3Int.RoundToInt(vector3);
     }
-
-    public static GameObject Instantiate(this GameObject gameObject, Vector3 position)
-    {
-        var go = GameObject.Instantiate(gameObject);
-        go.transform.position = position;
-        return go;
-    }
 }
 
