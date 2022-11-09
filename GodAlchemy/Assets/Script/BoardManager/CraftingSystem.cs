@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftingSystem : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class CraftingSystem : MonoBehaviour
     [SerializeField] private ItemSlot secondElementSlot;
     [SerializeField] private ItemSlot resultSlot;
     [SerializeField] public ElementScriptableObject[] recipeItemBook;
+    [SerializeField] private Text resultSlotText;
 
     //Crafting slot
     [SerializeField] private InventorySystem playerInventory;
@@ -25,10 +27,13 @@ public class CraftingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!firstElementSlot.IsEmpty() && !secondElementSlot.IsEmpty())
+        if (!firstElementSlot.IsEmpty() && !secondElementSlot.IsEmpty()) {
             CheckRecipe();
-        else
+            resultSlotText.text = "Fabrication : "+(ComputeCraftCost()).ToString();
+        } else {
             resultSlot.Empty();
+            resultSlotText.text = "";
+        }
     }
 
     private void CheckRecipe()
@@ -76,7 +81,7 @@ public class CraftingSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Diminue la barre de power du coût du craft et vide les slots.
+    /// Diminue la barre de power du coï¿½t du craft et vide les slots.
     /// </summary>
     /// <exception cref="InvalidOperationException"> si le craft coute plus cher que la barre de power n'est rempli </exception>
     public void ConsumePower() 
