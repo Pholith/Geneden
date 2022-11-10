@@ -58,3 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba37b9972232fb45959c1d998481117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedTile: {fileID: 0}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
+  m_Name: "M\xE9t\xE9orite"
+  m_EditorClassIdentifier: 
+  ElementDescription: "D\xE9chaine une m\xE9t\xE9orite qui explose et  a une chance
+    de laisser un gisement al\xE9atoire"
+  Sprite: {fileID: 21300000, guid: aa353738783149e4aa72e3316521aba7, type: 3}
+  DifficultyToCraft: 1
+  IsPrimaryElement: 0
+  ElementToCraft1: {fileID: 11400000, guid: 910f593104f615443a2bcf82c901b64f, type: 2}
+  ElementToCraft2: {fileID: 11400000, guid: abbd3c9f5bd2ebc4eb26017dddb1ee0a, type: 2}
+  EffectOnMap:
+    m_PersistentCalls:
+      m_Calls: []

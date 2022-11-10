@@ -5,8 +5,12 @@ using UnityEngine.Tilemaps;
 public class GridManager : BaseManager<GridManager>
 {
 
-    public Tilemap GameGrid;
+    public Tilemap MainGameGrid;
+    public Tilemap DirtGameGrid;
     
+    [SerializeField]
+    private TileBase dirt; 
+
     private Camera mainCamera;
 
     protected override void InitManager()
@@ -17,19 +21,37 @@ public class GridManager : BaseManager<GridManager>
 
     public void SetTileOnMouse(TileBase tile)
     {
-        GameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
+        MainGameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
     }
 
-    public void SetTilesOnMouseInRange(TileBase tile, int range)
+    public void SetTileInRange(TileBase tile, Vector3Int position, int radius)
     {
-        Vector3Int tilePos = GetMouseGridPos().ToVector3Int();
-        for (int i = -range; i <= range; i++)
+        for (int iy = -radius; iy <= radius; iy++)
         {
-            for (int j = -range; j <= range; j++)
+            int dx = (int)Mathf.Sqrt(radius * radius - iy * iy);
+            for (int ix = -dx; ix <= dx; ix++)
             {
-                GameGrid.SetTile(tilePos + new Vector3Int(i, j), tile);
+                if (tile == dirt)
+                {
+                    DirtGameGrid.SetTile(position + new Vector3Int(ix, iy), tile);
+                }
+                else
+                {
+                    MainGameGrid.SetTile(position + new Vector3Int(ix, iy), tile);
+                    if (tile == null) DirtGameGrid.SetTile(position + new Vector3Int(ix, iy), null);
+                }
             }
         }
+    }
+
+    public void SetTilesOnMouseInRange(TileBase tile, int radius)
+    {
+        SetTileInRange(tile, GetMouseGridPos().ToVector3Int(), radius);
+    }
+
+    public void RemoveObjectsOnMouse()
+    {
+        //TODO
     }
 
     public Vector3 GetMouseGridPos()
@@ -37,6 +59,6 @@ public class GridManager : BaseManager<GridManager>
         Vector3 _screenPos = Input.mousePosition;
         Vector3 _worldPos = mainCamera.ScreenToWorldPoint(_screenPos);
         _worldPos.z = 0.0f;
-        return GameGrid.WorldToCell(_worldPos);
+        return MainGameGrid.WorldToCell(_worldPos);
     }
 }

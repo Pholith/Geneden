@@ -22,7 +22,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (itemIcon.sprite != null)
+        if ((itemIcon.sprite != null) && (SlotType != Type.recipeBookSlot))
         {
             rectTransform = itemIcon.GetComponent<RectTransform>();
             initialRectTransform = rectTransform.anchoredPosition;
@@ -56,6 +56,10 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             case Type.ressourceSlot:
                 craftSystem.AddRessource(Element);
                 break;
+            case Type.recipeBookSlot:
+                if (IsRecipeUnlock())
+                recipeSystem.AddRecipeToCraft(Element);
+                break;
             default:
                 break;
         }
@@ -68,7 +72,6 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         ItemSlot originSlot = origin.GetComponent<ItemSlot>();
         ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
         GetComponent<ItemSlot>().SetParentSnap(transform);
-
         if (finalSlot.SlotType == Type.craftSlot)
         {
             switch (originSlot.SlotType)
@@ -98,9 +101,9 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                     if (finalSlot.AddItem(originSlot.Element, true)) originSlot.Empty();
                     break;
                 case Type.craftSlot:
-                    if (GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()) && finalSlot.AddItem(originSlot.Element, true))
+                    if (GameManager.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()) && finalSlot.AddItem(originSlot.Element, true))
                     {
-                        GameManager.Instance.ResourceManager.ConsumePower(originSlot.GetSlotCost());
+                        GameManager.ResourceManager.ConsumePower(originSlot.GetSlotCost());
                         originSlot.Empty();
                     }
                     break;
@@ -108,7 +111,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                     if (craftSystem.HasEnoughPower() && finalSlot.AddItem(originSlot.Element, true)) craftSystem.ConsumePower();
                     break;
                 case Type.ressourceSlot:
-                    if (GameManager.Instance.ResourceManager.HasEnoughPower(originSlot.Element.GetCost()) && finalSlot.AddItem(originSlot.Element, true)) GameManager.Instance.ResourceManager.ConsumePower(originSlot.Element.GetCost());
+                    if (GameManager.ResourceManager.HasEnoughPower(originSlot.Element.GetCost()) && finalSlot.AddItem(originSlot.Element, true)) GameManager.ResourceManager.ConsumePower(originSlot.Element.GetCost());
                     break;
                 default:
                     break;
@@ -122,6 +125,11 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         rectTransform.anchoredPosition = initialRectTransform;
         transform.SetParent(snapParent);
         itemIcon.raycastTarget = true;
+        rectTransform = null;
+        snapParent = null;
+        initialRectTransform = new Vector2(0, 0);
+
+
     }
 
     public void OnPointerClick(PointerEventData eventData)

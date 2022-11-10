@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Nourriture
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er de la nourriture pour les humains"
   Sprite: {fileID: -1900758783, guid: 07d50108c130c3642b6db2397b8f126d, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0
-  elementToCraft1: {fileID: 11400000, guid: 5413f5e411c71804da39f117ca682bd7, type: 2}
-  elementToCraft2: {fileID: 11400000, guid: 2911b96a07f13a240aa107a59bfd1283, type: 2}
+  ElementToCraft1: {fileID: 11400000, guid: 5413f5e411c71804da39f117ca682bd7, type: 2}
+  ElementToCraft2: {fileID: 11400000, guid: 2911b96a07f13a240aa107a59bfd1283, type: 2}
   EffectOnMap:
     m_PersistentCalls:
       m_Calls: []

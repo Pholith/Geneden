@@ -18,7 +18,7 @@ public class TileEditor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tilemap = GameManager.GridManager.GameGrid;
+        tilemap = GameManager.GridManager.MainGameGrid;
         gameUI = FindObjectOfType<GameUI>();
         ressourceManager = GetComponent<ResourceManager>();
         previewSprite = new GameObject();
