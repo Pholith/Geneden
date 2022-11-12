@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2041223380037105695}
   - component: {fileID: 4281603624139817801}
   - component: {fileID: -6444848580997083026}
+  - component: {fileID: 8911823134246392400}
   m_Layer: 0
   m_Name: water
   m_TagString: Untagged
@@ -4834,5 +4835,19 @@ MonoBehaviour:
   NetworkGuid:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 8911823134246392400}
   SimulationBehaviours: []
+--- !u!114 &8911823134246392400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931186524446697614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 539362646, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0

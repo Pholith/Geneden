@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5911366380029177573}
   - component: {fileID: 2030806754}
   - component: {fileID: 1331238577}
+  - component: {fileID: 96931583363761379}
+  - component: {fileID: 102908892}
   m_Layer: 0
   m_Name: GAME_MANAGER 1
   m_TagString: Untagged
@@ -52,6 +54,7 @@ MonoBehaviour:
   grid: {fileID: 5911366380029177572}
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
+  networkManager: {fileID: 96931583363761379}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +130,8 @@ MonoBehaviour:
   airParticlePrefab: {fileID: 2041223380037105695, guid: 0af6fd52f50b8b64ba3df3ff53b2faa4, type: 3}
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
   dirtParticlePrefab: {fileID: 2041223380037105695, guid: bfdd3bc9e3ade4742a001453e45e442e, type: 3}
-  waterParticlePrefab: {fileID: 2041223380037105695, guid: 53ec6f78b425f3042890ee623a22d2dd, type: 3}
+  waterParticlePrefab:
+    RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   lightningPrefab: {fileID: 7569464812020034455, guid: ca84c41ceaa02ef43b05ba4131148726, type: 3}
 --- !u!114 &1331238577
 MonoBehaviour:
@@ -155,4 +159,32 @@ MonoBehaviour:
   - {fileID: 5911366380029177572}
   - {fileID: 5911366380029177573}
   - {fileID: 2030806754}
+  - {fileID: 96931583363761379}
+  - {fileID: 102908892}
   SimulationBehaviours: []
+--- !u!114 &96931583363761379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d570af8bb3a360548bcd58d76fbe1874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+--- !u!114 &102908892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d570af8bb3a360548bcd58d76fbe1874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0

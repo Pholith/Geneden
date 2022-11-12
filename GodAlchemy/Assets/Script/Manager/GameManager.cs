@@ -23,6 +23,10 @@ public class GameManager : BaseGameManager
     private ResourceManager resourceManager;
     public static ResourceManager ResourceManager => instance.resourceManager;
 
+    [SerializeField]
+    private NetworkManager networkManager;
+    public static NetworkManager NetworkManager => instance.networkManager;
+
     protected override void InitManager()
     {
         if (instance == null)
@@ -36,7 +40,7 @@ public class GameManager : BaseGameManager
         grid?.Initialization();
         elementManager?.Initialization();
         resourceManager?.Initialization();
-
+        networkManager?.Initialization();
     }
 
 #if UNITY_EDITOR
@@ -45,6 +49,7 @@ public class GameManager : BaseGameManager
         if (grid == null) grid = GetComponentInChildren<GridManager>();
         if (elementManager == null) elementManager = GetComponentInChildren<ElementsManager>();
         if (resourceManager == null) resourceManager = GetComponentInChildren<ResourceManager>();
+        if (networkManager == null) networkManager = GetComponentInChildren<NetworkManager>();
     }
 #endif
 }
