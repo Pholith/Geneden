@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Fusion;
+using UnityEngine;
 
 /// <summary>
 /// Exemple de GameManager
@@ -6,27 +7,26 @@
 [ExecuteAlways]
 public class GameManager : BaseGameManager
 {
-
     private static GameManager instance;
     public static new GameManager Instance => instance;
 
 
-    [SerializeField] 
+    [SerializeField]
     private GridManager grid;
     public static GridManager GridManager => instance.grid;
 
-    [SerializeField] 
+    [SerializeField]
     private ElementsManager elementManager;
     public static ElementsManager ElementManager => instance.elementManager;
-    
-    [SerializeField] 
+
+    [SerializeField]
     private ResourceManager resourceManager;
     public static ResourceManager ResourceManager => instance.resourceManager;
 
     protected override void InitManager()
     {
-        if(instance == null)
-        instance = this;
+        if (instance == null)
+            instance = this;
         else
         {
             Debug.LogError("Multiple GameManager on this scene !! Destoying this one.");
@@ -36,6 +36,7 @@ public class GameManager : BaseGameManager
         grid?.Initialization();
         elementManager?.Initialization();
         resourceManager?.Initialization();
+
     }
 
 #if UNITY_EDITOR

@@ -1,6 +1,5 @@
-using System.Collections;
+using Fusion;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 public class ElementsManager : BaseManager<ElementsManager>
@@ -19,7 +18,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
 
     }
-    
+
     [SerializeField]
     private TileBase hillTile;
     public void Hill()
@@ -41,7 +40,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     public void Dirt()
     {
         dirtParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
-        var mousePos = GameManager.GridManager.GetMouseGridPos();
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(dirtTile, mousePos.ToVector3Int(), 4));
     }
 
@@ -50,8 +49,9 @@ public class ElementsManager : BaseManager<ElementsManager>
     private ParticleSystem waterParticlePrefab;
     public void Water()
     {
-        waterParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
-        var mousePos = GameManager.GridManager.GetMouseGridPos();
+        Runner.Spawn(waterParticlePrefab.gameObject, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        //waterParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 4));
     }
 
@@ -61,7 +61,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         GameObject lightning = Instantiate(lightningPrefab);
         lightning.transform.position = GameManager.GridManager.GetMouseGridPos();
-        var animator = lightning.GetComponent<Animator>();
+        Animator animator = lightning.GetComponent<Animator>();
         // Mettre le feu et particules de feu
     }
 }

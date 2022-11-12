@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Fusion;
+using System;
 using UnityEngine;
-
-
 
 /// <summary>
 /// Type de base pour tous vos managers-singletons de votre scène
 /// </summary>
 /// <typeparam name="T">Type de votre Manager à récrire (pour le champ `Instance` du singleton)</typeparam>
-public abstract class BaseManager<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class BaseManager<T> : NetworkBehaviour where T : MonoBehaviour
 {
     [NonSerialized] private bool alreadyInit = false;
 
