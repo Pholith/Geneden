@@ -6,11 +6,9 @@ public class CraftingSystem : MonoBehaviour
     [SerializeField] private ItemSlot firstElementSlot;
     [SerializeField] private ItemSlot secondElementSlot;
     [SerializeField] private ItemSlot resultSlot;
-    [SerializeField] public ElementScriptableObject[] recipeItemBook;
 
     //Crafting slot
     [SerializeField] private InventorySystem playerInventory;
-    [SerializeField] private ResourceManager resourceManager;
     [SerializeField] private RecipeSystem recipeSystem;
 
     private void Start()
@@ -19,7 +17,6 @@ public class CraftingSystem : MonoBehaviour
         secondElementSlot = transform.Find("ItemSlot2").transform.gameObject.GetComponent<ItemSlot>();
         resultSlot = transform.Find("ResultSlot").transform.gameObject.GetComponent<ItemSlot>();
         playerInventory = FindObjectOfType<InventorySystem>();
-        resourceManager = FindObjectOfType<ResourceManager>();
         recipeSystem = FindObjectOfType<RecipeSystem>();
     }
 
@@ -37,7 +34,7 @@ public class CraftingSystem : MonoBehaviour
         {
             if (resultSlot.IsEmpty())
             {
-                foreach (ElementScriptableObject combinedElement in recipeItemBook)
+                foreach (ElementScriptableObject combinedElement in GameManager.ElementManager.Elements)
                 {
                     if (combinedElement.ElementToCraft1 == null || combinedElement.ElementToCraft2 == null) continue;
                     if (combinedElement.ElementToCraft1.name == firstElementSlot.Element.name && combinedElement.ElementToCraft2.name == secondElementSlot.Element.name)
@@ -72,7 +69,7 @@ public class CraftingSystem : MonoBehaviour
     }
     public bool HasEnoughPower()
     {
-        return resourceManager.HasEnoughPower(ComputeCraftCost());
+        return GameManager.ResourceManager.HasEnoughPower(ComputeCraftCost());
     }
 
     /// <summary>
@@ -82,7 +79,7 @@ public class CraftingSystem : MonoBehaviour
     public void ConsumePower() 
     {
         if (!HasEnoughPower()) throw new InvalidOperationException();
-        resourceManager.ConsumePower(ComputeCraftCost());
+        GameManager.ResourceManager.ConsumePower(ComputeCraftCost());
         firstElementSlot.Empty();
         secondElementSlot.Empty();
         resultSlot.Empty();

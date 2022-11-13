@@ -8,7 +8,7 @@ using UnityEditor;
 
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/New element", order = 1)]
-public class ElementScriptableObject : ScriptableObject
+public class ElementScriptableObject : ScriptableObject, IComparable
 {
     public string ElementDescription;
 
@@ -26,6 +26,11 @@ public class ElementScriptableObject : ScriptableObject
 
     [SerializeField]
     public UnityEvent EffectOnMap;
+
+    public int CompareTo(object obj)
+    {
+        return name.CompareTo((obj as ElementScriptableObject).name);
+    }
 
     public int GetCost()
     {

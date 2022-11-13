@@ -1,4 +1,5 @@
-using Fusion;
+ï»¿using Fusion;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,25 +7,27 @@ public class ElementsManager : BaseManager<ElementsManager>
 {
     protected override void InitManager()
     {
+        Elements = new List<ElementScriptableObject>(Resources.FindObjectsOfTypeAll<ElementScriptableObject>());
+        Elements.Sort();
     }
+    public List<ElementScriptableObject> Elements { get; private set; }
 
     /// <summary>
-    /// Permet de faire spawn un objet en réseau. Utiliser Instance.SpawnObjectRPC !!!!
+    /// Permet de faire spawn un objet en rï¿½seau. Utiliser Instance.SpawnObjectRPC !!!!
     /// </summary>
     /// <param name="position"></param>
     /// <param name="prefabRef"></param>
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    private void SpawnObjectRPC(Vector3 position, NetworkPrefabRef prefabRef)
+    private void SpawnObjectRPC(NetworkPrefabRef prefabRef, Vector3 position)
     {
         GameManager.Instance.Runner.Spawn(prefabRef, position);
     }
-
     /// !!!!!!!!!!!!!
-    /// Fonctions UnityEvent pour les éléments. 
+    /// Fonctions UnityEvent pour les Ã©lÃ©ments. 
     /// Attention, il ne faut pas utiliser les champs de ElementsManager autres que ceux que vous mettez en dessous.
-    /// De même, ne pas utiliser les méthodes privés de cette classe sans utiliser Instance devant.
-    /// C'est un peu bizarre mais c'est dû à la manière dont unity gère les unityEvent.
-    /// Pour s'assurer du multijoueur, utiliser SpawnObjectRPC pour faire spawn un préfab.
+    /// De mÃªme, ne pas utiliser les mÃ©thodes privÃ©s de cette classe sans utiliser Instance devant.
+    /// C'est un peu bizarre mais c'est dÃ» Ã  la maniÃ¨re dont unity gÃ¨re les unityEvent.
+    /// Pour s'assurer du multijoueur, utiliser SpawnObjectRPC pour faire spawn un prÃ©fab.
     /// !!!!!!!!!!!!!
 
     [SerializeField]
@@ -45,19 +48,19 @@ public class ElementsManager : BaseManager<ElementsManager>
     }
 
     [SerializeField]
-    private ParticleSystem airParticlePrefab;
+    private NetworkPrefabRef airParticlePrefab;
     public void Air()
     {
-        airParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos());
+        Instance.SpawnObjectRPC(airParticlePrefab, GameManager.GridManager.GetMouseGridPos());
     }
 
     [SerializeField]
     private TileBase dirtTile;
     [SerializeField]
-    private ParticleSystem dirtParticlePrefab;
+    private NetworkPrefabRef dirtParticlePrefab;
     public void Dirt()
     {
-        dirtParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(dirtTile, mousePos.ToVector3Int(), 4));
     }
@@ -67,17 +70,15 @@ public class ElementsManager : BaseManager<ElementsManager>
     public void Water()
     {
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
-        Instance.SpawnObjectRPC(mousePos + particleSystemOffsets, waterParticlePrefab);
+        Instance.SpawnObjectRPC(waterParticlePrefab, mousePos + particleSystemOffsets);
         new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 4));
     }
 
     [SerializeField]
-    private GameObject lightningPrefab;
+    private NetworkPrefabRef lightningPrefab;
     public void Lightning()
     {
-        GameObject lightning = Instantiate(lightningPrefab);
-        lightning.transform.position = GameManager.GridManager.GetMouseGridPos();
-        Animator animator = lightning.GetComponent<Animator>();
-        // Mettre le feu et particules de feu
+        Instance.SpawnObjectRPC(lightningPrefab, GameManager.GridManager.GetMouseGridPos());
+        // inflige des dÃ©gats aux batiments
     }
 }

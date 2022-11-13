@@ -20,6 +20,8 @@ public class GridManager : BaseManager<GridManager>
     protected override void InitManager()
     {
         mainCamera = FindObjectOfType<Camera>();
+        tiles = new List<TileBase>(Resources.FindObjectsOfTypeAll<TileBase>());
+        tiles.Sort(new Comparison<TileBase>((target, target2) => target.name.CompareTo(target2.name)));
     }
 
     private enum GameTileMapRPC
