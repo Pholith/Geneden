@@ -99,7 +99,6 @@ MonoBehaviour:
   divinePowerBar: {fileID: 0}
   midPowerText: {fileID: 0}
   topPowerText: {fileID: 0}
-  timer: 2
 --- !u!114 &2030806754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,9 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5fa61ce88eebf4497c7f8a47a75c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeTile: {fileID: 11400000, guid: 075a3fb51958b044a84eab1ec40067f7, type: 2}
-  rockPrefab: {fileID: 5525039842881984747, guid: c72c07a41736f8a4bb5135247366a2aa, type: 3}
+  particleSystemOffsets: {x: 0, y: 5, z: 0}
+  timeInSecondAfterParticleStart: 2
   hillTile: {fileID: 11400000, guid: 939448eb5c2a5e74eaf286acdb581f4e, type: 2}
+  airParticlePrefab: {fileID: 2041223380037105695, guid: 0af6fd52f50b8b64ba3df3ff53b2faa4, type: 3}
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
-  waterTile: {fileID: 0}
+  dirtParticlePrefab: {fileID: 2041223380037105695, guid: bfdd3bc9e3ade4742a001453e45e442e, type: 3}
+  waterParticlePrefab: {fileID: 2041223380037105695, guid: 53ec6f78b425f3042890ee623a22d2dd, type: 3}
   lightningPrefab: {fileID: 7569464812020034455, guid: ca84c41ceaa02ef43b05ba4131148726, type: 3}

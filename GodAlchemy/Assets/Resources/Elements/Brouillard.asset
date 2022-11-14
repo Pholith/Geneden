@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Brouillard
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: Propage du brouillard qui ralenti les humains
   Sprite: {fileID: 21300000, guid: b527da2c2066a494fb2a2303a802e7ff, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0

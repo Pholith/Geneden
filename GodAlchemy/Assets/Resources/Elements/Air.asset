@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Air
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er un l\xE9ger vent qui peut faire tourner les moulins"
   Sprite: {fileID: 21300000, guid: 4735fd793da3f1c43923894f30771d65, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 1
@@ -20,4 +20,16 @@ MonoBehaviour:
   ElementToCraft2: {fileID: 0}
   EffectOnMap:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
+        m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
+        m_MethodName: Air
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Orage
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "D\xE9chaine un orage"
   Sprite: {fileID: 21300000, guid: a06427041c4611041a48394085012aa3, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0

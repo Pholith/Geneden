@@ -66,7 +66,6 @@ public class Tooltip : MonoBehaviour
 
         int headerLength = headerField.text.Length;
         int contentLength = contentField.text.Length;
-        Debug.Log(contentLength.ToString());
 
         layoutElement.enabled = (headerLength > characterLimit || contentLength > characterLimit) ? true : false;
     }

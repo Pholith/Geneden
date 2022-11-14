@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Foyer
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er un feu de camp"
   Sprite: {fileID: 21300000, guid: 4a37f10986fd2a541ad3bb95cdd8f7cc, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0

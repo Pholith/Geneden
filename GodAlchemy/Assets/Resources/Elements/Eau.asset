@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Eau
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: Pose de l'eau dans une petite zone
   Sprite: {fileID: 21300000, guid: 98d7fb4c0d054694fa56df3a7e736c28, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 1

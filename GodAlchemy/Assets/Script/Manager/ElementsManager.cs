@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 public class ElementsManager : BaseManager<ElementsManager>
@@ -8,21 +10,10 @@ public class ElementsManager : BaseManager<ElementsManager>
     }
 
     [SerializeField]
-    private TileBase treeTile;
-    // Creates some Trees / bushes near the cursor
-    public void Vegetation()
-    {
-        GameManager.GridManager.SetTilesOnMouseInRange(treeTile, 2);
-    }
-
+    private Vector3Int particleSystemOffsets = new(0, 5, 0);
     [SerializeField]
-    private GameObject rockPrefab;
-    public void Rock()
-    {
-        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
-        GameObject rock = Instantiate(rockPrefab);
-        rock.transform.position = mousePos;
-    }
+    private float timeInSecondAfterParticleStart = 2;
+
 
     public void Fire()
     {
@@ -33,30 +24,43 @@ public class ElementsManager : BaseManager<ElementsManager>
     private TileBase hillTile;
     public void Hill()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 4);
+        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 5);
+    }
+
+    [SerializeField]
+    private ParticleSystem airParticlePrefab;
+    public void Air()
+    {
+        airParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos());
     }
 
     [SerializeField]
     private TileBase dirtTile;
+    [SerializeField]
+    private ParticleSystem dirtParticlePrefab;
     public void Dirt()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(dirtTile, 4);
+        dirtParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        var mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(dirtTile, mousePos.ToVector3Int(), 4));
     }
 
+
     [SerializeField]
-    private TileBase waterTile;
+    private ParticleSystem waterParticlePrefab;
     public void Water()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(null, 4);
+        waterParticlePrefab.gameObject.Instantiate(GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        var mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 4));
     }
 
     [SerializeField]
     private GameObject lightningPrefab;
     public void Lightning()
     {
-        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         GameObject lightning = Instantiate(lightningPrefab);
-        lightning.transform.position = mousePos;
+        lightning.transform.position = GameManager.GridManager.GetMouseGridPos();
         var animator = lightning.GetComponent<Animator>();
         // Mettre le feu et particules de feu
     }

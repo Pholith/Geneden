@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Colline
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er une zone de colline sur\xE9lev\xE9e"
   Sprite: {fileID: 21300000, guid: ef30ff7636556f84db870f3193f3d13b, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 0

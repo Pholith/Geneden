@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Tornade
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "D\xE9chaine une tornade qui repousse les cr\xE9atures et d\xE9truit
+    les batiments et les arbres"
   Sprite: {fileID: 21300000, guid: b48a70d93fdb32b468f19c794176a85f, type: 3}
   DifficultyToCraft: 3
   IsPrimaryElement: 0

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Roche
   m_EditorClassIdentifier: 
-  ElementDescription: 
-  Sprite: {fileID: 21300000, guid: 187ed0ddef46b1d48be502bdc6dc7c0d, type: 3}
+  ElementDescription: Pose un rocher, les humains peuvent le miner pour obtenir de
+    la pierre
+  Sprite: {fileID: 21300000, guid: 7250c57d87992544c902c3d0bcb8999f, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: 2911b96a07f13a240aa107a59bfd1283, type: 2}

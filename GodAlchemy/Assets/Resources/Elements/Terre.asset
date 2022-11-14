@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: Terre
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: Pose de la terre sur le monde
   Sprite: {fileID: 21300000, guid: a4382ecc636ed1c489ef12d728cc807c, type: 3}
   DifficultyToCraft: 1
   IsPrimaryElement: 1

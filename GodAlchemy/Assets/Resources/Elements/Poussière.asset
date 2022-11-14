@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b4ff1db803eb4eac4af755c964531, type: 3}
   m_Name: "Poussi\xE8re"
   m_EditorClassIdentifier: 
-  ElementDescription: 
+  ElementDescription: "Cr\xE9er un nuage de poussi\xE8re opaque qui cache le terrain
+    pour les dieux"
   Sprite: {fileID: 21300000, guid: b9bf013d56f502043a871074b16e0e50, type: 3}
   DifficultyToCraft: 2
   IsPrimaryElement: 0
