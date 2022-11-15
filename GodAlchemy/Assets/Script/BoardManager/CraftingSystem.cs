@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftingSystem : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CraftingSystem : MonoBehaviour
     //Crafting slot
     [SerializeField] private InventorySystem playerInventory;
     [SerializeField] private RecipeSystem recipeSystem;
+    [SerializeField] private Text resultSlotText;
 
     private void Start()
     {
@@ -23,9 +25,15 @@ public class CraftingSystem : MonoBehaviour
     private void Update()
     {
         if (!firstElementSlot.IsEmpty() && !secondElementSlot.IsEmpty())
+        {
             CheckRecipe();
+            resultSlotText.text = "Fabrication : " + (ComputeCraftCost()).ToString();
+        }
         else
+        {
             resultSlot.Empty();
+            resultSlotText.text = "";
+        }
     }
 
     private void CheckRecipe()
