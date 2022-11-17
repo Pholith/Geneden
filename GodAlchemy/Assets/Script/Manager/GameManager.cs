@@ -27,6 +27,10 @@ public class GameManager : BaseGameManager
     private NetworkManager networkManager;
     public static NetworkManager NetworkManager => instance.networkManager;
 
+    [SerializeField]
+    private BuildingManager buildingManager;
+    public static BuildingManager BuildingManager => instance.buildingManager;
+
     protected override void InitManager()
     {
         if (instance == null)
@@ -41,6 +45,7 @@ public class GameManager : BaseGameManager
         elementManager?.Initialization();
         resourceManager?.Initialization();
         networkManager?.Initialization();
+        buildingManager?.Initialization();
     }
 
 #if UNITY_EDITOR
@@ -50,6 +55,7 @@ public class GameManager : BaseGameManager
         if (elementManager == null) elementManager = GetComponentInChildren<ElementsManager>();
         if (resourceManager == null) resourceManager = GetComponentInChildren<ResourceManager>();
         if (networkManager == null) networkManager = GetComponentInChildren<NetworkManager>();
+        if (buildingManager == null) buildingManager = GetComponentInChildren<BuildingManager>();
     }
 #endif
 }

@@ -188,6 +188,10 @@ public class ResourceManager : BaseManager<ResourceManager>
             return false;
         }
     }
+    public int getCivLevel()
+    {
+        return civLevel;
+    }
 
 
 }
