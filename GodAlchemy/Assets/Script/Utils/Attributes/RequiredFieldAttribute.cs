@@ -51,11 +51,18 @@ public class RequiredFieldDrawer : PropertyDrawer
     {
         RequiredFieldAttribute field = attribute as RequiredFieldAttribute;
 
+        if (property.propertyType == SerializedPropertyType.Generic)
+        {
+            Debug.LogError($"RequiredFieldAttribute is not available on type property of {property.type} ({property.name})");
+            return;
+        }
+        
         if (property.objectReferenceValue == null)
         {
             GUI.color = field.color; //Set the color of the GUI
             EditorGUI.PropertyField(position, property, label); //Draw the GUI
             GUI.color = Color.white; //Reset the color of the GUI to white
+            Debug.LogWarning($"Field {property.name} cannot be null !");
         }
         else
             EditorGUI.PropertyField(position, property, label);
