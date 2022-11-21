@@ -54,6 +54,8 @@ MonoBehaviour:
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
   networkManager: {fileID: 96931583363761379}
+  victoryScreen: {fileID: 0}
+  defeatScreen: {fileID: 0}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
