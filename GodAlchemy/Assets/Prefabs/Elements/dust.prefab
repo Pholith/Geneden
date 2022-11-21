@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d45eea62bedec04db0f65fab9fa1db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   fadeOut: 1
   fadeOutTime: 3
   timeToLive: 20
@@ -148,6 +149,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5388092748833441067}
+  - {fileID: -2249108189659059724}
   - {fileID: -1802528681707313405}
   SimulationBehaviours: []
 --- !u!114 &-1802528681707313405
@@ -188,5 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7b7f8e510298c4f93b43291b48c2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShadowOffset: {x: 1.2, y: -7.5}
+  ShadowOffset: {x: 1, y: -3}
   ShadowMaterial: {fileID: 2100000, guid: 66c0baef74829a940b6e3ccb8e31b342, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.11764706}

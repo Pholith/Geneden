@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Fusion;
+using UnityEngine;
 
-public class AutoDestroyAfterTime : MonoBehaviour
+public class AutoDestroyAfterTime : NetworkBehaviour
 {
     [SerializeField]
     private bool fadeOut = false;
@@ -28,7 +29,9 @@ public class AutoDestroyAfterTime : MonoBehaviour
         }
         new GameTimer(timeToLive, () =>
         {
-            Destroy(gameObject);
+            if (Runner.Exists(Object))
+                Runner.Despawn(Object);
+            //Destroy(gameObject);
         });
     }
 }
