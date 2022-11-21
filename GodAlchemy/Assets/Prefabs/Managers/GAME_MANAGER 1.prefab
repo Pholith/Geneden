@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2030806754}
   - component: {fileID: 1331238577}
   - component: {fileID: 96931583363761379}
+  - component: {fileID: 1104164626079110861}
   m_Layer: 0
   m_Name: GAME_MANAGER 1
   m_TagString: Untagged
@@ -54,8 +55,7 @@ MonoBehaviour:
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
   networkManager: {fileID: 96931583363761379}
-  victoryScreen: {fileID: 0}
-  defeatScreen: {fileID: 0}
+  buildingManager: {fileID: 1104164626079110861}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +137,9 @@ MonoBehaviour:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   lightningPrefab:
     RawGuidValue: ca84c41ceaa02ef43b05ba4131148726
+  dustPrefab:
+    RawGuidValue: adab753e521635d428f721ff748c459b
+  numberOfCloudToSpawn: 6
 --- !u!114 &1331238577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +167,7 @@ MonoBehaviour:
   - {fileID: 5911366380029177573}
   - {fileID: 2030806754}
   - {fileID: 96931583363761379}
+  - {fileID: 1104164626079110861}
   SimulationBehaviours: []
 --- !u!114 &96931583363761379
 MonoBehaviour:
@@ -178,3 +182,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+--- !u!114 &1104164626079110861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911366380029177561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318747c2419b15b4db53bc5c4aeb6943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  houseBuilding: {fileID: 6256013982987254513, guid: 73cfa3d4f0803d34f9db39aa79e8c760, type: 3}

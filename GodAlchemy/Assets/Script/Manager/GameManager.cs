@@ -31,6 +31,9 @@ public class GameManager : BaseGameManager
     public GameObject victoryScreen;
     public GameObject defeatScreen;
 
+    [SerializeField]
+    private BuildingManager buildingManager;
+    public static BuildingManager BuildingManager => instance.buildingManager;
 
     protected override void InitManager()
     {
@@ -46,6 +49,7 @@ public class GameManager : BaseGameManager
         elementManager?.Initialization();
         resourceManager?.Initialization();
         networkManager?.Initialization();
+        buildingManager?.Initialization();
     }
 
     private bool isGameWon() {
@@ -73,6 +77,7 @@ public class GameManager : BaseGameManager
         if (elementManager == null) elementManager = GetComponentInChildren<ElementsManager>();
         if (resourceManager == null) resourceManager = GetComponentInChildren<ResourceManager>();
         if (networkManager == null) networkManager = GetComponentInChildren<NetworkManager>();
+        if (buildingManager == null) buildingManager = GetComponentInChildren<BuildingManager>();
     }
 #endif
 }

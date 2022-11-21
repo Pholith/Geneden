@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public string firstLevel;
+    public SceneReference firstLevel;
 
     public GameObject optionsScreen;
 
