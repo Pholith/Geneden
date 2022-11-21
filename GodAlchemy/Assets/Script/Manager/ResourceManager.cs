@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+[Serializable]
 public class ResourceManager : BaseManager<ResourceManager>
 {
 
@@ -87,7 +90,7 @@ public class ResourceManager : BaseManager<ResourceManager>
     {
         while (true)
         {
-            RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
+            RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
             AddRessource(randomRessource, 100);
             AddRessource(RessourceType.CivLevel, 5);
             AddDivinePower(1);
@@ -187,6 +190,10 @@ public class ResourceManager : BaseManager<ResourceManager>
         {
             return false;
         }
+    }
+    public int getCivLevel()
+    {
+        return civLevel;
     }
 
 

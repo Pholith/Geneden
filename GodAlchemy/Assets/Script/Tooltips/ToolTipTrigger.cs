@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
+public class ToolTipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private static LTDescr delay;
+    private static GameTimer delay;
     private string headerText;
     private string contentText;
 
@@ -19,7 +17,7 @@ public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        delay = LeanTween.delayedCall(toolTipDelay, () =>
+        delay = new GameTimer(toolTipDelay, () =>
          {
              ToolTipsSystem.Show(contentText, headerText);
          });
@@ -27,7 +25,7 @@ public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        LeanTween.cancel(delay.uniqueId);
+        delay.Stop();
         ToolTipsSystem.Hide();
     }
 

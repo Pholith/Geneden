@@ -1,4 +1,7 @@
 
+using Fusion;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,6 +9,7 @@ public class GridManager : BaseManager<GridManager>
 {
 
     public Tilemap MainGameGrid;
+
     public Tilemap DirtGameGrid;
     
     [SerializeField]
@@ -16,8 +20,47 @@ public class GridManager : BaseManager<GridManager>
     protected override void InitManager()
     {
         mainCamera = FindObjectOfType<Camera>();
-
+        tiles = new List<TileBase>(Resources.FindObjectsOfTypeAll<TileBase>());
+        tiles.Sort(new Comparison<TileBase>((target, target2) => target.name.CompareTo(target2.name)));
     }
+
+    private enum GameTileMapRPC
+    {
+        MainGameGrid,
+        DirtGameGrid
+    }
+
+    [SerializeField]
+    private List<TileBase> tiles;
+    private int GetTileType(TileBase tileBase)
+    {
+        if (tileBase == null) return -1;
+        return tiles.IndexOf(tileBase);
+    }
+    private TileBase GetTileFromType(int tileType)
+    {
+        if (tileType == -1) return null;
+        return tiles[tileType];
+    }
+
+    [Rpc]
+    private void SetTileRPC(GameTileMapRPC tilemap, Vector3Int position, int tileType)
+    {
+        Tilemap tilemapToChange;
+        switch (tilemap)
+        {
+            case GameTileMapRPC.MainGameGrid:
+                tilemapToChange = MainGameGrid;
+                break;
+            case GameTileMapRPC.DirtGameGrid:
+                tilemapToChange = DirtGameGrid;
+                break;
+            default:
+                throw new ArgumentException();
+        }
+        tilemapToChange.SetTile(position, GetTileFromType(tileType));
+    }
+
 
     public void SetTileOnMouse(TileBase tile)
     {
@@ -33,12 +76,12 @@ public class GridManager : BaseManager<GridManager>
             {
                 if (tile == dirt)
                 {
-                    DirtGameGrid.SetTile(position + new Vector3Int(ix, iy), tile);
+                    SetTileRPC(GameTileMapRPC.DirtGameGrid, position + new Vector3Int(ix, iy), GetTileType(tile));
                 }
                 else
                 {
-                    MainGameGrid.SetTile(position + new Vector3Int(ix, iy), tile);
-                    if (tile == null) DirtGameGrid.SetTile(position + new Vector3Int(ix, iy), null);
+                    SetTileRPC(GameTileMapRPC.MainGameGrid, position + new Vector3Int(ix, iy), GetTileType(tile));
+                    if (tile == null) SetTileRPC(GameTileMapRPC.DirtGameGrid, position + new Vector3Int(ix, iy), GetTileType(null));
                 }
             }
         }

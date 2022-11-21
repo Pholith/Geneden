@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,6 +15,11 @@ public static class Utils
     public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> source, int count)
     {
         return source.Shuffle().Take(count);
+    }
+
+    public static int RandomIndex(this ICollection source)
+    {
+        return UnityEngine.Random.Range(0, source.Count);
     }
 
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
@@ -32,5 +38,7 @@ public static class Utils
         go.transform.position = position;
         return go;
     }
+
+
 }
 
