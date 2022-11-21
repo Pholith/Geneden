@@ -27,6 +27,5 @@ public class NetworkManager : BaseManager<NetworkManager>
         {
             Player1ResourceManager = GameManager.ResourceManager;
         }
-        var t = 1;
     }
 }
