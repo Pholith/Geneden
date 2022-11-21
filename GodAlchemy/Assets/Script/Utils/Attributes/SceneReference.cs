@@ -180,8 +180,8 @@ public class SceneReference : ISerializationCallbackReceiver
             }
         }
     }
-}
 #endif
+}
 
 
 

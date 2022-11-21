@@ -55,7 +55,7 @@ MonoBehaviour:
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
   networkManager: {fileID: 96931583363761379}
-  buildingManager: {fileID: 0}
+  buildingManager: {fileID: 1104164626079110861}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +137,9 @@ MonoBehaviour:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   lightningPrefab:
     RawGuidValue: ca84c41ceaa02ef43b05ba4131148726
+  dustPrefab:
+    RawGuidValue: adab753e521635d428f721ff748c459b
+  numberOfCloudToSpawn: 6
 --- !u!114 &1331238577
 MonoBehaviour:
   m_ObjectHideFlags: 0

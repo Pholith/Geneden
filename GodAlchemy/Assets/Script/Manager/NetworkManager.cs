@@ -1,4 +1,5 @@
 using Fusion;
+using UnityEngine;
 
 public class NetworkManager : BaseManager<NetworkManager>
 {
