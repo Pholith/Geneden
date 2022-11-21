@@ -1,4 +1,5 @@
 using Fusion;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,15 +14,17 @@ public class RandomSpriteOnStart : NetworkBehaviour
     [SerializeField]
     private List<Sprite> randomSprites;
 
-    [Rpc]
     private void ChangeSpriteRPC(int spriteIndex)
     {
-        randomSprites.Sort();
-        spriteRenderer.sprite = randomSprites[spriteIndex];
+        randomSprites.Sort(new Comparison<Sprite>((sprite1, sprite2) => sprite1.name.CompareTo(sprite2.name)));
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = randomSprites[spriteIndex];     
     }
+
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangeSpriteRPC(randomSprites.RandomIndex());
+        // Seulement le serveur fait un random pour demander à tous les clients de changer le sprite.
+        if (HasStateAuthority) ChangeSpriteRPC(randomSprites.RandomIndex());
     }
+
 }
