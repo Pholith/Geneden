@@ -55,6 +55,11 @@ public class ResourceManager : BaseManager<ResourceManager>
     [SerializeField] private TextMeshProUGUI midPowerText;
     [SerializeField] private TextMeshProUGUI topPowerText;
 
+    [SerializeField]
+    [Range(0, 10)]
+    private float resourceRefillDelay = 1f;
+    private float resourceRefill = 0;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -77,26 +82,27 @@ public class ResourceManager : BaseManager<ResourceManager>
         maxPower = 500;
         currentPower = 500;
 #endif
-        StartCoroutine(RegenDivinPower());
+
     }
 
     public void Update()
     {
+        resourceRefill += Time.deltaTime;
+        if (resourceRefill > resourceRefillDelay)
+        {
+            resourceRefill = 0f;
+            RegenDivinPower();
+        }
         SetCurrentFill();
         UpdateUI();
     }
 
-    private IEnumerator RegenDivinPower()
+    private void RegenDivinPower()
     {
-        while (true)
-        {
-            RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
-            AddRessource(randomRessource, 100);
-            AddRessource(RessourceType.CivLevel, 5);
-            AddDivinePower(10);
-            yield return new WaitForSeconds(1.0f);
-        }
-
+        RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
+        AddRessource(randomRessource, 100);
+        AddRessource(RessourceType.CivLevel, 5);
+        AddDivinePower(10);
     }
 
     public void AddRessource(RessourceType type, int amount)
