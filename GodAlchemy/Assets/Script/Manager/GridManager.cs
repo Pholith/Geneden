@@ -104,4 +104,11 @@ public class GridManager : BaseManager<GridManager>
         _worldPos.z = 0.0f;
         return MainGameGrid.WorldToCell(_worldPos);
     }
+
+    public Vector3 GetGridPos(Vector3 pos)
+    {
+        Vector3 _worldPos = mainCamera.ScreenToWorldPoint(pos);
+        _worldPos.z = 0.0f;
+        return MainGameGrid.WorldToCell(_worldPos);
+    }
 }

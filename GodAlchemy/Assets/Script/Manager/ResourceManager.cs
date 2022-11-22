@@ -87,9 +87,9 @@ public class ResourceManager : BaseManager<ResourceManager>
     {
         while (true)
         {
-            RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
-            AddRessource(randomRessource, 100);
-            AddRessource(RessourceType.CivLevel, 5);
+            //RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
+            //AddRessource(randomRessource, 100);
+            //AddRessource(RessourceType.CivLevel, 5);
             AddDivinePower(1);
             yield return new WaitForSeconds(1.0f);
         }

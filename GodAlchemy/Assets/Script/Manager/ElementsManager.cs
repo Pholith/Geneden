@@ -66,6 +66,14 @@ public class ElementsManager : BaseManager<ElementsManager>
     }
 
     [SerializeField]
+    private NetworkPrefabRef rock;
+    public void Rock()
+    {
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(rock, GameManager.GridManager.GetMouseGridPos()));
+    }
+
+    [SerializeField]
     private NetworkPrefabRef waterParticlePrefab;
     public void Water()
     {

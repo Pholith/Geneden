@@ -5,19 +5,20 @@ using UnityEngine;
 using static BuildingsScriptableObject;
 using static ResourceManager;
 using static GameTimer;
+using Unity.VisualScripting;
 
 public class BuildingGeneric : MonoBehaviour
 {
     public BuildingsScriptableObject building; //scriptableobject script
-    
+    private bool isBuild;
     private ResourceManager resourceManager;
     private SpriteRenderer sr;
     public Sprite spriteTimeBuilding;
 
     void Start()
     {
+        isBuild = false;
         sr = GetComponent<SpriteRenderer>();
-
         // Test Condition spécial de construction
         if (building.SpecialConditionRequired.Invoke())
         {
@@ -28,7 +29,7 @@ public class BuildingGeneric : MonoBehaviour
             {
                 // buildingtime
                 sr.sprite = spriteTimeBuilding; // TODO Sprite construction;
-                new GameTimer(10, () => sr.sprite = this.building.Sprite);
+                new GameTimer(10, () => Build());
             }
             else
             {
@@ -41,4 +42,26 @@ public class BuildingGeneric : MonoBehaviour
         }
     }
 
+    public BuildingsScriptableObject GetBuilding()
+    {
+        return building;
+    }
+
+    public bool IsBuild()
+    {
+        return isBuild;
+    }
+
+    private void Build()
+    {
+        sr.sprite = building.Sprite;
+        isBuild = true;
+
+        switch(building.GetType().ToString())
+        {
+            case "GatheringBuildingScript":
+                this.AddComponent<GatheringBuildings>();
+                break;
+        }
+    }
 }
