@@ -6,14 +6,20 @@ public class Meteor : NetworkBehaviour
     [SerializeField]
     private NetworkPrefabRef explosionPrefab;
 
+    [SerializeField]
+    private Vector2 velocity = new Vector2(10, 5);
+
+    [SerializeField]
+    private Vector2 startPositionOffset = new Vector2(-30, 30);
+
     private float startY;
 
     private void Start()
     {
         Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
         startY = transform.position.y;
-        transform.position = new Vector3(transform.position.x - 45, transform.position.y + 10, transform.position.z);
-        rigidbody2D.AddForce(new Vector2(10, 20), ForceMode2D.Impulse);
+        transform.position = new Vector3(transform.position.x + startPositionOffset.x, transform.position.y + startPositionOffset.y, transform.position.z);
+        rigidbody2D.velocity = velocity;
     }
 
     private void Update()

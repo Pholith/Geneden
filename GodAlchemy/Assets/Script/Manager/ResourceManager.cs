@@ -76,8 +76,8 @@ public class ResourceManager : BaseManager<ResourceManager>
         divinePowerBar = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("PowerFill").transform.gameObject.GetComponent<Image>();
         midPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("MidText").transform.gameObject.GetComponent<TextMeshProUGUI>();
         topPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("TopText").transform.gameObject.GetComponent<TextMeshProUGUI>();
-        maxPower = 300;
-        currentPower = 300;
+        maxPower = 100;
+        currentPower = 80;
 #if DEBUG
         maxPower = 500;
         currentPower = 500;
@@ -101,8 +101,8 @@ public class ResourceManager : BaseManager<ResourceManager>
     {
         RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
         AddRessource(randomRessource, 100);
-        AddRessource(RessourceType.CivLevel, 5);
-        AddDivinePower(10);
+        AddRessource(RessourceType.CivLevel, 1);
+        AddDivinePower(2);
     }
 
     public void AddRessource(RessourceType type, int amount)
