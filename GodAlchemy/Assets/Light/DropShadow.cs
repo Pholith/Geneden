@@ -28,7 +28,7 @@ public class DropShadow : MonoBehaviour
         //update the sorting layer of the shadow to always lie behind the sprite
         shadowSpriteRenderer.sortingLayerName = spriteRenderer.sortingLayerName;
         shadowSpriteRenderer.sortingOrder = spriteRenderer.sortingOrder - 1;
-        shadowSpriteRenderer.material.color = shadowColor;
+        shadowSpriteRenderer.color = shadowColor;
 
     }
 
