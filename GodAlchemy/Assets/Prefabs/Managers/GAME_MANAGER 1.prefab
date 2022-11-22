@@ -140,6 +140,8 @@ MonoBehaviour:
   dustPrefab:
     RawGuidValue: adab753e521635d428f721ff748c459b
   numberOfCloudToSpawn: 6
+  meteorPrefab:
+    RawGuidValue: 8ddb2898e3b11d349ad1e9cdf7098d51
 --- !u!114 &1331238577
 MonoBehaviour:
   m_ObjectHideFlags: 0

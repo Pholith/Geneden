@@ -93,4 +93,13 @@ public class ElementsManager : BaseManager<ElementsManager>
             Instance.SpawnObjectRPC(dustPrefab, GameManager.GridManager.GetMouseGridPos());
         }
     }
+
+    [SerializeField]
+    private NetworkPrefabRef meteorPrefab;
+    public void Meteor()
+    {
+        Instance.SpawnObjectRPC(meteorPrefab, GameManager.GridManager.GetMouseGridPos());
+    }
+
+
 }
