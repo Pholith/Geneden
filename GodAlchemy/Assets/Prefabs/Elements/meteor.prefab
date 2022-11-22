@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: -3851311320683482740}
   - component: {fileID: 3066659594403839116}
   - component: {fileID: 6550937244035740284}
-  - component: {fileID: 1914472058345460783}
+  - component: {fileID: 8694289584684985836}
+  - component: {fileID: -1516985543404442569}
+  - component: {fileID: 1926426008202351392}
   m_Layer: 0
   m_Name: meteor
   m_TagString: Untagged
@@ -226,9 +228,30 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 2799723034929241844}
-  - {fileID: 1914472058345460783}
+  - {fileID: 1926426008202351392}
   SimulationBehaviours: []
---- !u!114 &1914472058345460783
+--- !u!50 &8694289584684985836
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665953842746825989}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-1516985543404442569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,7 +260,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1665953842746825989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 539362646, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Script: {fileID: 11500000, guid: 708a1d8286133a047bc5624872da5879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1926426008202351392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665953842746825989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1779252708, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 8342653853815953926}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
