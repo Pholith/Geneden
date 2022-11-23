@@ -76,11 +76,11 @@ Material:
     - Disolve_Seed: 0.5
     - Disolve_Value: 0.57083243
     - Displacement_Value: -0.30740225
-    - DistortionUV_DistanceX_1: 0.523
-    - DistortionUV_DistanceY_1: 0.598
-    - DistortionUV_Speed_1: 1.28
-    - DistortionUV_WaveX_1: 18.6
-    - DistortionUV_WaveY_1: 46.6
+    - DistortionUV_DistanceX_1: 0.506
+    - DistortionUV_DistanceY_1: 0.52
+    - DistortionUV_Speed_1: 2
+    - DistortionUV_WaveX_1: 14
+    - DistortionUV_WaveY_1: 44
     - Effect_Fading: 1
     - Glass_Displacement: -0.27332112
     - Glass_Rotation: -0.689
