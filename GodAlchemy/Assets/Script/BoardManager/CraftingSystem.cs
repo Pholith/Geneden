@@ -86,7 +86,7 @@ public class CraftingSystem : MonoBehaviour
     /// <exception cref="InvalidOperationException"> si le craft coute plus cher que la barre de power n'est rempli </exception>
     public void ConsumePower()
     {
-        if (!HasEnoughPower()) throw new InvalidOperationException();
+        if (!HasEnoughPower()) throw new InvalidOperationException("Un test n'a pas été fait avant l'appel de cette fonction !!");
         GameManager.ResourceManager.ConsumePower(ComputeCraftCost());
         firstElementSlot.Empty();
         secondElementSlot.Empty();
