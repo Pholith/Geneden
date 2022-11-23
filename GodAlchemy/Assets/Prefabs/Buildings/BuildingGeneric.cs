@@ -19,13 +19,13 @@ public class BuildingGeneric : MonoBehaviour
     {
         isBuild = false;
         sr = GetComponent<SpriteRenderer>();
-        // Test Condition spécial de construction
+        // Test Condition spï¿½cial de construction
         if (building.SpecialConditionRequired.Invoke())
         {
 
             // Test Condition Lvl Civilisation
             resourceManager = ResourceManager.Instance;
-            if (resourceManager.getCivLevel() >= this.building.RequiredCivilisationLvl)
+            if (resourceManager.GetCivLevel() >= this.building.RequiredCivilisationLvl)
             {
                 // buildingtime
                 sr.sprite = spriteTimeBuilding; // TODO Sprite construction;
@@ -33,12 +33,12 @@ public class BuildingGeneric : MonoBehaviour
             }
             else
             {
-                Debug.Log("Vous n'avez pas atteint le niveau de civilisation necéssaire pour construire ce batîment.");
+                Debug.Log("Vous n'avez pas atteint le niveau de civilisation necï¿½ssaire pour construire ce batï¿½ment.");
             }
         }
         else
         {
-            Debug.Log("Vous ne pouvez pas encore construire ce batîment.");
+            Debug.Log("Vous ne pouvez pas encore construire ce batï¿½ment.");
         }
     }
 

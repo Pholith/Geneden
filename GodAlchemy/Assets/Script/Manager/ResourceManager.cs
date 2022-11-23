@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+[Serializable]
 public class ResourceManager : BaseManager<ResourceManager>
 {
 
@@ -44,13 +47,14 @@ public class ResourceManager : BaseManager<ResourceManager>
     [SerializeField] private TextMeshProUGUI civText;
 
     //Divine Power
-    [SerializeField] private int currentPower;
-    [SerializeField] private int maxPower;
+    [RequiredField]
+    [SerializeField] 
+    private DivinPowerBar powerBar;
 
-    //Divine Power bar
-    [SerializeField] private Image divinePowerBar;
-    [SerializeField] private TextMeshProUGUI midPowerText;
-    [SerializeField] private TextMeshProUGUI topPowerText;
+    [SerializeField]
+    [Range(0, 10)]
+    private float resourceRefillDelay = 1f;
+    private float resourceRefill = 0;
 
 
     // Start is called before the first frame update
@@ -65,35 +69,32 @@ public class ResourceManager : BaseManager<ResourceManager>
         goldText = gameUI.transform.Find("Canvas").transform.Find("Ressource Panel").transform.Find("GoldScore").transform.gameObject.GetComponent<TextMeshProUGUI>();
         popText = gameUI.transform.Find("Canvas").transform.Find("Ressource Panel").transform.Find("PopScore").transform.gameObject.GetComponent<TextMeshProUGUI>();
         civText = gameUI.transform.Find("Canvas").transform.Find("Ressource Panel").transform.Find("CivScore").transform.gameObject.GetComponent<TextMeshProUGUI>();
-        divinePowerBar = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("PowerFill").transform.gameObject.GetComponent<Image>();
-        midPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("MidText").transform.gameObject.GetComponent<TextMeshProUGUI>();
-        topPowerText = gameUI.transform.Find("Canvas").transform.Find("DivinPower").transform.Find("TopText").transform.gameObject.GetComponent<TextMeshProUGUI>();
-        maxPower = 100;
-        currentPower = 80;
+        powerBar.PowerMax = 100;
+        powerBar.CurrentPower = 80;
 #if DEBUG
-        maxPower = 500;
-        currentPower = 500;
+        powerBar.PowerMax = 200;
+        powerBar.CurrentPower = 180;
 #endif
-        StartCoroutine(RegenDivinPower());
+
     }
 
     public void Update()
     {
-        SetCurrentFill();
+        resourceRefill += Time.deltaTime;
+        if (resourceRefill > resourceRefillDelay)
+        {
+            resourceRefill = 0f;
+            RegenDivinPower();
+        }
         UpdateUI();
     }
 
-    private IEnumerator RegenDivinPower()
+    private void RegenDivinPower()
     {
-        while (true)
-        {
-            //RessourceType randomRessource = (RessourceType)Random.Range(0, 7);
-            //AddRessource(randomRessource, 100);
-            //AddRessource(RessourceType.CivLevel, 5);
-            AddDivinePower(1);
-            yield return new WaitForSeconds(1.0f);
-        }
-
+        RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
+        AddRessource(randomRessource, 100);
+        AddRessource(RessourceType.CivLevel, 1);
+        powerBar.CurrentPower += 2;
     }
 
     public void AddRessource(RessourceType type, int amount)
@@ -129,6 +130,7 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     }
 
+
     public void UpdateUI()
     {
         foodText.text = foodScore.ToString();
@@ -139,56 +141,22 @@ public class ResourceManager : BaseManager<ResourceManager>
         goldText.text = goldScore.ToString();
         popText.text = popScore.ToString();
         civText.text = civLevel.ToString();
-        midPowerText.text = (maxPower / 2).ToString();
-        topPowerText.text = maxPower.ToString();
     }
 
-    public void SetCurrentFill()
+    public void ToggleShowCost(int cost = -1)
     {
-        float _fillAmount = currentPower / (float)maxPower;
-        divinePowerBar.fillAmount = _fillAmount;
+        powerBar.ToggleShowCost(cost);
     }
-
-    public void AddDivinePower(int amount)
+    public void ConsumePower(int cost)
     {
-        if (!((currentPower + amount) > maxPower))
-        {
-            currentPower += amount;
-        }
-        else
-        {
-            currentPower = maxPower;
-        }
-    }
-
-    public void SetMaxDivinePower(int max)
-    {
-        maxPower = max;
-    }
-
-    public int GetMaxDivinePower()
-    {
-        return maxPower;
-    }
-
-    public void ConsumePower(int amount)
-    {
-        currentPower -= amount;
+        powerBar.CurrentPower -= cost;
     }
 
     public bool HasEnoughPower(int substraction)
     {
-        int _current = currentPower;
-        if (!((_current - substraction) < 0))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return powerBar.CurrentPower - substraction > 0;
     }
-    public int getCivLevel()
+    public int GetCivLevel()
     {
         return civLevel;
     }

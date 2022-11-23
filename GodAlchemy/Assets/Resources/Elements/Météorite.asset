@@ -15,10 +15,22 @@ MonoBehaviour:
   ElementDescription: "D\xE9chaine une m\xE9t\xE9orite qui explose et  a une chance
     de laisser un gisement al\xE9atoire"
   Sprite: {fileID: 21300000, guid: aa353738783149e4aa72e3316521aba7, type: 3}
-  DifficultyToCraft: 1
+  DifficultyToCraft: 3
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: 910f593104f615443a2bcf82c901b64f, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: abbd3c9f5bd2ebc4eb26017dddb1ee0a, type: 2}
   EffectOnMap:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
+        m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
+        m_MethodName: Meteor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

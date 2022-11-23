@@ -15,7 +15,7 @@ MonoBehaviour:
   ElementDescription: "Provoque un s\xE9isme qui inflige des d\xE9gats aux b\xE2timents
     et modifie le relief"
   Sprite: {fileID: 21300000, guid: 88f0b9bb88f3eb8489dec8c0cac3d11c, type: 3}
-  DifficultyToCraft: 1
+  DifficultyToCraft: 2
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: f2a48abd5ff637a4b903424f7decd362, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: f2a48abd5ff637a4b903424f7decd362, type: 2}
