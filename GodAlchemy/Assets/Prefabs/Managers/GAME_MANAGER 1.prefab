@@ -107,11 +107,8 @@ MonoBehaviour:
   goldText: {fileID: 0}
   popText: {fileID: 0}
   civText: {fileID: 0}
-  currentPower: 0
-  maxPower: 0
-  divinePowerBar: {fileID: 0}
-  midPowerText: {fileID: 0}
-  topPowerText: {fileID: 0}
+  powerBar: {fileID: 0}
+  resourceRefillDelay: 1
 --- !u!114 &2030806754
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Partie de la classe qui gère le drag and drop des item slot
 /// </summary>
-public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IDropHandler
+public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField]
@@ -58,7 +59,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 break;
             case Type.recipeBookSlot:
                 if (IsRecipeUnlock())
-                recipeSystem.AddRecipeToCraft(Element);
+                    recipeSystem.AddRecipeToCraft(Element);
                 break;
             default:
                 break;
@@ -128,8 +129,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         rectTransform = null;
         snapParent = null;
         initialRectTransform = new Vector2(0, 0);
-
-
+        GameManager.ResourceManager.ToggleShowCost();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -142,5 +142,13 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         snapParent = parentSnap;
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GameManager.ResourceManager.ToggleShowCost(SlotType == Type.recipeSlot ? craftSystem.ComputeCraftCost() : GetSlotCost());
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!eventData.dragging) GameManager.ResourceManager.ToggleShowCost();
+    }
 }

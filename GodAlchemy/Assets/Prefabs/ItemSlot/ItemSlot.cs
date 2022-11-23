@@ -151,6 +151,6 @@ public partial class ItemSlot : MonoBehaviour
     /// </summary>
     public int GetSlotCost()
     {
-        return elementIsPayed ? 0 :  Element.GetCost();
+        return elementIsPayed ? 0 : Element == null ? 0 : Element.GetCost();
     }
 }

@@ -24,7 +24,7 @@ public class BuildingGeneric : MonoBehaviour
 
             // Test Condition Lvl Civilisation
             resourceManager = ResourceManager.Instance;
-            if (resourceManager.getCivLevel() >= this.building.RequiredCivilisationLvl)
+            if (resourceManager.GetCivLevel() >= this.building.RequiredCivilisationLvl)
             {
                 // buildingtime
                 sr.sprite = spriteTimeBuilding; // TODO Sprite construction;
