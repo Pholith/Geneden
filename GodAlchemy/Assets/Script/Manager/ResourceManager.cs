@@ -161,5 +161,49 @@ public class ResourceManager : BaseManager<ResourceManager>
         return civLevel;
     }
 
+    public void ConsumeWood(int cost)
+    {
+        woodScore -= cost;
+    }
+    public bool HasEnoughWood(int substraction)
+    {
+        return woodScore - substraction >= 0;
+    }
+
+    public void ConsumeIron(int cost)
+    {
+        ironScore -= cost;
+    }
+    public bool HasEnoughIron(int substraction)
+    {
+        return ironScore - substraction >= 0;
+    }
+
+    public void ConsumeStone(int cost)
+    {
+        stoneScore -= cost;
+    }
+    public bool HasEnoughStone(int substraction)
+    {
+        return stoneScore - substraction >= 0;
+    }
+
+    public void ConsumeSilver(int cost)
+    {
+        silverScore -= cost;
+    }
+    public bool HasEnoughSilver(int substraction)
+    {
+        return silverScore - substraction >= 0;
+    }
+
+    public void ConsumeGold(int cost)
+    {
+        goldScore -= cost;
+    }
+    public bool HasEnoughGold(int substraction)
+    {
+        return goldScore - substraction >= 0;
+    }
 
 }

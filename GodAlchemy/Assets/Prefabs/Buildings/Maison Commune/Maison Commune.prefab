@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6782917888937698564}
   - component: {fileID: 4936908734323321018}
   m_Layer: 0
-  m_Name: Maison
+  m_Name: Maison Commune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0dee2b9b2ffa44c8f0d14703c2e548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building: {fileID: 11400000, guid: 5fe2fdcd2e9fc2642ae49d181737627c, type: 2}
+  building: {fileID: 11400000, guid: 1dabc7e1006285e41b94da7c138d8243, type: 2}
   spriteTimeBuilding: {fileID: 21300000, guid: b9bf013d56f502043a871074b16e0e50, type: 3}
 --- !u!212 &4936908734323321018
 SpriteRenderer:

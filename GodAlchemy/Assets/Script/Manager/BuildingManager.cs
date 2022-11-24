@@ -9,10 +9,18 @@ public class BuildingManager : BaseManager<BuildingManager>
     }
 
     [SerializeField]
-    private GameObject houseBuilding;
+    private GameObject maison;
     public void buildHouse()
     {
-        GameObject house = Instantiate(houseBuilding);
+        GameObject house = Instantiate(maison);
+        house.transform.position = GameManager.GridManager.GetMouseGridPos();
+    }
+
+    [SerializeField]
+    private GameObject maisonCommune;
+    public void buildCommonHouse()
+    {
+        GameObject house = Instantiate(maisonCommune);
         house.transform.position = GameManager.GridManager.GetMouseGridPos();
     }
 }

@@ -81,4 +81,8 @@ public class BuildingsScriptableObject : ScriptableObject
     [SerializeField]
     public UnityEvent UpdateFunction;
 
+    [Header("Script")]
+    [SerializeField]
+    public UnityEvent createBuildingOnMap;
+
 }

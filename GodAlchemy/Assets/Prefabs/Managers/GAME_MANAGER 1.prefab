@@ -194,4 +194,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  houseBuilding: {fileID: 6256013982987254513, guid: 73cfa3d4f0803d34f9db39aa79e8c760, type: 3}
+  maison: {fileID: 6256013982987254513, guid: 935e956ca9406c54f9a0ec83f1e0e416, type: 3}
+  maisonCommune: {fileID: 6256013982987254513, guid: 5b05e0e115045624e93eebc667f3a748, type: 3}
