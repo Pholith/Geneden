@@ -71,7 +71,7 @@ public class CraftingSystem : MonoBehaviour
         }
     }
 
-    private int ComputeCraftCost()
+    public int ComputeCraftCost()
     {
         return firstElementSlot.GetSlotCost() + secondElementSlot.GetSlotCost() + resultSlot.GetSlotCost();
     }
@@ -84,9 +84,9 @@ public class CraftingSystem : MonoBehaviour
     /// Diminue la barre de power du coût du craft et vide les slots.
     /// </summary>
     /// <exception cref="InvalidOperationException"> si le craft coute plus cher que la barre de power n'est rempli </exception>
-    public void ConsumePower() 
+    public void ConsumePower()
     {
-        if (!HasEnoughPower()) throw new InvalidOperationException();
+        if (!HasEnoughPower()) throw new InvalidOperationException("Un test n'a pas été fait avant l'appel de cette fonction !!");
         GameManager.ResourceManager.ConsumePower(ComputeCraftCost());
         firstElementSlot.Empty();
         secondElementSlot.Empty();
@@ -99,10 +99,10 @@ public class CraftingSystem : MonoBehaviour
         else if (secondElementSlot.IsEmpty()) secondElementSlot.AddItem(addedRessource);
     }
 
-    public void AddItemInSlot(ElementScriptableObject addedRessource,bool isPayed)
+    public void AddItemInSlot(ElementScriptableObject addedRessource, bool isPayed)
     {
-        if (firstElementSlot.IsEmpty()) firstElementSlot.AddItem(addedRessource,isPayed);
-        else if (secondElementSlot.IsEmpty()) secondElementSlot.AddItem(addedRessource,isPayed);
+        if (firstElementSlot.IsEmpty()) firstElementSlot.AddItem(addedRessource, isPayed);
+        else if (secondElementSlot.IsEmpty()) secondElementSlot.AddItem(addedRessource, isPayed);
     }
 
 

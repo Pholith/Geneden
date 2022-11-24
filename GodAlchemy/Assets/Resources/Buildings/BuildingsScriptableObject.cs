@@ -17,14 +17,14 @@ public class BuildingsScriptableObject : ScriptableObject
     }
 
     [Header("Informations basiques")]
-    [TextArea]
+    [TextArea(0, 8)]
     public string BuildingDescription;
 
-    [HideInInspector, SerializeField]
+    [SerializeField]
     public Sprite Sprite;
 
     [Min(0)]
-    public int MaxHealth;
+    public int MaxHealth = 500;
 
     [Min(0)]
     [Tooltip("Temps en seconde de construction du batiment.")]
@@ -42,6 +42,7 @@ public class BuildingsScriptableObject : ScriptableObject
     [Min(0)]
     public int GoldCost;
 
+
     [Header("Gameplay")]
     [Range(1, 4)]
     public int Tier = 1;
@@ -54,7 +55,7 @@ public class BuildingsScriptableObject : ScriptableObject
 
     [SerializeField]
     public List<BuildingType> BuildingTags;
-    
+
     [Header("Conditions")]
     [Range(0, 50)]
     public int RequiredCivilisationLvl;

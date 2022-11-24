@@ -55,7 +55,7 @@ MonoBehaviour:
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
   networkManager: {fileID: 96931583363761379}
-  buildingManager: {fileID: 0}
+  buildingManager: {fileID: 1104164626079110861}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,11 +107,8 @@ MonoBehaviour:
   goldText: {fileID: 0}
   popText: {fileID: 0}
   civText: {fileID: 0}
-  currentPower: 0
-  maxPower: 0
-  divinePowerBar: {fileID: 0}
-  midPowerText: {fileID: 0}
-  topPowerText: {fileID: 0}
+  powerBar: {fileID: 0}
+  resourceRefillDelay: 1
 --- !u!114 &2030806754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +134,11 @@ MonoBehaviour:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   lightningPrefab:
     RawGuidValue: ca84c41ceaa02ef43b05ba4131148726
+  dustPrefab:
+    RawGuidValue: adab753e521635d428f721ff748c459b
+  numberOfCloudToSpawn: 6
+  meteorPrefab:
+    RawGuidValue: 8ddb2898e3b11d349ad1e9cdf7098d51
 --- !u!114 &1331238577
 MonoBehaviour:
   m_ObjectHideFlags: 0

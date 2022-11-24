@@ -81,4 +81,25 @@ public class ElementsManager : BaseManager<ElementsManager>
         Instance.SpawnObjectRPC(lightningPrefab, GameManager.GridManager.GetMouseGridPos());
         // inflige des dégats aux batiments
     }
+
+    [SerializeField]
+    private NetworkPrefabRef dustPrefab;
+    [SerializeField]
+    private int numberOfCloudToSpawn;
+    public void Dust()
+    {
+        for (int i = 0; i < numberOfCloudToSpawn; i++)
+        {
+            Instance.SpawnObjectRPC(dustPrefab, GameManager.GridManager.GetMouseGridPos());
+        }
+    }
+
+    [SerializeField]
+    private NetworkPrefabRef meteorPrefab;
+    public void Meteor()
+    {
+        Instance.SpawnObjectRPC(meteorPrefab, GameManager.GridManager.GetMouseGridPos());
+    }
+
+
 }

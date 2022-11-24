@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementDescription: "Cr\xE9er une zone de colline sur\xE9lev\xE9e"
   Sprite: {fileID: 21300000, guid: ef30ff7636556f84db870f3193f3d13b, type: 3}
-  DifficultyToCraft: 1
+  DifficultyToCraft: 2
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: 826029d4a928be944a304663a792fa4a, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: 826029d4a928be944a304663a792fa4a, type: 2}
