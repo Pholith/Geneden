@@ -1,5 +1,6 @@
 ﻿using Fusion;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Exemple de GameManager
@@ -27,6 +28,9 @@ public class GameManager : BaseGameManager
     private NetworkManager networkManager;
     public static NetworkManager NetworkManager => instance.networkManager;
 
+    public GameObject victoryScreen;
+    public GameObject defeatScreen;
+
     [SerializeField]
     private BuildingManager buildingManager;
     public static BuildingManager BuildingManager => instance.buildingManager;
@@ -46,6 +50,24 @@ public class GameManager : BaseGameManager
         resourceManager?.Initialization();
         networkManager?.Initialization();
         buildingManager?.Initialization();
+    }
+
+    private bool isGameWon() {
+        //TODO
+        return true;
+    }
+
+    public void EndGame() {
+        Debug.Log("Game is ended");
+        if (isGameWon()) {
+            Debug.Log(victoryScreen.activeSelf);
+            victoryScreen.SetActive(true);
+            Debug.Log(victoryScreen.activeSelf);
+        }
+        else {
+            defeatScreen.SetActive(true);
+        }
+        
     }
 
 #if UNITY_EDITOR

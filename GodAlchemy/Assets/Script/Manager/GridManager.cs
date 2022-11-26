@@ -92,11 +92,6 @@ public class GridManager : BaseManager<GridManager>
         SetTileInRange(tile, GetMouseGridPos().ToVector3Int(), radius);
     }
 
-    public void RemoveObjectsOnMouse()
-    {
-        //TODO
-    }
-
     public Vector3 GetMouseGridPos()
     {
         Vector3 _screenPos = Input.mousePosition;
