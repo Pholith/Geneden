@@ -18,7 +18,7 @@ public class BuildingGeneric : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
 
-        // Test Condition spécial de construction
+        // Test Condition spï¿½cial de construction
         if (building.SpecialConditionRequired.Invoke())
         {
             // Test Condition Lvl Civilisation
@@ -46,19 +46,19 @@ public class BuildingGeneric : MonoBehaviour
                 else
                 {
                     Destroy(gameObject);
-                    Debug.Log("Vous n'avez pas assez de ressources pour construire ce batîment.");
+                    Debug.Log("Vous n'avez pas assez de ressources pour construire ce batï¿½ment.");
                 }
             } 
             else
             {
                 Destroy(gameObject);
-                Debug.Log("Vous n'avez pas atteint le niveau de civilisation necéssaire pour construire ce batîment.");
+                Debug.Log("Vous n'avez pas atteint le niveau de civilisation necï¿½ssaire pour construire ce batï¿½ment.");
             }
         }
         else
         {
             Destroy(gameObject);
-            Debug.Log("Vous ne pouvez pas encore construire ce batîment.");
+            Debug.Log("Vous ne pouvez pas encore construire ce batï¿½ment.");
         }
     }
 

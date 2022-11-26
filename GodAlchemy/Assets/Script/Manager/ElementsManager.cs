@@ -1,4 +1,4 @@
-﻿using Fusion;
+using Fusion;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -63,6 +63,14 @@ public class ElementsManager : BaseManager<ElementsManager>
         Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(dirtTile, mousePos.ToVector3Int(), 4));
+    }
+
+    [SerializeField]
+    private NetworkPrefabRef rock;
+    public void Rock()
+    {
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(rock, GameManager.GridManager.GetMouseGridPos()));
     }
 
     [SerializeField]

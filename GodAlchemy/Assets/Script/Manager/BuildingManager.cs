@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,19 +9,17 @@ public class BuildingManager : BaseManager<BuildingManager>
     {
     }
 
-    [SerializeField]
-    private GameObject maison;
-    public void buildHouse()
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void SpawnObjectRPC(NetworkPrefabRef prefabRef, Vector3 position)
     {
-        GameObject house = Instantiate(maison);
-        house.transform.position = GameManager.GridManager.GetMouseGridPos();
+        GameManager.Instance.Runner.Spawn(prefabRef, position);
     }
 
     [SerializeField]
-    private GameObject maisonCommune;
-    public void buildCommonHouse()
+    private NetworkPrefabRef houseBuildingPrefab;
+    public void buildHouse()
     {
-        GameObject house = Instantiate(maisonCommune);
-        house.transform.position = GameManager.GridManager.GetMouseGridPos();
+        Instance.SpawnObjectRPC(houseBuildingPrefab, GameManager.GridManager.GetMouseGridPos());    
     }
+
 }
