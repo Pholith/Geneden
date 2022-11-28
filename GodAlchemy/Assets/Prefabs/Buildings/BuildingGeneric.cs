@@ -25,7 +25,7 @@ public class BuildingGeneric : NetworkBehaviour
         {
             // Test Condition Lvl Civilisation
             resourceManager = ResourceManager.Instance;
-            if (resourceManager.GetCivLevel() >= this.building.RequiredCivilisationLvl)
+            if (resourceManager.GetCivLevel() >= building.RequiredCivilisationLvl)
             {
                 // Test Condition des ressources
                 if (resourceManager.HasEnoughWood(building.WoodCost) &&

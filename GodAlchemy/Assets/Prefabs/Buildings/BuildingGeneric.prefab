@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0dee2b9b2ffa44c8f0d14703c2e548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   building: {fileID: 0}
   spriteTimeBuilding: {fileID: 21300000, guid: b9bf013d56f502043a871074b16e0e50, type: 3}
 --- !u!212 &4936908734323321018
@@ -121,5 +122,6 @@ MonoBehaviour:
   NetworkGuid:
     RawGuidValue: e8d0711bd46eb75489f7d8cb08057d91
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 6782917888937698564}
   SimulationBehaviours: []

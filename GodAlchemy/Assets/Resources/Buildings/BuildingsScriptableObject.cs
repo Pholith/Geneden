@@ -1,14 +1,16 @@
+using Fusion;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/New building", order = 2)]
-[Serializable]
-public class BuildingsScriptableObject : ScriptableObject
+public class BuildingsScriptableObject : ScriptableObject, IComparable<BuildingsScriptableObject>
 {
     [Serializable]
-    public enum BuildingType {
+    public enum BuildingType
+    {
         Economic,
         Production,
         Military,
@@ -22,7 +24,7 @@ public class BuildingsScriptableObject : ScriptableObject
     public string BuildingDescription;
 
     [SerializeField]
-    public SerializableSprite Sprite;
+    public Sprite Sprite;
 
     [Min(0)]
     public int MaxHealth = 500;
@@ -51,18 +53,18 @@ public class BuildingsScriptableObject : ScriptableObject
     [SerializeField]
     public BuildingsScriptableObject UpgradeInto;
 
-    //[SerializeField]
-    //public SerializableList<GameObject> UnlockUnities;
+    [SerializeField]
+    public List<GameObject> UnlockUnities;
 
     [SerializeField]
-    public SerializableList<BuildingType> BuildingTags;
+    public List<BuildingType> BuildingTags;
 
     [Header("Conditions")]
     [Range(0, 50)]
     public int RequiredCivilisationLvl;
 
     [Serializable]
-    public class BuildingSpecialCondition : SerializableCallback<bool> {}
+    public class BuildingSpecialCondition : SerializableCallback<bool> { }
 
     [SerializeField]
     [Tooltip("A utiliser si le batiment nécessite une condition spéciale (exemple: une cathédrale est construite)\n" +
@@ -78,8 +80,14 @@ public class BuildingsScriptableObject : ScriptableObject
         return true;
     }
 
-    //[Header("Script")]
-    //[SerializeField]
-    //public UnityEvent UpdateFunction;
+
+    public int CompareTo(BuildingsScriptableObject other)
+    {
+        return name.CompareTo(other.name);
+    }
+
+    [Header("Script")]
+    [SerializeField]
+    public UnityEvent UpdateFunction;
 
 }

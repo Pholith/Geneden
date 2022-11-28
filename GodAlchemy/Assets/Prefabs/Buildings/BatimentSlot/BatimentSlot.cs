@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField]
-    public HouseScriptableObject House;
+    public BuildingsScriptableObject selectedBuildingDescriptor;
     public TextMeshProUGUI title, description, health, timeRequired, level;
 
     [SerializeField]
@@ -43,23 +43,21 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData) {
         mouse_over = true;
-        Debug.Log("Mouse enter");
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         mouse_over = false;
-        Debug.Log("Mouse exit");
     }
 
     public void UpdateBatView()
     {
         if (mouse_over)
         {
-            title.SetText(House.name);
-            description.SetText(House.BuildingDescription);
-            health.SetText("Santé : " + (House.MaxHealth).ToString());
-            timeRequired.SetText("Temps construction : " + (House.BuildingTime).ToString());
-            level.SetText("Niveau recquis : " + (House.RequiredCivilisationLvl).ToString());
+            title.SetText(selectedBuildingDescriptor.name);
+            description.SetText(selectedBuildingDescriptor.BuildingDescription);
+            health.SetText("Santé : " + (selectedBuildingDescriptor.MaxHealth).ToString());
+            timeRequired.SetText("Temps construction : " + (selectedBuildingDescriptor.BuildingTime).ToString());
+            level.SetText("Niveau recquis : " + (selectedBuildingDescriptor.RequiredCivilisationLvl).ToString());
             batView.SetActive(true);
         }
         else
@@ -70,7 +68,7 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Building selected : " + House.name);
+        Debug.Log("Building selected : " + selectedBuildingDescriptor.name);
         building_clicked = true;
     }
 
@@ -79,7 +77,7 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
         //Debug.Log(building_clicked);
         if (building_clicked)
         {
-            spriteRenderer.sprite = House.Sprite;
+            spriteRenderer.sprite = selectedBuildingDescriptor.Sprite;
             if (spriteRenderer.sprite == null) return;
 
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -95,6 +93,6 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
         building_clicked = false;
         buildingSelected.SetActive(false);
         
-        BuildingManager.Instance.buildHouse(House);
+        BuildingManager.Instance.BuildBuilding(selectedBuildingDescriptor);
     }
 }
