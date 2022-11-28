@@ -5,11 +5,13 @@ using UnityEngine;
 using static BuildingsScriptableObject;
 using static ResourceManager;
 using static GameTimer;
+using Unity.VisualScripting;
+using Fusion;
 
-public class BuildingGeneric : MonoBehaviour
+public class BuildingGeneric : NetworkBehaviour
 {
     public BuildingsScriptableObject building; //scriptableobject script
-    
+    private bool isBuild;
     private ResourceManager resourceManager;
     private SpriteRenderer sr;
     public Sprite spriteTimeBuilding;
@@ -59,6 +61,29 @@ public class BuildingGeneric : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("Vous ne pouvez pas encore construire ce bat�ment.");
+        }
+    }
+
+    public BuildingsScriptableObject GetBuilding()
+    {
+        return building;
+    }
+
+    public bool IsBuild()
+    {
+        return isBuild;
+    }
+
+    private void Build()
+    {
+        sr.sprite = building.Sprite;
+        isBuild = true;
+
+        switch (building.GetType().ToString())
+        {
+            case "GatheringBuildingScript":
+                this.AddComponent<GatheringBuildings>();
+                break;
         }
     }
 

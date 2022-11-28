@@ -94,7 +94,7 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
         spriteRenderer.sprite = null;
         building_clicked = false;
         buildingSelected.SetActive(false);
-
-        House.createBuildingOnMap.Invoke();
+        
+        BuildingManager.Instance.buildHouse(House);
     }
 }

@@ -10,16 +10,17 @@ public class BuildingManager : BaseManager<BuildingManager>
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    private void SpawnObjectRPC(NetworkPrefabRef prefabRef, Vector3 position)
+    private void SpawnObjectRPC(NetworkPrefabRef prefabRef, Vector3 position, BuildingsScriptableObject building)
     {
-        GameManager.Instance.Runner.Spawn(prefabRef, position);
+        var obj = GameManager.Instance.Runner.Spawn(prefabRef, position);
+        obj.GetComponent<BuildingGeneric>().building = building;
     }
 
     [SerializeField]
-    private NetworkPrefabRef houseBuildingPrefab;
-    public void buildHouse()
+    private NetworkPrefabRef maison;
+    public void buildHouse(BuildingsScriptableObject building)
     {
-        Instance.SpawnObjectRPC(houseBuildingPrefab, GameManager.GridManager.GetMouseGridPos());    
+        Instance.SpawnObjectRPC(maison, GameManager.GridManager.GetMouseGridPos(), building);
     }
 
 }

@@ -55,6 +55,8 @@ MonoBehaviour:
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
   networkManager: {fileID: 96931583363761379}
+  victoryScreen: {fileID: 0}
+  defeatScreen: {fileID: 0}
   buildingManager: {fileID: 1104164626079110861}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
@@ -130,6 +132,8 @@ MonoBehaviour:
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
   dirtParticlePrefab:
     RawGuidValue: bfdd3bc9e3ade4742a001453e45e442e
+  rock:
+    RawGuidValue: 00000000000000000000000000000000
   waterParticlePrefab:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   lightningPrefab:
@@ -194,5 +198,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  maison: {fileID: 6256013982987254513, guid: 935e956ca9406c54f9a0ec83f1e0e416, type: 3}
-  maisonCommune: {fileID: 6256013982987254513, guid: 5b05e0e115045624e93eebc667f3a748, type: 3}
+  maison:
+    RawGuidValue: e8d0711bd46eb75489f7d8cb08057d91

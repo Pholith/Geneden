@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5579788828076100338}
   - component: {fileID: 6782917888937698564}
   - component: {fileID: 4936908734323321018}
+  - component: {fileID: -3439482973301828465}
   m_Layer: 0
   m_Name: BuildingGeneric
   m_TagString: Untagged
@@ -99,3 +100,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3439482973301828465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256013982987254513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: e8d0711bd46eb75489f7d8cb08057d91
+  NestedObjects: []
+  NetworkedBehaviours: []
+  SimulationBehaviours: []

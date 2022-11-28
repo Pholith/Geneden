@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/New building", order = 2)]
+[Serializable]
 public class BuildingsScriptableObject : ScriptableObject
 {
     [Serializable]
@@ -21,7 +22,7 @@ public class BuildingsScriptableObject : ScriptableObject
     public string BuildingDescription;
 
     [SerializeField]
-    public Sprite Sprite;
+    public SerializableSprite Sprite;
 
     [Min(0)]
     public int MaxHealth = 500;
@@ -50,11 +51,11 @@ public class BuildingsScriptableObject : ScriptableObject
     [SerializeField]
     public BuildingsScriptableObject UpgradeInto;
 
-    [SerializeField]
-    public List<GameObject> UnlockUnities;
+    //[SerializeField]
+    //public SerializableList<GameObject> UnlockUnities;
 
     [SerializeField]
-    public List<BuildingType> BuildingTags;
+    public SerializableList<BuildingType> BuildingTags;
 
     [Header("Conditions")]
     [Range(0, 50)]
@@ -77,12 +78,8 @@ public class BuildingsScriptableObject : ScriptableObject
         return true;
     }
 
-    [Header("Script")]
-    [SerializeField]
-    public UnityEvent UpdateFunction;
-
-    [Header("Script")]
-    [SerializeField]
-    public UnityEvent createBuildingOnMap;
+    //[Header("Script")]
+    //[SerializeField]
+    //public UnityEvent UpdateFunction;
 
 }
