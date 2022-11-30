@@ -185,6 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  sceneAfterConnected:
+    m_SceneAsset: {fileID: 102900000, guid: fc1dae8fef2715c4f92ae7eb922e8107, type: 3}
+    m_IsDirty: 1
+    m_ScenePath: Assets/Scenes/Victoire.unity
 --- !u!114 &1104164626079110861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,5 +202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  maison:
-    RawGuidValue: e8d0711bd46eb75489f7d8cb08057d91
+  buildingsScriptableObjects: []
+  genericBuildingPrefab:
+    RawGuidValue: 00000000000000000000000000000000
