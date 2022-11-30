@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockScript: {fileID: 11400000, guid: 9d502ce72c394a74f99a5a39ec92d6f2, type: 2}
-  resource_Amount: 0
+  serializableDescriptor: {fileID: 11400000, guid: 9d502ce72c394a74f99a5a39ec92d6f2, type: 2}
+  resource_Amount: 40
 --- !u!114 &9035153729075802394
 MonoBehaviour:
   m_ObjectHideFlags: 0
