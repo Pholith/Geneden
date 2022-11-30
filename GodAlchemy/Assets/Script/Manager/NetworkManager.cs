@@ -18,8 +18,6 @@ public class NetworkManager : BaseManager<NetworkManager>
     public override void Spawned()
     {
         base.Spawned();
-
-
         if (Runner.IsClient)
         {
             Player2ResourceManager = GameManager.ResourceManager;
@@ -28,4 +26,21 @@ public class NetworkManager : BaseManager<NetworkManager>
             Player1ResourceManager = GameManager.ResourceManager;
         }
     }
+
+    public bool GetWinner()
+    {
+        if (Runner != null) {
+            int myCiv = GameManager.ResourceManager.GetCivLevel();
+            if (Runner.IsClient) {
+                int opponentCiv = Player1ResourceManager.GetCivLevel();
+                return myCiv > opponentCiv;
+            }
+            else {
+                int opponentCiv = Player2ResourceManager.GetCivLevel();
+                return myCiv >= opponentCiv;
+            }
+        }
+    return false;
+    }
 }
+

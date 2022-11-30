@@ -50,26 +50,22 @@ public class GameManager : BaseGameManager
         buildingManager?.Initialization();
     }
 
-    private bool isGameWon()
-    {
-        //TODO
-        return true;
+
+    private bool isGameWon() {
+        return networkManager.GetWinner();
     }
 
-    public void EndGame()
-    {
+    public void EndGame() {
         Debug.Log("Game is ended");
-        if (isGameWon())
-        {
+        if (isGameWon()) {
             Debug.Log(victoryScreen.activeSelf);
             victoryScreen.SetActive(true);
             Debug.Log(victoryScreen.activeSelf);
         }
-        else
-        {
+        else {
             defeatScreen.SetActive(true);
         }
-
+        
     }
 
 #if UNITY_EDITOR
