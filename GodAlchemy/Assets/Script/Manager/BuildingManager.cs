@@ -31,7 +31,7 @@ public class BuildingManager : BaseManager<BuildingManager>
     private void SpawnObjectRPC(NetworkPrefabRef prefabRef, Vector3 position, int scriptableObjectIndex)
     {
         NetworkObject obj = GameManager.Instance.Runner.Spawn(prefabRef, position);
-        obj.GetComponent<BuildingGeneric>().building = GetBuildingFromIndex(scriptableObjectIndex);
+        obj.GetComponent<BuildingGeneric>().buildingScriptObj = GetBuildingFromIndex(scriptableObjectIndex);
     }
 
     [SerializeField]

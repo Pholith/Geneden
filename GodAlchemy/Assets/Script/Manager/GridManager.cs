@@ -2,6 +2,7 @@
 using Fusion;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,9 +12,9 @@ public class GridManager : BaseManager<GridManager>
     public Tilemap MainGameGrid;
 
     public Tilemap DirtGameGrid;
-    
+
     [SerializeField]
-    private TileBase dirt; 
+    private TileBase dirt;
 
     private Camera mainCamera;
 
@@ -61,30 +62,64 @@ public class GridManager : BaseManager<GridManager>
         tilemapToChange.SetTile(position, GetTileFromType(tileType));
     }
 
-
+    [Obsolete]
     public void SetTileOnMouse(TileBase tile)
     {
         MainGameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
     }
 
-    public void SetTileInRange(TileBase tile, Vector3Int position, int radius)
+    private List<Vector3Int> GetCellsPositionsOfRange(Vector3Int position, int radius)
     {
+        List<Vector3Int> positionList = new();
         for (int iy = -radius; iy <= radius; iy++)
         {
             int dx = (int)Mathf.Sqrt(radius * radius - iy * iy);
             for (int ix = -dx; ix <= dx; ix++)
             {
-                if (tile == dirt)
-                {
-                    SetTileRPC(GameTileMapRPC.DirtGameGrid, position + new Vector3Int(ix, iy), GetTileType(tile));
-                }
-                else
-                {
-                    SetTileRPC(GameTileMapRPC.MainGameGrid, position + new Vector3Int(ix, iy), GetTileType(tile));
-                    if (tile == null) SetTileRPC(GameTileMapRPC.DirtGameGrid, position + new Vector3Int(ix, iy), GetTileType(null));
-                }
+                positionList.Add(position + new Vector3Int(ix, iy));
             }
         }
+        return positionList;
+    }
+
+    public void SetTileInRange(TileBase tile, Vector3Int position, int radius)
+    {
+        foreach (Vector3Int cellPosition in GetCellsPositionsOfRange(position, radius))
+        {
+            if (IsThereResourceOnTile(cellPosition)) continue;
+
+            if (tile == dirt)
+            {
+                SetTileRPC(GameTileMapRPC.DirtGameGrid, cellPosition, GetTileType(tile));
+            }
+            else
+            {
+                SetTileRPC(GameTileMapRPC.MainGameGrid, cellPosition, GetTileType(tile));
+                if (tile == null) SetTileRPC(GameTileMapRPC.DirtGameGrid, cellPosition, GetTileType(null));
+            }
+        }
+    }
+
+    public List<Collider2D> GetResourcesInRange(Vector3Int position, int radius)
+    {
+        return GetResourcesOfGridCells(GetCellsPositionsOfRange(position, radius).ToArray());
+    }
+
+    private List<Collider2D> GetResourcesOfGridCells(params Vector3Int[] targetPosition)
+    {
+        List<Collider2D> colliders = new();
+        foreach (Vector3Int cellPosition in targetPosition)
+        {
+            Rect rect = new Rect((Vector2Int)cellPosition, MainGameGrid.cellSize); // Permet d'afficher du debug
+            rect.DrawRect();
+            colliders.AddRange(Physics2D.OverlapBoxAll((Vector2Int)cellPosition, MainGameGrid.cellSize, 0f, LayerMask.GetMask("Resources")));
+        }
+
+        return colliders.Distinct().ToList();
+    }
+    private bool IsThereResourceOnTile(Vector3Int targetPosition)
+    {
+        return GetResourcesOfGridCells(targetPosition).Count > 0;
     }
 
     public void SetTilesOnMouseInRange(TileBase tile, int radius)

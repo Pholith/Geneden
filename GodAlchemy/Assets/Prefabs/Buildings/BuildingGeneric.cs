@@ -1,56 +1,62 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static BuildingsScriptableObject;
-using static ResourceManager;
-using static GameTimer;
-using Unity.VisualScripting;
 using Fusion;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class BuildingGeneric : NetworkBehaviour
 {
-    public BuildingsScriptableObject building; //scriptableobject script
+    [RequiredField]
+    public BuildingsScriptableObject buildingScriptObj; //scriptableobject script
+    public Sprite spriteTimeBuilding;
+    [SerializeField]
     private bool isBuild;
+    [ReadOnly]
+    private int hp;
     private ResourceManager resourceManager;
     private SpriteRenderer sr;
-    public Sprite spriteTimeBuilding;
 
-    void Start()
+    private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-
+#if DEBUG
+        buildingScriptObj.BuildingTime = 1;
+#endif
+        if (!buildingScriptObj)
+        {
+            Destroy(gameObject);
+            Debug.LogWarning($"Component BuildingGeneric of {gameObject.name} doesn't have a script descriptor.");
+            return;
+        }
         // Test Condition sp�cial de construction
-        if (building.SpecialConditionRequired.Invoke())
+        if (buildingScriptObj.SpecialConditionRequired != null && buildingScriptObj.SpecialConditionRequired.Invoke())
         {
             // Test Condition Lvl Civilisation
             resourceManager = ResourceManager.Instance;
-            if (resourceManager.GetCivLevel() >= building.RequiredCivilisationLvl)
+            if (resourceManager.GetCivLevel() >= buildingScriptObj.RequiredCivilisationLvl)
             {
                 // Test Condition des ressources
-                if (resourceManager.HasEnoughWood(building.WoodCost) &&
-                    resourceManager.HasEnoughStone(building.RockCost) &&
-                    resourceManager.HasEnoughIron(building.IronCost) &&
-                    resourceManager.HasEnoughSilver(building.SilverCost) &&
-                    resourceManager.HasEnoughGold(building.GoldCost))
+                if (resourceManager.HasEnoughWood(buildingScriptObj.WoodCost) &&
+                    resourceManager.HasEnoughStone(buildingScriptObj.RockCost) &&
+                    resourceManager.HasEnoughIron(buildingScriptObj.IronCost) &&
+                    resourceManager.HasEnoughSilver(buildingScriptObj.SilverCost) &&
+                    resourceManager.HasEnoughGold(buildingScriptObj.GoldCost))
                 {
                     // Consume ressources
-                    resourceManager.ConsumeWood(building.WoodCost);
-                    resourceManager.ConsumeStone(building.RockCost);
-                    resourceManager.ConsumeIron(building.IronCost);
-                    resourceManager.ConsumeSilver(building.SilverCost);
-                    resourceManager.ConsumeGold(building.GoldCost);
+                    resourceManager.ConsumeWood(buildingScriptObj.WoodCost);
+                    resourceManager.ConsumeStone(buildingScriptObj.RockCost);
+                    resourceManager.ConsumeIron(buildingScriptObj.IronCost);
+                    resourceManager.ConsumeSilver(buildingScriptObj.SilverCost);
+                    resourceManager.ConsumeGold(buildingScriptObj.GoldCost);
 
                     // buildingtime
                     sr.sprite = spriteTimeBuilding; // TODO Sprite construction;
-                    new GameTimer(10, () => sr.sprite = this.building.Sprite);
+                    new GameTimer(buildingScriptObj.BuildingTime, () => Build());
                 }
                 else
                 {
                     Destroy(gameObject);
                     Debug.Log("Vous n'avez pas assez de ressources pour construire ce bat�ment.");
                 }
-            } 
+            }
             else
             {
                 Destroy(gameObject);
@@ -62,11 +68,24 @@ public class BuildingGeneric : NetworkBehaviour
             Destroy(gameObject);
             Debug.Log("Vous ne pouvez pas encore construire ce bat�ment.");
         }
+        hp = buildingScriptObj.MaxHealth;
+        ComputeCollider();
+    }
+
+    private void ComputeCollider()
+    {
+        // Génère un collider carré autour du sprite.
+        var collider = gameObject.AddOrGetComponent<BoxCollider2D>();
+        Vector2 S = sr.sprite.bounds.size;
+        collider.offset = new Vector2(0, 0);
+        collider.size = new Vector3(sr.sprite.bounds.size.x / transform.lossyScale.x,
+                                     sr.sprite.bounds.size.y / transform.lossyScale.y,
+                                     sr.sprite.bounds.size.z / transform.lossyScale.z);
     }
 
     public BuildingsScriptableObject GetBuilding()
     {
-        return building;
+        return buildingScriptObj;
     }
 
     public bool IsBuild()
@@ -76,15 +95,20 @@ public class BuildingGeneric : NetworkBehaviour
 
     private void Build()
     {
-        sr.sprite = building.Sprite;
+        sr.sprite = buildingScriptObj.Sprite;
         isBuild = true;
+        ComputeCollider();
 
-        switch (building.GetType().ToString())
+    }
+    private void Update()
+    {
+        if (hp <= 0)
         {
-            case "GatheringBuildingScript":
-                this.AddComponent<GatheringBuildings>();
-                break;
+            Destroy(gameObject);
         }
     }
-
+    public void Damage(int damage)
+    {
+        hp -= damage;
+    }
 }

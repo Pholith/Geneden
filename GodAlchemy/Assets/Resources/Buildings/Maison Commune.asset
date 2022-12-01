@@ -17,7 +17,7 @@ MonoBehaviour:
     et attaque les unit\xE9s ennemis proches. La maison commune peut \xEAtre am\xE9lior\xE9e
     pour augmenter ses points de vie, son bonus de population et d\xE9bloquer de
     nouveaux b\xE2timents."
-  Sprite: {fileID: 359655389, guid: ac20b9d7ff56cf54c90cec8e565fe7b9, type: 3}
+  Sprite: {fileID: 1974448446, guid: ac20b9d7ff56cf54c90cec8e565fe7b9, type: 3}
   MaxHealth: 4000
   BuildingTime: 0
   WoodCost: 0
@@ -39,9 +39,6 @@ MonoBehaviour:
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     dirty: 0
   UpdateFunction:
-    m_PersistentCalls:
-      m_Calls: []
-  createBuildingOnMap:
     m_PersistentCalls:
       m_Calls: []
   AdditionalPopulation: 20

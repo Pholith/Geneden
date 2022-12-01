@@ -87,6 +87,13 @@ public class ElementsManager : BaseManager<ElementsManager>
     public void Lightning()
     {
         Instance.SpawnObjectRPC(lightningPrefab, GameManager.GridManager.GetMouseGridPos());
+        var resources = GameManager.GridManager.GetResourcesInRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3);
+        foreach (var resource in resources)
+        {
+            var buildingComponent = resource.GetComponent<BuildingGeneric>();
+            if (buildingComponent != null) buildingComponent.Damage(3000);
+            else Destroy(gameObject);
+        }
         // inflige des dégats aux batiments
     }
 

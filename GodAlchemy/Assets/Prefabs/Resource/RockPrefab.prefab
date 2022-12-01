@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 134475757002571990}
-  - component: {fileID: 7407951086924298105}
   - component: {fileID: 9064210688465981896}
   - component: {fileID: 4871906407492267190}
   - component: {fileID: 3703010357254990522}
   - component: {fileID: 3420221795606886122}
-  m_Layer: 0
+  - component: {fileID: 2655060707614820598}
+  m_Layer: 3
   m_Name: RockPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,20 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7407951086924298105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2507836594909730308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializableDescriptor: {fileID: 11400000, guid: 19d2b007f2653b84187b586bdb078912, type: 2}
-  resource_Amount: 30
 --- !u!114 &9064210688465981896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +138,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2655060707614820598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507836594909730308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializableDescriptor: {fileID: 11400000, guid: 19d2b007f2653b84187b586bdb078912, type: 2}
+  resource_Amount: 1

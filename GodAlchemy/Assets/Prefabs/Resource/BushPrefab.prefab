@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6319329956123664204}
-  - component: {fileID: 1292728172073876450}
   - component: {fileID: 9035153729075802394}
+  - component: {fileID: -84056625756112456}
   - component: {fileID: 5681088305887023099}
   - component: {fileID: 7114503967669826746}
   - component: {fileID: -70077889814715275}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BushPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,20 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1292728172073876450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5491253146018709795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializableDescriptor: {fileID: 11400000, guid: e89d0aef6f3d5be41b9d5d66c6700658, type: 2}
-  resource_Amount: 100
 --- !u!114 &9035153729075802394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +60,20 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 5681088305887023099}
   SimulationBehaviours: []
+--- !u!114 &-84056625756112456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491253146018709795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializableDescriptor: {fileID: 11400000, guid: e89d0aef6f3d5be41b9d5d66c6700658, type: 2}
+  resource_Amount: 30
 --- !u!114 &5681088305887023099
 MonoBehaviour:
   m_ObjectHideFlags: 0

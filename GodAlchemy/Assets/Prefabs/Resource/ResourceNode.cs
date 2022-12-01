@@ -1,25 +1,21 @@
 using UnityEngine;
 
 [ExecuteAlways]
-public class Node : MonoBehaviour
+public class ResourceNode : MonoBehaviour
 {
 
     public ResourceScriptableObject serializableDescriptor;
-    private SpriteRenderer rockSpriteRenderer;
-    private ResourceManager.RessourceType resourceType;
+    private SpriteRenderer spriteRenderer;
 
     public int resource_Amount;
 
-    // Start is called before the first frame update
     private void Start()
     {
-        resourceType = serializableDescriptor.ResourceType;
-        resource_Amount = serializableDescriptor.MaxResource;
-        rockSpriteRenderer = GetComponent<SpriteRenderer>();
-        rockSpriteRenderer.sprite = serializableDescriptor.Sprite;
+        resource_Amount = serializableDescriptor != null ? serializableDescriptor.MaxResource : 1;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = serializableDescriptor?.Sprite;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         DestroyObject();
@@ -47,6 +43,6 @@ public class Node : MonoBehaviour
 
     public ResourceManager.RessourceType GetResourceType()
     {
-        return resourceType;
+        return serializableDescriptor.ResourceType;
     }
 }

@@ -7,7 +7,7 @@ public class GatheringBuildings : MonoBehaviour
 {
     private GatheringBuildingScript building;
     private List<GameObject> nodesInRangeList;
-    private Node TargetedNode;
+    private ResourceNode TargetedNode;
     private ResourceManager resourceManager;
     private BuildingGeneric baseBuilding;
     private float secondToWaitBeforeGather;
@@ -44,7 +44,7 @@ public class GatheringBuildings : MonoBehaviour
             {
                 nodesInRangeList.Add(collider.gameObject);
             }
-            TargetedNode = nodesInRangeList[0].GetComponent<Node>();
+            TargetedNode = nodesInRangeList[0].GetComponent<ResourceNode>();
             return;
         }
         TargetedNode = null;   
