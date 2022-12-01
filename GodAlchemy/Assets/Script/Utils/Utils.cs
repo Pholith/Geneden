@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public static class Utils
 {
@@ -29,7 +28,7 @@ public static class Utils
 
     public static void AddRange<T>(this ICollection<T> set, T[] items)
     {
-        foreach (var item in items)
+        foreach (T item in items)
         {
             set.Add(item);
         }

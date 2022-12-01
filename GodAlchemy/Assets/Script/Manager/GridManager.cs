@@ -1,4 +1,3 @@
-
 using Fusion;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class GridManager : BaseManager<GridManager>
 {
-
     public Tilemap MainGameGrid;
-
     public Tilemap DirtGameGrid;
 
     [SerializeField]
@@ -125,11 +122,6 @@ public class GridManager : BaseManager<GridManager>
     public void SetTilesOnMouseInRange(TileBase tile, int radius)
     {
         SetTileInRange(tile, GetMouseGridPos().ToVector3Int(), radius);
-    }
-
-    public void RemoveObjectsOnMouse()
-    {
-        //TODO
     }
 
     public Vector3 GetMouseGridPos()

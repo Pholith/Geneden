@@ -9,6 +9,10 @@ public class ElementsManager : BaseManager<ElementsManager>
 
     private ScreenShake cameraShaker;
 
+    public const int DAMAGE_LOW = 2000;
+    public const int DAMAGE_MEDIUM = 3000;
+    public const int DAMAGE_HIGH = 10000;
+
     protected override void InitManager()
     {
         Elements = new List<ElementScriptableObject>(Resources.FindObjectsOfTypeAll<ElementScriptableObject>());
@@ -52,16 +56,29 @@ public class ElementsManager : BaseManager<ElementsManager>
 
     }
 
+    public void CampFire()
+    {
+
+    }
     [SerializeField]
     private TileBase hillTile;
     public void Hill()
     {
-        GameManager.GridManager.SetTilesOnMouseInRange(hillTile, 5);
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(hillTile, mousePos.ToVector3Int(), 5));
     }
 
     [SerializeField]
     private NetworkPrefabRef airParticlePrefab;
     public void Air()
+    {
+        Instance.SpawnObjectRPC(airParticlePrefab, GameManager.GridManager.GetMouseGridPos());
+    }
+
+    [SerializeField]
+    private NetworkPrefabRef gustParticlePrefab;
+    public void Gust()
     {
         Instance.SpawnObjectRPC(airParticlePrefab, GameManager.GridManager.GetMouseGridPos());
     }
@@ -78,20 +95,18 @@ public class ElementsManager : BaseManager<ElementsManager>
     }
 
     [SerializeField]
-    private NetworkPrefabRef rock;
-    public void Rock()
-    {
-        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
-        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(rock, GameManager.GridManager.GetMouseGridPos()));
-    }
-
-    [SerializeField]
     private NetworkPrefabRef waterParticlePrefab;
     public void Water()
     {
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         Instance.SpawnObjectRPC(waterParticlePrefab, mousePos + particleSystemOffsets);
-        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 4));
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 3));
+    }
+
+    [SerializeField]
+    private NetworkPrefabRef rainPrefab;
+    public void Rain()
+    {
     }
 
     [SerializeField]
@@ -100,14 +115,13 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         Instance.SpawnObjectRPC(lightningPrefab, GameManager.GridManager.GetMouseGridPos());
         Instance.ShakeScreenRPC(0.3f, 0.1f);
-        var resources = GameManager.GridManager.GetResourcesInRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3);
-        foreach (var resource in resources)
+        List<Collider2D> resources = GameManager.GridManager.GetResourcesInRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3);
+        foreach (Collider2D resource in resources)
         {
-            var buildingComponent = resource.GetComponent<BuildingGeneric>();
-            if (buildingComponent != null) buildingComponent.Damage(3000);
+            BuildingGeneric buildingComponent = resource.GetComponent<BuildingGeneric>();
+            if (buildingComponent != null) buildingComponent.Damage(DAMAGE_MEDIUM);
             else Destroy(gameObject);
         }
-        // inflige des dégats aux batiments
     }
 
     [SerializeField]
@@ -129,19 +143,78 @@ public class ElementsManager : BaseManager<ElementsManager>
         Instance.SpawnObjectRPC(meteorPrefab, GameManager.GridManager.GetMouseGridPos());
     }
 
-    
+
     [SerializeField]
     private NetworkPrefabRef treePrefab;
     [SerializeField]
     private NetworkPrefabRef bushPrefab;
     public void Plant()
     {
-        var cellPositions = GridManager.Instance.GetCellsPositionsOfRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3).PickRandom(4);
-        foreach (var cell in cellPositions)
+        IEnumerable<Vector3Int> cellPositions = GridManager.Instance.GetCellsPositionsOfRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3).PickRandom(4);
+        foreach (Vector3Int cell in cellPositions)
         {
-            Instance.SpawnObjectRPC(treePrefab, cell);
+            switch (Random.Range(0, 1))
+            {
+                case 0:
+                    Instance.SpawnObjectRPC(treePrefab, cell);
+                    break;
+                case 1:
+                    Instance.SpawnObjectRPC(bushPrefab, cell);
+                    break;
+            }
         }
     }
 
+    public void Adn()
+    {
+        switch (Random.Range(0, 1))
+        {
+            case 0:
+                Plant();
+                break;
+            case 1:
+                Animals();
+                break;
+        }
+    }
+
+    private void Animals()
+    {
+
+    }
+
+    [SerializeField]
+    private NetworkPrefabRef rockPrefab;
+    public void Rock()
+    {
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(rockPrefab, mousePos));
+    }
+    [SerializeField]
+    private NetworkPrefabRef ironPrefab;
+    public void Iron()
+    {
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(ironPrefab, mousePos));
+    }
+
+    [SerializeField]
+    private NetworkPrefabRef silverPrefab;
+    public void Silver()
+    {
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(silverPrefab, mousePos));
+    }
+    [SerializeField]
+    private NetworkPrefabRef goldPrefab;
+    public void Gold()
+    {
+        Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
+        Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
+        new GameTimer(timeInSecondAfterParticleStart, () => Instance.SpawnObjectRPC(goldPrefab, mousePos));
+    }
 
 }

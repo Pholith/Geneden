@@ -1,5 +1,4 @@
 using Fusion;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildingGeneric : NetworkBehaviour
@@ -75,7 +74,7 @@ public class BuildingGeneric : NetworkBehaviour
     private void ComputeCollider()
     {
         // Génère un collider carré autour du sprite.
-        var collider = gameObject.AddOrGetComponent<BoxCollider2D>();
+        BoxCollider2D collider = gameObject.AddOrGetComponent<BoxCollider2D>();
         Vector2 S = sr.sprite.bounds.size;
         collider.offset = new Vector2(0, 0);
         collider.size = new Vector3(sr.sprite.bounds.size.x / transform.lossyScale.x,

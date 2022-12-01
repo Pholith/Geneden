@@ -30,6 +30,15 @@ public class Meteor : NetworkBehaviour
     private void Explode()
     {
         GameManager.Instance.Runner?.Spawn(explosionPrefab, transform.position);
+
+        var resources = GameManager.GridManager.GetResourcesInRange(transform.position.ToVector3Int(), 6);
+        foreach (var resource in resources)
+        {
+            var buildingComponent = resource.GetComponent<BuildingGeneric>();
+            if (buildingComponent != null) buildingComponent.Damage(ElementsManager.DAMAGE_HIGH);
+            else Destroy(resource.gameObject);
+        }
+
         GameManager.ElementManager.ShakeScreenRPC(0.5f, 0.3f);
 
         Destroy(gameObject);

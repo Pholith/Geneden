@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+
 public class GameUI : MonoBehaviour
 {
     private Tile selectedTile;
     private TileEditor playerEditor;
     private Button desactivatedButton;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         selectedTile = null;
         playerEditor = FindObjectOfType<TileEditor>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
     }
@@ -53,7 +53,7 @@ public class GameUI : MonoBehaviour
 
     public Tile GetSelectedTile()
     {
-        
+
         return selectedTile;
     }
 }

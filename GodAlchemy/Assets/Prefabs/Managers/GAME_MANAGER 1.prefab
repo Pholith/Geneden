@@ -132,8 +132,6 @@ MonoBehaviour:
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
   dirtParticlePrefab:
     RawGuidValue: bfdd3bc9e3ade4742a001453e45e442e
-  rock:
-    RawGuidValue: c72c07a41736f8a4bb5135247366a2aa
   waterParticlePrefab:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
   lightningPrefab:
@@ -147,6 +145,14 @@ MonoBehaviour:
     RawGuidValue: f8cddab4c4736684aa109117f0f48e74
   bushPrefab:
     RawGuidValue: c61b742a7376ba24e909e8d394e1105a
+  rockPrefab:
+    RawGuidValue: c72c07a41736f8a4bb5135247366a2aa
+  ironPrefab:
+    RawGuidValue: 8c98fb062c9464141a29ac2de0a591db
+  silverPrefab:
+    RawGuidValue: fe1b482b0622e7446bc221bb350c2dc3
+  goldPrefab:
+    RawGuidValue: 807a350702b030644827d68696cad2d1
 --- !u!114 &1331238577
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class ResourceManager : BaseManager<ResourceManager>
@@ -48,7 +46,7 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     //Divine Power
     [RequiredField]
-    [SerializeField] 
+    [SerializeField]
     private DivinPowerBar powerBar;
 
     [SerializeField]

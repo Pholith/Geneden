@@ -1,6 +1,4 @@
 using Fusion;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class NetworkManager : BaseManager<NetworkManager>
 {
@@ -21,7 +19,8 @@ public class NetworkManager : BaseManager<NetworkManager>
         if (Runner.IsClient)
         {
             Player2ResourceManager = GameManager.ResourceManager;
-        } else
+        }
+        else
         {
             Player1ResourceManager = GameManager.ResourceManager;
         }
@@ -29,18 +28,21 @@ public class NetworkManager : BaseManager<NetworkManager>
 
     public bool GetWinner()
     {
-        if (Runner != null) {
+        if (Runner != null)
+        {
             int myCiv = GameManager.ResourceManager.GetCivLevel();
-            if (Runner.IsClient) {
+            if (Runner.IsClient)
+            {
                 int opponentCiv = Player1ResourceManager.GetCivLevel();
                 return myCiv > opponentCiv;
             }
-            else {
+            else
+            {
                 int opponentCiv = Player2ResourceManager.GetCivLevel();
                 return myCiv >= opponentCiv;
             }
         }
-    return false;
+        return false;
     }
 }
 
