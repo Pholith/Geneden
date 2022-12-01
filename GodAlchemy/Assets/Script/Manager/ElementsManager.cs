@@ -5,12 +5,16 @@ using UnityEngine.Tilemaps;
 
 public class ElementsManager : BaseManager<ElementsManager>
 {
+    public List<ElementScriptableObject> Elements { get; private set; }
+
+    private ScreenShake cameraShaker;
+
     protected override void InitManager()
     {
         Elements = new List<ElementScriptableObject>(Resources.FindObjectsOfTypeAll<ElementScriptableObject>());
         Elements.Sort();
+        cameraShaker = FindObjectOfType<ScreenShake>();
     }
-    public List<ElementScriptableObject> Elements { get; private set; }
 
     /// <summary>
     /// Permet de faire spawn un objet en r�seau. Utiliser Instance.SpawnObjectRPC !!!!
@@ -22,6 +26,14 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         GameManager.Instance.Runner.Spawn(prefabRef, position);
     }
+
+    [Rpc]
+    public void ShakeScreenRPC(float duration, float intensity)
+    {
+        cameraShaker.Shake(duration, intensity);
+    }
+
+
     /// !!!!!!!!!!!!!
     /// Fonctions UnityEvent pour les éléments. 
     /// Attention, il ne faut pas utiliser les champs de ElementsManager autres que ceux que vous mettez en dessous.
@@ -87,6 +99,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     public void Lightning()
     {
         Instance.SpawnObjectRPC(lightningPrefab, GameManager.GridManager.GetMouseGridPos());
+        Instance.ShakeScreenRPC(0.3f, 0.1f);
         var resources = GameManager.GridManager.GetResourcesInRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3);
         foreach (var resource in resources)
         {
@@ -114,6 +127,20 @@ public class ElementsManager : BaseManager<ElementsManager>
     public void Meteor()
     {
         Instance.SpawnObjectRPC(meteorPrefab, GameManager.GridManager.GetMouseGridPos());
+    }
+
+    
+    [SerializeField]
+    private NetworkPrefabRef treePrefab;
+    [SerializeField]
+    private NetworkPrefabRef bushPrefab;
+    public void Plant()
+    {
+        var cellPositions = GridManager.Instance.GetCellsPositionsOfRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3).PickRandom(4);
+        foreach (var cell in cellPositions)
+        {
+            Instance.SpawnObjectRPC(treePrefab, cell);
+        }
     }
 
 

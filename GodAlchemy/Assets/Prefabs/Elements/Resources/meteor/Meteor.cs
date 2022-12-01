@@ -30,6 +30,8 @@ public class Meteor : NetworkBehaviour
     private void Explode()
     {
         GameManager.Instance.Runner?.Spawn(explosionPrefab, transform.position);
+        GameManager.ElementManager.ShakeScreenRPC(0.5f, 0.3f);
+
         Destroy(gameObject);
     }
 }

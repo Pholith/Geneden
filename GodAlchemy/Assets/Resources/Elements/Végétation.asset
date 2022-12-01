@@ -23,7 +23,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
         m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
-        m_MethodName: Vegetation
+        m_MethodName: Plant
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RecipeSystem : MonoBehaviour
@@ -11,7 +9,7 @@ public class RecipeSystem : MonoBehaviour
     [SerializeField]
     private InventorySystem playerInventory;
 
-    void Start()
+    private void Start()
     {
         recipeList = transform.GetComponentsInChildren<ItemSlot>();
         craftSystem = FindObjectOfType<CraftingSystem>();
@@ -19,19 +17,19 @@ public class RecipeSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
     }
 
     public void UnlockRecipe(ElementScriptableObject element)
     {
-        foreach(ItemSlot slot in recipeList)
+        foreach (ItemSlot slot in recipeList)
         {
-            if(element == slot.Element)
+            if (element == slot.Element)
             {
                 slot.UnlockRecipe();
-          
+
             }
         }
     }
@@ -39,29 +37,29 @@ public class RecipeSystem : MonoBehaviour
     public void AddRecipeToCraft(ElementScriptableObject element)
     {
         ElementScriptableObject[] elementForCraft = { element.ElementToCraft1, element.ElementToCraft2 };
-            foreach(ElementScriptableObject craftElement in elementForCraft)
+        foreach (ElementScriptableObject craftElement in elementForCraft)
+        {
+            if (!CheckPlayerElement(craftElement))
             {
-                if (!CheckPlayerElement(craftElement))
+                if (craftElement.IsPrimaryElement)
                 {
-                    if (craftElement.IsPrimaryElement)
-                    {
-                        craftSystem.AddRessource(craftElement);
-                    }
-                }
-                else
-                {
-                    AddPlayerElement(craftElement);
+                    craftSystem.AddRessource(craftElement);
                 }
             }
+            else
+            {
+                AddPlayerElement(craftElement);
+            }
+        }
     }
 
     private bool CheckPlayerElement(ElementScriptableObject element)
     {
-            ItemSlot _playerElement = playerInventory.SearchElement(element);
-            if (_playerElement != null)
-            {
-                return true;
-            }
+        ItemSlot _playerElement = playerInventory.SearchElement(element);
+        if (_playerElement != null)
+        {
+            return true;
+        }
         return false;
     }
 

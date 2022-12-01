@@ -68,7 +68,7 @@ public class GridManager : BaseManager<GridManager>
         MainGameGrid.SetTile(GetMouseGridPos().ToVector3Int(), tile);
     }
 
-    private List<Vector3Int> GetCellsPositionsOfRange(Vector3Int position, int radius)
+    public List<Vector3Int> GetCellsPositionsOfRange(Vector3Int position, int radius)
     {
         List<Vector3Int> positionList = new();
         for (int iy = -radius; iy <= radius; iy++)
