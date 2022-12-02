@@ -6,7 +6,7 @@ public class BuildingManager : BaseManager<BuildingManager>
 {
     protected override void InitManager()
     {
-        buildingsScriptableObjects = new List<BuildingsScriptableObject>(Resources.LoadAll<BuildingsScriptableObject>("/Buildings"));
+        buildingsScriptableObjects = new List<BuildingsScriptableObject>(Resources.LoadAll<BuildingsScriptableObject>("Buildings"));
         buildingsScriptableObjects.Sort();
     }
 

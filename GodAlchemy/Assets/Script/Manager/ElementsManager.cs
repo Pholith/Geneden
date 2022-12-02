@@ -15,7 +15,7 @@ public class ElementsManager : BaseManager<ElementsManager>
 
     protected override void InitManager()
     {
-        Elements = new List<ElementScriptableObject>(Resources.FindObjectsOfTypeAll<ElementScriptableObject>());
+        Elements = new List<ElementScriptableObject>(Resources.LoadAll<ElementScriptableObject>("Elements"));
         Elements.Sort();
         cameraShaker = FindObjectOfType<ScreenShake>();
     }
@@ -66,7 +66,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
-        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(hillTile, mousePos.ToVector3Int(), 5));
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(hillTile, mousePos.ToVector3Int(), 5, true));
     }
 
     [SerializeField]
@@ -91,7 +91,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         Instance.SpawnObjectRPC(dirtParticlePrefab, GameManager.GridManager.GetMouseGridPos() + particleSystemOffsets);
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
-        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(dirtTile, mousePos.ToVector3Int(), 4));
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(dirtTile, mousePos.ToVector3Int(), 4, true));
     }
 
     [SerializeField]
@@ -100,7 +100,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     {
         Vector3 mousePos = GameManager.GridManager.GetMouseGridPos();
         Instance.SpawnObjectRPC(waterParticlePrefab, mousePos + particleSystemOffsets);
-        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 3));
+        new GameTimer(timeInSecondAfterParticleStart, () => GameManager.GridManager.SetTileInRange(null, mousePos.ToVector3Int(), 3, true));
     }
 
     [SerializeField]
@@ -153,7 +153,8 @@ public class ElementsManager : BaseManager<ElementsManager>
         IEnumerable<Vector3Int> cellPositions = GridManager.Instance.GetCellsPositionsOfRange(GameManager.GridManager.GetMouseGridPos().ToVector3Int(), 3).PickRandom(4);
         foreach (Vector3Int cell in cellPositions)
         {
-            switch (Random.Range(0, 1))
+            if (GameManager.GridManager.IsThereResourceOnTile(cell)) continue;
+            switch (Random.Range(0, 2))
             {
                 case 0:
                     Instance.SpawnObjectRPC(treePrefab, cell);

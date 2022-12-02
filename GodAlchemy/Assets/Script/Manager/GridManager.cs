@@ -79,21 +79,23 @@ public class GridManager : BaseManager<GridManager>
         return positionList;
     }
 
-    public void SetTileInRange(TileBase tile, Vector3Int position, int radius)
+    public void SetTileInRange(TileBase tile, Vector3Int position, int radius, bool isRandomDelayed = false)
     {
         foreach (Vector3Int cellPosition in GetCellsPositionsOfRange(position, radius))
         {
             if (IsThereResourceOnTile(cellPosition)) continue;
+            GameTileMapRPC targetGameTileMap = (tile == dirt) ? GameTileMapRPC.DirtGameGrid : GameTileMapRPC.MainGameGrid;
 
-            if (tile == dirt)
+            Action endCallback = () =>
             {
-                SetTileRPC(GameTileMapRPC.DirtGameGrid, cellPosition, GetTileType(tile));
-            }
-            else
-            {
-                SetTileRPC(GameTileMapRPC.MainGameGrid, cellPosition, GetTileType(tile));
+                SetTileRPC(targetGameTileMap, cellPosition, GetTileType(tile));
                 if (tile == null) SetTileRPC(GameTileMapRPC.DirtGameGrid, cellPosition, GetTileType(null));
+            };
+            if (isRandomDelayed)
+            {
+                new GameTimer(UnityEngine.Random.Range(0, 2f), endCallback);
             }
+            else endCallback.Invoke();
         }
     }
 
@@ -114,7 +116,7 @@ public class GridManager : BaseManager<GridManager>
 
         return colliders.Distinct().ToList();
     }
-    private bool IsThereResourceOnTile(Vector3Int targetPosition)
+    public bool IsThereResourceOnTile(Vector3Int targetPosition)
     {
         return GetResourcesOfGridCells(targetPosition).Count > 0;
     }
