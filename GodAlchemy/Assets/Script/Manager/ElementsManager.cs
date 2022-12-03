@@ -15,9 +15,9 @@ public class ElementsManager : BaseManager<ElementsManager>
 
     protected override void InitManager()
     {
-        Elements = new List<ElementScriptableObject>(Resources.LoadAll<ElementScriptableObject>("Elements"));
+        Resources.LoadAll("Elements");
+        Elements = new List<ElementScriptableObject>(Resources.FindObjectsOfTypeAll<ElementScriptableObject>());
         Elements.Sort();
-        cameraShaker = FindObjectOfType<ScreenShake>();
     }
 
     /// <summary>

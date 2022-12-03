@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class GatheringBuildings : MonoBehaviour
+public class GatheringBuildings : MonoBehaviour, IPointerClickHandler
 {
     private GatheringBuildingScript building;
     private List<GameObject> nodesInRangeList;
@@ -12,10 +13,13 @@ public class GatheringBuildings : MonoBehaviour
     private BuildingGeneric baseBuilding;
     private float secondToWaitBeforeGather;
 
+    private GameObject buildingRange;
     // Start is called before the first frame update
     private void Start()
     {
         building = (GatheringBuildingScript)GetComponent<BuildingGeneric>().GetBuilding();
+        buildingRange = transform.Find("Range").gameObject;
+        buildingRange.SetActive(false);
         nodesInRangeList = new List<GameObject>();
         resourceManager = FindObjectOfType<ResourceManager>();
         baseBuilding = GetComponent<BuildingGeneric>();
@@ -43,7 +47,10 @@ public class GatheringBuildings : MonoBehaviour
         {
             foreach (Collider collider in colliders)
             {
-                nodesInRangeList.Add(collider.gameObject);
+                if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<Node>().GetResourceType()))
+                {
+                    nodesInRangeList.Add(collider.gameObject);
+                } 
             }
             TargetedNode = nodesInRangeList[0].GetComponent<ResourceNode>();
             return;
@@ -83,5 +90,10 @@ public class GatheringBuildings : MonoBehaviour
                 secondToWaitBeforeGather = 0.1f;
             }
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+            buildingRange.SetActive(true);
     }
 }
