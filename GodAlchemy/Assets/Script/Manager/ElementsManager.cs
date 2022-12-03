@@ -51,6 +51,12 @@ public class ElementsManager : BaseManager<ElementsManager>
     [SerializeField]
     private float timeInSecondAfterParticleStart = 2;
 
+    [SerializeField]
+    private NetworkPrefabRef foodMarmitePrefab;
+    public void Food()
+    {
+        Instance.SpawnObjectRPC(foodMarmitePrefab, GameManager.GridManager.GetMouseGridPos());
+    }
     public void Fire()
     {
 

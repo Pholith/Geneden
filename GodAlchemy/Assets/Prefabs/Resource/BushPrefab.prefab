@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5681088305887023099}
   - component: {fileID: 7114503967669826746}
   - component: {fileID: -70077889814715275}
+  - component: {fileID: 6779779836936095027}
   m_Layer: 3
   m_Name: BushPrefab
   m_TagString: Untagged
@@ -128,7 +129,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1068319958, guid: bc198f6a9195be64a978a09de25c929c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,7 +137,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!135 &-70077889814715275
@@ -152,3 +153,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6779779836936095027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491253146018709795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7b7f8e510298c4f93b43291b48c2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShadowOffset: {x: 0, y: -0.2}
+  ShadowMaterial: {fileID: 2100000, guid: 98c04aa50a773b540aaf124e4b0fddb4, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.3529412}

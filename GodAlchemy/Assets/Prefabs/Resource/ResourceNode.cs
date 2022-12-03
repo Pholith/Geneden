@@ -1,19 +1,14 @@
 using UnityEngine;
 
-[ExecuteAlways]
 public class ResourceNode : MonoBehaviour
 {
-
-    public ResourceScriptableObject serializableDescriptor;
-    private SpriteRenderer spriteRenderer;
-
-    public int resource_Amount;
+    [SerializeField]
+    private int resourceAmount = 100;
+    [SerializeField]
+    private ResourceManager.RessourceType type;
 
     private void Start()
     {
-        resource_Amount = serializableDescriptor != null ? serializableDescriptor.MaxResource : 1;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = serializableDescriptor?.Sprite;
     }
 
     private void Update()
@@ -23,7 +18,7 @@ public class ResourceNode : MonoBehaviour
 
     public void DestroyObject()
     {
-        if (resource_Amount <= 0)
+        if (resourceAmount <= 0)
         {
             Destroy(gameObject);
         }
@@ -31,10 +26,10 @@ public class ResourceNode : MonoBehaviour
 
     public bool DeleteResource(int amount)
     {
-        int _tempResource = resource_Amount;
+        int _tempResource = resourceAmount;
         if (_tempResource - amount >= 0)
         {
-            resource_Amount -= amount;
+            resourceAmount -= amount;
             return true;
         }
 
@@ -43,6 +38,6 @@ public class ResourceNode : MonoBehaviour
 
     public ResourceManager.RessourceType GetResourceType()
     {
-        return serializableDescriptor.ResourceType;
+        return type;
     }
 }

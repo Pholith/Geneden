@@ -129,11 +129,15 @@ MonoBehaviour:
   hillTile: {fileID: 11400000, guid: 939448eb5c2a5e74eaf286acdb581f4e, type: 2}
   airParticlePrefab:
     RawGuidValue: 0af6fd52f50b8b64ba3df3ff53b2faa4
+  gustParticlePrefab:
+    RawGuidValue: 00000000000000000000000000000000
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
   dirtParticlePrefab:
     RawGuidValue: bfdd3bc9e3ade4742a001453e45e442e
   waterParticlePrefab:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
+  rainPrefab:
+    RawGuidValue: 00000000000000000000000000000000
   lightningPrefab:
     RawGuidValue: ca84c41ceaa02ef43b05ba4131148726
   dustPrefab:
