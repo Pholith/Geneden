@@ -7,9 +7,11 @@ public class ElementsManager : BaseManager<ElementsManager>
 {
     protected override void InitManager()
     {
+        Resources.LoadAll("Elements");
         Elements = new List<ElementScriptableObject>(Resources.FindObjectsOfTypeAll<ElementScriptableObject>());
         Elements.Sort();
     }
+    [SerializeField]
     public List<ElementScriptableObject> Elements { get; private set; }
 
     /// <summary>
