@@ -47,7 +47,7 @@ public class GatheringBuildings : MonoBehaviour, IPointerClickHandler
         {
             foreach (Collider collider in colliders)
             {
-                if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<Node>().GetResourceType()))
+                if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<ResourceNode>().GetResourceType()))
                 {
                     nodesInRangeList.Add(collider.gameObject);
                 } 

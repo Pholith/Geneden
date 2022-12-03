@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5579788828076100338}
   - component: {fileID: 6782917888937698564}
   - component: {fileID: 4936908734323321018}
+  - component: {fileID: 2079688439414345133}
   m_Layer: 0
   m_Name: LumberCamp
   m_TagString: Untagged
@@ -46,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0dee2b9b2ffa44c8f0d14703c2e548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building: {fileID: 11400000, guid: cd906096ce655304292ee9dc719829d2, type: 2}
+  _interpolationDataSource: 0
+  buildingScriptObj: {fileID: 11400000, guid: cd906096ce655304292ee9dc719829d2, type: 2}
   spriteTimeBuilding: {fileID: 21300000, guid: b9bf013d56f502043a871074b16e0e50, type: 3}
+  isBuild: 0
 --- !u!212 &4936908734323321018
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,6 +103,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2079688439414345133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256013982987254513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 2aefd14cbaca7d84a8a5d8105ed2d36f
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 6782917888937698564}
+  SimulationBehaviours: []
 --- !u!1001 &8823721221233468247
 PrefabInstance:
   m_ObjectHideFlags: 0
