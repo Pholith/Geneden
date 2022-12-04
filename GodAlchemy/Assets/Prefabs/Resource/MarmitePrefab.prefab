@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2986055123921015360}
   - component: {fileID: 5532885383608716962}
   - component: {fileID: -4589217842516834814}
+  - component: {fileID: -7113718724218181122}
   m_Layer: 3
   m_Name: MarmitePrefab
   m_TagString: Untagged
@@ -159,3 +160,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+--- !u!58 &-7113718724218181122
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30517674349595399}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

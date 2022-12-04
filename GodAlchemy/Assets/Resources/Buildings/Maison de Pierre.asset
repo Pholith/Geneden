@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007ba1afc5fb2a348a4f350d030465f8, type: 3}
   m_Name: Maison de Pierre
   m_EditorClassIdentifier: 
-  BuildingDescription: 
+  BuildingDescription: "Maison am\xE9lior\xE9e qui augmente d'avantage la population."
   Sprite: {fileID: 61107799, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 1000
-  BuildingTime: 10
+  BuildingTime: 1
   WoodCost: 50
   IronCost: 0
   RockCost: 25

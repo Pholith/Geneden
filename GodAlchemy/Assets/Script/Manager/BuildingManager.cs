@@ -6,15 +6,17 @@ public class BuildingManager : BaseManager<BuildingManager>
 {
     protected override void InitManager()
     {
-        buildingsScriptableObjects = new List<BuildingsScriptableObject>(Resources.LoadAll<BuildingsScriptableObject>("Buildings"));
+        Resources.LoadAll("Buildings");
+        buildingsScriptableObjects = new List<BuildingsScriptableObject>(Resources.FindObjectsOfTypeAll<BuildingsScriptableObject>());
         buildingsScriptableObjects.Sort();
     }
+
+    public GameObject buildingRangePrefab;
 
     /// <summary>
     /// Ces fonctions servent à convertir un buildingScriptableObject en int pour être envoyé sur le réseau comme référence
     /// </summary>
-    [SerializeField]
-    private List<BuildingsScriptableObject> buildingsScriptableObjects;
+    public List<BuildingsScriptableObject> buildingsScriptableObjects { get; private set; }
     private int GetBuildingIndex(BuildingsScriptableObject buildingsScriptableObject)
     {
         if (buildingsScriptableObject == null) return -1;

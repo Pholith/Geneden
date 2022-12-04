@@ -20,6 +20,10 @@ public class ElementsManager : BaseManager<ElementsManager>
         Elements.Sort();
     }
 
+    private void Start()
+    {
+        cameraShaker = FindObjectOfType<ScreenShake>();
+    }
     /// <summary>
     /// Permet de faire spawn un objet en r�seau. Utiliser Instance.SpawnObjectRPC !!!!
     /// </summary>

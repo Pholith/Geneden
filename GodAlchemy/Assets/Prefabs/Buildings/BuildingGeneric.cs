@@ -1,4 +1,5 @@
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildingGeneric : NetworkBehaviour
@@ -54,18 +55,21 @@ public class BuildingGeneric : NetworkBehaviour
                 {
                     Destroy(gameObject);
                     Debug.Log("Vous n'avez pas assez de ressources pour construire ce bat�ment.");
+                    return;
                 }
             }
             else
             {
                 Destroy(gameObject);
                 Debug.Log("Vous n'avez pas atteint le niveau de civilisation nec�ssaire pour construire ce bat�ment.");
+                return;
             }
         }
         else
         {
             Destroy(gameObject);
             Debug.Log("Vous ne pouvez pas encore construire ce bat�ment.");
+            return;
         }
         hp = buildingScriptObj.MaxHealth;
         ComputeCollider();
@@ -96,8 +100,11 @@ public class BuildingGeneric : NetworkBehaviour
     {
         sr.sprite = buildingScriptObj.Sprite;
         isBuild = true;
+        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Economic))
+        {
+            gameObject.AddComponent<GatheringBuildings>();
+        }
         ComputeCollider();
-
     }
     private void Update()
     {

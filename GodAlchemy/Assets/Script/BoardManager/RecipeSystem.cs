@@ -30,7 +30,7 @@ public class RecipeSystem : MonoBehaviour
     public void CreateRecipeList()
     {   
         int _i = 0;
-        int _xPos = -88;
+        int _xPos = -91;
         int _yPos = 355;
         
         ItemSlot _recipeSlotScript = recipeSlotPrefab.GetComponent<ItemSlot>();
@@ -52,7 +52,7 @@ public class RecipeSystem : MonoBehaviour
             _i += 1;
             if(_i%3 == 0)
             {
-                _xPos = -88;
+                _xPos = -91;
                 _yPos -= 40;
                 _i = 0;
             }

@@ -115,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -145.2, y: 58.7}
-  m_SizeDelta: {x: 30, y: 36}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3510237544436444994
 MonoBehaviour:
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Element: {fileID: 0}
   SlotType: 4
-  elementIsPayed: 1
+  elementIsPayed: 0
   lockedSprite: {fileID: 21300000, guid: afce7c7f11f2cfc42a8814709c4188ae, type: 3}
   initialRectTransform: {x: 0, y: 0}
   rectTransform: {fileID: 0}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: afce7c7f11f2cfc42a8814709c4188ae, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
