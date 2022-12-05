@@ -41,6 +41,7 @@ public class GatheringBuildings : MonoBehaviour
     private void Update()
     {
         GetNodes();
+        BuildingIsSelected();
     }
 
     private void CreateBuildingRange()
@@ -52,16 +53,19 @@ public class GatheringBuildings : MonoBehaviour
         buildingRange.SetActive(false);
     }
 
-    private void OnMouseDown()
+    private void BuildingIsSelected()
     {
-        buildingRange.SetActive(true);
+        if (baseBuilding.isSelectedBuilding())
+            buildingRange.SetActive(true);
+        else
+            buildingRange.SetActive(false);
+
     }
 
     public void GetNodes()
     {
         if (TargetedNode == null)
         {
-            Debug.Log(gridManager.MainGameGrid.cellSize);
             collidersInRangeList = gridManager.GetResourcesInRange(gridManager.GetGridPos(transform.position + new Vector3(0.5f,0.5f,0f)), Mathf.RoundToInt((building.gatheringRange /2) * gridManager.MainGameGrid.cellSize.x));
         }
         else
@@ -73,7 +77,6 @@ public class GatheringBuildings : MonoBehaviour
         {
             foreach (Collider2D collider in collidersInRangeList)
             {
-                Debug.Log(collider);
                 if(collider.gameObject.GetComponent<ResourceNode>() != null)
                 {
                     if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<ResourceNode>().GetResourceType()))
