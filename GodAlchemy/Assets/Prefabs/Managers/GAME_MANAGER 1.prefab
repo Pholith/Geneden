@@ -127,6 +127,8 @@ MonoBehaviour:
   questSystem: {fileID: 7337215965699055723, guid: 964d30814c4500c42b7f218b99c750f9, type: 3}
   particleSystemOffsets: {x: 0, y: 5, z: 0}
   timeInSecondAfterParticleStart: 2
+  foodMarmitePrefab:
+    RawGuidValue: 00000000000000000000000000000000
   hillTile: {fileID: 11400000, guid: 939448eb5c2a5e74eaf286acdb581f4e, type: 2}
   airParticlePrefab:
     RawGuidValue: 0af6fd52f50b8b64ba3df3ff53b2faa4
@@ -200,6 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  cursorPrefab:
+    RawGuidValue: daa083a070f55684a89b6a455e2dee15
 --- !u!114 &1104164626079110861
 MonoBehaviour:
   m_ObjectHideFlags: 0

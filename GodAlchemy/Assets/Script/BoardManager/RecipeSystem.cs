@@ -41,7 +41,6 @@ public class RecipeSystem : MonoBehaviour
             {
                 continue;
             }
-            Debug.Log(element);
             _recipeSlotScript.Element = element;
             GameObject _recipeSlot = Instantiate(recipeSlotPrefab);
             _recipeSlot.transform.SetParent(_contentPanel.transform);

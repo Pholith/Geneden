@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Victoire.unity
+    guid: fc1dae8fef2715c4f92ae7eb922e8107
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 895ffc3df5c2e6d4e83fe52b544e2f6a
   - enabled: 1

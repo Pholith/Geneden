@@ -1,29 +1,88 @@
 using Fusion;
+using UnityEngine;
 
 public class NetworkManager : BaseManager<NetworkManager>
 {
-
     [Networked]
-    private ResourceManager Player1ResourceManager { get; set; }
+    private ResourceManager player1ResourceManager { get; set; }
     [Networked]
-    private ResourceManager Player2ResourceManager { get; set; }
+    private ResourceManager player2ResourceManager { get; set; }
 
+    private NetworkObject playerCursor;
+
+    [SerializeField]
+    private NetworkPrefabRef cursorPrefab;
 
     protected override void InitManager()
     {
     }
 
+    // Lorsque le client se connecte et est prêt (Spawned) il appel le serveur pour commencer la game.
     public override void Spawned()
     {
         base.Spawned();
         if (Runner.IsClient)
         {
-            Player2ResourceManager = GameManager.ResourceManager;
+            OnGameStartRPC(Runner.LocalPlayer);
         }
-        else
+    }
+    /// <summary>
+    /// Initialisation de la game côté serveur, mettre ici toutes les réinitialisations et les choses à faire au début de la game.
+    /// </summary>
+    /// <param name="clientPlayer"></param>
+    [Rpc]
+    public void OnGameStartRPC(PlayerRef clientPlayer)
+    {
+        NetworkObject player2Cursor;
+        if (Runner.IsPlayer && Runner.IsServer) // host is the player 1
         {
-            Player1ResourceManager = GameManager.ResourceManager;
+            player1ResourceManager = GameManager.ResourceManager;
+            playerCursor = Runner.Spawn(cursorPrefab);
+            playerCursor.name = "host cursor";
+            playerCursor.GetComponent<SpriteRenderer>().enabled = false;
+            playerCursor.GetComponent<SpriteRenderer>().color = Color.cyan;
+
+            // Fait spawn le 2ème curseur et envoie un RPC au client pour qu'il le modifie de son côté.
+            player2Cursor = Runner.Spawn(cursorPrefab, inputAuthority: clientPlayer);
+            player2Cursor.name = "client cursor";
+            Player2HideCursorRPC(player2Cursor.Id);
         }
+        else // client is the player 2
+        {
+            player2ResourceManager = GameManager.ResourceManager;
+        }
+    }
+    [Rpc]
+    private void Player2HideCursorRPC(NetworkId id)
+    {
+        if (!Runner.IsClient) return;
+        playerCursor = Runner.FindObject(id);
+        playerCursor.GetComponent<SpriteRenderer>().enabled = false;
+        playerCursor.GetComponent<SpriteRenderer>().color = Color.magenta;
+    }
+
+    private NetworkObject clientCursor = null;
+    /// <summary>
+    /// Permet de déplacer le curseur du client sur l'host même si le client n'a pas l'authorité sur le curseur.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="objectId"></param>
+    [Rpc(RpcSources.Proxies, RpcTargets.StateAuthority)]
+    private void MoveClientCurserRPC(Vector3 position, NetworkId objectId)
+    {
+        if (!clientCursor) clientCursor = Runner.FindObject(objectId);
+        clientCursor.transform.position = position;
+    }
+
+    private void Update()
+    {
+        if (!Runner || playerCursor == null) return;
+
+        Vector3 newPosition = GameManager.GridManager.GetMouseGridPos();
+        if (Runner.IsServer)
+            playerCursor.transform.position = newPosition;
+        else
+            MoveClientCurserRPC(newPosition, playerCursor.Id);
     }
 
     public bool GetWinner()
@@ -33,12 +92,12 @@ public class NetworkManager : BaseManager<NetworkManager>
             int myCiv = GameManager.ResourceManager.GetCivLevel();
             if (Runner.IsClient)
             {
-                int opponentCiv = Player1ResourceManager.GetCivLevel();
+                int opponentCiv = player1ResourceManager.GetCivLevel();
                 return myCiv > opponentCiv;
             }
             else
             {
-                int opponentCiv = Player2ResourceManager.GetCivLevel();
+                int opponentCiv = player2ResourceManager.GetCivLevel();
                 return myCiv >= opponentCiv;
             }
         }

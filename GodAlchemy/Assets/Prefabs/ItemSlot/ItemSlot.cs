@@ -85,6 +85,7 @@ public partial class ItemSlot : MonoBehaviour
                 toolTipTrigger.SetContent(Element.ElementDescription);
                 itemIcon.sprite = Element.Sprite;
                 costText.text = Element.GetCost().ToString();
+                if (elementIsPayed) costText.text = "";
             }
             
         }
