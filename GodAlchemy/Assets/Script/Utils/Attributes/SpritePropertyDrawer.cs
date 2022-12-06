@@ -31,7 +31,6 @@ public class SpritePropertyDrawer : PropertyDrawer
             position.x += position.width;
             position.width = textSize;
             position.height = textSize;
-
             prop.objectReferenceValue = EditorGUI.ObjectField(position, prop.objectReferenceValue, typeof(Sprite), false);
         }
         else

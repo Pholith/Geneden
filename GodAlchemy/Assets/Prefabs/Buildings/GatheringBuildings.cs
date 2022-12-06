@@ -1,58 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GatheringBuildings : MonoBehaviour
 {
     private GatheringBuildingScript building;
     private List<GameObject> nodesInRangeList;
-    private Node TargetedNode;
+    [SerializeField]
+    private ResourceNode TargetedNode;
     private ResourceManager resourceManager;
+    private GridManager gridManager;
     private BuildingGeneric baseBuilding;
     private float secondToWaitBeforeGather;
+
+    [SerializeField]
+    private List<Collider2D> collidersInRangeList;
+    private GameObject buildingRange;
+    private BuildingManager buildingManager;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         building = (GatheringBuildingScript)GetComponent<BuildingGeneric>().GetBuilding();
         nodesInRangeList = new List<GameObject>();
+        collidersInRangeList = new List<Collider2D>();
         resourceManager = FindObjectOfType<ResourceManager>();
+        gridManager = FindObjectOfType<GridManager>();
+        buildingManager = FindObjectOfType<BuildingManager>();
         baseBuilding = GetComponent<BuildingGeneric>();
+        CreateBuildingRange();
         TargetedNode = null;
         secondToWaitBeforeGather = 10.0f;
         StartCoroutine(GatherRoutine());
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(TargetedNode == null)
-        {
-            GetNodesListInRange();
-        }
-               
+        GetNodes();
     }
 
-    public void GetNodesListInRange()
+    private void CreateBuildingRange()
     {
-        nodesInRangeList = new List<GameObject>();
-        Vector3 BuildingPos = GameManager.GridManager.GetGridPos(transform.position);
-        var colliders = Physics.OverlapSphere(transform.position, building.gatheringRange);
-        if(colliders.Any())
+        buildingRange = Instantiate(buildingManager.buildingRangePrefab);
+        buildingRange.transform.SetParent(transform);
+        buildingRange.transform.localPosition = new Vector3(1f, 1f, 0);
+        buildingRange.transform.localScale = new Vector3( building.gatheringRange * gridManager.MainGameGrid.cellSize.x, building.gatheringRange * gridManager.MainGameGrid.cellSize.y, 1);
+        buildingRange.SetActive(false);
+    }
+
+    private void OnMouseDown()
+    {
+        buildingRange.SetActive(true);
+    }
+
+    public void GetNodes()
+    {
+        if (TargetedNode == null)
         {
-            foreach (var collider in colliders)
-            {
-                nodesInRangeList.Add(collider.gameObject);
-            }
-            TargetedNode = nodesInRangeList[0].GetComponent<Node>();
+            Debug.Log(gridManager.MainGameGrid.cellSize);
+            collidersInRangeList = gridManager.GetResourcesInRange(gridManager.GetGridPos(transform.position + new Vector3(0.5f,0.5f,0f)), Mathf.RoundToInt((building.gatheringRange /2) * gridManager.MainGameGrid.cellSize.x));
+        }
+        else
+        {
+            collidersInRangeList = new List<Collider2D>();
             return;
         }
-        TargetedNode = null;   
-    }
-
-    public bool NodeListIsEmpty()
-    {
-        return nodesInRangeList.Any();
+        if (collidersInRangeList.Any())
+        {
+            foreach (Collider2D collider in collidersInRangeList)
+            {
+                Debug.Log(collider);
+                if(collider.gameObject.GetComponent<ResourceNode>() != null)
+                {
+                    if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<ResourceNode>().GetResourceType()))
+                    {
+                        TargetedNode = collider.gameObject.GetComponent<ResourceNode>();
+                        return;
+                    }
+                }      
+            }
+        }
+        TargetedNode = null;
     }
 
     private IEnumerator GatherRoutine()
@@ -70,16 +102,17 @@ public class GatheringBuildings : MonoBehaviour
 
     public void GatherNode()
     {
-        if((TargetedNode != null) && baseBuilding.IsBuild())
+        if (TargetedNode != null)
         {
-            if(TargetedNode.DeleteResource(10))
+            if (TargetedNode.DeleteResource(10))
             {
                 resourceManager.AddRessource(TargetedNode.GetResourceType(), 10);
                 secondToWaitBeforeGather = 10.0f;
             }
             else
             {
-                secondToWaitBeforeGather = 0.1f;
+                TargetedNode = null;
+                secondToWaitBeforeGather = 1.0f;
             }
         }
     }

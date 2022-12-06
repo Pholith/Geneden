@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6782917888937698564}
   - component: {fileID: 4936908734323321018}
   - component: {fileID: -3439482973301828465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BuildingGeneric
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  building: {fileID: 0}
+  buildingScriptObj: {fileID: 11400000, guid: 1dabc7e1006285e41b94da7c138d8243, type: 2}
   spriteTimeBuilding: {fileID: 21300000, guid: b9bf013d56f502043a871074b16e0e50, type: 3}
+  isBuild: 0
 --- !u!212 &4936908734323321018
 SpriteRenderer:
   m_ObjectHideFlags: 0

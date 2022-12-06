@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6319329956123664204}
-  - component: {fileID: 1292728172073876450}
   - component: {fileID: 9035153729075802394}
   - component: {fileID: 5681088305887023099}
   - component: {fileID: 7114503967669826746}
-  - component: {fileID: -70077889814715275}
-  m_Layer: 0
+  - component: {fileID: 7651524969646736528}
+  - component: {fileID: 5140954504623769785}
+  m_Layer: 3
   m_Name: IronPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,20 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1292728172073876450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5491253146018709795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rockScript: {fileID: 11400000, guid: 9bd1e3180d98d704caefe78a9ac6dc53, type: 2}
-  resource_Amount: 0
 --- !u!114 &9035153729075802394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +114,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 931845098, guid: bc198f6a9195be64a978a09de25c929c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,19 +122,36 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!135 &-70077889814715275
-SphereCollider:
+--- !u!114 &7651524969646736528
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5491253146018709795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceAmount: 100
+  type: 3
+--- !u!58 &5140954504623769785
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491253146018709795}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

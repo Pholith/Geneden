@@ -29,12 +29,10 @@ public class CraftingSystem : MonoBehaviour
         if (!firstElementSlot.IsEmpty() && !secondElementSlot.IsEmpty())
         {
             CheckRecipe();
-            resultSlotText.text = "Fabrication : " + (ComputeCraftCost()).ToString();
         }
         else
         {
-            resultSlot.Empty();
-            resultSlotText.text = "";
+            EmptyResultSlot();
         }
     }
 
@@ -51,17 +49,19 @@ public class CraftingSystem : MonoBehaviour
                     {
                         resultSlot.AddItem(combinedElement);
                         recipeSystem.UnlockRecipe(combinedElement);
+                        PrintCraftCost();
                         return;
                     }
                     else if (combinedElement.ElementToCraft2.name == firstElementSlot.Element.name && combinedElement.ElementToCraft1.name == secondElementSlot.Element.name)
                     {
                         resultSlot.AddItem(combinedElement);
                         recipeSystem.UnlockRecipe(combinedElement);
+                        PrintCraftCost();
                         return;
                     }
                     else
                     {
-                        resultSlot.Empty();
+                        EmptyResultSlot();
                     }
 
                 }
@@ -69,8 +69,19 @@ public class CraftingSystem : MonoBehaviour
         }
         else
         {
-            resultSlot.Empty();
+            EmptyResultSlot();
         }
+    }
+
+    public void EmptyResultSlot()
+    {
+        resultSlot.Empty();
+        resultSlotText.text = "";
+    }
+
+    public void PrintCraftCost()
+    {
+        resultSlotText.text = "Fabrication : " + (ComputeCraftCost()).ToString();
     }
 
     public int ComputeCraftCost()

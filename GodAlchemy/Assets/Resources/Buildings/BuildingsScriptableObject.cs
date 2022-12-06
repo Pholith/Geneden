@@ -35,6 +35,8 @@ public class BuildingsScriptableObject : ScriptableObject, IComparable<Buildings
 
     [Header("Coûts")]
     [Min(0)]
+    public int FoodCost;
+    [Min(0)]
     public int WoodCost;
     [Min(0)]
     public int IronCost;

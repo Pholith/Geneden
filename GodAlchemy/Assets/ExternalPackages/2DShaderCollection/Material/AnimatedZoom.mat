@@ -59,10 +59,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AnimatedZoomUV_AnimatedZoomUV_Intensity_1: 1.47
-    - AnimatedZoomUV_AnimatedZoomUV_PosX_1: 0.48
-    - AnimatedZoomUV_AnimatedZoomUV_PosY_1: 0.5
-    - AnimatedZoomUV_AnimatedZoomUV_Speed_1: 6.393
+    - AnimatedZoomUV_AnimatedZoomUV_Intensity_1: 0.15
+    - AnimatedZoomUV_AnimatedZoomUV_PosX_1: 0
+    - AnimatedZoomUV_AnimatedZoomUV_PosY_1: 0.62
+    - AnimatedZoomUV_AnimatedZoomUV_Speed_1: 6.7
     - AnimatedZoomUV_AnimatedZoomUV_Zoom_1: 1
     - _BumpScale: 1
     - _ColorMask: 15
@@ -72,7 +72,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LerpUV_Fade_1: 1
+    - _LerpUV_Fade_1: 0.995
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
