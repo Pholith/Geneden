@@ -1,3 +1,4 @@
+using ExitGames.Client.Photon;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -12,6 +13,8 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private Vector2 initialRectTransform;
     [SerializeField]
     private RectTransform rectTransform;
+    [SerializeField]
+    private GameObject previewTile;
 
     [SerializeField]
     private Transform snapParent;
@@ -25,19 +28,32 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         if ((itemIcon.sprite != null) && (SlotType != Type.recipeBookSlot))
         {
+            previewTile = Instantiate(gridManager.previewTilePrefab);
+            previewTile.transform.localScale = new Vector3(gridManager.MainGameGrid.cellSize.x, gridManager.MainGameGrid.cellSize.y, 0);
             rectTransform = itemIcon.GetComponent<RectTransform>();
             initialRectTransform = rectTransform.anchoredPosition;
+            rectTransform.localScale = rectTransform.localScale / 2;
             snapParent = transform.parent;
             transform.SetParent(canvas.transform);
             transform.SetAsLastSibling();
             itemIcon.raycastTarget = false;
         }
     }
+    [SerializeField]
+    private float dampingSpeed = .05f;
+    private Vector3 velocity = Vector3.zero;
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log(eventData.delta);
         if (rectTransform == null) return;
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if(RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform,eventData.position,eventData.pressEventCamera,out var mousePos))
+        {
+            rectTransform.position = Vector3.SmoothDamp(rectTransform.position, mousePos, ref velocity, dampingSpeed);
+            previewTile.transform.position = gridManager.GetMouseGridPos();
+        }
+       
+
     }
 
     /// <summary>
@@ -123,7 +139,9 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (rectTransform == null) return;
+        Destroy(previewTile);
         rectTransform.anchoredPosition = initialRectTransform;
+        rectTransform.localScale = rectTransform.localScale * 2;
         transform.SetParent(snapParent);
         itemIcon.raycastTarget = true;
         rectTransform = null;

@@ -1,4 +1,5 @@
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildingGeneric : NetworkBehaviour
@@ -8,13 +9,25 @@ public class BuildingGeneric : NetworkBehaviour
     public Sprite spriteTimeBuilding;
     [SerializeField]
     private bool isBuild;
-    [ReadOnly]
+    //[ReadOnly]
+    [SerializeField]
     private int hp;
     private ResourceManager resourceManager;
     private SpriteRenderer sr;
 
+    //BuildingSelection
+    [SerializeField]
+    private BuildingManager buildingManager;
+    [SerializeField]
+    private BuildingInfosTable buildingInfosTable;
+    private bool isSelected;
+
+
+
     private void Start()
     {
+        buildingManager = FindObjectOfType<BuildingManager>(true);
+        buildingInfosTable = FindObjectOfType<BuildingInfosTable>(true);
         sr = GetComponent<SpriteRenderer>();
 #if DEBUG
         buildingScriptObj.BuildingTime = 1;
@@ -54,20 +67,24 @@ public class BuildingGeneric : NetworkBehaviour
                 {
                     Destroy(gameObject);
                     Debug.Log("Vous n'avez pas assez de ressources pour construire ce bat�ment.");
+                    return;
                 }
             }
             else
             {
                 Destroy(gameObject);
                 Debug.Log("Vous n'avez pas atteint le niveau de civilisation nec�ssaire pour construire ce bat�ment.");
+                return;
             }
         }
         else
         {
             Destroy(gameObject);
             Debug.Log("Vous ne pouvez pas encore construire ce bat�ment.");
+            return;
         }
         hp = buildingScriptObj.MaxHealth;
+        isSelected = false;
         ComputeCollider();
     }
 
@@ -76,7 +93,7 @@ public class BuildingGeneric : NetworkBehaviour
         // Génère un collider carré autour du sprite.
         BoxCollider2D collider = gameObject.AddOrGetComponent<BoxCollider2D>();
         Vector2 S = sr.sprite.bounds.size;
-        collider.offset = new Vector2(0, 0);
+        collider.offset = new Vector2(1, 1);
         collider.size = new Vector3(sr.sprite.bounds.size.x / transform.lossyScale.x,
                                      sr.sprite.bounds.size.y / transform.lossyScale.y,
                                      sr.sprite.bounds.size.z / transform.lossyScale.z);
@@ -96,18 +113,91 @@ public class BuildingGeneric : NetworkBehaviour
     {
         sr.sprite = buildingScriptObj.Sprite;
         isBuild = true;
+        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Economic))
+        {
+            gameObject.AddComponent<GatheringBuildings>();
+        }
         ComputeCollider();
+    }
 
+    private void OnMouseDown()
+    {
+        OnSelectBuilding();
+    }
+
+    private void OnSelectBuilding()
+    {
+        if(buildingManager.selectedBuilding == null)
+        {
+            if (isSelected)
+            {
+                UnselectBuilding();
+            }
+            else
+            {
+                SelectBuilding();
+            }
+        }
+        else
+        {
+            if(buildingManager.selectedBuilding != gameObject)
+            {
+                buildingManager.selectedBuilding.GetComponent<BuildingGeneric>().UnselectBuilding();
+                SelectBuilding();
+            }
+            else
+            {
+                UnselectBuilding();
+            }
+        }
+        
+        buildingInfosTable.BuildingClicked();
+    }
+
+    private void UnselectBuilding()
+    {
+            isSelected = false;
+            buildingManager.selectedBuilding = null;
+    }
+
+    private void SelectBuilding()
+    {
+        isSelected = true;
+        buildingManager.selectedBuilding = gameObject;
+    }
+
+    private void OnBuildingDestroy()
+    {
+        if(buildingManager.selectedBuilding == gameObject)
+        {
+            UnselectBuilding();
+            buildingInfosTable.BuildingClicked();
+        }
+    }
+    public bool isSelectedBuilding()
+    {
+        return isSelected;
+    }
+
+    public void SetSelected(bool selected)
+    {
+        isSelected = selected;
     }
     private void Update()
     {
         if (hp <= 0)
         {
+            OnBuildingDestroy();
             Destroy(gameObject);
         }
     }
     public void Damage(int damage)
     {
         hp -= damage;
+    }
+
+    public int GetHp()
+    {
+        return hp;
     }
 }

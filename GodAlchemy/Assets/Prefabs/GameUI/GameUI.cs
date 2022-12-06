@@ -5,55 +5,49 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    private Tile selectedTile;
-    private TileEditor playerEditor;
-    private Button desactivatedButton;
+    private BuildingManager buildingManager;
 
+    //
+    [SerializeField]
+    private GameObject InventoryTable;
     // Start is called before the first frame update
     private void Start()
     {
-        selectedTile = null;
-        playerEditor = FindObjectOfType<TileEditor>();
+        buildingManager = FindObjectOfType<BuildingManager>();
+        InventoryTable = transform.Find("Canvas").transform.Find("InventoryBoard").gameObject;
+        ManageUI();
     }
 
     // Update is called once per frame
     private void Update()
     {
-
+        
     }
 
-    public void OnSelectTile(Tile tile)
+    public void ManageUI()
     {
-        if (desactivatedButton != null)
+        if(buildingManager.selectedBuilding == null)
         {
-            desactivatedButton.interactable = true;
+            InventoryTable.transform.Find("RightTable").gameObject.SetActive(true);
+            InventoryTable.transform.Find("MiddleTable").gameObject.SetActive(true);
+            InventoryTable.transform.Find("CraftingTable").gameObject.SetActive(true);
+            InventoryTable.transform.Find("RecipeTable").gameObject.SetActive(true);
+            InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(true);
+            InventoryTable.transform.Find("BuildingTable").gameObject.SetActive(false);
+
+            InventoryTable.transform.Find("InfosTable").gameObject.SetActive(false);
         }
-        string _buttonName = EventSystem.current.currentSelectedGameObject.name;
-        Button _button = GameObject.Find(_buttonName).GetComponent<Button>();
-        _button.interactable = false;
-        desactivatedButton = _button;
-        selectedTile = tile;
-        playerEditor.SetSelectedTile(selectedTile);
-
-    }
-
-    public void OnSelectNone()
-    {
-        if (desactivatedButton != null)
+        else
         {
-            desactivatedButton.interactable = true;
+            InventoryTable.transform.Find("RightTable").gameObject.SetActive(false);
+            InventoryTable.transform.Find("MiddleTable").gameObject.SetActive(false);
+            InventoryTable.transform.Find("CraftingTable").gameObject.SetActive(false);
+            InventoryTable.transform.Find("RecipeTable").gameObject.SetActive(false);
+            InventoryTable.transform.Find("BuildingTable").gameObject.SetActive(false);
+            InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(false);
+
+            InventoryTable.transform.Find("InfosTable").gameObject.SetActive(true);
         }
-        string _buttonName = EventSystem.current.currentSelectedGameObject.name;
-        Button _button = GameObject.Find(_buttonName).GetComponent<Button>();
-        _button.interactable = false;
-        desactivatedButton = _button;
-        selectedTile = null;
-        playerEditor.SetSelectedTile(selectedTile);
     }
 
-    public Tile GetSelectedTile()
-    {
-
-        return selectedTile;
-    }
 }

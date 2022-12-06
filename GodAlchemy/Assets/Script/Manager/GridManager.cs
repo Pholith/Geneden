@@ -14,6 +14,8 @@ public class GridManager : BaseManager<GridManager>
     private TileBase dirt;
 
     private Camera mainCamera;
+    [SerializeField]
+    public GameObject previewTilePrefab;
 
     protected override void InitManager()
     {
@@ -134,10 +136,10 @@ public class GridManager : BaseManager<GridManager>
         return MainGameGrid.WorldToCell(_worldPos);
     }
 
-    public Vector3 GetGridPos(Vector3 pos)
+    public Vector3Int GetGridPos(Vector3 pos)
     {
-        Vector3 _worldPos = mainCamera.ScreenToWorldPoint(pos);
-        _worldPos.z = 0.0f;
-        return MainGameGrid.WorldToCell(_worldPos);
+        //Vector3 _worldPos = mainCamera.ScreenToWorldPoint(pos);
+        //_worldPos.z = 0.0f;
+        return MainGameGrid.WorldToCell(pos);
     }
 }

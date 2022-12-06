@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6939585cbcdf42944ac77f7e89554179, type: 3}
-  m_Name: Lumber Camp
+  m_Script: {fileID: 11500000, guid: b248f11bc7edabe4ba7e6f8206e865da, type: 3}
+  m_Name: Ferme
   m_EditorClassIdentifier: 
-  BuildingDescription: 
-  Sprite: {fileID: 21300000, guid: 584173ce29273b34eb60cf54ebd0ab5d, type: 3}
-  MaxHealth: 700
+  BuildingDescription: "Les fermes sont une source illimit\xE9e de nourriture lorsqu\u2019un
+    villageois les r\xE9colte. "
+  Sprite: {fileID: 2130270517, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  MaxHealth: 250
   BuildingTime: 10
-  WoodCost: 50
+  WoodCost: 70
   IronCost: 0
   RockCost: 0
   SilverCost: 0
@@ -25,7 +26,7 @@ MonoBehaviour:
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
   BuildingTags: 
-  RequiredCivilisationLvl: 0
+  RequiredCivilisationLvl: 10
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition
@@ -37,6 +38,3 @@ MonoBehaviour:
   UpdateFunction:
     m_PersistentCalls:
       m_Calls: []
-  gatherableRessource: 01000000
-  gatheringRange: 10
-  maxVillager: 3

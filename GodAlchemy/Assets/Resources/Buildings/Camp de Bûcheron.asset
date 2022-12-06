@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6939585cbcdf42944ac77f7e89554179, type: 3}
-  m_Name: Miner Camp
+  m_Name: "Camp de B\xFBcheron"
   m_EditorClassIdentifier: 
-  BuildingDescription: 
-  Sprite: {fileID: 21300000, guid: 606bc45f558a33a45b4944c847a8ca96, type: 3}
+  BuildingDescription: "B\xE2timent \xE9conomique qui abrite des b\xFBcherons et
+    permet de r\xE9colter le bois \xE0 porter. Contient les am\xE9liorations technologiques
+    de la r\xE9colte du bois."
+  Sprite: {fileID: -832742988, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 700
-  BuildingTime: 10
+  BuildingTime: 1
+  FoodCost: 0
   WoodCost: 50
   IronCost: 0
   RockCost: 0
@@ -24,7 +27,7 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 
+  BuildingTags: 00000000
   RequiredCivilisationLvl: 0
   SpecialConditionRequired:
     _target: {fileID: 11400000}
@@ -37,6 +40,6 @@ MonoBehaviour:
   UpdateFunction:
     m_PersistentCalls:
       m_Calls: []
-  gatherableRessource: 02000000030000000400000005000000
+  gatherableRessource: 01000000
   gatheringRange: 10
   maxVillager: 3

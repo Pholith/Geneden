@@ -1707,9 +1707,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel:
-    m_SceneAsset: {fileID: 102900000, guid: a655a175614e10243b5b42b7df8ecae3, type: 3}
+    m_SceneAsset: {fileID: 102900000, guid: c3828d74df8601e43967c9bbbd42c53a, type: 3}
     m_IsDirty: 0
-    m_ScenePath: Assets/Scenes/RoomSelection.unity
+    m_ScenePath: Assets/Scenes/Main.unity
   optionsScreen: {fileID: 474220881}
 --- !u!1001 &1993110184
 PrefabInstance:

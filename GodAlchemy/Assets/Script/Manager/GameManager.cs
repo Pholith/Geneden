@@ -56,6 +56,7 @@ public class GameManager : BaseGameManager
     }
 
     public void EndGame() {
+        // TODO: force the end for both sides
         Debug.Log("Game is ended");
         if (isGameWon()) {
             Debug.Log(victoryScreen.activeSelf);

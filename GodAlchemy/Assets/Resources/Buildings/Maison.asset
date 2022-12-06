@@ -16,9 +16,10 @@ MonoBehaviour:
     de population maximum. Elles peuvent \xEAtre am\xE9lior\xE9es \xE0 l\u2019aide
     de ressources de Tier II et III afin d\u2019augmenter le nombre d\u2019habitant
     qu\u2019elles contiennent et leurs points de vie."
-  Sprite: {fileID: 1974448446, guid: ac20b9d7ff56cf54c90cec8e565fe7b9, type: 3}
+  Sprite: {fileID: -2115248026, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 500
-  BuildingTime: 10
+  BuildingTime: 1
+  FoodCost: 0
   WoodCost: 50
   IronCost: 0
   RockCost: 0
@@ -27,7 +28,7 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 00000000
+  BuildingTags: 01000000
   RequiredCivilisationLvl: 0
   SpecialConditionRequired:
     _target: {fileID: 11400000}
@@ -38,9 +39,6 @@ MonoBehaviour:
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     dirty: 0
   UpdateFunction:
-    m_PersistentCalls:
-      m_Calls: []
-  createBuildingOnMap:
     m_PersistentCalls:
       m_Calls: []
   AdditionalPopulation: 10
