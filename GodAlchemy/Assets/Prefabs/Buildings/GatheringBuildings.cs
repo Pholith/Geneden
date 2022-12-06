@@ -9,23 +9,50 @@ using UnityEngine.EventSystems;
 public class GatheringBuildings : MonoBehaviour
 {
     private GatheringBuildingScript building;
-    private List<GameObject> nodesInRangeList;
     [SerializeField]
     private ResourceNode TargetedNode;
     private ResourceManager resourceManager;
     private GridManager gridManager;
     private BuildingGeneric baseBuilding;
-    private float secondToWaitBeforeGather;
 
+    //Nodes
     [SerializeField]
     private List<Collider2D> collidersInRangeList;
     private GameObject buildingRange;
     private BuildingManager buildingManager;
+
+    //Gathering Stuff
+    [SerializeField]
+    private int workers;
+    [SerializeField]
+    private int maxWorkers;
+    [SerializeField]
+    private int gatheringPerCycle;
+    [SerializeField]
+    private float effeciencyBonus;
+    [SerializeField]
+    private float secondToWaitBeforeGather;
+
+    private StopWatch gatheringTimer;
+    public const float GATHERINGTIMER = 15.0f;
+    public const float WAITINGTIMER = 1.0f;
+
     // Start is called before the first frame update
     private void Start()
     {
         building = (GatheringBuildingScript)GetComponent<BuildingGeneric>().GetBuilding();
-        nodesInRangeList = new List<GameObject>();
+        //Gathering Stuff
+        workers = 0;
+        maxWorkers = building.maxVillager;
+        gatheringPerCycle = 10;
+        effeciencyBonus = 0;
+        gatheringTimer = gameObject.AddComponent<StopWatch>();
+        secondToWaitBeforeGather = WAITINGTIMER;
+
+
+
+        //Other
+        
         collidersInRangeList = new List<Collider2D>();
         resourceManager = FindObjectOfType<ResourceManager>();
         gridManager = FindObjectOfType<GridManager>();
@@ -33,15 +60,16 @@ public class GatheringBuildings : MonoBehaviour
         baseBuilding = GetComponent<BuildingGeneric>();
         CreateBuildingRange();
         TargetedNode = null;
-        secondToWaitBeforeGather = 10.0f;
-        StartCoroutine(GatherRoutine());
+        //StartCoroutine(GatherRoutine());
     }
 
     // Update is called once per frame
     private void Update()
     {
-        GetNodes();
-        BuildingIsSelected();
+        if(IsThereNoWorker() == false)
+            GetNodes();
+        if(gatheringTimer.IsFinished())
+            GatherNode();
     }
 
     private void CreateBuildingRange()
@@ -53,13 +81,9 @@ public class GatheringBuildings : MonoBehaviour
         buildingRange.SetActive(false);
     }
 
-    private void BuildingIsSelected()
+    public void ShowRange(bool show)
     {
-        if (baseBuilding.isSelectedBuilding())
-            buildingRange.SetActive(true);
-        else
-            buildingRange.SetActive(false);
-
+        buildingRange.SetActive(show);
     }
 
     public void GetNodes()
@@ -83,6 +107,9 @@ public class GatheringBuildings : MonoBehaviour
                     if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<ResourceNode>().GetResourceType()))
                     {
                         TargetedNode = collider.gameObject.GetComponent<ResourceNode>();
+                        secondToWaitBeforeGather = (GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) - ((GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) * effeciencyBonus);
+                        gatheringTimer.SetEndTime(secondToWaitBeforeGather);
+                        gatheringTimer.StartCount();
                         return;
                     }
                 }      
@@ -91,7 +118,7 @@ public class GatheringBuildings : MonoBehaviour
         TargetedNode = null;
     }
 
-    private IEnumerator GatherRoutine()
+    /*private IEnumerator GatherRoutine()
     {
         while (true)
         {
@@ -102,22 +129,76 @@ public class GatheringBuildings : MonoBehaviour
             yield return new WaitForSeconds(secondToWaitBeforeGather);
         }
 
-    }
+    }*/
 
     public void GatherNode()
     {
         if (TargetedNode != null)
         {
-            if (TargetedNode.DeleteResource(10))
+            int nodeAmount = TargetedNode.GetCurrentAmout();
+            if (TargetedNode.DeleteResource(gatheringPerCycle * workers))
             {
-                resourceManager.AddRessource(TargetedNode.GetResourceType(), 10);
-                secondToWaitBeforeGather = 10.0f;
+                resourceManager.AddRessource(TargetedNode.GetResourceType(), gatheringPerCycle * workers);
+                secondToWaitBeforeGather = (GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) - ((GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) * effeciencyBonus);
+                gatheringTimer.SetEndTime(secondToWaitBeforeGather);
+                gatheringTimer.StartCount();
+            }
+            else if(TargetedNode.DeleteResource(TargetedNode.GetCurrentAmout()))
+            {
+                resourceManager.AddRessource(TargetedNode.GetResourceType(), nodeAmount);
+                TargetedNode = null;
+                gatheringTimer.StopCount();
             }
             else
             {
                 TargetedNode = null;
-                secondToWaitBeforeGather = 1.0f;
+                gatheringTimer.StopCount();
             }
         }
+    }
+
+    public void AddWorker(int number)
+    {
+        if (workers + number <= maxWorkers)
+        {
+            ResourceManager.Instance.ConsumePop(number);
+            workers += number;
+        }     
+    }
+
+    public void RemoveWorker(int number)
+    {
+        if (workers - number >= 0)
+        {
+            ResourceManager.Instance.AddRessource(ResourceManager.RessourceType.Population,number);
+            workers -= number;
+        }
+    }
+
+    public int GetWorker()
+    {
+        return workers;
+    }
+
+    public int GetMaxWorker()
+    {
+        return maxWorkers;
+    }
+
+    public StopWatch GetTimer()
+    {
+        return gatheringTimer;
+    }
+
+    public bool IsThereNoWorker()
+    {
+        if(workers == 0)
+        {
+            gatheringTimer.StopCount();
+            TargetedNode = null;
+            return true;
+        }
+        return false;
+        
     }
 }

@@ -17,6 +17,8 @@ public class BuildingsScriptableObject : ScriptableObject, IComparable<Buildings
         Defensive,
         Technologic,
         Divine,
+        House,
+        Gathering,
     }
 
     [Header("Informations basiques")]

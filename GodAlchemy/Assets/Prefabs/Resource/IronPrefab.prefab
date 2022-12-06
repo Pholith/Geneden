@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceAmount: 100
   type: 3
+  gatheringSpeed: 1
 --- !u!58 &5140954504623769785
 CircleCollider2D:
   m_ObjectHideFlags: 0

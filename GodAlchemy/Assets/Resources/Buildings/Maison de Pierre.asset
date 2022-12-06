@@ -16,6 +16,7 @@ MonoBehaviour:
   Sprite: {fileID: 61107799, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 1000
   BuildingTime: 1
+  FoodCost: 0
   WoodCost: 50
   IronCost: 0
   RockCost: 25
@@ -24,7 +25,7 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 
+  BuildingTags: 06000000
   RequiredCivilisationLvl: 15
   SpecialConditionRequired:
     _target: {fileID: 11400000}

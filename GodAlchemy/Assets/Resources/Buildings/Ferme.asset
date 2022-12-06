@@ -17,6 +17,7 @@ MonoBehaviour:
   Sprite: {fileID: 2130270517, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 250
   BuildingTime: 10
+  FoodCost: 0
   WoodCost: 70
   IronCost: 0
   RockCost: 0

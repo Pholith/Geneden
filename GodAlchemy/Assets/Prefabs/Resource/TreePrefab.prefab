@@ -88,6 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceAmount: 100
   type: 1
+  gatheringSpeed: 1
 --- !u!61 &4909302300758734147
 BoxCollider2D:
   m_ObjectHideFlags: 0

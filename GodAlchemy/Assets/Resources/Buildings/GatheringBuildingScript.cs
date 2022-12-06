@@ -12,6 +12,6 @@ public class GatheringBuildingScript : BuildingsScriptableObject
     public int gatheringRange = 10;
 
     [Header("Villagers")]
-    [Range(1, 3)]
-    public int maxVillager = 1;
+    [Range(1, 5)]
+    public int maxVillager = 3;
 }

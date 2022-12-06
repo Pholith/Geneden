@@ -15,19 +15,10 @@ public class BuildingGeneric : NetworkBehaviour
     private ResourceManager resourceManager;
     private SpriteRenderer sr;
 
-    //BuildingSelection
-    [SerializeField]
-    private BuildingManager buildingManager;
-    [SerializeField]
-    private BuildingInfosTable buildingInfosTable;
-    private bool isSelected;
-
 
 
     private void Start()
     {
-        buildingManager = FindObjectOfType<BuildingManager>(true);
-        buildingInfosTable = FindObjectOfType<BuildingInfosTable>(true);
         sr = GetComponent<SpriteRenderer>();
 #if DEBUG
         buildingScriptObj.BuildingTime = 1;
@@ -84,7 +75,6 @@ public class BuildingGeneric : NetworkBehaviour
             return;
         }
         hp = buildingScriptObj.MaxHealth;
-        isSelected = false;
         ComputeCollider();
     }
 
@@ -113,76 +103,36 @@ public class BuildingGeneric : NetworkBehaviour
     {
         sr.sprite = buildingScriptObj.Sprite;
         isBuild = true;
-        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Economic))
+        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
         {
             gameObject.AddComponent<GatheringBuildings>();
+        }
+        else if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House))
+        {
+            HouseScriptableObject houseScript = (HouseScriptableObject)buildingScriptObj;
+            ResourceManager.Instance.UpMaxPop(houseScript.AdditionalPopulation);
         }
         ComputeCollider();
     }
 
-    private void OnMouseDown()
-    {
-        OnSelectBuilding();
-    }
-
-    private void OnSelectBuilding()
-    {
-        if(buildingManager.selectedBuilding == null)
-        {
-            if (isSelected)
-            {
-                UnselectBuilding();
-            }
-            else
-            {
-                SelectBuilding();
-            }
-        }
-        else
-        {
-            if(buildingManager.selectedBuilding != gameObject)
-            {
-                buildingManager.selectedBuilding.GetComponent<BuildingGeneric>().UnselectBuilding();
-                SelectBuilding();
-            }
-            else
-            {
-                UnselectBuilding();
-            }
-        }
-        
-        buildingInfosTable.BuildingClicked();
-    }
-
-    private void UnselectBuilding()
-    {
-            isSelected = false;
-            buildingManager.selectedBuilding = null;
-    }
-
-    private void SelectBuilding()
-    {
-        isSelected = true;
-        buildingManager.selectedBuilding = gameObject;
-    }
-
     private void OnBuildingDestroy()
     {
-        if(buildingManager.selectedBuilding == gameObject)
+        SelectionManager _selectionManager = SelectionManager.Instance;
+        if (_selectionManager.isSelected(this.GetComponent<SelectableObject>()))
         {
-            UnselectBuilding();
-            buildingInfosTable.BuildingClicked();
+            _selectionManager.DeselectObject(this.GetComponent<SelectableObject>());
+        }
+        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House))
+        {
+            HouseScriptableObject houseScript = (HouseScriptableObject)buildingScriptObj;
+            ResourceManager.Instance.RemoveMaxPop(houseScript.AdditionalPopulation);
+        }
+        if (buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
+        {
+            ResourceManager.Instance.AddRessource(ResourceManager.RessourceType.Population,this.GetComponent<GatheringBuildings>().GetWorker());
         }
     }
-    public bool isSelectedBuilding()
-    {
-        return isSelected;
-    }
 
-    public void SetSelected(bool selected)
-    {
-        isSelected = selected;
-    }
     private void Update()
     {
         if (hp <= 0)
