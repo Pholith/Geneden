@@ -15,7 +15,8 @@ public class GameUI : MonoBehaviour
     {
         buildingManager = FindObjectOfType<BuildingManager>();
         InventoryTable = transform.Find("Canvas").transform.Find("InventoryBoard").gameObject;
-        ManageUI();
+        ShowBuildingUI(false);
+        ShowElementUI(true);
     }
 
     // Update is called once per frame
@@ -24,30 +25,23 @@ public class GameUI : MonoBehaviour
         
     }
 
-    public void ManageUI()
+    public void ShowBuildingUI(bool show)
     {
-        if(buildingManager.selectedBuilding == null)
-        {
-            InventoryTable.transform.Find("RightTable").gameObject.SetActive(true);
-            InventoryTable.transform.Find("MiddleTable").gameObject.SetActive(true);
-            InventoryTable.transform.Find("CraftingTable").gameObject.SetActive(true);
-            InventoryTable.transform.Find("RecipeTable").gameObject.SetActive(true);
-            InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(true);
-            InventoryTable.transform.Find("BuildingTable").gameObject.SetActive(false);
-
-            InventoryTable.transform.Find("InfosTable").gameObject.SetActive(false);
-        }
-        else
-        {
-            InventoryTable.transform.Find("RightTable").gameObject.SetActive(false);
-            InventoryTable.transform.Find("MiddleTable").gameObject.SetActive(false);
-            InventoryTable.transform.Find("CraftingTable").gameObject.SetActive(false);
-            InventoryTable.transform.Find("RecipeTable").gameObject.SetActive(false);
-            InventoryTable.transform.Find("BuildingTable").gameObject.SetActive(false);
-            InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(false);
-
-            InventoryTable.transform.Find("InfosTable").gameObject.SetActive(true);
-        }
+        InventoryTable.transform.Find("InfosTable").gameObject.SetActive(show);
     }
 
+    public void ShowElementUI(bool show)
+    {
+        InventoryTable.transform.Find("RightTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("MiddleTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("CraftingTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("RecipeTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("BuildingTable").gameObject.SetActive(false);
+        InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(show);
+    }
+
+    public void ShowGatheringUI(bool show)
+    {
+        InventoryTable.transform.Find("InfosTable").transform.Find("AsignationTable").gameObject.SetActive(show);
+    }
 }

@@ -9,7 +9,6 @@ public class BuildingManager : BaseManager<BuildingManager>
 
     protected override void InitManager()
     {
-        selectedBuilding = null;
         Resources.LoadAll("Buildings");
         buildingsScriptableObjects = new List<BuildingsScriptableObject>(Resources.FindObjectsOfTypeAll<BuildingsScriptableObject>());
         buildingsScriptableObjects.Sort();
@@ -19,7 +18,6 @@ public class BuildingManager : BaseManager<BuildingManager>
     }
 
     public GameObject buildingRangePrefab;
-    public GameObject selectedBuilding;
 
     [SerializeField]
     public List<TagScriptableObject> tagsSpriteList;

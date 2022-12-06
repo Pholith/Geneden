@@ -6,6 +6,8 @@ public class ResourceNode : MonoBehaviour
     private int resourceAmount = 100;
     [SerializeField]
     private ResourceManager.RessourceType type;
+    [SerializeField]
+    private float gatheringSpeed;
 
     private void Start()
     {
@@ -34,6 +36,16 @@ public class ResourceNode : MonoBehaviour
         }
 
         return false;
+    }
+
+    public float GetGatheringSpeed()
+    {
+        return gatheringSpeed;
+    }
+
+    public int GetCurrentAmout()
+    {
+        return resourceAmount;
     }
 
     public ResourceManager.RessourceType GetResourceType()

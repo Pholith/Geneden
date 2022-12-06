@@ -31,6 +31,8 @@ public class GameManager : BaseGameManager
 
     [SerializeField]
     private BuildingManager buildingManager;
+    [SerializeField]
+    private SelectionManager selectionManager;
     public static BuildingManager BuildingManager => instance.buildingManager;
 
     protected override void InitManager()
@@ -48,6 +50,7 @@ public class GameManager : BaseGameManager
         resourceManager?.Initialization();
         networkManager?.Initialization();
         buildingManager?.Initialization();
+        selectionManager?.Initialization();
     }
 
 

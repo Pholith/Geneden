@@ -27,7 +27,7 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 0000000004000000
+  BuildingTags: 0000000007000000
   RequiredCivilisationLvl: 0
   SpecialConditionRequired:
     _target: {fileID: 11400000}

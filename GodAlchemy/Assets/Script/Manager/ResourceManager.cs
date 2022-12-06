@@ -32,6 +32,8 @@ public class ResourceManager : BaseManager<ResourceManager>
     [SerializeField] private int silverScore;
     [SerializeField] private int goldScore;
     [SerializeField] private int popScore;
+    [SerializeField] private int realPop;
+    [SerializeField] private int maxPop;
     [SerializeField] private int civLevel;
 
     //UI score text
@@ -129,6 +131,20 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     }
 
+    public void UpMaxPop(int amount)
+    {
+        if (maxPop >= realPop)
+        {
+            maxPop += amount;
+            realPop += amount;
+            popScore += amount;
+        }
+        else
+        {
+            maxPop += amount;
+        }
+    }
+
 
     public void UpdateUI()
     {
@@ -138,7 +154,7 @@ public class ResourceManager : BaseManager<ResourceManager>
         ironText.text = ironScore.ToString();
         silverText.text = silverScore.ToString();
         goldText.text = goldScore.ToString();
-        popText.text = popScore.ToString();
+        popText.text = popScore.ToString() + "/" + maxPop.ToString();
         civText.text = civLevel.ToString();
     }
 
@@ -203,6 +219,25 @@ public class ResourceManager : BaseManager<ResourceManager>
     public bool HasEnoughGold(int substraction)
     {
         return goldScore - substraction >= 0;
+    }
+
+    public void ConsumePop(int pop)
+    {
+        popScore -= pop;
+    }
+    public bool HasEnoughPop(int substraction)
+    {
+        return popScore - substraction >= 0;
+    }
+
+    public void AddMaxPop(int pop)
+    {
+        maxPop += pop;
+    }
+
+    public void RemoveMaxPop(int pop)
+    {
+        maxPop -= pop;
     }
 
 }

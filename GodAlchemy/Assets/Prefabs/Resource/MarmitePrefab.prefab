@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceAmount: 100
   type: 0
+  gatheringSpeed: 1
 --- !u!114 &5532885383608716962
 MonoBehaviour:
   m_ObjectHideFlags: 0
