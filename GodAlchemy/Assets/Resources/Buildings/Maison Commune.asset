@@ -17,9 +17,10 @@ MonoBehaviour:
     et attaque les unit\xE9s ennemis proches. La maison commune peut \xEAtre am\xE9lior\xE9e
     pour augmenter ses points de vie, son bonus de population et d\xE9bloquer de
     nouveaux b\xE2timents."
-  Sprite: {fileID: 359655389, guid: ac20b9d7ff56cf54c90cec8e565fe7b9, type: 3}
+  Sprite: {fileID: -2115248026, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 4000
   BuildingTime: 0
+  FoodCost: 0
   WoodCost: 0
   IronCost: 0
   RockCost: 0
@@ -28,7 +29,7 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 00000000
+  BuildingTags: 
   RequiredCivilisationLvl: 0
   SpecialConditionRequired:
     _target: {fileID: 11400000}
@@ -41,19 +42,4 @@ MonoBehaviour:
   UpdateFunction:
     m_PersistentCalls:
       m_Calls: []
-  createBuildingOnMap:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1104164626079110861, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
-        m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
-        m_MethodName: buildCommonHouse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   AdditionalPopulation: 20

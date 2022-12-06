@@ -30,7 +30,6 @@ public class DivinPowerBar : MonoBehaviour
     }
 
     [SerializeField]
-    [ReadOnly]
     private int currentPower;
     public int CurrentPower
     {

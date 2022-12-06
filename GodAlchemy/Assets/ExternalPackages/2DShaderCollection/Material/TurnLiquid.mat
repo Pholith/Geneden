@@ -28,19 +28,19 @@ Material:
     m_Ints: []
     m_Floats:
     - Displacement_Value: 0.3
-    - DistanceX: 0.3
-    - DistanceY: 0.3
+    - DistanceX: 0.2
+    - DistanceY: 0.2
     - Effect_Fading: 1
     - PixelSnap: 0
     - Pixel_Size: 22
-    - Speed: 1
+    - Speed: 0.5
     - Symbiose_Distance: -0.012881077
     - Symbiose_Position: -0.209
     - TiltDownUV_TiltDownUV_Value_1: -0.14888936
     - TiltRightUV_TiltRightUV_Value_1: 0.0774262
-    - TurnLiquid_Value: 0.5849775
-    - WaveX: 2
-    - WaveY: 2
+    - TurnLiquid_Value: 0.6
+    - WaveX: 1.3
+    - WaveY: 1.3
     - _ColorMask: 15
     - _Fire_Addition_Value: 0.5
     - _Fire_Displacement_Value: 0

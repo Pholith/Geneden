@@ -59,11 +59,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AnimatedRotationUV_AnimatedRotationUV_Intensity_1: 0.5
-    - AnimatedRotationUV_AnimatedRotationUV_PosX_1: 0.5
-    - AnimatedRotationUV_AnimatedRotationUV_PosY_1: 0.5
-    - AnimatedRotationUV_AnimatedRotationUV_Rotation_1: -16.715
-    - AnimatedRotationUV_AnimatedRotationUV_Speed_1: 4.107
+    - AnimatedRotationUV_AnimatedRotationUV_Intensity_1: 0.1
+    - AnimatedRotationUV_AnimatedRotationUV_PosX_1: 0.048
+    - AnimatedRotationUV_AnimatedRotationUV_PosY_1: 0
+    - AnimatedRotationUV_AnimatedRotationUV_Rotation_1: 0.1
+    - AnimatedRotationUV_AnimatedRotationUV_Speed_1: 0.5
     - _BumpScale: 1
     - _ColorMask: 15
     - _Cutoff: 0.5

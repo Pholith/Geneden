@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public static class Utils
 {
@@ -27,18 +26,13 @@ public static class Utils
         return source.OrderBy(x => Guid.NewGuid());
     }
 
-    public static Vector3Int ToVector3Int(this Vector3 vector3)
+    public static void AddRange<T>(this ICollection<T> set, T[] items)
     {
-        return Vector3Int.RoundToInt(vector3);
+        foreach (T item in items)
+        {
+            set.Add(item);
+        }
     }
-
-    public static GameObject Instantiate(this GameObject gameObject, Vector3 position)
-    {
-        var go = GameObject.Instantiate(gameObject);
-        go.transform.position = position;
-        return go;
-    }
-
 
 }
 

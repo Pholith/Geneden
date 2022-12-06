@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class ResourceManager : BaseManager<ResourceManager>
@@ -48,7 +47,7 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     //Divine Power
     [RequiredField]
-    [SerializeField] 
+    [SerializeField]
     private DivinPowerBar powerBar;
 
     [SerializeField]
@@ -91,9 +90,9 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     private void RegenDivinPower()
     {
-        RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
-        AddRessource(randomRessource, 100);
-        AddRessource(RessourceType.CivLevel, 1);
+        //RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
+        //AddRessource(randomRessource, 100);
+        //AddRessource(RessourceType.CivLevel, 1);
         powerBar.CurrentPower += 2;
     }
 

@@ -1,13 +1,16 @@
+using Fusion;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/New building", order = 2)]
-public class BuildingsScriptableObject : ScriptableObject
+public class BuildingsScriptableObject : ScriptableObject, IComparable<BuildingsScriptableObject>
 {
     [Serializable]
-    public enum BuildingType {
+    public enum BuildingType
+    {
         Economic,
         Production,
         Military,
@@ -31,6 +34,8 @@ public class BuildingsScriptableObject : ScriptableObject
     public int BuildingTime;
 
     [Header("Coûts")]
+    [Min(0)]
+    public int FoodCost;
     [Min(0)]
     public int WoodCost;
     [Min(0)]
@@ -61,7 +66,7 @@ public class BuildingsScriptableObject : ScriptableObject
     public int RequiredCivilisationLvl;
 
     [Serializable]
-    public class BuildingSpecialCondition : SerializableCallback<bool> {}
+    public class BuildingSpecialCondition : SerializableCallback<bool> { }
 
     [SerializeField]
     [Tooltip("A utiliser si le batiment nécessite une condition spéciale (exemple: une cathédrale est construite)\n" +
@@ -77,12 +82,14 @@ public class BuildingsScriptableObject : ScriptableObject
         return true;
     }
 
-    [Header("Script")]
-    [SerializeField]
-    public UnityEvent UpdateFunction;
+
+    public int CompareTo(BuildingsScriptableObject other)
+    {
+        return name.CompareTo(other.name);
+    }
 
     [Header("Script")]
     [SerializeField]
-    public UnityEvent createBuildingOnMap;
+    public UnityEvent UpdateFunction;
 
 }

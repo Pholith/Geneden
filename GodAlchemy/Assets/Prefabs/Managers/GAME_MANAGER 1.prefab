@@ -55,6 +55,8 @@ MonoBehaviour:
   elementManager: {fileID: 2030806754}
   resourceManager: {fileID: 5911366380029177573}
   networkManager: {fileID: 96931583363761379}
+  victoryScreen: {fileID: 0}
+  defeatScreen: {fileID: 0}
   buildingManager: {fileID: 1104164626079110861}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
@@ -122,16 +124,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  questSystem: {fileID: 7337215965699055723, guid: 964d30814c4500c42b7f218b99c750f9, type: 3}
   particleSystemOffsets: {x: 0, y: 5, z: 0}
   timeInSecondAfterParticleStart: 2
   hillTile: {fileID: 11400000, guid: 939448eb5c2a5e74eaf286acdb581f4e, type: 2}
   airParticlePrefab:
     RawGuidValue: 0af6fd52f50b8b64ba3df3ff53b2faa4
+  gustParticlePrefab:
+    RawGuidValue: 00000000000000000000000000000000
   dirtTile: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
   dirtParticlePrefab:
     RawGuidValue: bfdd3bc9e3ade4742a001453e45e442e
   waterParticlePrefab:
     RawGuidValue: 53ec6f78b425f3042890ee623a22d2dd
+  rainPrefab:
+    RawGuidValue: 00000000000000000000000000000000
   lightningPrefab:
     RawGuidValue: ca84c41ceaa02ef43b05ba4131148726
   dustPrefab:
@@ -139,6 +146,18 @@ MonoBehaviour:
   numberOfCloudToSpawn: 6
   meteorPrefab:
     RawGuidValue: 8ddb2898e3b11d349ad1e9cdf7098d51
+  treePrefab:
+    RawGuidValue: f8cddab4c4736684aa109117f0f48e74
+  bushPrefab:
+    RawGuidValue: c61b742a7376ba24e909e8d394e1105a
+  rockPrefab:
+    RawGuidValue: c72c07a41736f8a4bb5135247366a2aa
+  ironPrefab:
+    RawGuidValue: 8c98fb062c9464141a29ac2de0a591db
+  silverPrefab:
+    RawGuidValue: fe1b482b0622e7446bc221bb350c2dc3
+  goldPrefab:
+    RawGuidValue: 807a350702b030644827d68696cad2d1
 --- !u!114 &1331238577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,5 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  maison: {fileID: 6256013982987254513, guid: 935e956ca9406c54f9a0ec83f1e0e416, type: 3}
-  maisonCommune: {fileID: 6256013982987254513, guid: 5b05e0e115045624e93eebc667f3a748, type: 3}
+  buildingsScriptableObjects: []
+  genericBuildingPrefab:
+    RawGuidValue: 00000000000000000000000000000000
