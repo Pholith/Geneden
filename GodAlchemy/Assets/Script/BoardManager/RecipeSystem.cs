@@ -31,7 +31,6 @@ public class RecipeSystem : MonoBehaviour
             if(element == slot.Element)
             {
                 slot.UnlockRecipe();
-          
             }
         }
     }

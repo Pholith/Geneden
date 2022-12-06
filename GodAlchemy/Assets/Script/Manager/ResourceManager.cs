@@ -92,8 +92,8 @@ public class ResourceManager : BaseManager<ResourceManager>
     private void RegenDivinPower()
     {
         RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
-        AddRessource(randomRessource, 100);
-        AddRessource(RessourceType.CivLevel, 1);
+        //AddRessource(randomRessource, 100);
+        //AddRessource(RessourceType.CivLevel, 1);
         powerBar.CurrentPower += 2;
     }
 

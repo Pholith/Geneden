@@ -13,6 +13,8 @@ public class CraftingSystem : MonoBehaviour
     [SerializeField] private RecipeSystem recipeSystem;
     [SerializeField] private Text resultSlotText;
 
+    [SerializeField] private QuestSystem questSystem;
+
     private void Start()
     {
         firstElementSlot = transform.Find("ItemSlot1").transform.gameObject.GetComponent<ItemSlot>();
@@ -81,15 +83,16 @@ public class CraftingSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Diminue la barre de power du coût du craft et vide les slots.
+    /// Diminue la barre de power du coï¿½t du craft et vide les slots.
     /// </summary>
     /// <exception cref="InvalidOperationException"> si le craft coute plus cher que la barre de power n'est rempli </exception>
     public void ConsumePower()
     {
-        if (!HasEnoughPower()) throw new InvalidOperationException("Un test n'a pas été fait avant l'appel de cette fonction !!");
+        if (!HasEnoughPower()) throw new InvalidOperationException("Un test n'a pas ï¿½tï¿½ fait avant l'appel de cette fonction !!");
         GameManager.ResourceManager.ConsumePower(ComputeCraftCost());
         firstElementSlot.Empty();
         secondElementSlot.Empty();
+        questSystem.Crafted(resultSlot.Element.name);
         resultSlot.Empty();
     }
 
