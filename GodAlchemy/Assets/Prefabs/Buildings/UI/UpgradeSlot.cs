@@ -89,12 +89,13 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (SelectedBuilding.IsSearchingUpgrade(Upgrade) == false)
+        if(!SelectedBuilding.IsSearching())
         {
             Debug.Log(PlayerManager.Instance.IsUpgradeSearchable(Upgrade));
             if (PlayerManager.Instance.IsUpgradeSearchable(Upgrade))
             {
                 SelectedBuilding.SearchUpgrade(Upgrade);
+                FindObjectOfType<BuildingInfosTable>().UpdateSearchingIcon();
             }
         }
     }

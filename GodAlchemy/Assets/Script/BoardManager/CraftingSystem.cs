@@ -113,6 +113,20 @@ public class CraftingSystem : MonoBehaviour
         else if (secondElementSlot.IsEmpty()) secondElementSlot.AddItem(addedRessource);
     }
 
+    public bool AddPayedRessource(ElementScriptableObject addedRessource)
+    {
+        if (firstElementSlot.IsEmpty()) 
+        {
+            return firstElementSlot.AddItem(addedRessource, true);
+            
+        }  
+        else if (secondElementSlot.IsEmpty()) 
+        {
+            return secondElementSlot.AddItem(addedRessource, true);
+        }
+        return false;
+    }
+
     public void AddItemInSlot(ElementScriptableObject addedRessource, bool isPayed)
     {
         if (firstElementSlot.IsEmpty()) firstElementSlot.AddItem(addedRessource, isPayed);

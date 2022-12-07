@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 [ExecuteAlways] // Permet d'appeler certaines fonction dans le mode d'�dition pour actualiser les slots
 public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -57,7 +58,9 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
 
     }
 
-    private void Update() {
+    private void Update()
+    {
+        SetBuildableFeedBack();
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -79,6 +82,47 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
         goldNumber.SetText(selectedBuildingDescriptor.GoldCost.ToString());
         batIcon.sprite = itemIcon.sprite;
         buildingViewer.SetActive(true);
+    }
+
+
+    private bool IsBuildable()
+    {
+        Dictionary<ResourceManager.RessourceType, int> ressourcesForBuild = new Dictionary<ResourceManager.RessourceType, int>();
+        ressourcesForBuild.Add(ResourceManager.RessourceType.Food, selectedBuildingDescriptor.FoodCost);
+        ressourcesForBuild.Add(ResourceManager.RessourceType.Wood, selectedBuildingDescriptor.WoodCost);
+        ressourcesForBuild.Add(ResourceManager.RessourceType.Stone, selectedBuildingDescriptor.RockCost);
+        ressourcesForBuild.Add(ResourceManager.RessourceType.Iron, selectedBuildingDescriptor.IronCost);
+        ressourcesForBuild.Add(ResourceManager.RessourceType.Silver, selectedBuildingDescriptor.SilverCost);
+        ressourcesForBuild.Add(ResourceManager.RessourceType.Gold, selectedBuildingDescriptor.GoldCost);
+
+        if(!ResourceManager.Instance.HasEnoughRessource(ResourceManager.RessourceType.CivLevel,selectedBuildingDescriptor.RequiredCivilisationLvl))
+        {
+            return false;
+        }
+
+        foreach(ResourceManager.RessourceType type in ressourcesForBuild.Keys)
+        {
+            if(!ResourceManager.Instance.HasEnoughRessource(type, ressourcesForBuild[type]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void SetBuildableFeedBack()
+    {
+        if(IsBuildable())
+            SetCaseColor(new Color32(255, 255, 255, 255));
+        else
+            SetCaseColor(new Color32(106, 106, 106, 194));
+    }
+
+    private void SetCaseColor(Color32 color)
+    {
+        transform.Find("Case").gameObject.GetComponent<Image>().color = color;
+        transform.Find("Case").transform.Find("ItemIcon").GetComponent<Image>().color = color;
     }
 
     private bool isEconomicBuilding()
@@ -113,8 +157,12 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
-        building_clicked = true;
-        CreatePreview();
+        if(IsBuildable())
+        {
+            Debug.Log("Building selected : " + selectedBuildingDescriptor.name);
+            building_clicked = true;
+            CreatePreview();
+        }
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
@@ -122,6 +170,8 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
         //Debug.Log(building_clicked);
         if (building_clicked)
         {
+            spriteRenderer.gameObject.SetActive(true);
+            previewTile.SetActive(true);
             spriteRenderer.sprite = selectedBuildingDescriptor.Sprite;
             if (spriteRenderer.sprite == null) return;
 
@@ -130,6 +180,25 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
             previewTile.transform.position = gridManager.GetMouseGridPos();
             buildingSelected.transform.position = gridManager.GetMouseGridPos();
             buildingSelected.SetActive(true);
+            /*if (GridManager.Instance.IsThereResourceOnTileSquare(GridManager.Instance.GetIntMouseGridPos(), 1))
+            {
+                spriteRenderer.color = new Color32(255, 0, 0, 101); ;
+                previewTile.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 101);
+            }
+            else
+            {
+                spriteRenderer.color = new Color32(255,255,255,255);
+                previewTile.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 101);
+            }*/
+                
+        }
+
+        
+
+        if (eventData.pointerCurrentRaycast.gameObject.name != "GameplayBoard")
+        {
+            spriteRenderer.gameObject.SetActive(false);
+            previewTile.SetActive(false);
         }
     }
 
@@ -141,7 +210,9 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
         spriteRenderer.sprite = null;
         building_clicked = false;
         buildingSelected.SetActive(false);
-        
-        BuildingManager.Instance.BuildBuilding(selectedBuildingDescriptor);
+
+        GameObject dropped = eventData.pointerCurrentRaycast.gameObject;
+        if (dropped.name == "GameplayBoard")
+            BuildingManager.Instance.BuildBuilding(selectedBuildingDescriptor);
     }
 }

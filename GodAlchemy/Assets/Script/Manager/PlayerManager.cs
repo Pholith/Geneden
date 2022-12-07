@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -96,6 +97,22 @@ public class PlayerManager : BaseManager<PlayerManager>
         }
 
         return efficiencyBonus;
+    }
+
+    public List<ResourceManager.RessourceType> CheckGatherableRessources(GatheringBuildingScript building, UpgradesScriptableObject.UpgradeType type)
+    {
+        List<ResourceManager.RessourceType> gatherableRessources = building.gatherableRessource;
+
+        foreach(UpgradesScriptableObject upgrade in Upgrades)
+        {
+            if ((upgrade.UpgradeApplication.Contains(building)) && (upgrade.type.Contains(type)) && IsUpgradeUnlocked(upgrade))
+            {
+                gatherableRessources = gatherableRessources.Concat(upgrade.AddedGatherableRessource).ToList();
+            }
+        }
+
+        return gatherableRessources;
+
     }
 
     public void UpdateBuildingUpgrade()
