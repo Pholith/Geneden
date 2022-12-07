@@ -12,6 +12,7 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
         Efficiency,
         Value,
         Technologie,
+        UnlockRessource
     }
 
     [Header("Informations basiques")]
@@ -41,6 +42,7 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
 
     [Header("Bonus")]
     public float Bonus;
+    public List<ResourceManager.RessourceType> AddedGatherableRessource;
 
     [Header("Etat")]
     public bool Unlocked;

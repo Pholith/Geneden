@@ -52,6 +52,7 @@ public class StopWatch : MonoBehaviour
     public void StopCount()
     {
         stopWatchActive = false;
+        currentTime = 0;
     }
 
     public void StartCount()

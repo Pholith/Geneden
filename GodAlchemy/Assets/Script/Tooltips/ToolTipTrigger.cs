@@ -25,6 +25,11 @@ public class ToolTipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        StopDelay();
+    }
+
+    public void StopDelay()
+    {
         delay.Stop();
         ToolTipsSystem.Hide();
     }

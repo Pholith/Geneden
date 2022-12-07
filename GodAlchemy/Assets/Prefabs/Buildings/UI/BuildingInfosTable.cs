@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection.Emit;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static BuildingsScriptableObject;
@@ -16,6 +17,7 @@ public class BuildingInfosTable : MonoBehaviour
     public GameObject tagIconPrefab;
     public GameObject workerIconPrefab;
     public GameObject upgradeSlotPrefab;
+    public GameObject researchIconPrefab;
     [SerializeField]
     private BuildingGeneric selectedBuilding;
 
@@ -107,6 +109,7 @@ public class BuildingInfosTable : MonoBehaviour
         if(selectedBuilding.buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
         {
             UpdateWorkerUI();
+            UpdateSearchingIcon();
             FindObjectOfType<GameUI>().ShowGatheringUI(true);
             selectedBuilding.GetComponent<GatheringBuildings>().ShowRange(true);
         }
@@ -277,19 +280,35 @@ public class BuildingInfosTable : MonoBehaviour
 
     private void UpdateSearchingUI()
     {
-        Image _searchingBar = BuildingGatheringPanel.transform.Find("ResearchPanel").transform.Find("ResearchBar").transform.Find("FillBar").gameObject.GetComponent<Image>();
-        TextMeshProUGUI _searchingTimerText = BuildingGatheringPanel.transform.Find("ResearchPanel").transform.Find("ResearchBar").transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
+        GameObject ResearchPanel = BuildingGatheringPanel.transform.Find("ResearchPanel").gameObject;
+        
+        Image _searchingBar = ResearchPanel.transform.Find("ResearchBar").transform.Find("FillBar").gameObject.GetComponent<Image>();
+        TextMeshProUGUI _searchingTimerText = ResearchPanel.transform.Find("ResearchBar").transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
         if (selectedBuilding.GetComponent<BuildingGeneric>().IsSearching())
         {
-            BuildingGatheringPanel.transform.Find("ResearchPanel").transform.gameObject.SetActive(true);
+            ResearchPanel.transform.gameObject.SetActive(true);
             _searchingBar.fillAmount = ((float)selectedBuilding.GetComponent<BuildingGeneric>().GetTimer().GetCurrentTime() / ((float)selectedBuilding.GetComponent<BuildingGeneric>().GetTimer().endTime));
             TimeSpan time = TimeSpan.FromSeconds((double)selectedBuilding.GetComponent<BuildingGeneric>().GetTimer().GetCurrentTime());
             _searchingTimerText.text = time.ToString(@"mm\:ss");
         }
         else
         {
-            BuildingGatheringPanel.transform.Find("ResearchPanel").transform.gameObject.SetActive(false);
+            ResearchPanel.transform.gameObject.SetActive(false);
         }
+    }
+
+    public void UpdateSearchingIcon()
+    {
+        if(selectedBuilding.IsSearching())
+        {
+            GameObject ResearchPanel = BuildingGatheringPanel.transform.Find("ResearchPanel").gameObject;
+            DestroyContentUI(ResearchPanel.transform.Find("IconPanel").gameObject);
+            GameObject _researchIcon = Instantiate(researchIconPrefab);
+            _researchIcon.GetComponent<ResearchIcon>().SetIcon(selectedBuilding);
+            _researchIcon.transform.SetParent(ResearchPanel.transform.Find("IconPanel").transform);
+            _researchIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(-13.5f, 13.5f, 0f);
+            _researchIcon.GetComponent<RectTransform>().localScale = new Vector3(0.75f, 0.75f, 1.0f);
+        }  
     }
 
     private void DestroyContentUI(GameObject UIPanel)
