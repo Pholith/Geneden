@@ -131,6 +131,31 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     }
 
+    public int GetRessourcePerType(RessourceType type)
+    {
+        switch (type)
+        {
+            case RessourceType.Food:
+                return foodScore;
+            case RessourceType.Wood:
+                return woodScore;
+            case RessourceType.Stone:
+                return stoneScore;
+            case RessourceType.Iron:
+                return ironScore;
+            case RessourceType.Silver:
+                return silverScore;
+            case RessourceType.Gold:
+                return goldScore;
+            case RessourceType.Population:
+                return popScore;
+            case RessourceType.CivLevel:
+                return civLevel;
+        }
+
+        return 0;
+    }
+
     public void UpMaxPop(int amount)
     {
         if (maxPop >= realPop)
@@ -156,6 +181,11 @@ public class ResourceManager : BaseManager<ResourceManager>
         goldText.text = goldScore.ToString();
         popText.text = popScore.ToString() + "/" + maxPop.ToString();
         civText.text = civLevel.ToString();
+    }
+
+    public bool HasEnoughRessource(ResourceManager.RessourceType type, int amount)
+    {
+        return GetRessourcePerType(type) - amount >= 0;
     }
 
     public void ToggleShowCost(int cost = -1)

@@ -1,6 +1,7 @@
 using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildingGeneric : NetworkBehaviour
 {
@@ -9,11 +10,15 @@ public class BuildingGeneric : NetworkBehaviour
     public Sprite spriteTimeBuilding;
     [SerializeField]
     private bool isBuild;
-    //[ReadOnly]
+    [ReadOnly]
     [SerializeField]
     private int hp;
     private ResourceManager resourceManager;
     private SpriteRenderer sr;
+
+    //Upgrading
+    private UpgradesScriptableObject PendingUpgrade = null;
+    private StopWatch UpgradeTimer;
 
 
 
@@ -75,6 +80,7 @@ public class BuildingGeneric : NetworkBehaviour
             return;
         }
         hp = buildingScriptObj.MaxHealth;
+        UpgradeTimer = this.AddComponent<StopWatch>();
         ComputeCollider();
     }
 
@@ -103,14 +109,27 @@ public class BuildingGeneric : NetworkBehaviour
     {
         sr.sprite = buildingScriptObj.Sprite;
         isBuild = true;
-        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
+        PlayerManager.Instance.AddBuilding(this);
+        if (buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
         {
             gameObject.AddComponent<GatheringBuildings>();
         }
-        else if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House))
+        else if (buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House))
         {
             HouseScriptableObject houseScript = (HouseScriptableObject)buildingScriptObj;
             ResourceManager.Instance.UpMaxPop(houseScript.AdditionalPopulation);
+        }
+        else if (buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Ressource))
+        {
+            ResourceNode _nodeBuilding = gameObject.AddComponent<ResourceNode>();
+            switch (buildingScriptObj.name)
+            {
+                case "Ferme":
+                    _nodeBuilding.SetMaxAmount(1000);
+                    _nodeBuilding.SetGatheringSpeed(0.75f);
+                    _nodeBuilding.SetRessourceType(ResourceManager.RessourceType.Food);
+                    break;
+            }
         }
         ComputeCollider();
     }
@@ -122,15 +141,26 @@ public class BuildingGeneric : NetworkBehaviour
         {
             _selectionManager.DeselectObject(this.GetComponent<SelectableObject>());
         }
-        if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House))
+        if(IsHouseBuilding())
         {
             HouseScriptableObject houseScript = (HouseScriptableObject)buildingScriptObj;
             ResourceManager.Instance.RemoveMaxPop(houseScript.AdditionalPopulation);
         }
-        if (buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
+        if (IsGatheringBuilding())
         {
             ResourceManager.Instance.AddRessource(ResourceManager.RessourceType.Population,this.GetComponent<GatheringBuildings>().GetWorker());
         }
+        PlayerManager.Instance.RemoveBuilding(this);
+    }
+
+    private bool IsGatheringBuilding()
+    {
+        return buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering);
+    }
+
+    private bool IsHouseBuilding()
+    {
+        return buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House);
     }
 
     private void Update()
@@ -139,6 +169,12 @@ public class BuildingGeneric : NetworkBehaviour
         {
             OnBuildingDestroy();
             Destroy(gameObject);
+        }
+        if(UpgradeTimer.IsActive())
+        {
+            if (UpgradeTimer.IsFinished())
+                EndUpgrade();
+
         }
     }
     public void Damage(int damage)
@@ -150,4 +186,55 @@ public class BuildingGeneric : NetworkBehaviour
     {
         return hp;
     }
+
+    public void SearchUpgrade(UpgradesScriptableObject upgrade)
+    {
+        PendingUpgrade = upgrade;
+        PlayerManager.Instance.StartUpgrade(upgrade);
+        UpgradeTimer.SetEndTime(upgrade.ResearchTime);
+        UpgradeTimer.StartCount();
+    }
+
+    public void StopUpgrade(UpgradesScriptableObject upgrade)
+    {
+        PlayerManager.Instance.StopUpgrade(upgrade);
+        PendingUpgrade = null;
+        UpgradeTimer.StopCount();
+        
+    }
+
+    public void EndUpgrade()
+    {
+        PlayerManager.Instance.UnlockUpgrade(PendingUpgrade);
+        UpgradeTimer.StopCount();
+        PlayerManager.Instance.UpdateBuildingUpgrade();
+        if (SelectionManager.Instance.isSelected(this.GetComponent<SelectableObject>()))
+            FindObjectOfType<BuildingInfosTable>().UpdateUpgradesUI();
+            
+    }
+
+    public bool IsSearchingUpgrade(UpgradesScriptableObject upgrade)
+    {
+        return ((upgrade == PendingUpgrade) && (UpgradeTimer.IsActive()));
+    }
+
+    public bool IsSearching()
+    {
+        return UpgradeTimer.IsActive();
+    }
+
+    public StopWatch GetTimer()
+    {
+        return UpgradeTimer;
+    }
+
+    public void UpdateBuildingUpgrades()
+    {
+       if(IsGatheringBuilding())
+       {
+            gameObject.GetComponent<GatheringBuildings>().UpdateEfficiencyBonus();
+       }
+    }
+
+
 }

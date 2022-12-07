@@ -19,6 +19,7 @@ public class BuildingsScriptableObject : ScriptableObject, IComparable<Buildings
         Divine,
         House,
         Gathering,
+        Ressource,
     }
 
     [Header("Informations basiques")]
@@ -66,6 +67,9 @@ public class BuildingsScriptableObject : ScriptableObject, IComparable<Buildings
     [Header("Conditions")]
     [Range(0, 50)]
     public int RequiredCivilisationLvl;
+
+    [Header("Upgrades")]
+    public List<UpgradesScriptableObject> UpgradeList;
 
     [Serializable]
     public class BuildingSpecialCondition : SerializableCallback<bool> { }

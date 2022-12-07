@@ -24,6 +24,7 @@ public class QuestSystem  : MonoBehaviour
 
     public void Start()
     {
+        resourceManager = ResourceManager.Instance;
         questsLevel0 = new List<Quest>();
         questsLevel1 = new List<Quest>();
         questsLevel2 = new List<Quest>();

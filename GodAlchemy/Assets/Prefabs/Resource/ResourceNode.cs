@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ResourceManager;
 
 public class ResourceNode : MonoBehaviour
 {
@@ -36,6 +37,21 @@ public class ResourceNode : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetMaxAmount(int amount)
+    {
+        resourceAmount = amount;
+    }
+
+    public void SetGatheringSpeed(float speed)
+    {
+        gatheringSpeed = speed;
+    }
+
+    public void SetRessourceType(ResourceManager.RessourceType _type)
+    {
+        type = _type;
     }
 
     public float GetGatheringSpeed()

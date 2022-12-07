@@ -24,7 +24,7 @@ public class GameplayBoard : MonoBehaviour, IDropHandler
             originSlot.Element.EffectOnMap.Invoke();
         }
 
-        if (originSlot.SlotType == ItemSlot.Type.recipeSlot && GameManager.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()))
+        if (originSlot.SlotType == ItemSlot.Type.recipeSlot && GameManager.ResourceManager.HasEnoughPower(craftingSystem.ComputeCraftCost()))
         {
             ElementScriptableObject _tempElement = originSlot.Element;
             craftingSystem.ConsumePower();

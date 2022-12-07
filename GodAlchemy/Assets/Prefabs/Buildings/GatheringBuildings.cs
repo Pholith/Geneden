@@ -45,7 +45,7 @@ public class GatheringBuildings : MonoBehaviour
         workers = 0;
         maxWorkers = building.maxVillager;
         gatheringPerCycle = 10;
-        effeciencyBonus = 0;
+        effeciencyBonus = 0 + PlayerManager.Instance.CheckEfficiencyUpgrades(building,UpgradesScriptableObject.UpgradeType.Efficiency);
         gatheringTimer = gameObject.AddComponent<StopWatch>();
         secondToWaitBeforeGather = WAITINGTIMER;
 
@@ -72,6 +72,17 @@ public class GatheringBuildings : MonoBehaviour
             GatherNode();
     }
 
+    public void UpdateEfficiencyBonus()
+    {
+        effeciencyBonus = 0 + PlayerManager.Instance.CheckEfficiencyUpgrades(building, UpgradesScriptableObject.UpgradeType.Efficiency);
+        if(IsGathering())
+        {
+            secondToWaitBeforeGather = (GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) - ((GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) * effeciencyBonus);
+            gatheringTimer.SetEndTime(secondToWaitBeforeGather);
+        }
+            
+    }
+
     private void CreateBuildingRange()
     {
         buildingRange = Instantiate(buildingManager.buildingRangePrefab);
@@ -88,7 +99,7 @@ public class GatheringBuildings : MonoBehaviour
 
     public void GetNodes()
     {
-        if (TargetedNode == null)
+        if (!IsGathering())
         {
 
             collidersInRangeList = gridManager.GetResourcesInRange(gridManager.GetGridPos(transform.position + new Vector3(0.5f,0.5f,0f)), Mathf.RoundToInt((building.gatheringRange /2) * gridManager.MainGameGrid.cellSize.x));
@@ -131,9 +142,14 @@ public class GatheringBuildings : MonoBehaviour
 
     }*/
 
+    public bool IsGathering()
+    {
+        return (TargetedNode != null);
+    }
+
     public void GatherNode()
     {
-        if (TargetedNode != null)
+        if (IsGathering())
         {
             int nodeAmount = TargetedNode.GetCurrentAmout();
             if (TargetedNode.DeleteResource(gatheringPerCycle * workers))
