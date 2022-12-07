@@ -228,13 +228,21 @@ public class BuildingGeneric : NetworkBehaviour
         return UpgradeTimer;
     }
 
+    public UpgradesScriptableObject GetPendingUpgrade()
+    {
+        return PendingUpgrade;
+    }
+
     public void UpdateBuildingUpgrades()
     {
        if(IsGatheringBuilding())
        {
             gameObject.GetComponent<GatheringBuildings>().UpdateEfficiencyBonus();
+            gameObject.GetComponent<GatheringBuildings>().UpdateGatherableRessources();
+            
        }
     }
+
 
 
 }

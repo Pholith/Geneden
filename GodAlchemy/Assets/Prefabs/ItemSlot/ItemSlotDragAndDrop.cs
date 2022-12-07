@@ -64,8 +64,13 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         switch (SlotType)
         {
             case Type.itemSlot:
+                if (craftSystem.AddPayedRessource(Element))
+                    this.Empty();
                 break;
             case Type.craftSlot:
+                if (this.elementIsPayed)
+                    playerInventory.AddItem(Element, true);
+                this.Empty();
                 break;
             case Type.recipeSlot:
                 if (!IsEmpty() && craftSystem.HasEnoughPower() && playerInventory.AddItem(Element, true)) craftSystem.ConsumePower();
@@ -89,6 +94,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         ItemSlot originSlot = origin.GetComponent<ItemSlot>();
         ItemSlot finalSlot = dropped.GetComponentInParent<ItemSlot>();
         GetComponent<ItemSlot>().SetParentSnap(transform);
+
         if (finalSlot.SlotType == Type.craftSlot)
         {
             switch (originSlot.SlotType)

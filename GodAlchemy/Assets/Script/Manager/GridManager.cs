@@ -123,12 +123,35 @@ public class GridManager : BaseManager<GridManager>
         return GetResourcesOfGridCells(targetPosition).Count > 0;
     }
 
+    /*public bool IsThereResourceOnTileSquare(Vector3Int targetPosition, int radius)
+    {
+        for(int x = targetPosition.x; x<(targetPosition.x + radius); x++)
+        {
+            for(int y = targetPosition.y; y< (targetPosition.y + radius); y++)
+            {
+                if (IsThereResourceOnTile(new Vector3Int(x, y, 0)))
+                    return true;
+            }
+        }
+
+        return false;
+            
+    }*/
+
     public void SetTilesOnMouseInRange(TileBase tile, int radius)
     {
         SetTileInRange(tile, GetMouseGridPos().ToVector3Int(), radius);
     }
 
     public Vector3 GetMouseGridPos()
+    {
+        Vector3 _screenPos = Input.mousePosition;
+        Vector3 _worldPos = mainCamera.ScreenToWorldPoint(_screenPos);
+        _worldPos.z = 0.0f;
+        return MainGameGrid.WorldToCell(_worldPos);
+    }
+
+    public Vector3Int GetIntMouseGridPos()
     {
         Vector3 _screenPos = Input.mousePosition;
         Vector3 _worldPos = mainCamera.ScreenToWorldPoint(_screenPos);

@@ -23,6 +23,8 @@ public class GatheringBuildings : MonoBehaviour
 
     //Gathering Stuff
     [SerializeField]
+    private List<ResourceManager.RessourceType> gatherableRessources;
+    [SerializeField]
     private int workers;
     [SerializeField]
     private int maxWorkers;
@@ -42,6 +44,7 @@ public class GatheringBuildings : MonoBehaviour
     {
         building = (GatheringBuildingScript)GetComponent<BuildingGeneric>().GetBuilding();
         //Gathering Stuff
+        gatherableRessources = building.gatherableRessource;
         workers = 0;
         maxWorkers = building.maxVillager;
         gatheringPerCycle = 10;
@@ -66,7 +69,9 @@ public class GatheringBuildings : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(IsThereNoWorker() == false)
+        if (!IsGathering())
+            gatheringTimer.StopCount();
+        if(!IsThereNoWorker())
             GetNodes();
         if(gatheringTimer.IsFinished())
             GatherNode();
@@ -81,6 +86,11 @@ public class GatheringBuildings : MonoBehaviour
             gatheringTimer.SetEndTime(secondToWaitBeforeGather);
         }
             
+    }
+
+    public void UpdateGatherableRessources()
+    {
+        gatherableRessources = PlayerManager.Instance.CheckGatherableRessources(building, UpgradesScriptableObject.UpgradeType.UnlockRessource);
     }
 
     private void CreateBuildingRange()
@@ -115,7 +125,7 @@ public class GatheringBuildings : MonoBehaviour
             {
                 if(collider.gameObject.GetComponent<ResourceNode>() != null)
                 {
-                    if (building.gatherableRessource.Contains(collider.gameObject.GetComponent<ResourceNode>().GetResourceType()))
+                    if (gatherableRessources.Contains(collider.gameObject.GetComponent<ResourceNode>().GetResourceType()))
                     {
                         TargetedNode = collider.gameObject.GetComponent<ResourceNode>();
                         secondToWaitBeforeGather = (GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) - ((GATHERINGTIMER / TargetedNode.GetGatheringSpeed()) * effeciencyBonus);
@@ -165,11 +175,11 @@ public class GatheringBuildings : MonoBehaviour
                 TargetedNode = null;
                 gatheringTimer.StopCount();
             }
-            else
-            {
-                TargetedNode = null;
-                gatheringTimer.StopCount();
-            }
+        }
+        else
+        {
+            TargetedNode = null;
+            gatheringTimer.StopCount();
         }
     }
 

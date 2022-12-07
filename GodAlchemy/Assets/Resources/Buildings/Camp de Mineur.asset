@@ -30,6 +30,9 @@ MonoBehaviour:
   UnlockUnities: []
   BuildingTags: 0000000007000000
   RequiredCivilisationLvl: 0
+  UpgradeList:
+  - {fileID: 11400000, guid: 08a8fba97c37fe447b38cd278662c6ed, type: 2}
+  - {fileID: 11400000, guid: 0da161203c203ef439dc2e9b6f2a1175, type: 2}
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition
@@ -41,6 +44,6 @@ MonoBehaviour:
   UpdateFunction:
     m_PersistentCalls:
       m_Calls: []
-  gatherableRessource: 02000000030000000400000005000000
+  gatherableRessource: 020000000400000005000000
   gatheringRange: 10
   maxVillager: 3
