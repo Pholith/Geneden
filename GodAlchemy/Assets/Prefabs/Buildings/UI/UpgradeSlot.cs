@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradeSlot : MonoBehaviour, IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
+public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     // Start is called before the first frame update
     private ToolTipTrigger toolTipTrigger;
@@ -16,7 +12,8 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler,IPointerEnterHand
     private BuildingGeneric SelectedBuilding;
 
     private GameObject UpgradeView;
-    void Start()
+
+    private void Start()
     {
         //Tooltip
         toolTipTrigger = gameObject.GetComponent<ToolTipTrigger>();
@@ -60,7 +57,7 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler,IPointerEnterHand
     {
         UpgradeView.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = Upgrade.name;
         UpgradeView.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = Upgrade.UpgradeDescription;
-        UpgradeView.transform.Find("SearchingTime").GetComponent<TextMeshProUGUI>().text = "Temps de Recherche : " + TimeSpan.FromSeconds(Upgrade.ResearchTime).ToString(@"mm\:ss") +"s";
+        UpgradeView.transform.Find("SearchingTime").GetComponent<TextMeshProUGUI>().text = "Temps de Recherche : " + TimeSpan.FromSeconds(Upgrade.ResearchTime).ToString(@"mm\:ss") + "s";
         UpgradeView.transform.Find("Civilisation").GetComponent<TextMeshProUGUI>().text = "Niveau recquis : " + Upgrade.RequiredCivilisationLvl.ToString();
         UpgradeView.transform.Find("Icon").GetComponent<Image>().sprite = Upgrade.Sprite;
 
@@ -78,7 +75,7 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler,IPointerEnterHand
         UpgradeView.SetActive(false);
     }
 
-    public void SetUpgrade(UpgradesScriptableObject upgrade,BuildingGeneric building)
+    public void SetUpgrade(UpgradesScriptableObject upgrade, BuildingGeneric building)
     {
         Upgrade = upgrade;
         SelectedBuilding = building;
@@ -92,14 +89,14 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler,IPointerEnterHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(SelectedBuilding.IsSearchingUpgrade(Upgrade) == false)
+        if (SelectedBuilding.IsSearchingUpgrade(Upgrade) == false)
         {
             Debug.Log(PlayerManager.Instance.IsUpgradeSearchable(Upgrade));
-            if(PlayerManager.Instance.IsUpgradeSearchable(Upgrade))
+            if (PlayerManager.Instance.IsUpgradeSearchable(Upgrade))
             {
                 SelectedBuilding.SearchUpgrade(Upgrade);
             }
-        }      
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
