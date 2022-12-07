@@ -14,9 +14,13 @@ public class BuildingInfosTable : MonoBehaviour
     //Manager
     [SerializeField]
     private BuildingManager buildingManager;
+    [SerializeField]
     public GameObject tagIconPrefab;
+    [SerializeField]
     public GameObject workerIconPrefab;
+    [SerializeField]
     public GameObject upgradeSlotPrefab;
+    [SerializeField]
     public GameObject researchIconPrefab;
     [SerializeField]
     private BuildingGeneric selectedBuilding;
