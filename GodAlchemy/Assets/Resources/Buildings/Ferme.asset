@@ -16,7 +16,7 @@ MonoBehaviour:
     villageois les r\xE9colte. "
   Sprite: {fileID: 2130270517, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 250
-  BuildingTime: 10
+  BuildingTime: 1
   FoodCost: 0
   WoodCost: 70
   IronCost: 0
@@ -26,8 +26,8 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 
-  RequiredCivilisationLvl: 10
+  BuildingTags: 08000000
+  RequiredCivilisationLvl: 0
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition

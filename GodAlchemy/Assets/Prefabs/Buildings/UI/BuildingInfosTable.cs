@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection.Emit;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +15,7 @@ public class BuildingInfosTable : MonoBehaviour
     private BuildingManager buildingManager;
     public GameObject tagIconPrefab;
     public GameObject workerIconPrefab;
+    public GameObject upgradeSlotPrefab;
     [SerializeField]
     private BuildingGeneric selectedBuilding;
 
@@ -70,6 +73,7 @@ public class BuildingInfosTable : MonoBehaviour
         {
             CheckHealth();
             CheckGathering();
+            CheckSearching();
         }
             
     }
@@ -129,6 +133,8 @@ public class BuildingInfosTable : MonoBehaviour
         _gameUI.ShowElementUI(false);
         _gameUI.ShowBuildingUI(true);
         FindObjectOfType<GameUI>().ShowGatheringUI(false);
+        UpdateUpgradesUI();
+        
 
         CheckHealth();
         DestroyContentUI(BuildingInfosPanel.transform.Find("TagsInfo").transform.Find("TagList").gameObject);
@@ -209,12 +215,49 @@ public class BuildingInfosTable : MonoBehaviour
 
     }
 
+    public void UpdateUpgradesUI()
+    {
+        int _i = 0;
+        int _xPos = -91;
+        int _yPos = 355;
+        
+
+        GameObject _contentPanel = BuildingUpgradesPanel.transform.Find("ScrollArea").gameObject.transform.Find("Content").gameObject;
+        DestroyContentUI(_contentPanel);
+        foreach (UpgradesScriptableObject upgrade in selectedBuilding.buildingScriptObj.UpgradeList)
+        {
+            Debug.Log(upgrade.name);
+            UpgradesScriptableObject upgradeToShow = PlayerManager.Instance.GetLastTierUpgrade(upgrade);
+            if(upgradeToShow != null)
+            {
+                GameObject _upgradeSlot = Instantiate(upgradeSlotPrefab);
+                _upgradeSlot.GetComponent<UpgradeSlot>().SetUpgrade(upgradeToShow, selectedBuilding);
+                _upgradeSlot.transform.SetParent(_contentPanel.transform);
+                _upgradeSlot.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
+                _upgradeSlot.GetComponent<RectTransform>().localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            }
+            _xPos += 35;
+            _i += 1;
+            if (_i % 3 == 0)
+            {
+                _xPos = -91;
+                _yPos -= 40;
+                _i = 0;
+            }
+        }
+    }
+
     private void CheckGathering()
     {
         if (selectedBuilding.buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
         {
             UpdateGatheringUI();
         }
+    }
+
+    private void CheckSearching()
+    {
+        UpdateSearchingUI();
     }
 
     private void UpdateGatheringUI()
@@ -230,6 +273,23 @@ public class BuildingInfosTable : MonoBehaviour
         }
         
         
+    }
+
+    private void UpdateSearchingUI()
+    {
+        Image _searchingBar = BuildingGatheringPanel.transform.Find("ResearchPanel").transform.Find("ResearchBar").transform.Find("FillBar").gameObject.GetComponent<Image>();
+        TextMeshProUGUI _searchingTimerText = BuildingGatheringPanel.transform.Find("ResearchPanel").transform.Find("ResearchBar").transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
+        if (selectedBuilding.GetComponent<BuildingGeneric>().IsSearching())
+        {
+            BuildingGatheringPanel.transform.Find("ResearchPanel").transform.gameObject.SetActive(true);
+            _searchingBar.fillAmount = ((float)selectedBuilding.GetComponent<BuildingGeneric>().GetTimer().GetCurrentTime() / ((float)selectedBuilding.GetComponent<BuildingGeneric>().GetTimer().endTime));
+            TimeSpan time = TimeSpan.FromSeconds((double)selectedBuilding.GetComponent<BuildingGeneric>().GetTimer().GetCurrentTime());
+            _searchingTimerText.text = time.ToString(@"mm\:ss");
+        }
+        else
+        {
+            BuildingGatheringPanel.transform.Find("ResearchPanel").transform.gameObject.SetActive(false);
+        }
     }
 
     private void DestroyContentUI(GameObject UIPanel)
