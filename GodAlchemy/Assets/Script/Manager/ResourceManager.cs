@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class ResourceManager : BaseManager<ResourceManager>
@@ -33,6 +32,8 @@ public class ResourceManager : BaseManager<ResourceManager>
     [SerializeField] private int silverScore;
     [SerializeField] private int goldScore;
     [SerializeField] private int popScore;
+    [SerializeField] private int realPop;
+    [SerializeField] private int maxPop;
     [SerializeField] private int civLevel;
 
     //UI score text
@@ -48,7 +49,7 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     //Divine Power
     [RequiredField]
-    [SerializeField] 
+    [SerializeField]
     private DivinPowerBar powerBar;
 
     [SerializeField]
@@ -91,9 +92,9 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     private void RegenDivinPower()
     {
-        RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
-        AddRessource(randomRessource, 100);
-        AddRessource(RessourceType.CivLevel, 1);
+        //RessourceType randomRessource = (RessourceType)UnityEngine.Random.Range(0, 7);
+        //AddRessource(randomRessource, 100);
+        //AddRessource(RessourceType.CivLevel, 1);
         powerBar.CurrentPower += 2;
     }
 
@@ -130,6 +131,45 @@ public class ResourceManager : BaseManager<ResourceManager>
 
     }
 
+    public int GetRessourcePerType(RessourceType type)
+    {
+        switch (type)
+        {
+            case RessourceType.Food:
+                return foodScore;
+            case RessourceType.Wood:
+                return woodScore;
+            case RessourceType.Stone:
+                return stoneScore;
+            case RessourceType.Iron:
+                return ironScore;
+            case RessourceType.Silver:
+                return silverScore;
+            case RessourceType.Gold:
+                return goldScore;
+            case RessourceType.Population:
+                return popScore;
+            case RessourceType.CivLevel:
+                return civLevel;
+        }
+
+        return 0;
+    }
+
+    public void UpMaxPop(int amount)
+    {
+        if (maxPop >= realPop)
+        {
+            maxPop += amount;
+            realPop += amount;
+            popScore += amount;
+        }
+        else
+        {
+            maxPop += amount;
+        }
+    }
+
 
     public void UpdateUI()
     {
@@ -139,8 +179,13 @@ public class ResourceManager : BaseManager<ResourceManager>
         ironText.text = ironScore.ToString();
         silverText.text = silverScore.ToString();
         goldText.text = goldScore.ToString();
-        popText.text = popScore.ToString();
+        popText.text = popScore.ToString() + "/" + maxPop.ToString();
         civText.text = civLevel.ToString();
+    }
+
+    public bool HasEnoughRessource(ResourceManager.RessourceType type, int amount)
+    {
+        return GetRessourcePerType(type) - amount >= 0;
     }
 
     public void ToggleShowCost(int cost = -1)
@@ -161,5 +206,68 @@ public class ResourceManager : BaseManager<ResourceManager>
         return civLevel;
     }
 
+    public void ConsumeWood(int cost)
+    {
+        woodScore -= cost;
+    }
+    public bool HasEnoughWood(int substraction)
+    {
+        return woodScore - substraction >= 0;
+    }
+
+    public void ConsumeIron(int cost)
+    {
+        ironScore -= cost;
+    }
+    public bool HasEnoughIron(int substraction)
+    {
+        return ironScore - substraction >= 0;
+    }
+
+    public void ConsumeStone(int cost)
+    {
+        stoneScore -= cost;
+    }
+    public bool HasEnoughStone(int substraction)
+    {
+        return stoneScore - substraction >= 0;
+    }
+
+    public void ConsumeSilver(int cost)
+    {
+        silverScore -= cost;
+    }
+    public bool HasEnoughSilver(int substraction)
+    {
+        return silverScore - substraction >= 0;
+    }
+
+    public void ConsumeGold(int cost)
+    {
+        goldScore -= cost;
+    }
+    public bool HasEnoughGold(int substraction)
+    {
+        return goldScore - substraction >= 0;
+    }
+
+    public void ConsumePop(int pop)
+    {
+        popScore -= pop;
+    }
+    public bool HasEnoughPop(int substraction)
+    {
+        return popScore - substraction >= 0;
+    }
+
+    public void AddMaxPop(int pop)
+    {
+        maxPop += pop;
+    }
+
+    public void RemoveMaxPop(int pop)
+    {
+        maxPop -= pop;
+    }
 
 }

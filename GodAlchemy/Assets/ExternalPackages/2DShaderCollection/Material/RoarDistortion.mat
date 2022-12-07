@@ -29,7 +29,7 @@ Material:
     m_Floats:
     - Effect_Fade: 1
     - ExplosionValue: 0.30580708
-    - LineSize: 2.6
+    - LineSize: 0.1
     - OffsetUV_X_1: 0
     - OffsetUV_Y_1: 0.445
     - OffsetUV_ZoomX_1: 1
@@ -41,12 +41,12 @@ Material:
     - PixelXYUV_SizeY_1: 32
     - Pixel_Fade: 18.82359
     - Pixel_Size: 42.5
-    - PosX: 0.508
-    - PosY: 0.603
+    - PosX: 0.32
+    - PosY: 0
     - Repeat: 11.783579
-    - Roar_Intensity: 0.024
-    - Size: 1.091
-    - Speed: 0.96
+    - Roar_Intensity: 0.017
+    - Size: 0.09
+    - Speed: 0.03
     - _ColorMask: 15
     - _LerpUV_Fade_1: 1
     - _Make3DFX_Dist_1: -0.36862513

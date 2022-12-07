@@ -4,10 +4,12 @@ using UnityEngine.EventSystems;
 public class GameplayBoard : MonoBehaviour, IDropHandler
 {
     private CraftingSystem craftingSystem;
+    private BuildingManager buildingManager;
 
     private void Start()
     {
         craftingSystem = FindObjectOfType<CraftingSystem>();
+        buildingManager = FindObjectOfType<BuildingManager>();
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -22,7 +24,7 @@ public class GameplayBoard : MonoBehaviour, IDropHandler
             originSlot.Element.EffectOnMap.Invoke();
         }
 
-        if (originSlot.SlotType == ItemSlot.Type.recipeSlot && GameManager.ResourceManager.HasEnoughPower(originSlot.GetSlotCost()))
+        if (originSlot.SlotType == ItemSlot.Type.recipeSlot && GameManager.ResourceManager.HasEnoughPower(craftingSystem.ComputeCraftCost()))
         {
             ElementScriptableObject _tempElement = originSlot.Element;
             craftingSystem.ConsumePower();
@@ -32,4 +34,7 @@ public class GameplayBoard : MonoBehaviour, IDropHandler
         if (originSlot.SlotType != ItemSlot.Type.ressourceSlot && originSlot.SlotType != ItemSlot.Type.recipeBookSlot) originSlot.Empty();
 
     }
+
+
+
 }

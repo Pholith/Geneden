@@ -10,10 +10,10 @@ public class CameraHandler : MonoBehaviour
     public float zoomMin = 5.0f;
     public float zoomMax = 20.0f;
 
-    [SerializeField] private new Camera camera;
+    [SerializeField] private Camera shaker;
     void Start()
     {
-        camera = GetComponent<Camera>();
+        shaker = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class CameraHandler : MonoBehaviour
     private void CameraInput()
     {
         Vector3 _cameraPos = transform.position;
-        float _cameraSize = camera.orthographicSize;
+        float _cameraSize = shaker.orthographicSize;
 
 
         if(Input.GetKey("z"))
@@ -48,8 +48,8 @@ public class CameraHandler : MonoBehaviour
         float _scroll = Input.GetAxis("Mouse ScrollWheel");
         _cameraSize -= _scroll * zoomSpeed * 100f * Time.deltaTime;
 
-        camera.orthographicSize = _cameraSize;
-        camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, zoomMin, zoomMax);
+        shaker.orthographicSize = _cameraSize;
+        shaker.orthographicSize = Mathf.Clamp(shaker.orthographicSize, zoomMin, zoomMax);
         transform.position = _cameraPos;
     }
 }

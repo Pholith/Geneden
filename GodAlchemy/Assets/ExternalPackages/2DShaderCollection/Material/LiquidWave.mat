@@ -92,7 +92,7 @@ Material:
     - DistortionUV_WaveY_1: 19.8
     - DoodleUV_Frame_1: 10.11
     - DoodleUV_Size_1: 7.22
-    - Effect_Fade: 0.597
+    - Effect_Fade: 1
     - Effect_Fading: 1
     - Explode_Value: 0.35749298
     - FishEyeUV_Size_1: 0.418
@@ -106,11 +106,11 @@ Material:
     - KaleidoscopeUV_Number_1: 1.65
     - KaleidoscopeUV_PosX_1: 0.5
     - KaleidoscopeUV_PosY_1: 0.5
-    - LiquidUV_DistanceX_1: 0.3
-    - LiquidUV_DistanceY_1: 0.3
-    - LiquidUV_Speed_1: 1
-    - LiquidUV_WaveX_1: 2
-    - LiquidUV_WaveY_1: 2
+    - LiquidUV_DistanceX_1: 0.4
+    - LiquidUV_DistanceY_1: 0.2
+    - LiquidUV_Speed_1: 0.2
+    - LiquidUV_WaveX_1: 0.05
+    - LiquidUV_WaveY_1: 0.2
     - Parasite_Angle: -0.241
     - Parasite_Distance: -0.247
     - PixelSnap: 0

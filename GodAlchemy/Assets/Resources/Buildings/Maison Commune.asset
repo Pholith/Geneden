@@ -17,9 +17,10 @@ MonoBehaviour:
     et attaque les unit\xE9s ennemis proches. La maison commune peut \xEAtre am\xE9lior\xE9e
     pour augmenter ses points de vie, son bonus de population et d\xE9bloquer de
     nouveaux b\xE2timents."
-  Sprite: {fileID: 0}
+  Sprite: {fileID: -2115248026, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
   MaxHealth: 4000
   BuildingTime: 0
+  FoodCost: 0
   WoodCost: 0
   IronCost: 0
   RockCost: 0
@@ -28,11 +29,11 @@ MonoBehaviour:
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
-  BuildingTags: 00000000
+  BuildingTags: 06000000
   RequiredCivilisationLvl: 0
   SpecialConditionRequired:
-    _target: {fileID: 0}
-    _methodName: 
+    _target: {fileID: 11400000}
+    _methodName: NoCondition
     _args: []
     _dynamic: 0
     _typeName: BuildingsScriptableObject+BuildingSpecialCondition, Assembly-CSharp,

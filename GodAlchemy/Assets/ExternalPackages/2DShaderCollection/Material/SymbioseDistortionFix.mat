@@ -31,8 +31,8 @@ Material:
     - Effect_Fading: 1
     - PixelSnap: 0
     - Pixel_Size: 22
-    - Symbiose_Distance: 0.050294835
-    - Symbiose_Position: -0.218
+    - Symbiose_Distance: 0.018
+    - Symbiose_Position: -0.28
     - _ColorMask: 15
     - _Sharpness_Angle_1: 0.25
     - _Sharpness_Distance_1: 2.66

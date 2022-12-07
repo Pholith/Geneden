@@ -8,12 +8,15 @@ public class LevelLoader : MonoBehaviour
     public GameObject loadingScreen;
     public Slider slider;
 
-    public void LoadLevel(int sceneIndex) {
-        StartCoroutine(LoadAsync(sceneIndex));
+    [SerializeField]
+    private SceneReference sceneAfterLoading;
+
+    public void LoadLevel() {
+        StartCoroutine(LoadAsync());
     }
 
-    IEnumerator LoadAsync(int sceneIndex) {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+    IEnumerator LoadAsync() {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneAfterLoading);
         loadingScreen.SetActive(true);
 
         while (!operation.isDone) {

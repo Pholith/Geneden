@@ -18,8 +18,8 @@ public class PauseMenuIG : MonoBehaviour
         optionsMenu = imageOptionsMenu.transform.Find("Options Screen").transform.gameObject;
     }
 
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {

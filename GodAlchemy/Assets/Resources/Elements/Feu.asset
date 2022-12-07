@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementDescription: "Cr\xE9er une faible chaleur qui peut faire fondre la neige"
   Sprite: {fileID: 21300000, guid: 12d7c0b96d362a14c845af2ace33b328, type: 3}
-  DifficultyToCraft: 2
+  DifficultyToCraft: 1
   IsPrimaryElement: 1
   ElementToCraft1: {fileID: 0}
   ElementToCraft2: {fileID: 0}

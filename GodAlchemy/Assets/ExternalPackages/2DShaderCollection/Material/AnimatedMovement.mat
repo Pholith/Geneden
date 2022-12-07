@@ -59,9 +59,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AnimatedMouvementUV_Speed_1: 0.239
-    - AnimatedMouvementUV_X_1: 0.268
-    - AnimatedMouvementUV_Y_1: 0.554
+    - AnimatedMouvementUV_Speed_1: -0.13
+    - AnimatedMouvementUV_X_1: 0
+    - AnimatedMouvementUV_Y_1: 0
     - _BumpScale: 1
     - _ColorMask: 15
     - _Cutoff: 0.5

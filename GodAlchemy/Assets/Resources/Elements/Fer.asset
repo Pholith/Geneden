@@ -14,10 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementDescription: Pose un petit gisement de fer
   Sprite: {fileID: 21300000, guid: 51c302f64de43fe4b8b02506b6ed1918, type: 3}
-  DifficultyToCraft: 3
+  DifficultyToCraft: 1
   IsPrimaryElement: 0
   ElementToCraft1: {fileID: 11400000, guid: 2911b96a07f13a240aa107a59bfd1283, type: 2}
   ElementToCraft2: {fileID: 11400000, guid: abbd3c9f5bd2ebc4eb26017dddb1ee0a, type: 2}
   EffectOnMap:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030806754, guid: 5b60b428af8cfd542a04d6cd1ae2763c, type: 3}
+        m_TargetAssemblyTypeName: ElementsManager, Assembly-CSharp
+        m_MethodName: Iron
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

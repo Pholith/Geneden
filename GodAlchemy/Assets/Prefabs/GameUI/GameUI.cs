@@ -1,59 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+
 public class GameUI : MonoBehaviour
 {
-    private Tile selectedTile;
-    private TileEditor playerEditor;
-    private Button desactivatedButton;
+    private BuildingManager buildingManager;
+
+    //
+    [SerializeField]
+    private GameObject InventoryTable;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        selectedTile = null;
-        playerEditor = FindObjectOfType<TileEditor>();
+        buildingManager = FindObjectOfType<BuildingManager>();
+        InventoryTable = transform.Find("Canvas").transform.Find("InventoryBoard").gameObject;
+        ShowBuildingUI(false);
+        ShowElementUI(true);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void OnSelectTile(Tile tile)
-    {
-        if (desactivatedButton != null)
-        {
-            desactivatedButton.interactable = true;
-        }
-        string _buttonName = EventSystem.current.currentSelectedGameObject.name;
-        Button _button = GameObject.Find(_buttonName).GetComponent<Button>();
-        _button.interactable = false;
-        desactivatedButton = _button;
-        selectedTile = tile;
-        playerEditor.SetSelectedTile(selectedTile);
-
-    }
-
-    public void OnSelectNone()
-    {
-        if (desactivatedButton != null)
-        {
-            desactivatedButton.interactable = true;
-        }
-        string _buttonName = EventSystem.current.currentSelectedGameObject.name;
-        Button _button = GameObject.Find(_buttonName).GetComponent<Button>();
-        _button.interactable = false;
-        desactivatedButton = _button;
-        selectedTile = null;
-        playerEditor.SetSelectedTile(selectedTile);
-    }
-
-    public Tile GetSelectedTile()
+    private void Update()
     {
         
-        return selectedTile;
+    }
+
+    public void ShowBuildingUI(bool show)
+    {
+        InventoryTable.transform.Find("InfosTable").gameObject.SetActive(show);
+    }
+
+    public void ShowElementUI(bool show)
+    {
+        InventoryTable.transform.Find("RightTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("MiddleTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("CraftingTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("RecipeTable").gameObject.SetActive(show);
+        InventoryTable.transform.Find("BuildingTable").gameObject.SetActive(false);
+        InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(show);
+    }
+
+    public void ShowGatheringUI(bool show)
+    {
+        InventoryTable.transform.Find("InfosTable").transform.Find("AsignationTable").gameObject.SetActive(show);
     }
 }

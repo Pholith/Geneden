@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1640,14 +1640,14 @@ TextureImporter:
       Grass_30: 968948242
       Grass_64: 2062287466
       Grass_27: -213296778
+      Grass_8: -377637687
       Grass_19: 2033179677
-      Grass_9: -802683001
       Grass_58: -1204533260
       Grass_24: -2108248246
       Grass_52: -353364118
-      Grass_23: 1106985820
+      Grass_9: -802683001
       Grass_70: -1633642782
-      Grass_8: -377637687
+      Grass_23: 1106985820
       Grass_35: 671491478
       Grass_38: -365074738
       Grass_21: 58953070

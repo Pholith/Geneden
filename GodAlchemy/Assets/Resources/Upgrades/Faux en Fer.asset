@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b080d4d66c035da4bbc69d1a77353d04, type: 3}
+  m_Name: Faux en Fer
+  m_EditorClassIdentifier: 
+  UpgradeDescription: "Am\xE9liore la vitesse de r\xE9colte des fermes de 15% suppl\xE9mentaires."
+  Sprite: {fileID: -728118251, guid: a948f3f855222fc4dbfe3b96a55c27c5, type: 3}
+  ResearchTime: 60
+  FoodCost: 0
+  WoodCost: 150
+  IronCost: 300
+  RockCost: 0
+  SilverCost: 0
+  GoldCost: 0
+  Bonus: 0.15
+  Unlocked: 0
+  Tier: 1
+  type: 00000000
+  UpgradeInto: {fileID: 11400000, guid: ebf2ff7487cb99b41a5bd4faf9207daa, type: 2}
+  UpgradeApplication:
+  - {fileID: 11400000, guid: 2d2a36331fa670f4fb466c993b977f70, type: 2}
+  RequiredCivilisationLvl: 1

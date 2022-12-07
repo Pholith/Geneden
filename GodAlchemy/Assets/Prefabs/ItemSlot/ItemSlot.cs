@@ -29,6 +29,7 @@ public partial class ItemSlot : MonoBehaviour
     //Crafting Slot Type
     private CraftingSystem craftSystem;
     private InventorySystem playerInventory;
+    private GridManager gridManager;
 
     //RecipeSystem
     private RecipeSystem recipeSystem;
@@ -47,6 +48,7 @@ public partial class ItemSlot : MonoBehaviour
         craftSystem = FindObjectOfType<CraftingSystem>();
         playerInventory = FindObjectOfType<InventorySystem>();
         recipeSystem = FindObjectOfType<RecipeSystem>();
+        gridManager = FindObjectOfType<GridManager>();
 
         // Adapte le isPayed selon l'élément placé dans l'inspecteur
         elementIsPayed = SlotType != Type.ressourceSlot && Element != null;
@@ -83,11 +85,14 @@ public partial class ItemSlot : MonoBehaviour
                 toolTipTrigger.SetContent(Element.ElementDescription);
                 itemIcon.sprite = Element.Sprite;
                 costText.text = Element.GetCost().ToString();
+                if (elementIsPayed) costText.text = "";
             }
             
         }
         else
         {
+            toolTipTrigger.SetHeader(null);
+            toolTipTrigger.SetContent(null);
             itemIcon.sprite = null;
             costText.text = "";
         }
