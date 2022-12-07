@@ -58,6 +58,8 @@ MonoBehaviour:
   victoryScreen: {fileID: 0}
   defeatScreen: {fileID: 0}
   buildingManager: {fileID: 1104164626079110861}
+  selectionManager: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!114 &5911366380029177572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +76,7 @@ MonoBehaviour:
   MainGameGrid: {fileID: 0}
   DirtGameGrid: {fileID: 0}
   dirt: {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
+  previewTilePrefab: {fileID: 0}
   tiles:
   - {fileID: 11400000, guid: 559cae1fdc015024b81446f43ee57814, type: 2}
   - {fileID: 11400000, guid: 2bfb5e671e3ecd44fb3ace1a08811fdd, type: 2}
@@ -99,6 +102,8 @@ MonoBehaviour:
   silverScore: 0
   goldScore: 0
   popScore: 0
+  realPop: 0
+  maxPop: 0
   civLevel: 0
   gameUI: {fileID: 0}
   foodText: {fileID: 0}
@@ -128,7 +133,7 @@ MonoBehaviour:
   particleSystemOffsets: {x: 0, y: 5, z: 0}
   timeInSecondAfterParticleStart: 2
   foodMarmitePrefab:
-    RawGuidValue: 00000000000000000000000000000000
+    RawGuidValue: f1f774e525c45c240ad080231ed70a00
   hillTile: {fileID: 11400000, guid: 939448eb5c2a5e74eaf286acdb581f4e, type: 2}
   airParticlePrefab:
     RawGuidValue: 0af6fd52f50b8b64ba3df3ff53b2faa4
@@ -217,6 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  buildingsScriptableObjects: []
+  questSystem: {fileID: 0}
+  buildingRangePrefab: {fileID: 0}
+  tagsSpriteList: []
   genericBuildingPrefab:
     RawGuidValue: 00000000000000000000000000000000
