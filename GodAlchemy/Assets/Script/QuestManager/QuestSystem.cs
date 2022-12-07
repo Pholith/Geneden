@@ -134,7 +134,6 @@ public class QuestSystem  : MonoBehaviour
     }
 
     public void ElementInvoked(string elementName) {
-        UnityEngine.Debug.Log("Launched element launching function with " + elementName);
         List<Quest> currentQuestLevel = getCurrentQuestLevel();
         for (int i = 0; i < currentQuestLevel.Count ; i++) {
             if (currentQuestLevel[i] is ElementQuest) {
@@ -149,7 +148,6 @@ public class QuestSystem  : MonoBehaviour
     }
 
     public void Built(string buildName) {
-        UnityEngine.Debug.Log("Launched building function with " + buildName);
         List<Quest> currentQuestLevel = getCurrentQuestLevel();
         for (int i = 0; i < currentQuestLevel.Count ; i++) {
             if (currentQuestLevel[i] is BuildQuest) {

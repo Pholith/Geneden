@@ -88,7 +88,6 @@ public class PlayerManager : BaseManager<PlayerManager>
 
         foreach(UpgradesScriptableObject upgrade in Upgrades)
         {
-            Debug.Log(upgrade);
             if((upgrade.UpgradeApplication.Contains(building)) && (upgrade.type.Contains(type)) && IsUpgradeUnlocked(upgrade))
             {
                 efficiencyBonus += upgrade.Bonus;

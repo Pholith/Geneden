@@ -140,7 +140,7 @@ public class ElementsManager : BaseManager<ElementsManager>
         {
             BuildingGeneric buildingComponent = resource.GetComponent<BuildingGeneric>();
             if (buildingComponent != null) buildingComponent.Damage(DAMAGE_MEDIUM);
-            else Destroy(gameObject);
+            else Destroy(resource.gameObject);
         }
     }
 

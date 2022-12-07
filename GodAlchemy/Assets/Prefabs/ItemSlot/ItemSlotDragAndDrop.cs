@@ -45,7 +45,6 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(eventData.delta);
         if (rectTransform == null) return;
         if(RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform,eventData.position,eventData.pressEventCamera,out var mousePos))
         {

@@ -113,7 +113,6 @@ public partial class BatimentSlot : MonoBehaviour,IPointerEnterHandler, IPointer
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Building selected : " + selectedBuildingDescriptor.name);
         building_clicked = true;
         CreatePreview();
     }
