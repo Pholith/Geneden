@@ -9,6 +9,6 @@ public class ElementQuest : Quest
     
     public ElementQuest(int objective, string elementName) : base(objective){
         this.objectiveElement = elementName;
-        this.description = "Placer un " + elementName + " sur Aurus.";
+        this.description = "Lancer le sort " + elementName + " sur Aurus.";
     }
 }

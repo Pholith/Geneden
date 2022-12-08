@@ -8,7 +8,7 @@ public class BuildQuest : Quest
     public string ObjectiveBuild {get => objectiveBuild;}
 
     public BuildQuest(int objective, string buildName) : base(objective){
-        this.description = "Posséder simultanément " + objective.ToString() + " bâtiments.";
+        this.description = "Construire le bâtiment " + buildName + ".";
         this.objectiveBuild = buildName;
     }
 

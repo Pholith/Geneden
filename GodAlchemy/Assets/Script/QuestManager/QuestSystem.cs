@@ -93,6 +93,7 @@ public class QuestSystem  : MonoBehaviour
         questsLevel6.Add(new BuildQuest(1, "Merveille"));
 
         questsDescription = gameObject.GetComponent<TextMeshProUGUI>();
+        UnityEngine.Debug.Log(questsDescription);
         RefreshDescription();
     }
 
@@ -177,12 +178,25 @@ public class QuestSystem  : MonoBehaviour
 
     private void RefreshDescription() {
         List<Quest> currentQuestLevel = getCurrentQuestLevel();
-        //questsDescription.text = currentQuestLevel[0].description; //TODO
+        questsDescription.text = "";
+        for (int i = 0; i < currentQuestLevel.Count; i++) {
+            Quest currentQuest = currentQuestLevel[i];
+            questsDescription.text += @"<align=left>" + currentQuest.description + @"<line-height=0>
+<align=right>";
+            if (currentQuest.IsAccomplished())
+                questsDescription.text += "<color=\"green\">" + currentQuest.GetCurrentAmount() + "/" + currentQuest.GetObjectiveAmount() +@"</color><line-height=1em>
+
+";
+            else
+                questsDescription.text += currentQuest.GetCurrentAmount() + "/" + currentQuest.GetObjectiveAmount() +@"<line-height=1em>
+
+";
+        }
+
     }
 
     private void GetNextLevel() {
         currentLevel++;
-        UnityEngine.Debug.Log("resource manager is " + resourceManager);
         resourceManager.AddRessource(ResourceManager.RessourceType.CivLevel, 1);
         if (resourceManager.GetCivLevel() != currentLevel)
             throw new InvalidOperationException("Civ level does not match with quest level!");
@@ -192,7 +206,15 @@ public class QuestSystem  : MonoBehaviour
             gameObject.GetComponent<GameManager>().EndGame();
     }
 
-    private void Update() {        
+    private void Update() {
+        List<Quest> currentQuestLevel = getCurrentQuestLevel();
+        for (int i = 0; i < currentQuestLevel.Count; i++) {
+            if (currentQuestLevel[i] is ResourceQuest) {
+                ResourceQuest currentQuest = (ResourceQuest) currentQuestLevel[i];
+                currentQuest.SetCurrentAmount(resourceManager.GetRessourcePerType(currentQuest.RessourceType));
+                RefreshDescription(); 
+            }
+        }      
     }
 }
 

@@ -21,4 +21,10 @@ public class Quest
     public virtual void SetCurrentAmount(int newAmount) {
         currentAmount = newAmount;
     }
+    public virtual int GetCurrentAmount() {
+        return currentAmount;
+    }
+    public virtual int GetObjectiveAmount() {
+        return ObjectiveAmount;
+    }
 }
