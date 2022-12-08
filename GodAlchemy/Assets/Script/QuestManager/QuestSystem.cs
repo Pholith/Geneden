@@ -20,7 +20,7 @@ public class QuestSystem  : MonoBehaviour
     private static TextMeshProUGUI questsDescription;
 
     [SerializeField]
-    private ResourceManager resourceManager;
+    private static ResourceManager resourceManager;
 
     public void Start()
     {
@@ -182,6 +182,7 @@ public class QuestSystem  : MonoBehaviour
 
     private void GetNextLevel() {
         currentLevel++;
+        UnityEngine.Debug.Log("resource manager is " + resourceManager);
         resourceManager.AddRessource(ResourceManager.RessourceType.CivLevel, 1);
         if (resourceManager.GetCivLevel() != currentLevel)
             throw new InvalidOperationException("Civ level does not match with quest level!");

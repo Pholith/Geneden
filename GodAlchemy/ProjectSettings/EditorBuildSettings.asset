@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Victoire.unity
     guid: fc1dae8fef2715c4f92ae7eb922e8107
   - enabled: 1
@@ -19,7 +19,10 @@ EditorBuildSettings:
     guid: a655a175614e10243b5b42b7df8ecae3
   - enabled: 1
     path: Assets/Scenes/Main.unity
-    guid: c3828d74df8601e43967c9bbbd42c53a
+    guid: d6a57c741a53d564fbbc00cb3ab27480
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Scenes/Victoire.unity
     guid: fc1dae8fef2715c4f92ae7eb922e8107
