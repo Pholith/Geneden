@@ -30,7 +30,7 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         if (PlayerManager.Instance.IsUpgradeUnlocked(Upgrade))
             FindObjectOfType<BuildingInfosTable>().UpdateUpgradesUI();
-        if (SelectedBuilding.IsSearchingUpgrade(Upgrade))
+        if (PlayerManager.Instance.IsUpgradeAlreadySearched(Upgrade))
             SetCaseColor(new Color32(106, 106, 106, 194));
         else
         {
@@ -89,13 +89,21 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(!SelectedBuilding.IsSearching())
+        if (!SelectedBuilding.IsSearching())
         {
-            Debug.Log(PlayerManager.Instance.IsUpgradeSearchable(Upgrade));
             if (PlayerManager.Instance.IsUpgradeSearchable(Upgrade))
             {
                 SelectedBuilding.SearchUpgrade(Upgrade);
                 FindObjectOfType<BuildingInfosTable>().UpdateSearchingIcon();
+            }
+        }
+        else if ((SelectedBuilding.CanAddUpgradeToPendingList()) && !PlayerManager.Instance.IsUpgradeAlreadySearched(Upgrade))
+        {
+            if (PlayerManager.Instance.IsUpgradeSearchable(Upgrade))
+            {
+                PlayerManager.Instance.StartUpgrade(Upgrade);
+                SelectedBuilding.AddUpgradeToPendingList(Upgrade);
+                FindObjectOfType<BuildingInfosTable>().UpdateSearchingPendingList();
             }
         }
     }

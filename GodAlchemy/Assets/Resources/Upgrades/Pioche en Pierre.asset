@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeDescription: "Am\xE9liore la vitesse de r\xE9colte de gisements de 15%."
   Sprite: {fileID: 944516759, guid: a948f3f855222fc4dbfe3b96a55c27c5, type: 3}
-  ResearchTime: 20
+  ResearchTime: 60
   FoodCost: 125
   WoodCost: 125
   IronCost: 0
@@ -23,10 +23,10 @@ MonoBehaviour:
   GoldCost: 0
   Bonus: 0.15
   AddedGatherableRessource: 
-  Unlocked: 0
+  Unlocked: 1
   Tier: 1
   type: 00000000
-  UpgradeInto: {fileID: 0}
+  UpgradeInto: {fileID: 11400000, guid: 00b4b69415aa57647b9afa24e71f2e48, type: 2}
   UpgradeApplication:
   - {fileID: 11400000, guid: 7b93a1a1699ab054ebb2feaa7600180c, type: 2}
   RequiredCivilisationLvl: 0

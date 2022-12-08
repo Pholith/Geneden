@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b080d4d66c035da4bbc69d1a77353d04, type: 3}
   m_Name: Extraction du Fer
   m_EditorClassIdentifier: 
-  UpgradeDescription: 
+  UpgradeDescription: "Permet aux villageois de r\xE9colter les gisements de fer."
   Sprite: {fileID: 1273320291, guid: a948f3f855222fc4dbfe3b96a55c27c5, type: 3}
-  ResearchTime: 10
+  ResearchTime: 60
   FoodCost: 250
   WoodCost: 250
   IronCost: 0
@@ -23,10 +23,10 @@ MonoBehaviour:
   GoldCost: 0
   Bonus: 0
   AddedGatherableRessource: 03000000
-  Unlocked: 0
+  Unlocked: 1
   Tier: 1
   type: 03000000
-  UpgradeInto: {fileID: 0}
+  UpgradeInto: {fileID: 11400000, guid: 30270fbdd54f48c4799dd9817e369e18, type: 2}
   UpgradeApplication:
   - {fileID: 11400000, guid: 7b93a1a1699ab054ebb2feaa7600180c, type: 2}
   RequiredCivilisationLvl: 0

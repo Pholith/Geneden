@@ -23,6 +23,8 @@ public class BuildingInfosTable : MonoBehaviour
     [SerializeField]
     public GameObject researchIconPrefab;
     [SerializeField]
+    public GameObject pendingIconPrefab;
+    [SerializeField]
     private BuildingGeneric selectedBuilding;
 
 
@@ -114,6 +116,7 @@ public class BuildingInfosTable : MonoBehaviour
         {
             UpdateWorkerUI();
             UpdateSearchingIcon();
+            UpdateSearchingPendingList();
             FindObjectOfType<GameUI>().ShowGatheringUI(true);
             selectedBuilding.GetComponent<GatheringBuildings>().ShowRange(true);
         }
@@ -313,6 +316,27 @@ public class BuildingInfosTable : MonoBehaviour
             _researchIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(-13.5f, 13.5f, 0f);
             _researchIcon.GetComponent<RectTransform>().localScale = new Vector3(0.75f, 0.75f, 1.0f);
         }  
+    }
+
+    public void UpdateSearchingPendingList()
+    {
+        int _i = 0;
+        int _xPos = -95;
+        int _yPos = 5;
+
+        GameObject _contentPanel = BuildingGatheringPanel.transform.Find("ResearchPanel").transform.Find("PendingList").gameObject;
+        DestroyContentUI(_contentPanel);
+        foreach (UpgradesScriptableObject pendingUpgrade in selectedBuilding.GetPendingList())
+        {
+              GameObject _pendingIcon = Instantiate(pendingIconPrefab);
+            _pendingIcon.GetComponent<PendingSlot>().SetUpgrade(pendingUpgrade,selectedBuilding);
+              _pendingIcon.transform.SetParent(_contentPanel.transform);
+              _pendingIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
+            _xPos += 20;
+            _i += 1;
+            if (_i % 5 == 0)
+                return;
+        }
     }
 
     private void DestroyContentUI(GameObject UIPanel)

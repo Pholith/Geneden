@@ -1,4 +1,5 @@
 using Fusion;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +19,8 @@ public class BuildingGeneric : NetworkBehaviour
 
     //Upgrading
     private UpgradesScriptableObject PendingUpgrade = null;
+    [SerializeField]
+    private List<UpgradesScriptableObject> ListPendingUpgrade;
     private StopWatch UpgradeTimer;
 
 
@@ -81,6 +84,7 @@ public class BuildingGeneric : NetworkBehaviour
         }
         hp = buildingScriptObj.MaxHealth;
         UpgradeTimer = this.AddComponent<StopWatch>();
+        ListPendingUpgrade = new List<UpgradesScriptableObject>();
         ComputeCollider();
     }
 
@@ -150,6 +154,11 @@ public class BuildingGeneric : NetworkBehaviour
         {
             ResourceManager.Instance.AddRessource(ResourceManager.RessourceType.Population,this.GetComponent<GatheringBuildings>().GetWorker());
         }
+        if(IsSearching())
+        {
+            StopUpgrade(PendingUpgrade);
+            ListPendingUpgrade.Clear();
+        }
         PlayerManager.Instance.RemoveBuilding(this);
     }
 
@@ -187,10 +196,48 @@ public class BuildingGeneric : NetworkBehaviour
         return hp;
     }
 
+    public bool CanAddUpgradeToPendingList()
+    {
+        return ListPendingUpgrade.Count + 1 < 5;
+    }
+
+    public void AddUpgradeToPendingList(UpgradesScriptableObject upgrade)
+    {
+        ListPendingUpgrade.Add(upgrade);
+    }
+
+    public void RemoveUpgradeToPendingList(UpgradesScriptableObject upgrade)
+    {
+        ListPendingUpgrade.Remove(upgrade);
+    }
+
+    public UpgradesScriptableObject GetUpgradeFromPendingList(UpgradesScriptableObject upgrade)
+    {
+        return ListPendingUpgrade[ListPendingUpgrade.IndexOf(upgrade)];
+    }
+
+    public List<UpgradesScriptableObject> GetPendingList()
+    {
+        return ListPendingUpgrade;
+    }
+
+    public bool IsPendingUpgradeListEmpty()
+    {
+        return ListPendingUpgrade.Count <= 0;
+    }
+
+
     public void SearchUpgrade(UpgradesScriptableObject upgrade)
     {
         PendingUpgrade = upgrade;
         PlayerManager.Instance.StartUpgrade(upgrade);
+        UpgradeTimer.SetEndTime(upgrade.ResearchTime);
+        UpgradeTimer.StartCount();
+    }
+
+    public void SearchPendingListUpgrade(UpgradesScriptableObject upgrade)
+    {
+        PendingUpgrade = upgrade;
         UpgradeTimer.SetEndTime(upgrade.ResearchTime);
         UpgradeTimer.StartCount();
     }
@@ -200,22 +247,47 @@ public class BuildingGeneric : NetworkBehaviour
         PlayerManager.Instance.StopUpgrade(upgrade);
         PendingUpgrade = null;
         UpgradeTimer.StopCount();
+        StartNextUpgradeInList();
         
     }
 
+    private void StartNextUpgradeInList()
+    {
+        Debug.Log(!IsPendingUpgradeListEmpty());
+        if (!IsPendingUpgradeListEmpty())
+        {
+            SearchPendingListUpgrade(ListPendingUpgrade[0]);
+            ListPendingUpgrade.Remove(PendingUpgrade);
+        }
+        UpdateUpgradeUI();
+    }
     public void EndUpgrade()
     {
         PlayerManager.Instance.UnlockUpgrade(PendingUpgrade);
         UpgradeTimer.StopCount();
         PlayerManager.Instance.UpdateBuildingUpgrade();
+        StartNextUpgradeInList();
+        UpdateUpgradeUI();    
+    }
+
+    public void UpdateUpgradeUI()
+    {
         if (SelectionManager.Instance.isSelected(this.GetComponent<SelectableObject>()))
+        {
+            FindObjectOfType<BuildingInfosTable>().UpdateSearchingIcon();
+            FindObjectOfType<BuildingInfosTable>().UpdateSearchingPendingList();
             FindObjectOfType<BuildingInfosTable>().UpdateUpgradesUI();
-            
+        }
+    }
+
+    public bool IsUpgradeInPendingList(UpgradesScriptableObject upgrade)
+    {
+        return (ListPendingUpgrade.Contains(upgrade));
     }
 
     public bool IsSearchingUpgrade(UpgradesScriptableObject upgrade)
     {
-        return ((upgrade == PendingUpgrade) && (UpgradeTimer.IsActive()));
+        return (((upgrade == PendingUpgrade) && (UpgradeTimer.IsActive())) || (IsUpgradeInPendingList(upgrade)));
     }
 
     public bool IsSearching()

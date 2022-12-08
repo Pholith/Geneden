@@ -44,6 +44,6 @@ MonoBehaviour:
   UpdateFunction:
     m_PersistentCalls:
       m_Calls: []
-  gatherableRessource: 020000000400000005000000
+  gatherableRessource: 02000000
   gatheringRange: 10
   maxVillager: 3

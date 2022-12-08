@@ -159,6 +159,17 @@ public class PlayerManager : BaseManager<PlayerManager>
         return true;
     }
 
+    public bool IsUpgradeAlreadySearched(UpgradesScriptableObject upgrade)
+    {
+        foreach(BuildingGeneric building in ownedBuildingList)
+        {
+            if (building.IsSearchingUpgrade(upgrade))
+                return true;
+        }
+
+        return false;
+    }
+
     public void StartUpgrade(UpgradesScriptableObject upgrade)
     {
         Dictionary<ResourceManager.RessourceType, int> ressourcesForUpgrade = new Dictionary<ResourceManager.RessourceType, int>();

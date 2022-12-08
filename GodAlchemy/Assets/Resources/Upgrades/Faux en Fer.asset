@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Faux en Fer
   m_EditorClassIdentifier: 
   UpgradeDescription: "Am\xE9liore la vitesse de r\xE9colte des fermes de 15% suppl\xE9mentaires."
-  Sprite: {fileID: -728118251, guid: a948f3f855222fc4dbfe3b96a55c27c5, type: 3}
+  Sprite: {fileID: -791315681, guid: 032a458f68526da45ba1ead2642b133a, type: 3}
   ResearchTime: 60
   FoodCost: 0
   WoodCost: 150
@@ -22,10 +22,11 @@ MonoBehaviour:
   SilverCost: 0
   GoldCost: 0
   Bonus: 0.15
+  AddedGatherableRessource: 
   Unlocked: 0
   Tier: 1
   type: 00000000
   UpgradeInto: {fileID: 11400000, guid: ebf2ff7487cb99b41a5bd4faf9207daa, type: 2}
   UpgradeApplication:
   - {fileID: 11400000, guid: 2d2a36331fa670f4fb466c993b977f70, type: 2}
-  RequiredCivilisationLvl: 1
+  RequiredCivilisationLvl: 0
