@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b080d4d66c035da4bbc69d1a77353d04, type: 3}
-  m_Name: "Am\xE9lioration maison de pierre"
+  m_Name: Maison Niv2
   m_EditorClassIdentifier: 
   UpgradeDescription: "Am\xE9liore la maison en maison de pierre, ajoutant 10 de
     population suppl\xE9mentaire."
-  Sprite: {fileID: 61107799, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  Sprite: {fileID: -916663950, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   ResearchTime: 20
   FoodCost: 0
   WoodCost: 0
@@ -31,4 +31,4 @@ MonoBehaviour:
   UpgradeInto: {fileID: 0}
   UpgradeApplication:
   - {fileID: 11400000, guid: 5fe2fdcd2e9fc2642ae49d181737627c, type: 2}
-  RequiredCivilisationLvl: 0
+  RequiredCivilisationLvl: 3

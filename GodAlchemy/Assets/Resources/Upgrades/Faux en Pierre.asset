@@ -22,10 +22,13 @@ MonoBehaviour:
   SilverCost: 0
   GoldCost: 0
   Bonus: 0.15
+  AddedGatherableRessource: 
+  LevelUpBuilding: {fileID: 0}
   Unlocked: 0
   Tier: 1
   type: 00000000
   UpgradeInto: {fileID: 11400000, guid: 423a9aeec7f366143884013500e93ab6, type: 2}
   UpgradeApplication:
   - {fileID: 11400000, guid: 2d2a36331fa670f4fb466c993b977f70, type: 2}
-  RequiredCivilisationLvl: 0
+  - {fileID: 11400000, guid: f4e5f2d0495005a4086b819afadd6ad8, type: 2}
+  RequiredCivilisationLvl: 2

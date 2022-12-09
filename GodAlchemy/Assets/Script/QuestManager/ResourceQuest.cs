@@ -9,7 +9,7 @@ public class ResourceQuest : Quest
 
     public ResourceQuest(int objective, ResourceManager.RessourceType type) : base(objective){
         switch (type) {
-            case (ResourceManager.RessourceType.Population):
+            case (ResourceManager.RessourceType.MaxPopulation):
                 this.description = "Obtenir une population de " + objective.ToString() + " habitants.";
                 break;
             case (ResourceManager.RessourceType.Food):

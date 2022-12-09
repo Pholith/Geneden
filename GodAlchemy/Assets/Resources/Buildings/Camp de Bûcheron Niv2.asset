@@ -15,7 +15,7 @@ MonoBehaviour:
   BuildingDescription: "B\xE2timent \xE9conomique qui abrite des b\xFBcherons et
     permet de r\xE9colter le bois \xE0 porter. Contient les am\xE9liorations technologiques
     de la r\xE9colte du bois."
-  Sprite: {fileID: -832742988, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  Sprite: {fileID: -1431032698, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   MaxHealth: 1400
   BuildingTime: 1
   FoodCost: 0

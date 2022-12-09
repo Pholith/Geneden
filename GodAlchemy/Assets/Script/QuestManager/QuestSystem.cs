@@ -63,30 +63,30 @@ public class QuestSystem  : MonoBehaviour
          OU
         -Placer une forêt 0/1
         -Placer un camp de bûcherons 0/1 */
-        questsLevel2.Add(new BuildQuest(1, "Mine"));
+        questsLevel2.Add(new BuildQuest(1, "Camp de Mineur"));
         questsLevel2.Add(new ElementQuest(1, "Roche"));
         questsLevel2.Add(new ElementQuest(1, "Végétation"));
-        questsLevel2.Add(new BuildQuest(1, "Camp de bûcherons"));
+        questsLevel2.Add(new BuildQuest(1, "Camp de Bûcheron"));
 
         /*Niveau 3 (Développement)
         -Avoir 5 bâtiments               2/5
         -Atteindre une population de 30  14/30
         -Découvrir le fer                0/1 */
         questsLevel3.Add(new CraftQuest(1, "Fer"));
-        questsLevel3.Add(new ResourceQuest(30, ResourceManager.RessourceType.Population));
+        questsLevel3.Add(new ResourceQuest(30, ResourceManager.RessourceType.MaxPopulation));
 
         /*Niveau 4 (Prospérer)
         -Atteindre une génération de nourriture de 50/s
         -Atteindre une population de 75   30/75
         -Créer un bâtiment militaire */
-        questsLevel4.Add(new ResourceQuest(75, ResourceManager.RessourceType.Population));
+        questsLevel4.Add(new ResourceQuest(75, ResourceManager.RessourceType.MaxPopulation));
         questsLevel4.Add(new BuildQuest(1, "Militaire"));
 
         /*Niveau 5 (Explosion technologique)
         -Obtenir l'élément Or
         -Atteindre une population de 150  75/150*/
         questsLevel5.Add(new CraftQuest(1, "Or"));
-        questsLevel5.Add(new ResourceQuest(1, ResourceManager.RessourceType.Population));
+        questsLevel5.Add(new ResourceQuest(1, ResourceManager.RessourceType.MaxPopulation));
 
         /*Niveau 6 (AutoWin)
         Construire la merveille des dieux*/

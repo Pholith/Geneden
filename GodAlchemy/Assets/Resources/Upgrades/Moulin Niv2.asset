@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Moulin Niv2
   m_EditorClassIdentifier: 
   UpgradeDescription: Ajoute un emplacement de villageois au moulin.
-  Sprite: {fileID: -738356943, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  Sprite: {fileID: 2101649158, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   ResearchTime: 20
   FoodCost: 0
   WoodCost: 0
@@ -30,4 +30,5 @@ MonoBehaviour:
   UpgradeInto: {fileID: 0}
   UpgradeApplication:
   - {fileID: 11400000, guid: 2d2a36331fa670f4fb466c993b977f70, type: 2}
-  RequiredCivilisationLvl: 0
+  - {fileID: 11400000, guid: f4e5f2d0495005a4086b819afadd6ad8, type: 2}
+  RequiredCivilisationLvl: 3

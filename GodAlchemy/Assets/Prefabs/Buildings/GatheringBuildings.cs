@@ -228,4 +228,9 @@ public class GatheringBuildings : MonoBehaviour
         return false;
 
     }
+
+    public void SetBuildingScript(BuildingsScriptableObject newScript)
+    {
+        building = (GatheringBuildingScript)newScript;
+    }
 }

@@ -21,6 +21,7 @@ public class ResourceManager : BaseManager<ResourceManager>
         Silver,
         Gold,
         Population,
+        MaxPopulation,
         CivLevel
     };
 
@@ -151,6 +152,8 @@ public class ResourceManager : BaseManager<ResourceManager>
                 return popScore;
             case RessourceType.CivLevel:
                 return civLevel;
+            case RessourceType.MaxPopulation:
+                return maxPop;
         }
 
         return 0;

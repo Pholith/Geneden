@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   TagType: 6
-  Sprite: {fileID: -2115248026, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  Sprite: {fileID: 985377426, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}

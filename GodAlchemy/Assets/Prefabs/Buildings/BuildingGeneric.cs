@@ -297,6 +297,7 @@ public class BuildingGeneric : NetworkBehaviour
             GatheringBuildingScript upgradeBuilding = (GatheringBuildingScript)buildingScriptObj.UpgradeInto;
             gatheringBuilding.SetMaxWorker(upgradeBuilding.maxVillager);
             buildingScriptObj = upgradeBuilding;
+            gatheringBuilding.SetBuildingScript(buildingScriptObj);
         }
         else
         {

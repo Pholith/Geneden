@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Maison de Pierre
   m_EditorClassIdentifier: 
   BuildingDescription: "Maison am\xE9lior\xE9e qui augmente d'avantage la population."
-  Sprite: {fileID: 61107799, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  Sprite: {fileID: -916663950, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   MaxHealth: 1000
   BuildingTime: 1
   FoodCost: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
   BuildingTags: 06000000
-  RequiredCivilisationLvl: 1
+  RequiredCivilisationLvl: 2
   UpgradeList: []
   SpecialConditionRequired:
     _target: {fileID: 11400000}

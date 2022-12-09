@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Camp de b\xFBcheron Niv2"
   m_EditorClassIdentifier: 
   UpgradeDescription: "Ajoute un emplacement de villageois au camp de b\xFBcheron"
-  Sprite: {fileID: -832742988, guid: 298fd7af03d66ef4f9c1935311970fa2, type: 3}
+  Sprite: {fileID: -1431032698, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   ResearchTime: 20
   FoodCost: 0
   WoodCost: 0
@@ -30,4 +30,5 @@ MonoBehaviour:
   UpgradeInto: {fileID: 0}
   UpgradeApplication:
   - {fileID: 11400000, guid: cd906096ce655304292ee9dc719829d2, type: 2}
-  RequiredCivilisationLvl: 0
+  - {fileID: 11400000, guid: 652b93ab7066b5043acf67e3af31134e, type: 2}
+  RequiredCivilisationLvl: 3
