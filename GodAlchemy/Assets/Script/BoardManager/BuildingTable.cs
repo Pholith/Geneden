@@ -31,7 +31,7 @@ public class BuildingTable : MonoBehaviour
         GameObject _contentPanel = transform.Find("ScrollArea").gameObject.transform.Find("Content").gameObject;
         foreach (BuildingsScriptableObject building in GameManager.BuildingManager.buildingsScriptableObjects)
         {
-            if(building.name == "Data")
+            if(!building.isBuildable)
             {
                 continue;
             }

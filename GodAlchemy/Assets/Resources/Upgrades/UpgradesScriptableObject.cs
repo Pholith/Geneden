@@ -12,7 +12,8 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
         Efficiency,
         Value,
         Technologie,
-        UnlockRessource
+        UnlockRessource,
+        LevelUpBuilding
     }
 
     [Header("Informations basiques")]
@@ -43,6 +44,7 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
     [Header("Bonus")]
     public float Bonus;
     public List<ResourceManager.RessourceType> AddedGatherableRessource;
+    public BuildingsScriptableObject LevelUpBuilding;
 
     [Header("Etat")]
     public bool Unlocked;
@@ -67,6 +69,11 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
     public int CompareTo(UpgradesScriptableObject other)
     {
         return name.CompareTo(other.name);
+    }
+
+    public bool IsBuildingLevelUpUpgrade()
+    {
+        return LevelUpBuilding != null;
     }
 
 }

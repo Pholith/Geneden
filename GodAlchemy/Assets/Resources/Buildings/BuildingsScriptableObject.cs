@@ -50,6 +50,8 @@ public class BuildingsScriptableObject : ScriptableObject, IComparable<Buildings
     [Min(0)]
     public int GoldCost;
 
+    [Header("UI")]
+    public bool isBuildable;
 
     [Header("Gameplay")]
     [Range(1, 4)]

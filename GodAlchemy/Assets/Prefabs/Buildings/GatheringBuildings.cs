@@ -207,6 +207,11 @@ public class GatheringBuildings : MonoBehaviour
         return maxWorkers;
     }
 
+    public void SetMaxWorker(int workers)
+    {
+        maxWorkers = workers;
+    }
+
     public StopWatch GetTimer()
     {
         return gatheringTimer;

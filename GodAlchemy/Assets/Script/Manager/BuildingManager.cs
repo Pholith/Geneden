@@ -1,5 +1,6 @@
 using Fusion;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BuildingManager : BaseManager<BuildingManager>
@@ -12,7 +13,7 @@ public class BuildingManager : BaseManager<BuildingManager>
         Resources.LoadAll("Buildings");
         buildingsScriptableObjects = new List<BuildingsScriptableObject>(Resources.FindObjectsOfTypeAll<BuildingsScriptableObject>());
         buildingsScriptableObjects.Sort();
-
+        
         Resources.LoadAll("Tags");
         tagsSpriteList = new List<TagScriptableObject>(Resources.FindObjectsOfTypeAll<TagScriptableObject>());
     }

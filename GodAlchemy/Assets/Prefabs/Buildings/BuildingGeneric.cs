@@ -263,20 +263,59 @@ public class BuildingGeneric : NetworkBehaviour
     }
     public void EndUpgrade()
     {
-        PlayerManager.Instance.UnlockUpgrade(PendingUpgrade);
-        UpgradeTimer.StopCount();
-        PlayerManager.Instance.UpdateBuildingUpgrade();
-        StartNextUpgradeInList();
-        UpdateUpgradeUI();    
+        Debug.Log(PendingUpgrade.IsBuildingLevelUpUpgrade());
+        if(PendingUpgrade.IsBuildingLevelUpUpgrade())
+        {
+            UpgradeTimer.StopCount();
+            LevelUpBuilding();
+            StartNextUpgradeInList();
+            UpdateUpgradeUI();
+        }
+        else
+        {
+            PlayerManager.Instance.UnlockUpgrade(PendingUpgrade);
+            UpgradeTimer.StopCount();
+            PlayerManager.Instance.UpdateBuildingUpgrade();
+            StartNextUpgradeInList();
+            UpdateUpgradeUI();
+        }
+    }
+
+    private void LevelUpBuilding()
+    {
+        
+        if (buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House))
+        {
+            HouseScriptableObject houseScript = (HouseScriptableObject)buildingScriptObj;
+            HouseScriptableObject upgradeBuilding = (HouseScriptableObject)buildingScriptObj.UpgradeInto;
+            ResourceManager.Instance.UpMaxPop(upgradeBuilding.AdditionalPopulation - houseScript.AdditionalPopulation);
+            buildingScriptObj = upgradeBuilding;
+        }
+        else if(buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
+        {
+            GatheringBuildings gatheringBuilding = this.GetComponent<GatheringBuildings>();
+            GatheringBuildingScript upgradeBuilding = (GatheringBuildingScript)buildingScriptObj.UpgradeInto;
+            gatheringBuilding.SetMaxWorker(upgradeBuilding.maxVillager);
+            buildingScriptObj = upgradeBuilding;
+        }
+        else
+        {
+            buildingScriptObj = buildingScriptObj.UpgradeInto;
+        }
+        hp = hp + (buildingScriptObj.MaxHealth - hp);
+        sr.sprite = buildingScriptObj.Sprite;
+        ComputeCollider();
+        if(FindObjectOfType<BuildingInfosTable>(true).IsBuildingDisplayed(this))
+            FindObjectOfType<BuildingInfosTable>(true).BuildingSelected(this);
     }
 
     public void UpdateUpgradeUI()
     {
         if (SelectionManager.Instance.isSelected(this.GetComponent<SelectableObject>()))
         {
-            FindObjectOfType<BuildingInfosTable>().UpdateSearchingIcon();
-            FindObjectOfType<BuildingInfosTable>().UpdateSearchingPendingList();
-            FindObjectOfType<BuildingInfosTable>().UpdateUpgradesUI();
+            FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingIcon();
+            FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingPendingList();
+            FindObjectOfType<BuildingInfosTable>(true).UpdateUpgradesUI();
         }
     }
 

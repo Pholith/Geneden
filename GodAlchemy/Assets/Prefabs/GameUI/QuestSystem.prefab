@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2615058556850756551
+--- !u!1 &6435850576193467440
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2852663617979648744}
-  - component: {fileID: 7337215965699055723}
-  - component: {fileID: 2769962750739474046}
-  - component: {fileID: 2581445798012424353}
+  - component: {fileID: 6524734634703840543}
+  - component: {fileID: 1786019118994902940}
+  - component: {fileID: 6587310040821893513}
+  - component: {fileID: 6830010789682413398}
   m_Layer: 0
   m_Name: QuestSystem
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &2852663617979648744
+--- !u!224 &6524734634703840543
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615058556850756551}
+  m_GameObject: {fileID: 6435850576193467440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,37 +36,36 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297, y: 103}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 293.88, y: 113.951096}
+  m_SizeDelta: {x: 212.2303, y: 103.1062}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7337215965699055723
+--- !u!114 &1786019118994902940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615058556850756551}
+  m_GameObject: {fileID: 6435850576193467440}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e245a6305245d404893941b2febc0caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceManager: {fileID: 0}
---- !u!222 &2769962750739474046
+--- !u!222 &6587310040821893513
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615058556850756551}
+  m_GameObject: {fileID: 6435850576193467440}
   m_CullTransparentMesh: 1
---- !u!114 &2581445798012424353
+--- !u!114 &6830010789682413398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615058556850756551}
+  m_GameObject: {fileID: 6435850576193467440}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -80,7 +79,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: '<align=left>Creer du feu<line-height=0>
+
+    <align=right>0/1<line-height=1em>
+
+
+    <align=left>Lorem
+    ipsum miaou manger<line-height=0>
+
+    <align=right>0/1<line-height=1em>
+
+
+    <align=left>Construire
+    une maisonnette<line-height=0>
+
+    <align=right>0/1<line-height=1em>
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 296ebafcc7e8659448a34beeba3ddc0f, type: 2}
   m_sharedMaterial: {fileID: 6283599472157283469, guid: 296ebafcc7e8659448a34beeba3ddc0f, type: 2}
@@ -107,8 +122,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -143,7 +158,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.00004575312, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

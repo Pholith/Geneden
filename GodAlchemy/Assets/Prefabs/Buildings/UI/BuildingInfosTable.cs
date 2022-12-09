@@ -112,13 +112,15 @@ public class BuildingInfosTable : MonoBehaviour
     {
         selectedBuilding = building;
         SetInfos();
-        if(selectedBuilding.buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
+        if (selectedBuilding.buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering))
         {
             UpdateWorkerUI();
-            UpdateSearchingIcon();
-            UpdateSearchingPendingList();
             FindObjectOfType<GameUI>().ShowGatheringUI(true);
             selectedBuilding.GetComponent<GatheringBuildings>().ShowRange(true);
+        }
+        else
+        {
+            FindObjectOfType<GameUI>().ShowGatheringUI(false);
         }
        
     }
@@ -144,7 +146,9 @@ public class BuildingInfosTable : MonoBehaviour
         _gameUI.ShowBuildingUI(true);
         FindObjectOfType<GameUI>().ShowGatheringUI(false);
         UpdateUpgradesUI();
-        
+        UpdateSearchingIcon();
+        UpdateSearchingPendingList();
+
 
         CheckHealth();
         DestroyContentUI(BuildingInfosPanel.transform.Find("TagsInfo").transform.Find("TagList").gameObject);
@@ -197,7 +201,7 @@ public class BuildingInfosTable : MonoBehaviour
         int _xPos = -60;
         int _yPos = 0;
 
-        GameObject _contentPanel = BuildingGatheringPanel.transform.Find("WorkerList").gameObject;
+        GameObject _contentPanel = BuildingGatheringPanel.transform.Find("GatheringPanel").transform.Find("WorkerList").gameObject;
         DestroyContentUI(_contentPanel);
         for (int i = 1;i<6;i++)
         {
@@ -236,7 +240,6 @@ public class BuildingInfosTable : MonoBehaviour
         DestroyContentUI(_contentPanel);
         foreach (UpgradesScriptableObject upgrade in selectedBuilding.buildingScriptObj.UpgradeList)
         {
-            Debug.Log(upgrade.name);
             UpgradesScriptableObject upgradeToShow = PlayerManager.Instance.GetLastTierUpgrade(upgrade);
             if(upgradeToShow != null)
             {
@@ -254,7 +257,11 @@ public class BuildingInfosTable : MonoBehaviour
                 _yPos -= 40;
                 _i = 0;
             }
+
+            if (_i == 5)
+                continue;
         }
+
     }
 
     private void CheckGathering()
@@ -270,9 +277,14 @@ public class BuildingInfosTable : MonoBehaviour
         UpdateSearchingUI();
     }
 
+    public bool IsBuildingDisplayed(BuildingGeneric building)
+    {
+        return (selectedBuilding == building);
+    }
+
     private void UpdateGatheringUI()
     {
-        Image _gatheringBar = BuildingGatheringPanel.transform.Find("GatheringBar").transform.Find("FillBar").gameObject.GetComponent<Image>();
+        Image _gatheringBar = BuildingGatheringPanel.transform.Find("GatheringPanel").transform.Find("GatheringBar").transform.Find("FillBar").gameObject.GetComponent<Image>();
         if (selectedBuilding.GetComponent<GatheringBuildings>().GetTimer().IsActive())
         {
            _gatheringBar.fillAmount = ((float)selectedBuilding.GetComponent<GatheringBuildings>().GetTimer().GetCurrentTime() / ((float)selectedBuilding.GetComponent<GatheringBuildings>().GetTimer().endTime));
@@ -345,6 +357,7 @@ public class BuildingInfosTable : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+        ToolTipsSystem.Hide();
     }
 
     private void CreateTagUI()

@@ -17,7 +17,7 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         //Tooltip
         toolTipTrigger = gameObject.GetComponent<ToolTipTrigger>();
-        UpgradeView = FindObjectOfType<BuildingInfosTable>().transform.Find("UpgradeTable").transform.Find("UpgradeView").gameObject;
+        UpgradeView = FindObjectOfType<BuildingInfosTable>(true).transform.Find("UpgradeTable").transform.Find("UpgradeView").gameObject;
     }
 
     private void Update()
@@ -28,8 +28,22 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     private void CheckSearchability()
     {
+        if (Upgrade.IsBuildingLevelUpUpgrade())
+        {
+            if(PlayerManager.Instance.IsIndividualUpgradeSearchable(Upgrade) && !SelectedBuilding.IsSearchingUpgrade(Upgrade))
+            {
+                SetCaseColor(new Color32(255, 255, 255, 255));
+                return;
+            }
+            else
+            {
+                SetCaseColor(new Color32(106, 106, 106, 194));
+                return;
+            }
+                
+        }
         if (PlayerManager.Instance.IsUpgradeUnlocked(Upgrade))
-            FindObjectOfType<BuildingInfosTable>().UpdateUpgradesUI();
+            FindObjectOfType<BuildingInfosTable>(true).UpdateUpgradesUI();
         if (PlayerManager.Instance.IsUpgradeAlreadySearched(Upgrade))
             SetCaseColor(new Color32(106, 106, 106, 194));
         else
@@ -89,12 +103,14 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (CheckLevelingUpUpgrade())
+            return;
         if (!SelectedBuilding.IsSearching())
         {
             if (PlayerManager.Instance.IsUpgradeSearchable(Upgrade))
             {
                 SelectedBuilding.SearchUpgrade(Upgrade);
-                FindObjectOfType<BuildingInfosTable>().UpdateSearchingIcon();
+                FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingIcon();
             }
         }
         else if ((SelectedBuilding.CanAddUpgradeToPendingList()) && !PlayerManager.Instance.IsUpgradeAlreadySearched(Upgrade))
@@ -103,10 +119,40 @@ public class UpgradeSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             {
                 PlayerManager.Instance.StartUpgrade(Upgrade);
                 SelectedBuilding.AddUpgradeToPendingList(Upgrade);
-                FindObjectOfType<BuildingInfosTable>().UpdateSearchingPendingList();
+                FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingPendingList();
             }
         }
     }
+
+    private bool CheckLevelingUpUpgrade()
+    {
+        if (Upgrade.type.Contains(UpgradesScriptableObject.UpgradeType.LevelUpBuilding))
+        {
+            if (!SelectedBuilding.IsSearching())
+            {
+                if (PlayerManager.Instance.IsIndividualUpgradeSearchable(Upgrade))
+                {
+                    SelectedBuilding.SearchUpgrade(Upgrade);
+                    FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingIcon();
+                    return true;
+                }
+            }
+            else if ((SelectedBuilding.CanAddUpgradeToPendingList()) && !SelectedBuilding.IsSearchingUpgrade(Upgrade))
+            {
+                if (PlayerManager.Instance.IsIndividualUpgradeSearchable(Upgrade))
+                {
+                    PlayerManager.Instance.StartUpgrade(Upgrade);
+                    SelectedBuilding.AddUpgradeToPendingList(Upgrade);
+                    FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingPendingList();
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {

@@ -22,11 +22,13 @@ MonoBehaviour:
   RockCost: 25
   SilverCost: 0
   GoldCost: 0
+  isBuildable: 1
   Tier: 1
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
   BuildingTags: 06000000
   RequiredCivilisationLvl: 1
+  UpgradeList: []
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition

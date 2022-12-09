@@ -28,6 +28,7 @@ public class GameUI : MonoBehaviour
     public void ShowBuildingUI(bool show)
     {
         InventoryTable.transform.Find("InfosTable").gameObject.SetActive(show);
+        ShowAssignationUI(true);
     }
 
     public void ShowElementUI(bool show)
@@ -40,8 +41,13 @@ public class GameUI : MonoBehaviour
         InventoryTable.transform.Find("SwitchButtons").gameObject.SetActive(show);
     }
 
-    public void ShowGatheringUI(bool show)
+    public void ShowAssignationUI(bool show)
     {
         InventoryTable.transform.Find("InfosTable").transform.Find("AsignationTable").gameObject.SetActive(show);
+    }
+
+    public void ShowGatheringUI(bool show)
+    {
+        InventoryTable.transform.Find("InfosTable").transform.Find("AsignationTable").transform.Find("GatheringPanel").gameObject.SetActive(show);
     }
 }

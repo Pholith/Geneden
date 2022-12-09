@@ -44,11 +44,7 @@ public class PendingSlot : MonoBehaviour,IPointerClickHandler
         toolTipTrigger.StopDelay();
         PlayerManager.Instance.StopUpgrade(Upgrade);
         SelectedBuilding.RemoveUpgradeToPendingList(Upgrade);
-        FindObjectOfType<BuildingInfosTable>().UpdateSearchingPendingList();
+        FindObjectOfType<BuildingInfosTable>(true).UpdateSearchingPendingList();
     }
 
-    public void OnDestroy()
-    {
-        toolTipTrigger.StopDelay();
-    }
 }

@@ -159,6 +159,33 @@ public class PlayerManager : BaseManager<PlayerManager>
         return true;
     }
 
+    public bool IsIndividualUpgradeSearchable(UpgradesScriptableObject upgrade)
+    {
+        Dictionary<ResourceManager.RessourceType, int> ressourcesForUpgrade = new Dictionary<ResourceManager.RessourceType, int>();
+        ressourcesForUpgrade.Add(ResourceManager.RessourceType.Food, upgrade.FoodCost);
+        ressourcesForUpgrade.Add(ResourceManager.RessourceType.Wood, upgrade.WoodCost);
+        ressourcesForUpgrade.Add(ResourceManager.RessourceType.Stone, upgrade.RockCost);
+        ressourcesForUpgrade.Add(ResourceManager.RessourceType.Iron, upgrade.IronCost);
+        ressourcesForUpgrade.Add(ResourceManager.RessourceType.Silver, upgrade.SilverCost);
+        ressourcesForUpgrade.Add(ResourceManager.RessourceType.Gold, upgrade.GoldCost);
+
+        if (!ResourceManager.Instance.HasEnoughRessource(ResourceManager.RessourceType.CivLevel, upgrade.RequiredCivilisationLvl))
+            return false;
+
+        foreach (ResourceManager.RessourceType type in ressourcesForUpgrade.Keys)
+        {
+            if (ResourceManager.Instance.HasEnoughRessource(type, ressourcesForUpgrade[type]))
+            {
+                continue;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public bool IsUpgradeAlreadySearched(UpgradesScriptableObject upgrade)
     {
         foreach(BuildingGeneric building in ownedBuildingList)
@@ -169,6 +196,8 @@ public class PlayerManager : BaseManager<PlayerManager>
 
         return false;
     }
+
+
 
     public void StartUpgrade(UpgradesScriptableObject upgrade)
     {
