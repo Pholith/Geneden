@@ -15,7 +15,7 @@ MonoBehaviour:
   BuildingDescription: "B\xE2timent \xE9conomique permettant aux villageois de r\xE9colter
     les baies, arbres fruitiers et fermes \xE0 proximit\xE9. Les am\xE9liorations
     de la r\xE9colte des fermes sont \xE9galement disponibles."
-  Sprite: {fileID: 2101649158, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
+  Sprite: {fileID: 1649952480, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   MaxHealth: 1400
   BuildingTime: 1
   FoodCost: 0

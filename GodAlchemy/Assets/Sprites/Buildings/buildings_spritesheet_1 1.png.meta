@@ -213,7 +213,7 @@ TextureImporter:
       name: buildings_spritesheet_1 1_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 64
         width: 32
         height: 32
@@ -234,7 +234,7 @@ TextureImporter:
       name: buildings_spritesheet_1 1_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 64
         width: 32
         height: 32
@@ -255,8 +255,8 @@ TextureImporter:
       name: buildings_spritesheet_1 1_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 64
         width: 32
         height: 32
       alignment: 6
@@ -276,7 +276,7 @@ TextureImporter:
       name: buildings_spritesheet_1 1_8
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -289,6 +289,48 @@ TextureImporter:
       bones: []
       spriteID: 0eed6f3c0813d1346940127cc14fb1b1
       internalID: 866915426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1 1_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6ce3dcabff589c459563acd3d7fbdff
+      internalID: 1869815973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_spritesheet_1 1_10
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a0ece7c02805f4893eae8c0cf6592e
+      internalID: -875894580
       vertices: []
       indices: 
       edges: []
@@ -306,8 +348,10 @@ TextureImporter:
     nameFileIdTable:
       buildings_spritesheet_1 1_3: -556196541
       buildings_spritesheet_1 1_6: -1431032698
+      buildings_spritesheet_1 1_9: 1869815973
       buildings_spritesheet_1 1_1: 2101649158
       buildings_spritesheet_1 1_0: 985377426
+      buildings_spritesheet_1 1_10: -875894580
       buildings_spritesheet_1 1_4: -916663950
       buildings_spritesheet_1 1_8: 866915426
       buildings_spritesheet_1 1_5: 1649952480

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b248f11bc7edabe4ba7e6f8206e865da, type: 3}
+  m_Name: Temple
+  m_EditorClassIdentifier: 
+  BuildingDescription: "Le temple est un b\xE2timent divin contenant des am\xE9liorations
+    divines pour accro\xEEtre les capacit\xE9s du Dieu. Les villageois peuvent sacrifier
+    des ressources pour remplir la ressource divine."
+  Sprite: {fileID: 1869815973, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
+  MaxHealth: 2000
+  BuildingTime: 45
+  FoodCost: 0
+  WoodCost: 50
+  IronCost: 0
+  RockCost: 100
+  SilverCost: 0
+  GoldCost: 0
+  isBuildable: 1
+  Tier: 2
+  UpgradeInto: {fileID: 0}
+  UnlockUnities: []
+  BuildingTags: 05000000
+  RequiredCivilisationLvl: 0
+  UpgradeList: []
+  SpecialConditionRequired:
+    _target: {fileID: 11400000}
+    _methodName: NoCondition
+    _args: []
+    _dynamic: 0
+    _typeName: BuildingsScriptableObject+BuildingSpecialCondition, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    dirty: 0
+  UpdateFunction:
+    m_PersistentCalls:
+      m_Calls: []

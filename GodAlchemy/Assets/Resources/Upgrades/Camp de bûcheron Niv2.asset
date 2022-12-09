@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Camp de b\xFBcheron Niv2"
   m_EditorClassIdentifier: 
   UpgradeDescription: "Ajoute un emplacement de villageois au camp de b\xFBcheron"
-  Sprite: {fileID: -1431032698, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
+  Sprite: {fileID: 2080827132, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   ResearchTime: 20
   FoodCost: 0
   WoodCost: 0

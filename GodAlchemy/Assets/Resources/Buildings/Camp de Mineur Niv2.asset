@@ -16,7 +16,7 @@ MonoBehaviour:
     r\xE9colter les gisements de pierre, fer, argent et or \xE0 proximit\xE9. Contient
     les technologies propres aux mineurs et \xE0 l\u2019extraction de ressources
     plus rares."
-  Sprite: {fileID: 1649952480, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
+  Sprite: {fileID: -1431032698, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   MaxHealth: 1400
   BuildingTime: 1
   FoodCost: 0
