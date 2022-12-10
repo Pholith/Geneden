@@ -53,6 +53,8 @@ public class ResourceManager : BaseManager<ResourceManager>
     [SerializeField]
     private DivinPowerBar powerBar;
 
+    
+    private float baseResourceRefillDelay = 1f;
     [SerializeField]
     [Range(0, 10)]
     private float resourceRefillDelay = 1f;
@@ -97,6 +99,22 @@ public class ResourceManager : BaseManager<ResourceManager>
         //AddRessource(randomRessource, 100);
         //AddRessource(RessourceType.CivLevel, 1);
         powerBar.CurrentPower += 2;
+    }
+
+    public void AddMaxPower(int addition)
+    {
+        powerBar.PowerMax += addition;
+        AddPower(addition);
+
+
+    }
+
+    public void AddPower(int addition)
+    {
+        if (powerBar.CurrentPower + addition <= powerBar.PowerMax)
+            powerBar.CurrentPower += addition;
+        else
+            powerBar.CurrentPower += powerBar.PowerMax - powerBar.CurrentPower;
     }
 
     public void AddRessource(RessourceType type, int amount)
@@ -204,6 +222,11 @@ public class ResourceManager : BaseManager<ResourceManager>
     {
         return powerBar.CurrentPower - substraction > 0;
     }
+
+    public bool CanAddPower(int addition)
+    {
+        return powerBar.CurrentPower + addition <= powerBar.PowerMax;
+    }
     public int GetCivLevel()
     {
         return civLevel;
@@ -273,4 +296,14 @@ public class ResourceManager : BaseManager<ResourceManager>
         maxPop -= pop;
     }
 
+    public float GetRefillDelay()
+    {
+        return resourceRefillDelay;
+    }
+
+    public void ReduceRefillDelayPercentage(float bonusPerCent)
+    {
+        resourceRefillDelay -= baseResourceRefillDelay * bonusPerCent;
+        Debug.Log(baseResourceRefillDelay - (baseResourceRefillDelay * bonusPerCent));
+    }
 }

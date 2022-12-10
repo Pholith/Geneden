@@ -12,7 +12,9 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
         Efficiency,
         Value,
         Technologie,
+        Divine,
         UnlockRessource,
+        LevelUpSpell,
         LevelUpBuilding
     }
 
@@ -44,7 +46,9 @@ public class UpgradesScriptableObject : ScriptableObject, IComparable<UpgradesSc
     [Header("Bonus")]
     public float Bonus;
     public List<ResourceManager.RessourceType> AddedGatherableRessource;
+    [Header("LevelingUp")]
     public BuildingsScriptableObject LevelUpBuilding;
+    public SpellScriptableObject LevelUpSpell;
 
     [Header("Etat")]
     public bool Unlocked;

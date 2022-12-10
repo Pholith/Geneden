@@ -6571,6 +6571,7 @@ MonoBehaviour:
   upgradeSlotPrefab: {fileID: 2744240729806290485, guid: 94b30a8f345b3b34b96195936998e1fe, type: 3}
   researchIconPrefab: {fileID: 2331628541727066684, guid: abb8f0518023fd24bb43df9fa42a8f94, type: 3}
   pendingIconPrefab: {fileID: 2744240729806290485, guid: de282193c0346b44bae0be8f77cd0982, type: 3}
+  spellSlotPrefab: {fileID: 2744240729806290485, guid: 6fa87a16d25012f4d8bdb2d4640b9ecc, type: 3}
   selectedBuilding: {fileID: 0}
   BuildingInfosPanel: {fileID: 0}
   BuildingIcon: {fileID: 0}

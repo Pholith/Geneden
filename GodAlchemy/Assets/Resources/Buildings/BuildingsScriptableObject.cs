@@ -73,6 +73,9 @@ public class BuildingsScriptableObject : ScriptableObject, IComparable<Buildings
     [Header("Upgrades")]
     public List<UpgradesScriptableObject> UpgradeList;
 
+    [Header("Spells")]
+    public List<SpellScriptableObject> SpellList;
+
     [Serializable]
     public class BuildingSpecialCondition : SerializableCallback<bool> { }
 

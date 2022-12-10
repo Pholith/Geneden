@@ -12,6 +12,7 @@ public class PlayerManager : BaseManager<PlayerManager>
     private List<BuildingGeneric> ownedBuildingList;
 
     public List<UpgradesScriptableObject> Upgrades;
+    public List<SpellScriptableObject> Spells;
 
     // Start is called before the first frame update
 
@@ -22,6 +23,10 @@ public class PlayerManager : BaseManager<PlayerManager>
         Upgrades = new List<UpgradesScriptableObject>(Resources.FindObjectsOfTypeAll<UpgradesScriptableObject>());
         Upgrades.Sort();
         LockAllUpgrades();
+
+        Resources.LoadAll("Spells");
+        Spells = new List<SpellScriptableObject>(Resources.FindObjectsOfTypeAll<SpellScriptableObject>());
+        Spells.Sort();
     }
 
     public void AddBuilding(BuildingGeneric building)
@@ -60,6 +65,13 @@ public class PlayerManager : BaseManager<PlayerManager>
     public void UnlockUpgrade(UpgradesScriptableObject upgrade)
     {
         GetUpgradeByIndex(upgrade).Unlocked = true;
+        if(upgrade.type.Contains(UpgradesScriptableObject.UpgradeType.Divine))
+        {
+            if (upgrade.Bonus <= 1)
+                ResourceManager.Instance.ReduceRefillDelayPercentage(upgrade.Bonus);
+            else
+                ResourceManager.Instance.AddMaxPower((Mathf.RoundToInt(upgrade.Bonus)));
+        }
     }
 
     public UpgradesScriptableObject GetLastTierUpgrade(UpgradesScriptableObject upgrade)
@@ -81,6 +93,19 @@ public class PlayerManager : BaseManager<PlayerManager>
             return upgrade;
         }
 
+    }
+
+    public SpellScriptableObject GetLastTierSpell(SpellScriptableObject spell)
+    {
+        if (spell.UpgradeInto != null)
+        {
+            if (IsUpgradeUnlocked(spell.UpgradeInto.NecessaryUpgrade))
+            {
+                return GetLastTierSpell(spell.UpgradeInto);
+            }
+        }
+
+        return spell;
     }
 
     public float CheckEfficiencyUpgrades(BuildingsScriptableObject building,UpgradesScriptableObject.UpgradeType type)
@@ -186,6 +211,36 @@ public class PlayerManager : BaseManager<PlayerManager>
         return true;
     }
 
+    public bool IsSpellUsable(SpellScriptableObject spell)
+    {
+        Dictionary<ResourceManager.RessourceType, int> ressourceForSpell = new Dictionary<ResourceManager.RessourceType, int>();
+        ressourceForSpell.Add(ResourceManager.RessourceType.Food, spell.FoodCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Wood, spell.WoodCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Stone, spell.RockCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Iron, spell.IronCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Silver, spell.SilverCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Gold, spell.GoldCost);
+
+        if (!ResourceManager.Instance.HasEnoughRessource(ResourceManager.RessourceType.CivLevel, spell.RequiredCivilisationLvl))
+            return false;
+
+        if (spell.type.Contains(SpellScriptableObject.SpellType.Divine) && !ResourceManager.Instance.CanAddPower(Mathf.RoundToInt(spell.Bonus)))
+            return false;
+
+        foreach (ResourceManager.RessourceType type in ressourceForSpell.Keys)
+        {
+            if (ResourceManager.Instance.HasEnoughRessource(type, ressourceForSpell[type]))
+            {
+                continue;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public bool IsUpgradeAlreadySearched(UpgradesScriptableObject upgrade)
     {
         foreach(BuildingGeneric building in ownedBuildingList)
@@ -228,6 +283,25 @@ public class PlayerManager : BaseManager<PlayerManager>
         foreach (ResourceManager.RessourceType type in ressourcesForUpgrade.Keys)
         {
             ResourceManager.Instance.AddRessource(type, ressourcesForUpgrade[type]);
+        }
+    }
+
+    public void UseSpell(SpellScriptableObject spell)
+    {
+        Dictionary<ResourceManager.RessourceType, int> ressourceForSpell = new Dictionary<ResourceManager.RessourceType, int>();
+        ressourceForSpell.Add(ResourceManager.RessourceType.Food, spell.FoodCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Wood, spell.WoodCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Stone, spell.RockCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Iron, spell.IronCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Silver, spell.SilverCost);
+        ressourceForSpell.Add(ResourceManager.RessourceType.Gold, spell.GoldCost);
+
+        if (spell.type.Contains(SpellScriptableObject.SpellType.Divine))
+            ResourceManager.Instance.AddPower(Mathf.RoundToInt(spell.Bonus));
+
+        foreach (ResourceManager.RessourceType type in ressourceForSpell.Keys)
+        {
+            ResourceManager.Instance.AddRessource(type, -ressourceForSpell[type]);
         }
     }
 

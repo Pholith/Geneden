@@ -25,6 +25,8 @@ public class BuildingInfosTable : MonoBehaviour
     [SerializeField]
     public GameObject pendingIconPrefab;
     [SerializeField]
+    public GameObject spellSlotPrefab;
+    [SerializeField]
     private BuildingGeneric selectedBuilding;
 
 
@@ -257,9 +259,27 @@ public class BuildingInfosTable : MonoBehaviour
                 _yPos -= 40;
                 _i = 0;
             }
+        }
 
-            if (_i == 5)
-                continue;
+        foreach(SpellScriptableObject spell in selectedBuilding.buildingScriptObj.SpellList)
+        {
+            SpellScriptableObject spellToShow = PlayerManager.Instance.GetLastTierSpell(spell);
+            if (spellToShow != null)
+            {
+                GameObject _spellSlot = Instantiate(spellSlotPrefab);
+                _spellSlot.GetComponent<SpellSlot>().SetSpell(spellToShow, selectedBuilding);
+                _spellSlot.transform.SetParent(_contentPanel.transform);
+                _spellSlot.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
+                _spellSlot.GetComponent<RectTransform>().localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            }
+            _xPos += 35;
+            _i += 1;
+            if (_i % 3 == 0)
+            {
+                _xPos = -91;
+                _yPos -= 40;
+                _i = 0;
+            }
         }
 
     }

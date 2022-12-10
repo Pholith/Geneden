@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939ec351dcd1de146acd53a7b3f6fbf9, type: 3}
+  m_Name: Sacrifice
+  m_EditorClassIdentifier: 
+  SpellDescription: "La civilisation sacrifie 250 nourritures et 250 bois pour r\xE9cup\xE9rer
+    25 ressources divines."
+  Sprite: {fileID: 1274659820, guid: 02d17a47e9640074186d50d44c39b2fb, type: 3}
+  FoodCost: 250
+  WoodCost: 250
+  IronCost: 0
+  RockCost: 0
+  SilverCost: 0
+  GoldCost: 0
+  Bonus: 25
+  Tier: 1
+  type: 0000000001000000
+  UpgradeInto: {fileID: 11400000, guid: 2c308c60d4a7ba3499117c304ed916ed, type: 2}
+  NecessaryUpgrade: {fileID: 0}
+  RequiredCivilisationLvl: 0

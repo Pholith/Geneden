@@ -24,9 +24,10 @@ MonoBehaviour:
   Bonus: 0
   AddedGatherableRessource: 
   LevelUpBuilding: {fileID: 11400000, guid: f4e5f2d0495005a4086b819afadd6ad8, type: 2}
+  LevelUpSpell: {fileID: 0}
   Unlocked: 0
   Tier: 2
-  type: 04000000
+  type: 06000000
   UpgradeInto: {fileID: 0}
   UpgradeApplication:
   - {fileID: 11400000, guid: 2d2a36331fa670f4fb466c993b977f70, type: 2}

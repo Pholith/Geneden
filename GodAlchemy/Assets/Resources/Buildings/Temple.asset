@@ -17,7 +17,7 @@ MonoBehaviour:
     des ressources pour remplir la ressource divine."
   Sprite: {fileID: 1869815973, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
   MaxHealth: 2000
-  BuildingTime: 45
+  BuildingTime: 1
   FoodCost: 0
   WoodCost: 50
   IronCost: 0
@@ -30,7 +30,12 @@ MonoBehaviour:
   UnlockUnities: []
   BuildingTags: 05000000
   RequiredCivilisationLvl: 0
-  UpgradeList: []
+  UpgradeList:
+  - {fileID: 11400000, guid: 59f752ce17b5b914f84dca2938e4f73c, type: 2}
+  - {fileID: 11400000, guid: 48dc3838477403e4190ec61eff31fe75, type: 2}
+  - {fileID: 11400000, guid: c09d774023475144494cd4f8b8e8a012, type: 2}
+  SpellList:
+  - {fileID: 11400000, guid: a8c64be281c0de84ea0b6753eeafbcc5, type: 2}
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition

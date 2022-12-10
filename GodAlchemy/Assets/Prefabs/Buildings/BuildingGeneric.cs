@@ -167,6 +167,11 @@ public class BuildingGeneric : NetworkBehaviour
         return buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Gathering);
     }
 
+    private bool IsDivineBuilding()
+    {
+        return buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.Divine);
+    }
+
     private bool IsHouseBuilding()
     {
         return buildingScriptObj.BuildingTags.Contains(BuildingsScriptableObject.BuildingType.House);
