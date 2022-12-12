@@ -62,6 +62,7 @@ public class ElementsManager : BaseManager<ElementsManager>
     private NetworkPrefabRef foodMarmitePrefab;
     public void Food()
     {
+        questSystem.ElementInvoked("Nourriture");
         Instance.SpawnObjectRPC(foodMarmitePrefab, GameManager.GridManager.GetMouseGridPos());
     }
     public void Fire()

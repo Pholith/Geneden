@@ -62,9 +62,22 @@ public class PlayerManager : BaseManager<PlayerManager>
         return GetUpgradeByIndex(upgrade).Unlocked;
     }
 
+    public bool IsUpgradeUnlockedFromName(string upgradeName)
+    {
+        foreach(UpgradesScriptableObject upgrade in Upgrades)
+        {
+            if (upgrade.name == upgradeName) {
+                return IsUpgradeUnlocked(upgrade);
+            }
+        }
+        UnityEngine.Debug.Log("Error in PlayerManager.IsUpgradeUnlockedFromName, " + upgradeName + " does not exist.");
+        return false;
+    }
+
     public void UnlockUpgrade(UpgradesScriptableObject upgrade)
     {
         GetUpgradeByIndex(upgrade).Unlocked = true;
+        UnityEngine.Debug.Log("upgraded " + upgrade.name);
         if(upgrade.type.Contains(UpgradesScriptableObject.UpgradeType.Divine))
         {
             if (upgrade.Bonus <= 1)

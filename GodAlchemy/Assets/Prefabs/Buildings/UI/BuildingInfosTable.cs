@@ -210,7 +210,6 @@ public class BuildingInfosTable : MonoBehaviour
             GameObject _workerIcon = Instantiate(workerIconPrefab);
             _workerIcon.transform.SetParent(_contentPanel.transform);
             _workerIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
-            _workerIcon.GetComponent<RectTransform>().localScale = _workerIcon.GetComponent<RectTransform>().localScale * 2;
             if (i <= workers)
             {
                 _workerIcon.GetComponent<Image>().color = new Color32(255,255,255,255);

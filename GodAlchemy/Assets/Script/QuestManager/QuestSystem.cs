@@ -22,9 +22,13 @@ public class QuestSystem  : MonoBehaviour
     [SerializeField]
     private static ResourceManager resourceManager;
 
+    [SerializeField]
+    private static PlayerManager playerManager;
+
     public void Start()
     {
         resourceManager = ResourceManager.Instance;
+        playerManager = PlayerManager.Instance;
         questsLevel0 = new List<Quest>();
         questsLevel1 = new List<Quest>();
         questsLevel2 = new List<Quest>();
@@ -43,19 +47,8 @@ public class QuestSystem  : MonoBehaviour
         questsLevel0.Add(new ElementQuest(1, "Terre"));
         questsLevel0.Add(new CraftQuest(1, "Boue"));
         questsLevel0.Add(new CraftQuest(1, "Foudre"));
-        //questsLevel0.Add(new CraftQuest(1, "ADN"));
+        questsLevel0.Add(new ElementQuest(1, "ADN"));
 
-        /*
-        (APPARTITION DE LA VIE)
- 
-        Niveau 1  (Besoin primaires)
-        -Générer de la nourriture 0/1
-        -Générer du bois 0/1               - nécessaire? (on peut passer par pierre direct?)
-        -Placer une maison (Seul bâtiment disponible au niveau 1) 0/1 */
-        questsLevel1.Add(new ResourceQuest(1, ResourceManager.RessourceType.Food));
-        questsLevel1.Add(new ResourceQuest(1, ResourceManager.RessourceType.Wood));
-        questsLevel1.Add(new BuildQuest(1, "Maison"));
-    
         /*
         Niveau 2 (Pistes de gameplay)
         -Placer une mine 0/1
@@ -63,15 +56,27 @@ public class QuestSystem  : MonoBehaviour
          OU
         -Placer une forêt 0/1
         -Placer un camp de bûcherons 0/1 */
-        questsLevel2.Add(new BuildQuest(1, "Camp de Mineur"));
-        questsLevel2.Add(new ElementQuest(1, "Roche"));
-        questsLevel2.Add(new ElementQuest(1, "Végétation"));
-        questsLevel2.Add(new BuildQuest(1, "Camp de Bûcheron"));
+        questsLevel1.Add(new ElementQuest(1, "Roche"));
+        questsLevel1.Add(new BuildQuest(1, "Camp de Mineur"));
+
+        questsLevel1.Add(new ElementQuest(1, "Végétation"));
+        questsLevel1.Add(new BuildQuest(1, "Camp de Bûcheron"));
+
+                /*
+        (APPARTITION DE LA VIE)
+        Niveau 2  (Besoin primaires)
+        -Générer de la nourriture 0/1
+        -Générer du bois 0/1               - nécessaire? (on peut passer par pierre direct?)
+        -Placer une maison (Seul bâtiment disponible au niveau 1) 0/1 */
+        questsLevel2.Add(new ResourceQuest(1, ResourceManager.RessourceType.Food));
+        questsLevel2.Add(new ResourceQuest(1, ResourceManager.RessourceType.Wood));
+        questsLevel2.Add(new BuildQuest(1, "Maison"));
 
         /*Niveau 3 (Développement)
         -Avoir 5 bâtiments               2/5
         -Atteindre une population de 30  14/30
         -Découvrir le fer                0/1 */
+        questsLevel3.Add(new UpgradeQuest(1, "Grande Hache"));
         questsLevel3.Add(new CraftQuest(1, "Fer"));
         questsLevel3.Add(new ResourceQuest(30, ResourceManager.RessourceType.MaxPopulation));
 
@@ -80,7 +85,7 @@ public class QuestSystem  : MonoBehaviour
         -Atteindre une population de 75   30/75
         -Créer un bâtiment militaire */
         questsLevel4.Add(new ResourceQuest(75, ResourceManager.RessourceType.MaxPopulation));
-        questsLevel4.Add(new BuildQuest(1, "Militaire"));
+        questsLevel4.Add(new BuildQuest(1, "Temple"));
 
         /*Niveau 5 (Explosion technologique)
         -Obtenir l'élément Or
@@ -127,7 +132,6 @@ public class QuestSystem  : MonoBehaviour
                 if (!quest.IsAccomplished() && elementName.Equals(quest.ObjectiveElement)) {
                     quest.SetCurrentAmount(1);
                     UnityEngine.Debug.Log("Crafting quest accomplished : " + elementName);
-                    CheckNextLevel(currentQuestLevel);
                     break;
                 }
             }
@@ -142,7 +146,6 @@ public class QuestSystem  : MonoBehaviour
                 if (!quest.IsAccomplished() && elementName.Equals(quest.ObjectiveElement)) {
                     quest.SetCurrentAmount(1);
                     UnityEngine.Debug.Log("Element quest accomplished : " + elementName);
-                    CheckNextLevel(currentQuestLevel);
                 }
             }
         }
@@ -156,7 +159,6 @@ public class QuestSystem  : MonoBehaviour
                 if (!quest.IsAccomplished() && buildName.Equals(quest.ObjectiveBuild)) {
                     quest.SetCurrentAmount(1);
                     UnityEngine.Debug.Log("Build quest accomplished : " + buildName);
-                    CheckNextLevel(currentQuestLevel);
                 }
             }
         }
@@ -214,7 +216,16 @@ public class QuestSystem  : MonoBehaviour
                 currentQuest.SetCurrentAmount(resourceManager.GetRessourcePerType(currentQuest.RessourceType));
                 RefreshDescription(); 
             }
-        }      
+            if (currentQuestLevel[i] is UpgradeQuest) {
+                UpgradeQuest currentQuest = (UpgradeQuest) currentQuestLevel[i];
+                if (playerManager.IsUpgradeUnlockedFromName(currentQuest.UpgradeName))
+                    currentQuest.SetCurrentAmount(1);
+                else
+                    currentQuest.SetCurrentAmount(0);
+                RefreshDescription();
+            }
+        }
+        CheckNextLevel(currentQuestLevel);      
     }
 }
 

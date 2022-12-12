@@ -30,6 +30,7 @@ MonoBehaviour:
   BuildingTags: 08000000
   RequiredCivilisationLvl: 2
   UpgradeList: []
+  SpellList: []
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition
