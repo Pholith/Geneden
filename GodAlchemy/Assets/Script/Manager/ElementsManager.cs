@@ -192,7 +192,9 @@ public class ElementsManager : BaseManager<ElementsManager>
     public void Adn()
     {
         questSystem.ElementInvoked("ADN");
-        switch (Random.Range(0, 1))
+        BuildingsScriptableObject buildingToSpawn = BuildingManager.Instance.GetBuildingByName("Maison Commune");
+        BuildingManager.Instance.BuildBuilding(buildingToSpawn);
+        /*switch (Random.Range(0, 1))
         {
             case 0:
                 Plant();
@@ -200,7 +202,7 @@ public class ElementsManager : BaseManager<ElementsManager>
             case 1:
                 Animals();
                 break;
-        }
+        }*/
     }
 
     private void Animals()

@@ -29,7 +29,7 @@ MonoBehaviour:
   UpgradeInto: {fileID: 0}
   UnlockUnities: []
   BuildingTags: 05000000
-  RequiredCivilisationLvl: 0
+  RequiredCivilisationLvl: 3
   UpgradeList:
   - {fileID: 11400000, guid: 59f752ce17b5b914f84dca2938e4f73c, type: 2}
   - {fileID: 11400000, guid: 48dc3838477403e4190ec61eff31fe75, type: 2}

@@ -33,6 +33,7 @@ MonoBehaviour:
   RequiredCivilisationLvl: 1
   UpgradeList:
   - {fileID: 11400000, guid: d942ba8c94bf67542b47b1388f057804, type: 2}
+  SpellList: []
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition
