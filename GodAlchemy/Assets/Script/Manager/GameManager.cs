@@ -77,7 +77,7 @@ public class GameManager : BaseGameManager
             Debug.Log(victoryScreen.activeSelf);
         }
         else {
-            defeatScreen.SetActive(true);
+            //defeatScreen.SetActive(true);
         }
         
     }

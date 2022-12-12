@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  questSystem: {fileID: 7337215965699055723, guid: 964d30814c4500c42b7f218b99c750f9, type: 3}
+  questSystem: {fileID: 1786019118994902940, guid: 561674fd8f9ce904ebcd405f3ccf6df1, type: 3}
   particleSystemOffsets: {x: 0, y: 5, z: 0}
   timeInSecondAfterParticleStart: 2
   foodMarmitePrefab:

@@ -9,9 +9,9 @@ public class ElementsManager : BaseManager<ElementsManager>
 
     private ScreenShake cameraShaker;
 
-    public const int DAMAGE_LOW = 2000;
-    public const int DAMAGE_MEDIUM = 3000;
-    public const int DAMAGE_HIGH = 10000;
+    public const int DAMAGE_LOW = 100;
+    public const int DAMAGE_MEDIUM = 200;
+    public const int DAMAGE_HIGH = 1000;
 
     [SerializeField]
     private QuestSystem questSystem;

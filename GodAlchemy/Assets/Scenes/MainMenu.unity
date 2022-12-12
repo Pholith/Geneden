@@ -666,9 +666,9 @@ MonoBehaviour:
   loadingScreen: {fileID: 1254249841}
   slider: {fileID: 128308575}
   sceneAfterLoading:
-    m_SceneAsset: {fileID: 102900000, guid: a655a175614e10243b5b42b7df8ecae3, type: 3}
+    m_SceneAsset: {fileID: 102900000, guid: fc1dae8fef2715c4f92ae7eb922e8107, type: 3}
     m_IsDirty: 0
-    m_ScenePath: Assets/Scenes/RoomSelection.unity
+    m_ScenePath: Assets/Scenes/Victoire.unity
 --- !u!4 &720502125
 Transform:
   m_ObjectHideFlags: 0
@@ -1707,9 +1707,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel:
-    m_SceneAsset: {fileID: 102900000, guid: c3828d74df8601e43967c9bbbd42c53a, type: 3}
+    m_SceneAsset: {fileID: 102900000, guid: fc1dae8fef2715c4f92ae7eb922e8107, type: 3}
     m_IsDirty: 0
-    m_ScenePath: Assets/Scenes/Main.unity
+    m_ScenePath: Assets/Scenes/Victoire.unity
   optionsScreen: {fileID: 474220881}
 --- !u!1001 &1993110184
 PrefabInstance:
@@ -1802,7 +1802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086895346426441540, guid: 82d91f7126e33b74e9ab9e94e8611100, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2086895346426441540, guid: 82d91f7126e33b74e9ab9e94e8611100, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode

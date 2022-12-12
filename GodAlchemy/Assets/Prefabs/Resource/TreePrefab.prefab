@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0070a0e93fbd4882b99a91baa4779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceAmount: 100
+  resourceAmount: 1000
   type: 1
   gatheringSpeed: 1
 --- !u!61 &4909302300758734147

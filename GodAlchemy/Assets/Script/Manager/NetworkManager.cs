@@ -17,7 +17,7 @@ public class NetworkManager : BaseManager<NetworkManager>
     {
     }
 
-    // Lorsque le client se connecte et est prêt (Spawned) il appel le serveur pour commencer la game.
+    // Lorsque le client se connecte et est prï¿½t (Spawned) il appel le serveur pour commencer la game.
     public override void Spawned()
     {
         base.Spawned();
@@ -27,7 +27,7 @@ public class NetworkManager : BaseManager<NetworkManager>
         }
     }
     /// <summary>
-    /// Initialisation de la game côté serveur, mettre ici toutes les réinitialisations et les choses à faire au début de la game.
+    /// Initialisation de la game cï¿½tï¿½ serveur, mettre ici toutes les rï¿½initialisations et les choses ï¿½ faire au dï¿½but de la game.
     /// </summary>
     /// <param name="clientPlayer"></param>
     [Rpc]
@@ -42,7 +42,7 @@ public class NetworkManager : BaseManager<NetworkManager>
             playerCursor.GetComponent<SpriteRenderer>().enabled = false;
             playerCursor.GetComponent<SpriteRenderer>().color = Color.cyan;
 
-            // Fait spawn le 2ème curseur et envoie un RPC au client pour qu'il le modifie de son côté.
+            // Fait spawn le 2ï¿½me curseur et envoie un RPC au client pour qu'il le modifie de son cï¿½tï¿½.
             player2Cursor = Runner.Spawn(cursorPrefab, inputAuthority: clientPlayer);
             player2Cursor.name = "client cursor";
             Player2HideCursorRPC(player2Cursor.Id);
@@ -63,7 +63,7 @@ public class NetworkManager : BaseManager<NetworkManager>
 
     private NetworkObject clientCursor = null;
     /// <summary>
-    /// Permet de déplacer le curseur du client sur l'host même si le client n'a pas l'authorité sur le curseur.
+    /// Permet de dï¿½placer le curseur du client sur l'host mï¿½me si le client n'a pas l'authoritï¿½ sur le curseur.
     /// </summary>
     /// <param name="position"></param>
     /// <param name="objectId"></param>
@@ -87,6 +87,7 @@ public class NetworkManager : BaseManager<NetworkManager>
 
     public bool GetWinner()
     {
+        return true; /*
         if (Runner != null)
         {
             int myCiv = GameManager.ResourceManager.GetCivLevel();
@@ -102,6 +103,7 @@ public class NetworkManager : BaseManager<NetworkManager>
             }
         }
         return false;
+        */
     }
 }
 
