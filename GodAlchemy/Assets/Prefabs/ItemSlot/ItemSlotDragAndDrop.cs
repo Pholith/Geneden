@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Partie de la classe qui gï¿½re le drag and drop des item slot
+/// Partie de la classe qui gère le drag and drop des item slot
 /// </summary>
 public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -33,9 +33,9 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             rectTransform = itemIcon.GetComponent<RectTransform>();
             initialRectTransform = rectTransform.anchoredPosition;
             rectTransform.localScale = rectTransform.localScale / 2;
-            snapParent = transform.parent;
-            transform.SetParent(canvas.transform);
-            transform.SetAsLastSibling();
+            snapParent = itemIcon.transform.parent;
+            itemIcon.transform.SetParent(canvas.transform);
+            itemIcon.transform.SetAsLastSibling();
             itemIcon.raycastTarget = false;
         }
     }
@@ -79,7 +79,8 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 break;
             case Type.recipeBookSlot:
                 if (IsRecipeUnlock())
-                    recipeSystem.AddRecipeToCraft(Element);
+                    recipeSystem.ComputeRecipe(Element);
+                    /*recipeSystem.AddRecipeToCraft(Element);*/
                 break;
             default:
                 break;
@@ -144,13 +145,14 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (rectTransform == null) return;
-        transform.SetParent(snapParent);
+        itemIcon.transform.SetParent(snapParent);
+        snapParent = null;
         Destroy(previewTile);
         rectTransform.anchoredPosition = initialRectTransform;
         rectTransform.localScale = rectTransform.localScale * 2;
         itemIcon.raycastTarget = true;
         rectTransform = null;
-        snapParent = null;
+        
         initialRectTransform = new Vector2(0, 0);
         GameManager.ResourceManager.ToggleShowCost();
     }

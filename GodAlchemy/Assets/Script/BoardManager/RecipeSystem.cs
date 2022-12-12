@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class RecipeSystem : MonoBehaviour
 {
@@ -56,6 +57,22 @@ public class RecipeSystem : MonoBehaviour
                 _i = 0;
             }
         }
+    }
+
+    public void ComputeRecipe(ElementScriptableObject element)
+    {
+        if (HasEnoughPower(element) && playerInventory.AddItem(element, true))
+            ConsumePower(element);     
+    }
+
+    private bool HasEnoughPower(ElementScriptableObject element)
+    {
+        return GameManager.ResourceManager.HasEnoughPower((element.ElementToCraft1.GetCost() + element.ElementToCraft2.GetCost() + element.GetCost()));
+    }
+
+    private void ConsumePower(ElementScriptableObject element)
+    {
+        GameManager.ResourceManager.ConsumePower((element.ElementToCraft1.GetCost() + element.ElementToCraft2.GetCost() + element.GetCost()));
     }
 
     public void UnlockRecipe(ElementScriptableObject element)
