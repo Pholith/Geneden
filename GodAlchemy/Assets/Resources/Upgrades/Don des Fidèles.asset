@@ -27,10 +27,10 @@ MonoBehaviour:
   AddedGatherableRessource: 
   LevelUpBuilding: {fileID: 0}
   LevelUpSpell: {fileID: 11400000, guid: 184626563a147ee48892ded32736a281, type: 2}
-  Unlocked: 1
+  Unlocked: 0
   Tier: 3
   type: 05000000
   UpgradeInto: {fileID: 0}
   UpgradeApplication:
   - {fileID: 11400000, guid: ceeee7a6b4c5f4a42901ef617feaedd8, type: 2}
-  RequiredCivilisationLvl: 0
+  RequiredCivilisationLvl: 4

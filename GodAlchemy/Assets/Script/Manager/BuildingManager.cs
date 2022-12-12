@@ -2,6 +2,7 @@ using Fusion;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static BuildingsScriptableObject;
 
 public class BuildingManager : BaseManager<BuildingManager>
 {
@@ -30,6 +31,7 @@ public class BuildingManager : BaseManager<BuildingManager>
     public List<BuildingsScriptableObject> buildingsScriptableObjects { get; private set; }
     private int GetBuildingIndex(BuildingsScriptableObject buildingsScriptableObject)
     {
+        Debug.Log(buildingsScriptableObject);
         if (buildingsScriptableObject == null) return -1;
         return buildingsScriptableObjects.IndexOf(buildingsScriptableObject);
     }
@@ -37,6 +39,19 @@ public class BuildingManager : BaseManager<BuildingManager>
     {
         if (buildingType == -1) return null;
         return buildingsScriptableObjects[buildingType];
+    }
+
+    public BuildingsScriptableObject GetBuildingByName(string name)
+    {
+        foreach(BuildingsScriptableObject building in buildingsScriptableObjects)
+        {
+            if(building.name == name)
+            {
+                return building;
+            }
+        }
+
+        return null;
     }
 
 
