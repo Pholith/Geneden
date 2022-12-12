@@ -37,6 +37,7 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             itemIcon.transform.SetParent(canvas.transform);
             itemIcon.transform.SetAsLastSibling();
             itemIcon.raycastTarget = false;
+            GetComponent<ToolTipTrigger>().StopDelay();
         }
     }
     [SerializeField]
