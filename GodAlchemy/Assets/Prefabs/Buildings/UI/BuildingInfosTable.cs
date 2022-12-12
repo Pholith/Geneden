@@ -210,7 +210,7 @@ public class BuildingInfosTable : MonoBehaviour
             GameObject _workerIcon = Instantiate(workerIconPrefab);
             _workerIcon.transform.SetParent(_contentPanel.transform);
             _workerIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
-            _workerIcon.GetComponent<RectTransform>().localScale = _workerIcon.GetComponent<RectTransform>().localScale * 2;
+            _workerIcon.GetComponent<RectTransform>().localScale = _workerIcon.GetComponent<RectTransform>().localScale;
             if (i <= workers)
             {
                 _workerIcon.GetComponent<Image>().color = new Color32(255,255,255,255);
@@ -364,6 +364,7 @@ public class BuildingInfosTable : MonoBehaviour
             _pendingIcon.GetComponent<PendingSlot>().SetUpgrade(pendingUpgrade,selectedBuilding);
               _pendingIcon.transform.SetParent(_contentPanel.transform);
               _pendingIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
+              _pendingIcon.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 1.0f);
             _xPos += 20;
             _i += 1;
             if (_i % 5 == 0)
@@ -397,6 +398,7 @@ public class BuildingInfosTable : MonoBehaviour
                     _tagIcon.GetComponent<Image>().sprite = tag.Sprite;
                     _tagIcon.transform.SetParent(_contentPanel.transform);
                     _tagIcon.GetComponent<RectTransform>().anchoredPosition = new Vector3(_xPos, _yPos, 0f);
+                    _tagIcon.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0f);
                     _tagIcon.GetComponent<Tag>().SetName(buildingType.ToString());
                 }
             }
