@@ -68,9 +68,10 @@ public class QuestSystem  : MonoBehaviour
         -Générer de la nourriture 0/1
         -Générer du bois 0/1               - nécessaire? (on peut passer par pierre direct?)
         -Placer une maison (Seul bâtiment disponible au niveau 1) 0/1 */
-        questsLevel2.Add(new ResourceQuest(1, ResourceManager.RessourceType.Food));
-        questsLevel2.Add(new ResourceQuest(1, ResourceManager.RessourceType.Wood));
         questsLevel2.Add(new BuildQuest(1, "Maison"));
+        questsLevel2.Add(new BuildQuest(1, "Moulin"));
+        questsLevel2.Add(new ResourceQuest(1, ResourceManager.RessourceType.Food));
+
 
         /*Niveau 3 (Développement)
         -Avoir 5 bâtiments               2/5
@@ -187,11 +188,9 @@ public class QuestSystem  : MonoBehaviour
 <align=right>";
             if (currentQuest.IsAccomplished())
                 questsDescription.text += "<color=\"green\">" + currentQuest.GetCurrentAmount() + "/" + currentQuest.GetObjectiveAmount() +@"</color><line-height=1em>
-
 ";
             else
                 questsDescription.text += currentQuest.GetCurrentAmount() + "/" + currentQuest.GetObjectiveAmount() +@"<line-height=1em>
-
 ";
         }
 

@@ -83,12 +83,10 @@ MonoBehaviour:
 
     <align=right>0/1<line-height=1em>
 
-
     <align=left>Lorem
-    ipsum miaou manger TRES <line-height=0>
+    ipsum miaou manger TRESSQDQSD<line-height=0>
 
     <align=right>0/1<line-height=1em>
-
 
     <align=left>Construire
     une maisonnette<line-height=0>
@@ -134,7 +132,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

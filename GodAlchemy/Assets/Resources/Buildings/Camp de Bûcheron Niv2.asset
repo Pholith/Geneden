@@ -16,7 +16,7 @@ MonoBehaviour:
     permet de r\xE9colter le bois \xE0 porter. Contient les am\xE9liorations technologiques
     de la r\xE9colte du bois."
   Sprite: {fileID: 2080827132, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
-  MaxHealth: 1400
+  MaxHealth: 800
   BuildingTime: 1
   FoodCost: 0
   WoodCost: 50
@@ -32,6 +32,7 @@ MonoBehaviour:
   RequiredCivilisationLvl: 0
   UpgradeList:
   - {fileID: 11400000, guid: 5fc56f576ee21f244a00aaa36c97a663, type: 2}
+  SpellList: []
   SpecialConditionRequired:
     _target: {fileID: 11400000}
     _methodName: NoCondition

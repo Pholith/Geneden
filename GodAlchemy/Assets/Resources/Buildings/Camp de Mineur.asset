@@ -17,7 +17,7 @@ MonoBehaviour:
     les technologies propres aux mineurs et \xE0 l\u2019extraction de ressources
     plus rares."
   Sprite: {fileID: 791250566, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
-  MaxHealth: 700
+  MaxHealth: 400
   BuildingTime: 1
   FoodCost: 0
   WoodCost: 50

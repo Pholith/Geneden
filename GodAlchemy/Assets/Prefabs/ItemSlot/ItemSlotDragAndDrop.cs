@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Partie de la classe qui gère le drag and drop des item slot
+/// Partie de la classe qui gï¿½re le drag and drop des item slot
 /// </summary>
 public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -144,10 +144,10 @@ public partial class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (rectTransform == null) return;
+        transform.SetParent(snapParent);
         Destroy(previewTile);
         rectTransform.anchoredPosition = initialRectTransform;
         rectTransform.localScale = rectTransform.localScale * 2;
-        transform.SetParent(snapParent);
         itemIcon.raycastTarget = true;
         rectTransform = null;
         snapParent = null;

@@ -17,7 +17,7 @@ MonoBehaviour:
     de ressources de Tier II et III afin d\u2019augmenter le nombre d\u2019habitant
     qu\u2019elles contiennent et leurs points de vie."
   Sprite: {fileID: 985377426, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
-  MaxHealth: 500
+  MaxHealth: 300
   BuildingTime: 1
   FoodCost: 0
   WoodCost: 50

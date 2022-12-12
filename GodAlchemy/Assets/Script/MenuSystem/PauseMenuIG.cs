@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenuIG : MonoBehaviour
 {
 
-    public string mainMenuScene;
+    public SceneReference mainMenuScene;
     public GameObject pauseMenu;
     public GameObject imageOptionsMenu;
     private GameObject optionsMenu;

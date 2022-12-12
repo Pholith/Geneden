@@ -15,7 +15,7 @@ MonoBehaviour:
   BuildingDescription: "Les fermes sont une source illimit\xE9e de nourriture lorsqu\u2019un
     villageois les r\xE9colte. "
   Sprite: {fileID: 866915426, guid: 105a20c2a8fb50444b25cbb840bae141, type: 3}
-  MaxHealth: 250
+  MaxHealth: 50
   BuildingTime: 1
   FoodCost: 0
   WoodCost: 70
