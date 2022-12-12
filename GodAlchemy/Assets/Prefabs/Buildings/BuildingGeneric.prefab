@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4936908734323321018}
   - component: {fileID: -3439482973301828465}
   - component: {fileID: -4267441266995455587}
+  - component: {fileID: -1317520250842872065}
   m_Layer: 3
   m_Name: BuildingGeneric
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   spriteTimeBuilding: {fileID: 21300000, guid: b9bf013d56f502043a871074b16e0e50, type: 3}
   isBuild: 0
   hp: 0
+  ListPendingUpgrade: []
 --- !u!212 &4936908734323321018
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -128,6 +130,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 6782917888937698564}
+  - {fileID: -1317520250842872065}
   SimulationBehaviours: []
 --- !u!114 &-4267441266995455587
 MonoBehaviour:
@@ -142,6 +145,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionSprite: {fileID: 0}
+--- !u!114 &-1317520250842872065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256013982987254513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 539362646, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
 --- !u!1 &8570036076372268098
 GameObject:
   m_ObjectHideFlags: 0

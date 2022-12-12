@@ -36,7 +36,7 @@ public class NetworkManager : BaseManager<NetworkManager>
         NetworkObject player2Cursor;
         if (Runner.IsPlayer && Runner.IsServer) // host is the player 1
         {
-            player1ResourceManager = GameManager.ResourceManager;
+            //player1ResourceManager = GameManager.ResourceManager;
             playerCursor = Runner.Spawn(cursorPrefab);
             playerCursor.name = "host cursor";
             playerCursor.GetComponent<SpriteRenderer>().enabled = false;
@@ -49,7 +49,7 @@ public class NetworkManager : BaseManager<NetworkManager>
         }
         else // client is the player 2
         {
-            player2ResourceManager = GameManager.ResourceManager;
+            //player2ResourceManager = GameManager.ResourceManager;
         }
     }
     [Rpc]
