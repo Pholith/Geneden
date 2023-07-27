@@ -39,4 +39,11 @@ Le jeu se présente comme RTS, Sandbox, Multijoueur et Stratégique
 
 # Captures d'écran du jeu
 
-TODO
+### Aperçu du multijoueur
+![capture](./multiplayer.gif)
+
+### Un jeu de stratgie
+![capture](./capture1.png)
+
+### La fabrication et l'utilisation des éléments
+![capture](./graph.png)
